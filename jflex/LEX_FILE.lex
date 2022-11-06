@@ -129,8 +129,8 @@ COMMENT_2 = \/\*({TABLE2} | {LineTerminator})*\*\/
 {ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
-{COMMENT_1} 		{return symbol(TokenNames.COMMENT_1, new String( yytext()));)}
-{COMMENT_2}	    	{return symbol(TokenNames.COMMENT_2, new String( yytext()));)}
+{COMMENT_1} 		{return symbol(TokenNames.COMMENT_1, new String( yytext()));}
+{COMMENT_2}	    	{return symbol(TokenNames.COMMENT_2, new String( yytext()));}
 <<EOF>>				{ return symbol(TokenNames.EOF);}
 
 }
