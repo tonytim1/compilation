@@ -97,7 +97,7 @@ COMMENT_2 = \/\*({TABLE2} | {LineTerminator})*\*\/
 
 <YYINITIAL> {
 
-"("	    	   	        { return symbol(TokenNames.LPAREN, new String(yytext()));}
+"("	    	   	      { return symbol(TokenNames.LPAREN, new String(yytext()));}
 ")"				{ return symbol(TokenNames.RPAREN, new String(yytext()));}
 "["				{ return symbol(TokenNames.LBRACK, new String(yytext()));}
 "]"				{ return symbol(TokenNames.RBRACK, new String(yytext()));}
@@ -129,8 +129,8 @@ COMMENT_2 = \/\*({TABLE2} | {LineTerminator})*\*\/
 {ID}				{ return symbol(TokenNames.ID, new String( yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String(yytext()));}
 {WhiteSpace}			{ /* just skip what was found, do nothing */ }
-{COMMENT_1} 			{return symbol(TokenNames.COMMENT_1, new String( yytext()));}
-{COMMENT_2}	    		{return symbol(TokenNames.COMMENT_2, new String( yytext()));}
+{COMMENT_1} 			{ /* just skip what was found, do nothing */ }
+{COMMENT_2}	    		{ /* just skip what was found, do nothing */ }
 <<EOF>>				{ return symbol(TokenNames.EOF, new String(yytext()));}
 
 }
