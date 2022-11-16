@@ -97,40 +97,40 @@ COMMENT_2 = \/\*({TABLE2} | {LineTerminator})*\*\/
 
 <YYINITIAL> {
 
-"("					{ return symbol(TokenNames.LPAREN);}
-")"					{ return symbol(TokenNames.RPAREN);}
-"["					{ return symbol(TokenNames.LBRACK);}
-"]"					{ return symbol(TokenNames.RBRACK);}
-"{"					{ return symbol(TokenNames.LBRACE);}
-"}"					{ return symbol(TokenNames.RBRACE);}
-"nil"				{ return symbol(TokenNames.NIL);}
-"+"					{ return symbol(TokenNames.PLUS);}
-"-"					{ return symbol(TokenNames.MINUS);}
-"*" 				{ return symbol(TokenNames.TIMES);}
-"/"					{ return symbol(TokenNames.DIVIDE);}
-","					{ return symbol(TokenNames.COMMA);}
-"."					{ return symbol(TokenNames.DOT);}
-";"					{ return symbol(TokenNames.SEMICOLON);}
-"int"				{ return symbol(TokenNames.TYPE_INT);}
-"void"				{ return symbol(TokenNames.TYPE_VOID);}
-"string"			{ return symbol(TokenNames.TYPE_STRING);}
-":="				{ return symbol(TokenNames.ASSIGN);}
-"="					{ return symbol(TokenNames.EQ);}
-"<"					{ return symbol(TokenNames.LT);}
-">"					{ return symbol(TokenNames.GT);}
-"array"				{ return symbol(TokenNames.ARRAY);}
-"class"				{ return symbol(TokenNames.CLASS);}
-"extends"			{ return symbol(TokenNames.EXTENDS);}
-"return"			{ return symbol(TokenNames.RETURN);}
-"while"				{ return symbol(TokenNames.WHILE);}
-"if"				{ return symbol(TokenNames.IF);}
-"new"				{ return symbol(TokenNames.NEW);}
+"("	    	   	        { return symbol(TokenNames.LPAREN, new String(yytext()));}
+")"				{ return symbol(TokenNames.RPAREN, new String(yytext()));}
+"["				{ return symbol(TokenNames.LBRACK, new String(yytext()));}
+"]"				{ return symbol(TokenNames.RBRACK, new String(yytext()));}
+"{"				{ return symbol(TokenNames.LBRACE, new String(yytext()));}
+"}"				{ return symbol(TokenNames.RBRACE, new String(yytext()));}
+"nil"				{ return symbol(TokenNames.NIL, new String(yytext()));}
+"+"				{ return symbol(TokenNames.PLUS, new String(yytext()));}
+"-"				{ return symbol(TokenNames.MINUS, new String(yytext()));}
+"*" 				{ return symbol(TokenNames.TIMES, new String(yytext()));}
+"/"				{ return symbol(TokenNames.DIVIDE, new String(yytext()));}
+","				{ return symbol(TokenNames.COMMA, new String(yytext()));}
+"."				{ return symbol(TokenNames.DOT, new String(yytext()));}
+";"				{ return symbol(TokenNames.SEMICOLON, new String(yytext()));}
+"int"				{ return symbol(TokenNames.TYPE_INT, new String(yytext()));}
+"void"				{ return symbol(TokenNames.TYPE_VOID, new String(yytext()));}
+"string"			{ return symbol(TokenNames.TYPE_STRING, new String(yytext()));}
+":="				{ return symbol(TokenNames.ASSIGN, new String(yytext()));}
+"="				{ return symbol(TokenNames.EQ, new String(yytext()));}
+"<"				{ return symbol(TokenNames.LT, new String(yytext()));}
+">"				{ return symbol(TokenNames.GT, new String(yytext()));}
+"array"				{ return symbol(TokenNames.ARRAY, new String(yytext()));}
+"class"				{ return symbol(TokenNames.CLASS, new String(yytext()));}
+"extends"			{ return symbol(TokenNames.EXTENDS, new String(yytext()));}
+"return"			{ return symbol(TokenNames.RETURN, new String(yytext()));}
+"while"				{ return symbol(TokenNames.WHILE, new String(yytext()));}
+"if"				{ return symbol(TokenNames.IF, new String(yytext()));}
+"new"				{ return symbol(TokenNames.NEW, new String(yytext()));}
 {INTEGER}			{ return symbol(TokenNames.INT, new Integer(yytext()));}
-{ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
-{STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
-{WhiteSpace}		{ /* just skip what was found, do nothing */ }
-{COMMENT_1} 		{return symbol(TokenNames.COMMENT_1, new String( yytext()));}
-{COMMENT_2}	    	{return symbol(TokenNames.COMMENT_2, new String( yytext()));}
-<<EOF>>				{ return symbol(TokenNames.EOF);}
+{ID}				{ return symbol(TokenNames.ID, new String( yytext()));}
+{STRING}			{ return symbol(TokenNames.STRING, new String(yytext()));}
+{WhiteSpace}			{ /* just skip what was found, do nothing */ }
+{COMMENT_1} 			{return symbol(TokenNames.COMMENT_1, new String( yytext()));}
+{COMMENT_2}	    		{return symbol(TokenNames.COMMENT_2, new String( yytext()));}
+<<EOF>>				{ return symbol(TokenNames.EOF, new String(yytext()));}
 
 }
