@@ -1,8 +1,9 @@
-
+	
 import java.io.*;
 import java.io.PrintWriter;
 
 import java_cup.runtime.Symbol;
+
 
 public class Main
 {
@@ -14,6 +15,11 @@ public class Main
 		PrintWriter file_writer;
 		String inputFilename = argv[0];
 		String outputFilename = argv[1];
+
+		String [] tokenNames = {
+  		"EOF", "PLUS", "MINUS", "TIMES", "DIVIDE", "LPAREN", "RPAREN", "LBRACK", "RBRACK", "LBRACE", "RBRACE", "NIL", "COMMA", "DOT", "SEMICOLON", "TYPE_INT",
+  		"TYPE_VOID", "TYPE_STRING", "ASSIGN", "EQ", "LT", "GT", "ARRAY", "CLASS", "EXTENDS", "RETURN", "WHILE", "IF", "NEW", "INT", "STRING", "ID", 
+		};
 
 		try
 		{
@@ -45,22 +51,34 @@ public class Main
 				/************************/
 				/* [6] Print to console */
 				/************************/
+				System.out.print(tokenNames[s.sym]);
+				if (29 <= s.sym && s.sym <= 31) { // In case of ID, String and Int print (value)
+					System.out.print("(");
+					System.out.print(s.value);
+					System.out.print(")");
+				}
 				System.out.print("[");
 				System.out.print(l.getLine());
 				System.out.print(",");
 				System.out.print(l.getTokenStartPosition());
-				System.out.print("]:");
-				System.out.print(s.value);
+				System.out.print("]");
 				System.out.print("\n");
 
 				/*********************/
 				/* [7] Print to file */
 				/*********************/
+				file_writer.print(tokenNames[s.sym]);
+				if (29 <= s.sym && s.sym <= 31) { // In case of ID, String and Int print (value)
+					file_writer.print("(");
+					file_writer.print(s.value);
+					file_writer.print(")");
+				}
+				file_writer.print("[");
 				file_writer.print(l.getLine());
-				file_writer.print(": ");
-				file_writer.print(s.value);
+				file_writer.print(",");
+				file_writer.print(l.getTokenStartPosition());
+				file_writer.print("]");
 				file_writer.print("\n");
-
 				/***********************/
 				/* [8] Read next token */
 				/***********************/
@@ -78,9 +96,17 @@ public class Main
 			file_writer.close();
     	}
 
-		catch (Exception e)
-		{
-			e.printStackTrace();
+		// In case of error - If it's possible write to file error else just print to screen.
+		catch (Exception e) {
+			try {
+				PrintWriter pw = new PrintWriter(outputFilename);
+				pw.print("ERROR");
+				pw.close();
+				e.printStackTrace();
+			}
+			catch (FileNotFoundException ex) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
