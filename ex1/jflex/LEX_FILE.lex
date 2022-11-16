@@ -108,7 +108,7 @@ COMMENT_2 = \/\*({TABLE2} | {LineTerminator})*\*\/
 "-"					{ return symbol(TokenNames.MINUS);}
 "*" 				{ return symbol(TokenNames.TIMES);}
 "/"					{ return symbol(TokenNames.DIVIDE);}
-"'"					{ return symbol(TokenNames.COMMA);}
+","					{ return symbol(TokenNames.COMMA);}
 "."					{ return symbol(TokenNames.DOT);}
 ";"					{ return symbol(TokenNames.SEMICOLON);}
 "int"				{ return symbol(TokenNames.TYPE_INT);}
@@ -125,7 +125,7 @@ COMMENT_2 = \/\*({TABLE2} | {LineTerminator})*\*\/
 "while"				{ return symbol(TokenNames.WHILE);}
 "if"				{ return symbol(TokenNames.IF);}
 "new"				{ return symbol(TokenNames.NEW);}
-{INTEGER}			{ return symbol(TokenNames.NUMBER, new Integer(yytext()));}
+{INTEGER}			{ return symbol(TokenNames.INT, new Integer(yytext()));}
 {ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
