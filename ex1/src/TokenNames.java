@@ -32,6 +32,4 @@ public interface TokenNames {
   public static final int INT = 29;
   public static final int STRING = 30;
   public static final int ID = 31;
-  public static final int COMMENT_1 = 32;
-  public static final int COMMENT_2 = 33;
 }
