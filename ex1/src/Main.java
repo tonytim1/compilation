@@ -22,7 +22,7 @@ public class Main
 		//TODO - Remove comments
 		String [] tokenNames = {
   		"EOF", "PLUS", "MINUS", "TIMES", "DIVIDE", "LPAREN", "RPAREN", "LBRACK", "RBRACK", "LBRACE", "RBRACE", "NIL", "COMMA", "DOT", "SEMICOLON", "TYPE_INT",
-  		"TYPE_VOID", "TYPE_STRING", "ASSIGN", "EQ", "LT", "GT", "ARRAY", "CLASS", "EXTENDS", "RETURN", "WHILE", "IF", "NEW", "INT", "STRING", "ID", 
+  		"TYPE_VOID", "TYPE_STRING", "ASSIGN", "EQ", "LT", "GT", "ARRAY", "CLASS", "EXTENDS", "RETURN", "WHILE", "IF", "NEW", "INT", "STRING", "ID", "ERROR"
 		};
 
 
@@ -81,16 +81,29 @@ public class Main
 				}
 				firstTokenFile = false;
 				file_writer.print(tokenNames[s.sym]);
+				if (s.sym == 32) { //INVALID SYMBOL ERROR CASE
+					file_writer.close();
+					file_writer = new PrintWriter(outputFilename);
+					file_writer.print("ERROR");
+					break;
+				}
+
 				if (29 <= s.sym && s.sym <= 31) { // In case of ID, String and Int print (value)
 					if (29 == s.sym) { //In case int not in range throw Exception
 						try {
 							i = (int)s.value;
 						}
 						catch (Exception e) {
-							throw new Exception("Error converting int");
+							file_writer.close();
+							file_writer = new PrintWriter(outputFilename);
+							file_writer.print("ERROR");
+							break;
 						}
 						if ((i < 0) || (i > 32767)) {
-							throw new Exception("Int value is out of range");
+							file_writer.close();
+							file_writer = new PrintWriter(outputFilename);
+							file_writer.print("ERROR");
+							break;
 						}
 					}
 
@@ -98,6 +111,8 @@ public class Main
 					file_writer.print(s.value);
 					file_writer.print(")");
 				}
+
+
 				file_writer.print("[");
 				file_writer.print(l.getLine());
 				file_writer.print(",");
@@ -118,6 +133,7 @@ public class Main
 			/* [10] Close output file */
 			/**************************/
 			file_writer.close();
+			
     	}
 
 		// In case of error - If it's possible write to file error else just print to screen.
@@ -126,3 +142,4 @@ public class Main
 		}
 	}
 }
+
