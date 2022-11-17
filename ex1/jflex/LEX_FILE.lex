@@ -75,9 +75,13 @@ WhiteSpace		= {LineTerminator} | [ \t]
 INTEGER			= 0 | [1-9][0-9]*
 ID				= [a-zA-Z][a-zA-Z0-9]*
 STRING          = \"[a-zA-Z]*\"
-TABLE2 = [a-zA-Z0-9\(\)\[\]\{\}\?\!\+\-\*\/\.\; \t]
+TABLE2 = [a-zA-Z0-9\(\)\[\]\{\}\?\!\+\-\*\/\.\; \t\\]
+TABLE2WITHOUTSTAR = [a-zA-Z0-9\(\)\[\]\{\}\?\!\+\-\/\.\; \t\\]
+TABLE2WITHOUTSLASHSTAR = [a-zA-Z0-9\(\)\[\]\{\}\?\!\+\-\.\; \t\\]
+
 COMMENT_1 = \/\/{TABLE2}*{LineTerminator}
-COMMENT_2 = \/\*({TABLE2} | {LineTerminator})*\*\/
+COMMENT_2 = "/*"(({LineTerminator} | {TABLE2WITHOUTSTAR})|\*+({LineTerminator} | {TABLE2WITHOUTSLASHSTAR}))*\*+"/"
+
 
 /******************************/
 /* DOLAR DOLAR - DON'T TOUCH! */
