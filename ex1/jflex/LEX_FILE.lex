@@ -81,6 +81,7 @@ TABLE2WITHOUTSLASHSTAR = [a-zA-Z0-9\(\)\[\]\{\}\?\!\+\-\.\; \t\\]
 
 COMMENT_1 = \/\/{TABLE2}*{LineTerminator}
 COMMENT_2 = "/*"(({LineTerminator} | {TABLE2WITHOUTSTAR})|\*+({LineTerminator} | {TABLE2WITHOUTSLASHSTAR}))*\*+"/"
+ERROR = .*
 
 
 /******************************/
@@ -136,5 +137,5 @@ COMMENT_2 = "/*"(({LineTerminator} | {TABLE2WITHOUTSTAR})|\*+({LineTerminator} |
 {COMMENT_1} 			{ /* just skip what was found, do nothing */ }
 {COMMENT_2}	    		{ /* just skip what was found, do nothing */ }
 <<EOF>>				{ return symbol(TokenNames.EOF, new String(yytext()));}
-
+{ERROR}   		{ return symbol(TokenNames.ERROR, new String(yytext()));}
 }
