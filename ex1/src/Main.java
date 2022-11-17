@@ -15,6 +15,8 @@ public class Main
 		PrintWriter file_writer;
 		String inputFilename = argv[0];
 		String outputFilename = argv[1];
+		boolean firstTokenConsole = true;
+		boolean firstTokenFile = true;
 
 		String [] tokenNames = {
   		"EOF", "PLUS", "MINUS", "TIMES", "DIVIDE", "LPAREN", "RPAREN", "LBRACK", "RBRACK", "LBRACE", "RBRACE", "NIL", "COMMA", "DOT", "SEMICOLON", "TYPE_INT",
@@ -51,6 +53,11 @@ public class Main
 				/************************/
 				/* [6] Print to console */
 				/************************/
+				
+				if (firstTokenConsole == false) {
+					System.out.print("\n");
+				}
+				firstTokenConsole = false;
 				System.out.print(tokenNames[s.sym]);
 				if (29 <= s.sym && s.sym <= 31) { // In case of ID, String and Int print (value)
 					System.out.print("(");
@@ -62,11 +69,14 @@ public class Main
 				System.out.print(",");
 				System.out.print(l.getTokenStartPosition());
 				System.out.print("]");
-				System.out.print("\n");
-
+				
 				/*********************/
 				/* [7] Print to file */
 				/*********************/
+				if (firstTokenFile == false) {
+					file_writer.print("\n");
+				}
+				firstTokenFile = false;
 				file_writer.print(tokenNames[s.sym]);
 				if (29 <= s.sym && s.sym <= 31) { // In case of ID, String and Int print (value)
 					file_writer.print("(");
@@ -78,7 +88,6 @@ public class Main
 				file_writer.print(",");
 				file_writer.print(l.getTokenStartPosition());
 				file_writer.print("]");
-				file_writer.print("\n");
 				/***********************/
 				/* [8] Read next token */
 				/***********************/
