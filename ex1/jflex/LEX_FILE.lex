@@ -81,7 +81,7 @@ TABLE2WITHOUTSLASHSTAR = [a-zA-Z0-9\(\)\[\]\{\}\?\!\+\-\.\; \t\\]
 
 COMMENT_1 = \/\/{TABLE2}*{LineTerminator}
 COMMENT_2 = "/*"(({LineTerminator} | {TABLE2WITHOUTSTAR})|\*+({LineTerminator} | {TABLE2WITHOUTSLASHSTAR}))*\*+"/"
-ERROR = .*
+ERROR = .
 
 
 /******************************/
