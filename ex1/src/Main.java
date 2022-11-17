@@ -17,11 +17,14 @@ public class Main
 		String outputFilename = argv[1];
 		boolean firstTokenConsole = true;
 		boolean firstTokenFile = true;
+		int i = 0;
 
+		//TODO - Remove comments
 		String [] tokenNames = {
   		"EOF", "PLUS", "MINUS", "TIMES", "DIVIDE", "LPAREN", "RPAREN", "LBRACK", "RBRACK", "LBRACE", "RBRACE", "NIL", "COMMA", "DOT", "SEMICOLON", "TYPE_INT",
   		"TYPE_VOID", "TYPE_STRING", "ASSIGN", "EQ", "LT", "GT", "ARRAY", "CLASS", "EXTENDS", "RETURN", "WHILE", "IF", "NEW", "INT", "STRING", "ID", 
 		};
+
 
 		try
 		{
@@ -53,7 +56,7 @@ public class Main
 				/************************/
 				/* [6] Print to console */
 				/************************/
-				
+				/*
 				if (firstTokenConsole == false) {
 					System.out.print("\n");
 				}
@@ -69,7 +72,7 @@ public class Main
 				System.out.print(",");
 				System.out.print(l.getTokenStartPosition());
 				System.out.print("]");
-				
+				*/
 				/*********************/
 				/* [7] Print to file */
 				/*********************/
@@ -79,6 +82,18 @@ public class Main
 				firstTokenFile = false;
 				file_writer.print(tokenNames[s.sym]);
 				if (29 <= s.sym && s.sym <= 31) { // In case of ID, String and Int print (value)
+					if (29 == s.sym) { //In case int not in range throw Exception
+						try {
+							i = (int)s.value;
+						}
+						catch (Exception e) {
+							throw new Exception("Error converting int");
+						}
+						if ((i < 0) || (i > 32767)) {
+							throw new Exception("Int value is out of range");
+						}
+					}
+
 					file_writer.print("(");
 					file_writer.print(s.value);
 					file_writer.print(")");
@@ -107,16 +122,7 @@ public class Main
 
 		// In case of error - If it's possible write to file error else just print to screen.
 		catch (Exception e) {
-			try {
-				PrintWriter pw = new PrintWriter(outputFilename);
-				pw.print("ERROR");
-				pw.close();
-				e.printStackTrace();
-			}
-			catch (FileNotFoundException ex) {
-				e.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 	}
 }
-
