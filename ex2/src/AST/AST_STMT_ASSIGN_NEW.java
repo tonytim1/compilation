@@ -1,14 +1,15 @@
 package AST;
+import SYMBOL_TABLE.*
 
-public class AST_VAR_FIELD extends AST_VAR
+public class AST_STMT_ASSIGN_NEW extends AST_STMT 
 {
 	public AST_VAR var;
-	public String fieldName;
-	
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
-	public AST_VAR_FIELD(AST_VAR var,String fieldName)
+	public AST_NEW_EXP exp;
+
+	/*******************/
+	/*  CONSTRUCTOR(S) */
+	/*******************/
+	public AST_STMT_ASSIGN_NEW(AST_VAR var, AST_NEW_EXP exp)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -18,12 +19,12 @@ public class AST_VAR_FIELD extends AST_VAR
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== var -> var DOT ID( %s )\n",fieldName);
+		System.out.print("====================== stmt -> var ASSIGN newExp SEMICOLON\n");
 
 		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
+		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.var = var;
-		this.fieldName = fieldName;
+		this.exp = exp;
 	}
 }

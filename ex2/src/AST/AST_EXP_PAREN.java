@@ -1,15 +1,14 @@
 package AST;
 
-public class AST_VAR_FIELD extends AST_VAR
-{
-	public AST_VAR var;
-	public String fieldName;
+public class AST_EXP_PAREN extends AST_EXP {
 	
+	public AST_EXP exp;
+
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_FIELD(AST_VAR var,String fieldName)
-	{
+	public AST_EXP_PAREN(AST_EXP exp) 
+	{		
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -18,12 +17,11 @@ public class AST_VAR_FIELD extends AST_VAR
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== var -> var DOT ID( %s )\n",fieldName);
-
+		System.out.print("====================== exp -> LPAREN exp RPAREN\n");
+		
 		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
+		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
-		this.var = var;
-		this.fieldName = fieldName;
+		this.exp = exp;
 	}
 }

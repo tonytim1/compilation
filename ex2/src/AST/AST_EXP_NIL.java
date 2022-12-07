@@ -1,14 +1,12 @@
 package AST;
 
-public class AST_VAR_SUBSCRIPT extends AST_VAR
+public class AST_EXP_NIL extends AST_EXP 
 {
-	public AST_VAR var;
-	public AST_EXP subscript;
-	
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_SUBSCRIPT(AST_VAR var,AST_EXP subscript)
+	
+	public AST_EXP_NIL()
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -18,12 +16,8 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.print("====================== var -> var [ exp ]\n");
+		System.out.print("====================== exp -> NIL\n");
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/*******************************/
-		this.var = var;
-		this.subscript = subscript;
 	}
+
 }

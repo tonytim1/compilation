@@ -20,37 +20,8 @@ public class AST_EXP_VAR extends AST_EXP
 		System.out.print("====================== exp -> var\n");
 
 		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
+		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.var = var;
-	}
-	
-	/***********************************************/
-	/* The default message for an exp var AST node */
-	/***********************************************/
-	public void PrintMe()
-	{
-		/************************************/
-		/* AST NODE TYPE = EXP VAR AST NODE */
-		/************************************/
-		System.out.print("AST NODE EXP VAR\n");
-
-		/*****************************/
-		/* RECURSIVELY PRINT var ... */
-		/*****************************/
-		if (var != null) var.PrintMe();
-		
-		/*********************************/
-		/* Print to AST GRAPHIZ DOT file */
-		/*********************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			"EXP\nVAR");
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
-			
 	}
 }

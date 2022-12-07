@@ -1,16 +1,12 @@
 package AST;
-import SYMBOL_TABLE.*
 
-public class AST_STMT_WHILE extends AST_STMT
-{
-	public AST_EXP cond;
-	public AST_STMT_LIST body;
+public class AST_NEW_EXP extends AST_Node {
 
-	/*******************/
-	/*  CONSTRUCTOR(S) */
-	/*******************/
-	public AST_STMT_WHILE(AST_EXP cond,AST_STMT_LIST body)
-	{
+	public AST_TYPE type;
+	public AST_EXP exp;
+	
+	public AST_NEW_EXP(AST_TYPE type, AST_EXP exp) {
+		
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -19,14 +15,14 @@ public class AST_STMT_WHILE extends AST_STMT
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		
-		System.out.format("====================== stmt -> WHILE LPAREN exp RPAREN LBRACE multiStmt RBRACE\n");
+		if(exp == null) System.out.print("====================== newExp -> NEW type\n");
+		if(exp != null) System.out.print("====================== newExp -> NEW type RBRACK exp LBRACK\n");
 
-		
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
-		this.cond = cond;
-		this.body = body;
+		this.type = type;
+		this.exp = exp;
 	}
+
 }

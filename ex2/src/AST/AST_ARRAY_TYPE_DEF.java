@@ -1,29 +1,25 @@
 package AST;
 
-public class AST_VAR_FIELD extends AST_VAR
-{
-	public AST_VAR var;
-	public String fieldName;
+public class AST_ARRAY_TYPE_DEF extends AST_DEC {
+	public String id;
+	public AST_TYPE type;
 	
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
-	public AST_VAR_FIELD(AST_VAR var,String fieldName)
-	{
+	
+	public AST_ARRAY_TYPE_DEF(String id, AST_TYPE type) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-
+		
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== var -> var DOT ID( %s )\n",fieldName);
+		System.out.format("====================== arrayTypedef -> ARRAY ID( %s ) EQ type LBRACK RBRACK SEMICOLON", id);
 
 		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
+		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
-		this.var = var;
-		this.fieldName = fieldName;
+		this.id = id;
+		this.type = type;
 	}
 }

@@ -1,17 +1,16 @@
 package AST;
 
-public class AST_STMT_LIST extends AST_Node
-{
+public class AST_PROGRAM extends AST_Node {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public AST_STMT head;
-	public AST_STMT_LIST tail;
+	public AST_DEC dec;
+	public AST_PROGRAM program;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_STMT_LIST(AST_STMT head,AST_STMT_LIST tail)
+	public AST_PROGRAM(AST_DEC dec,AST_PROGRAM program)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -21,13 +20,16 @@ public class AST_STMT_LIST extends AST_Node
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		if (tail != null) System.out.print("====================== multiStmt -> stmt multiStmt\n");
-		if (tail == null) System.out.print("====================== multiStmt -> stmt      \n");
+		if (program == null) {
+		    System.out.print("====================== Program -> dec\n");
+		} else {
+		    System.out.print("====================== Program -> dec+\n");
+		}
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
-		this.head = head;
-		this.tail = tail;
+		this.dec = dec;
+		this.program = program;
 	}
 }

@@ -1,32 +1,27 @@
 package AST;
-import SYMBOL_TABLE.*
 
-public class AST_STMT_WHILE extends AST_STMT
-{
-	public AST_EXP cond;
-	public AST_STMT_LIST body;
-
+public class AST_STMT_RETURN extends AST_STMT {
+	public AST_EXP exp;
+	
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_WHILE(AST_EXP cond,AST_STMT_LIST body)
+	public AST_STMT_RETURN(AST_EXP exp)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		
+
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		
-		System.out.format("====================== stmt -> WHILE LPAREN exp RPAREN LBRACE multiStmt RBRACE\n");
+		if(exp != null) System.out.print("====================== stmt -> RETURN exp SEMICOLON\n");
+		if(exp == null) System.out.print("====================== stmt -> RETURN SEMICOLON\n");
 
-		
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
-		this.cond = cond;
-		this.body = body;
+		this.exp = exp;
 	}
 }
