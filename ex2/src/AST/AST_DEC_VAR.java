@@ -14,10 +14,11 @@ public class AST_DEC_VAR extends AST_DEC {
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== decVar -> v", id1);
+		System.out.print("====================== decVar -> v");
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.v = v;
+	}
 }

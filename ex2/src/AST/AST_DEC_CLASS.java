@@ -20,4 +20,5 @@ public class AST_DEC_CLASS extends AST_DEC {
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.c = c;
+	}
 }
