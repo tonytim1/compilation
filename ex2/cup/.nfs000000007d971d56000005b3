@@ -2,19 +2,16 @@
 /* IMPORT(S); */
 /*************/
 import java_cup.runtime.*;
-import java.io.PrintWriter;
 import AST.*;
 
 parser code 
 {:
 	public Lexer lexer;
-	String path;
 
-	public Parser(Lexer lexer, String path)
+	public Parser(Lexer lexer)
 	{
 		super(lexer);
 		this.lexer = lexer;
-		this.path = path;
 	}
 	public void report_error(String message, Object info)
 	{
@@ -22,17 +19,8 @@ parser code
 		System.out.print("[");
 		System.out.print(lexer.getLine());
 		System.out.print(":");
-		System.out.print(lexer.getTokenStartPosition());
-		System.out.print("] ");	
-		try {
-		PrintWriter file_writer = new PrintWriter(this.path);
-		file_writer.print("ERROR(");
-		file_writer.print(lexer.getLine());
-		file_writer.print(")");
-		file_writer.close(); 
-		} catch (Exception e){
-		//TODO: write an error
-		}	
+		System.out.print(lexer.getCharPos());
+		System.out.print("] ");		
 		System.exit(0);
 	}
 :}
@@ -44,10 +32,11 @@ scan with
 {:
 	Symbol s;
 	s = lexer.next_token();
+	//System.out.print(s.sym);
 	System.out.print("[");
 	System.out.print(lexer.getLine());
 	System.out.print(":");
-	System.out.print(lexer.getTokenStartPosition());
+	System.out.print(lexer.getCharPos());
 	System.out.print("] ");
 	System.out.print(TokenNames.terminalNames[s.sym]);
 	if (s.value != null)
@@ -55,12 +44,6 @@ scan with
 		System.out.print("( ");
 		System.out.print(s.value);
 		System.out.print(" )");
-	}
-		if (s.sym == TokenNames.ERROR){
-		PrintWriter file_writer = new PrintWriter(path);
-		file_writer.print("ERROR");
-		file_writer.close();
-		System.exit(0);
 	}
 	System.out.print("\n");
 	return s; 
@@ -187,13 +170,13 @@ type ::== TYPE_INT {: RESULT = new AST_TYPE(1); :}
         | ID:name  {: RESULT = new AST_TYPE(name); :}
         ;
 
-arrayTypeDef ::= ARRAY ID:name EQ type:t LBRACK RBRACK SEMICOLON {: RESULT = new AST_ARRAY_TYPE_DEF(name, t); :}
+arrayTypeDef ::= ARRAY ID:name ASSIGN type:t LBRACK RBRACK SEMICOLON {: RESULT = new AST_ARRAY_TYPE_DEF(name, t); :}
         ;
 
 
-varDec ::= type:t ID:name SEMICOLON {: RESULT = new AST_VAR_DEC(t, name, null, null); :}
-           | type:t ID:name ASSIGN exp:e SEMICOLON {: RESULT = new AST_VAR_DEC(t, name, e, null); :}
-           | type:t ID:name ASSIGN newExp:new_e SEMICOLON {: RESULT = new AST_VAR_DEC(t, name, null, new_e); :}
+varDec ::= type:t ID:name {: RESULT = new AST_VAR_DEC(t, name, null, null); :}
+           | type:t ID:name ASSIGN exp:e {: RESULT = new AST_VAR_DEC(t, name, e, null); :}
+           | type:t ID:name ASSIGN newExp:new_e {: RESULT = new AST_VAR_DEC(t, name, null, new_e); :}
            ;
 
 funcDec ::= type:t ID:name LPAREN typeIDList:tid RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, name, tid, st); :}
@@ -210,7 +193,7 @@ typeID ::= type:t ID:name {: RESULT = new AST_TYPE_ID(t, name); :}
 
 
 classDec ::= CLASS ID:name LBRACE cFieldList:cfl RBRACE {: RESULT = new AST_CLASS_DEC(name, null, cfl); :}
-             | CLASS ID:name EXTENDS ID:name2 LBRACE cFieldList:cfl RBRACE {: RESULT = new AST_CLASS_DEC(name, name2, cfl); :}
+             CLASS ID:name EXTENDS ID:name2 LBRACE cFieldList:cfl RBRACE {: RESULT = new AST_CLASS_DEC(name, name2, cfl); :}
              ;
 
 cField ::= varDec:v {: RESULT = new AST_C_FIELD_VAR(v); :}
