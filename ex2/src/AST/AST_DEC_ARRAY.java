@@ -20,4 +20,5 @@ public class AST_DEC_ARRAY extends AST_DEC {
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.a = a;
+    }
 }

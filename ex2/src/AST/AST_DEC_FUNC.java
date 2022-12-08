@@ -20,4 +20,5 @@ public class AST_DEC_FUNC extends AST_DEC {
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.f = f;
+	}
 }

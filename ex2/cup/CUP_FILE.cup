@@ -172,13 +172,14 @@ type ::== TYPE_INT {: RESULT = new AST_TYPE(1); :}
 arrayTypeDef ::= ARRAY ID:name ASSIGN type:t LBRACK RBRACK SEMICOLON {: RESULT = new AST_ARRAY_TYPE_DEF(name, t); :}
         ;
 
-varDec ::= type:t ID:name {: RESULT = new AST_VAR_DEC(t, id, null, null); :}
-           | type:t ID:name ASSIGN exp:e {: RESULT = new AST_VAR_DEC(t, id, e, null); :}
-           | type:t ID:name ASSIGN newExp:new_e {: RESULT = new AST_VAR_DEC(t, id, null, new_e); :}
+
+varDec ::= type:t ID:name {: RESULT = new AST_VAR_DEC(t, name, null, null); :}
+           | type:t ID:name ASSIGN exp:e {: RESULT = new AST_VAR_DEC(t, name, e, null); :}
+           | type:t ID:name ASSIGN newExp:new_e {: RESULT = new AST_VAR_DEC(t, name, null, new_e); :}
            ;
 
-funcDec ::= type:t ID:name LPAREN typeID:tid RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, tid, name, s); :}
-            | type:t ID:name LPAREN RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, null, name, s); :}
+funcDec ::= type:t ID:name LPAREN typeID:tid RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, name, tid, st); :}
+            | type:t ID:name LPAREN RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, name, null, st); :}
             ;
 
 typeID ::= type:t ID:name {: RESULT = new AST_TYPE_ID(t, name, null); :}

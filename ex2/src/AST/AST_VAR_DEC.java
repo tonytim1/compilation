@@ -5,7 +5,7 @@ public class AST_VAR_DEC extends AST_Node {
 	public AST_TYPE type;
 	public String id;
 	public AST_EXP exp;
-	public AST_newExp newExp;
+	public AST_NEW_EXP newExp;
 
 	public AST_VAR_DEC(AST_TYPE type, String id, AST_EXP exp, AST_NEW_EXP newExp) {
 		/******************************/
