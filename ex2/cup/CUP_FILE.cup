@@ -124,6 +124,7 @@ non terminal AST_EXP_NIL nil;
 //non terminal AST_EXP_STRING expString;
 non terminal AST_NEW_EXP newExp;
 non terminal AST_VAR_EXP_LIST varExpList;
+non terminal AST_VAR_EXP_LIST_STMT varExpListStmt;
 
 //non terminal AST_Node RESULT;
 
@@ -209,10 +210,10 @@ stmt		::=		varDec:v {: RESULT = new AST_STMT_VAR_DEC(v); :}
                     | RETURN SEMICOLON								{: RESULT = new AST_STMT_RETURN(null); :}
 					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body); :}
 					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
-					| ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(null, e, name); :}
-                    | ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(null, null, name); :}
-                    | var:v DOT ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(v, null, name); :}
-                    | var:v DOT ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(v, e, name); :}
+					| ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(null, e, name); :}
+                    | ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(null, null, name); :}
+                    | var:v DOT ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(v, null, name); :}
+                    | var:v DOT ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(v, e, name); :}
 					;
 
 expList ::=         exp:e COMMA expList:l		{: RESULT = new AST_EXP_LIST(e,l);    :}

@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_VAR_EXP_LIST extends AST_EXP
+public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 {
 	public AST_VAR var;
 	public AST_EXP_LIST expList;
@@ -9,7 +9,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_EXP_LIST(AST_VAR var, AST_EXP_LIST expList, String name)
+	public AST_VAR_EXP_LIST_STMT(AST_VAR var, AST_EXP_LIST expList, String name)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
