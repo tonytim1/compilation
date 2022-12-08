@@ -67,7 +67,7 @@ import java.lang.Math;
 	/**********************************************/
 	public int getTokenStartPosition() { return yycolumn + 1; } 
 
-	public boolean checkIfIntegerIsValid(String num_str){
+	public boolean isValidInteger(String num_str){
 		try {
 			Integer num_int = new Integer(num_str);
 			return (num_int < Math.pow(2,15));
@@ -89,21 +89,21 @@ import java.lang.Math;
 /***********************/
 /* MACRO DECALARATIONS */
 /***********************/
-VALID_WO_ASTERISK = [\t\n\r a-zA-Z0-9\+\-()\]\[{}\.;?!/]
-VALID_WO_SLASH    = [\t\n\r a-zA-Z0-9\+\-()\]\[{}\.;?!*]
-
-LONG_COMMENT = [/][*](({VALID_WO_ASTERISK}*([] | [*]+{VALID_WO_SLASH}))*{VALID_WO_ASTERISK}*[*][/])
-SHORT_COMMENT			= [/][/][\t a-zA-Z0-9/*()\]\[{}\.;?!\+\-]*
-COMMENT					= {LONG_COMMENT} | {SHORT_COMMENT}
 LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t]
+VALID_NO_STAR = [\t\n\r a-zA-Z0-9\+\-\(\)\]\[{}\.;\?\!\/]
+VALID_NO_SLASH    = [\t\n\r a-zA-Z0-9\+\-\(\)\]\[{}\.;\?\!\*]
+
+COMMENT_1			= \/\/[\t a-zA-Z0-9/*\(\)\]\[{}\.;\?\!\+\-]*
+COMMENT_2 = \/\*(({VALID_NO_STAR}*([] | \*+{VALID_NO_SLASH}))*{VALID_NO_STAR}*\*\/)
+COMMENT					= {COMMENT_2} | {COMMENT_1}
+BAD_COMMENT = \/\*
 INTEGER			= 0 | [1-9][0-9]*
-UNFINISHED_COMMENT = [/][*]
-ID				= ([a-zA-Z]+)([a-zA-Z0-9]*)
-STRING 			= \"[a-zA-Z]*\"
 BAD_INTEGER		= (0)([0-9]+)
+ID				= ([a-zA-Z]+)([a-zA-Z0-9]*)
 BAD_ID 			= ([0-9]+){ID}
-/* Will get to ERROR, if didn't get to anything by now */
+STRING 			= \"[a-zA-Z]*\"
+
 ERROR 			= .
 /******************************/
 /* DOLAR DOLAR - DON'T TOUCH! */
@@ -123,53 +123,47 @@ ERROR 			= .
 
 <YYINITIAL> {
 
-/* Keywords */
-"class"				{ return symbol(TokenNames.CLASS);}
+"if"				{ return symbol(TokenNames.IF);}
 "nil"				{ return symbol(TokenNames.NIL);}
+"new"				{ return symbol(TokenNames.NEW);}
 "array"				{ return symbol(TokenNames.ARRAY);}
 "while"				{ return symbol(TokenNames.WHILE);}
 "extends"			{ return symbol(TokenNames.EXTENDS);}
+"class"				{ return symbol(TokenNames.CLASS);}
 "return"			{ return symbol(TokenNames.RETURN);}
-"new"				{ return symbol(TokenNames.NEW);}
-"if"				{ return symbol(TokenNames.IF);}
-
-/* Types */
 "int"				{ return symbol(TokenNames.TYPE_INT);}
 "string"			{ return symbol(TokenNames.TYPE_STRING);}
 "void"				{ return symbol(TokenNames.TYPE_VOID);}
-
+"="					{ return symbol(TokenNames.EQ);}
+"."					{ return symbol(TokenNames.DOT);}
 "+"					{ return symbol(TokenNames.PLUS);}
 "-"					{ return symbol(TokenNames.MINUS);}
 "*"					{ return symbol(TokenNames.TIMES);}
 "/"					{ return symbol(TokenNames.DIVIDE);}
+":="				{ return symbol(TokenNames.ASSIGN);}
 "("					{ return symbol(TokenNames.LPAREN);}
 ")"					{ return symbol(TokenNames.RPAREN);}
 "["					{ return symbol(TokenNames.LBRACK);}
 "]"					{ return symbol(TokenNames.RBRACK);}
 "{"					{ return symbol(TokenNames.LBRACE);}
 "}"					{ return symbol(TokenNames.RBRACE);}
-","					{ return symbol(TokenNames.COMMA);}
-"."					{ return symbol(TokenNames.DOT);}
-";"					{ return symbol(TokenNames.SEMICOLON);}
-":="				{ return symbol(TokenNames.ASSIGN);}
-"="					{ return symbol(TokenNames.EQ);}
 "<"					{ return symbol(TokenNames.LT);}
 ">"					{ return symbol(TokenNames.GT);}
-
-{COMMENT}			{ /* comment found, skip and do nothing */ }
+","					{ return symbol(TokenNames.COMMA);}
+";"					{ return symbol(TokenNames.SEMICOLON);}
 {INTEGER}			{
-						if (checkIfIntegerIsValid(yytext()))
+						if (isValidInteger(yytext()))
 							return symbol(TokenNames.INT, new Integer(yytext()));
 						else 
 							return symbol(TokenNames.ERROR);
 					}
-
 {ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, yytextStr());}   
-{WhiteSpace}		{ /* just skip what was found, do nothing */ }
-<<EOF>>				{ return symbol(TokenNames.EOF);}
-{UNFINISHED_COMMENT}	{ return symbol(TokenNames.ERROR);}
+{WhiteSpace}		{ }
+{COMMENT}			{ }
+{BAD_COMMENT}	{ return symbol(TokenNames.ERROR);}
 {BAD_ID}			{ return symbol(TokenNames.ERROR);}
 {BAD_INTEGER}		{ return symbol(TokenNames.ERROR);}
 {ERROR}				{ return symbol(TokenNames.ERROR);}
+<<EOF>>				{ return symbol(TokenNames.EOF);}
 }
