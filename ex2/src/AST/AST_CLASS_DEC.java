@@ -20,7 +20,7 @@ public class AST_CLASS_DEC extends AST_Node {
 		if ( id2 != null)
 		    System.out.format("====================== classDec -> CLASS ID( %s ) EXTENDS ID( %s ) LBRACE classCont RBRACE", id1, id2);
 		else
-		    System.out.format("====================== classDec -> CLASS ID( %s ) LBRACE classCont RBRACE");
+		    System.out.format("====================== classDec -> CLASS ID( %s ) LBRACE classCont RBRACE", id1);
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
