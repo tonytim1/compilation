@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_CLASS_DEC extends AST_DEC {
+public class AST_CLASS_DEC extends AST_Node {
 
 	public String id1;
 	public String id2;

@@ -27,6 +27,7 @@ public class TokenNames {
   public static final int GT = 7;
   public static final int LBRACE = 16;
   public static final int ID = 32;
+  public static final int STRING = 33;
   public static final int COMMA = 22;
   public static final int EOF = 0;
   public static final int DIVIDE = 11;
@@ -72,7 +73,8 @@ public class TokenNames {
   "TYPE_VOID",
   "RETURN",
   "INT",
-  "ID"
+  "ID",
+  "STRING"
   };
 }
 

@@ -153,14 +153,14 @@ start with program;
 program ::= decList:l {: RESULT = new AST_PROGRAM(l); :}
             ;
 
-decList ::= dec: decList:l		{: RESULT = new AST_DEC_LIST(d,l);    :}
+decList ::= dec:d decList:l		{: RESULT = new AST_DEC_LIST(d,l);    :}
 			| dec:d				{: RESULT = new AST_DEC_LIST(d,null); :}
 			;
 
-dec ::= varDec:v {: RESULT = new AST_VAR_DEC(v); :}
-        | funcDec:f {: RESULT = new AST_FUNC_DEC(f); :}
-        | classDec:c {: RESULT = new AST_CLASS_DEC(c); :}
-        | ARRAY ID:name ASSIGN type:t LBRACK RBRACK SEMICOLON {: RESULT = new AST_ARRAY_TYPE_DEF(name, t); :}
+dec ::= varDec:v {: RESULT = new AST_DEC_VAR(v); :}
+        | funcDec:f {: RESULT = new AST_DEC_FUNC(f); :}
+        | classDec:c {: RESULT = new AST_DEC_CLASS(c); :}
+        | arrayTypeDef:a {: RESULT = new AST_DEC_ARRAY(a); :}
         ;
 
 type ::== TYPE_INT {: RESULT = new AST_TYPE(1); :}

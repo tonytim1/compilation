@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_VAR_DEC extends AST_DEC {
+public class AST_VAR_DEC extends AST_Node {
 
 	public AST_TYPE type;
 	public String id;

@@ -1,11 +1,11 @@
 package AST;
 
-public class AST_ARRAY_TYPE_DEF extends AST_Node {
-	public String id;
-	public AST_TYPE type;
-	
-	
-	public AST_ARRAY_TYPE_DEF(String id, AST_TYPE type) {
+public class AST_DEC_VAR extends AST_DEC {
+
+	public AST_VAR_DEC v;
+
+	public AST_DEC_VAR(AST_VAR_DEC v)
+	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -14,12 +14,10 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== arrayTypedef -> ARRAY ID( %s ) EQ type LBRACK RBRACK SEMICOLON", id);
+		System.out.format("====================== decVar -> v", id1);
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
-		this.id = id;
-		this.type = type;
-	}
+		this.v = v;
 }
