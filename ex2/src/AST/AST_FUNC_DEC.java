@@ -4,10 +4,10 @@ public class AST_FUNC_DEC extends AST_Node {
 
 	public AST_TYPE type;
 	public String id;
-	public AST_TYPE_ID tid;
+	public AST_TYPE_ID_LIST tid;
 	public AST_STMT_LIST stmtList;
 
-	public AST_FUNC_DEC(AST_TYPE type, String id, AST_TYPE_ID tid, AST_STMT_LIST stmtList)
+	public AST_FUNC_DEC(AST_TYPE type, String id, AST_TYPE_ID_LIST tid, AST_STMT_LIST stmtList)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

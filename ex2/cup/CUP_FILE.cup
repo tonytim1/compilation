@@ -106,6 +106,7 @@ non terminal AST_CLASS_DEC classDec;
 non terminal AST_ARRAY_TYPE_DEF arrayTypeDef;
 non terminal AST_TYPE type;
 non terminal AST_TYPE_ID typeID;
+non terminal AST_TYPE_ID_LIST typeIDList;
 non terminal AST_C_FIELD cField;
 non terminal AST_C_FIELD_LIST cFieldList;
 non terminal AST_VAR_SIMPLE varSimple;
@@ -177,13 +178,18 @@ varDec ::= type:t ID:name {: RESULT = new AST_VAR_DEC(t, id, null, null); :}
            | type:t ID:name ASSIGN newExp:new_e {: RESULT = new AST_VAR_DEC(t, id, null, new_e); :}
            ;
 
-funcDec ::= type:t ID:name LPAREN typeID:tid RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, tid, name, s); :}
+funcDec ::= type:t ID:name LPAREN typeIDList:tid RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, tid, name, s); :}
             | type:t ID:name LPAREN RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, null, name, s); :}
             ;
 
-typeID ::= type:t ID:name {: RESULT = new AST_TYPE_ID(t, name, null); :}
-           type:t ID:name COMMA typeID:tid {: RESULT = new AST_TYPE_ID(t, name, tid); :}
+typeIDList	::=		typeID:t COMMA typeIDList:l		{: RESULT = new AST_TYPE_ID_LIST(t,l);    :}
+					| typeID:t				{: RESULT = new AST_TYPE_ID_LIST(t,null); :}
+					;
+
+typeID ::= type:t ID:name {: RESULT = new AST_TYPE_ID(t, name); :}
            ;
+
+
 
 classDec ::= CLASS ID:name LBRACE cFieldList:c RBRACE {: RESULT = new AST_CLASS_DEC(name, c); :}
              CLASS ID:name EXTENDS ID:name2 LBRACE cFieldList:c RBRACE {: RESULT = new AST_CLASS_DEC(name, name2, c); :}
