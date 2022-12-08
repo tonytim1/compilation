@@ -119,9 +119,9 @@ non terminal AST_EXP_LIST expList;
 non terminal AST_EXP_VAR expVar;
 non terminal AST_EXP_PAREN expParen;
 non terminal AST_EXP_BINOP expBinop;
-non terminal AST_INT int;
-non terminal AST_NIL nil;
-non terminal AST_STRING string;
+non terminal AST_EXP_INT int;
+non terminal AST_EXP_NIL nil;
+non terminal AST_EXP_STRING string;
 non terminal AST_NEW_EXP newExp;
 non terminal AST_VAR_EXP_LIST varExpList;
 
@@ -147,7 +147,7 @@ start with program;
 /* DERIVATION RULES */
 /********************/
 
-//Gal
+
 program ::= dec:d {: RESULT = new AST_PROGRAM(d,null); :}
             | dec:d program:p {: RESULT = new AST_PROGRAM(d,p); :}
             ;
@@ -175,7 +175,7 @@ varDec ::= type:t ID:name {: RESULT = new AST_VAR_DEC(t, id, null, null); :}
 funcDec ::= type:t ID:name LPAREN typeID:tid RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, tid, name, s); :}
             | type:t ID:name LPAREN RPAREN LBRACE stmtList:st RBRACE {: RESULT = new AST_FUNC_DEC(t, null, name, s); :}
             ;
-//Roy
+
 typeID ::= type:t ID:name {: RESULT = new AST_TYPE_ID(t, name, null); :}
            type:t ID:name COMMA typeID:tid {: RESULT = new AST_TYPE_ID(t, name, tid); :}
            ;
@@ -196,7 +196,7 @@ cFieldList	::=		cField:c	cFieldList:l		{: RESULT = new AST_C_FIELD_LIST(c,l);   
 stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
 					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
 					;
-// Tony
+
 var			::=		ID:name								{: RESULT = new AST_VAR_SIMPLE(name);       :}
 					| var:v DOT ID:fieldName			{: RESULT = new AST_VAR_FIELD(v,fieldName); :} 
 					| var:v LBRACK exp:e RBRACK			{: RESULT = new AST_VAR_SUBSCRIPT(v,e);     :} 
@@ -221,10 +221,10 @@ exp			::=		var:v								{: RESULT = new AST_EXP_VAR(v);          :}
 					| LPAREN exp:e RPAREN				{: RESULT = new AST_EXP_PAREN(e);:}
 					| exp:e1 binop:op  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, op);:}
                     | varIdExp:v                          {: REULST = new AST_VAR_ID_EXP(v); :}
-                    | int:i                             {: RESULT = new AST_INT(i, 0); :}
-                    | MINUS int:i                       {: RESULT = new AST_INT(i, 1); :}
-                    | NIL                             {: RESULT = new AST_NIL(); :}
-                    | string:s                             {: RESULT = new AST_STRING(s); :}
+                    | int:i                             {: RESULT = new AST_EXP_INT(i, 0); :}
+                    | MINUS int:i                       {: RESULT = new AST_EXP_INT(i, 1); :}
+                    | NIL                             {: RESULT = new AST_EXP_NIL(); :}
+                    | string:s                             {: RESULT = new AST_EXP_STRING(s); :}
                     ;
 
 newExp      ::=     NEW type:t                          {: RESULT = new AST_NEW_EXP(t, null); :}
