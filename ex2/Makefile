@@ -129,7 +129,7 @@ all:
 	@echo "*                                     *"
 	@echo "*                                     *"
 	@echo "***************************************"
-	dot -Tjpeg -o${OUTPUT_DIR}/AST.jpeg ${OUTPUT_DIR}/AST_IN_GRAPHVIZ_DOT_FORMAT.txt
+	#dot -Tjpeg -o${OUTPUT_DIR}/AST.jpeg ${OUTPUT_DIR}/AST_IN_GRAPHVIZ_DOT_FORMAT.txt
 	@echo "\n"
 	@echo "************************************************"
 	@echo "*                                              *"
@@ -138,5 +138,5 @@ all:
 	@echo "*                                              *"
 	@echo "*                                              *"
 	@echo "************************************************"
-	eog ${OUTPUT_DIR}/AST.jpeg &
+	#eog ${OUTPUT_DIR}/AST.jpeg &
 
