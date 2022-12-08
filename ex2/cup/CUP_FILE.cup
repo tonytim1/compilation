@@ -192,12 +192,12 @@ typeID ::= type:t ID:name {: RESULT = new AST_TYPE_ID(t, name); :}
 
 
 
-classDec ::= CLASS ID:name LBRACE cFieldList:c RBRACE {: RESULT = new AST_CLASS_DEC(name, null, c); :}
-             CLASS ID:name EXTENDS ID:name2 LBRACE cFieldList:c RBRACE {: RESULT = new AST_CLASS_DEC(name, name2, c); :}
+classDec ::= CLASS ID:name LBRACE cFieldList:cfl RBRACE {: RESULT = new AST_CLASS_DEC(name, null, cfl); :}
+             CLASS ID:name EXTENDS ID:name2 LBRACE cFieldList:cfl RBRACE {: RESULT = new AST_CLASS_DEC(name, name2, cfl); :}
              ;
 
-cField ::= varDec:v {: RESULT = new AST_C_FIELD(v); :}
-            | funcDec:f {: RESULT = new AST_C_FIELD(f); :}
+cField ::= varDec:v {: RESULT = new AST_C_FIELD_VAR(v); :}
+            | funcDec:f {: RESULT = new AST_C_FIELD_FUNC(f); :}
             ;
 
 cFieldList	::=		cField:c	cFieldList:l		{: RESULT = new AST_C_FIELD_LIST(c,l);    :}
