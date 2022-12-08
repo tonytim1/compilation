@@ -99,6 +99,7 @@ non terminal AST_STMT stmt;
 non terminal AST_STMT_LIST stmtList;
 non terminal AST_PROGRAM program;
 non terminal AST_DEC dec;
+non terminal AST_DEC_LIST decList;
 non terminal AST_VAR_DEC varDec;
 non terminal AST_FUNC_DEC funcDec;
 non terminal AST_CLASS_DEC classDec;
@@ -149,13 +150,16 @@ start with program;
 /********************/
 
 
-program ::= dec:d {: RESULT = new AST_PROGRAM(d,null); :}
-            | dec:d program:p {: RESULT = new AST_PROGRAM(d,p); :}
+program ::= decList:l {: RESULT = new AST_PROGRAM(l); :}
             ;
 
-dec ::= varDec:v {: RESULT = new AST_DEC(v); :}
-        | funcDec:f {: RESULT = new AST_DEC(f); :}
-        | classDec:c {: RESULT = new AST_DEC(c); :}
+decList ::= dec: decList:l		{: RESULT = new AST_DEC_LIST(d,l);    :}
+			| dec:d				{: RESULT = new AST_DEC_LIST(d,null); :}
+			;
+
+dec ::= varDec:v {: RESULT = new AST_VAR_DEC(v); :}
+        | funcDec:f {: RESULT = new AST_FUNC_DEC(f); :}
+        | classDec:c {: RESULT = new AST_CLASS_DEC(c); :}
         | ARRAY ID:name ASSIGN type:t LBRACK RBRACK SEMICOLON {: RESULT = new AST_ARRAY_TYPE_DEF(name, t); :}
         ;
 

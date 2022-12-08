@@ -1,15 +1,17 @@
 package AST;
 
-public class AST_PROGRAM extends AST_Node {
+public class AST_DEC_LIST extends AST_Node
+{
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public AST_DEC_LIST decList;
+	public AST_DEC head;
+	public AST_DEC_LIST tail;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_PROGRAM(AST_DEC_LIST decList)
+	public AST_DEC_LIST(AST_DEC head,AST_DEC_LIST tail)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -19,11 +21,13 @@ public class AST_PROGRAM extends AST_Node {
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.print("====================== Program -> decList\n");
+		if (tail != null) System.out.print("====================== multiDec -> dec multiDec \n");
+		if (tail == null) System.out.print("====================== Dec -> dec      \n");
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
-		this.decList = decList;
+		this.head = head;
+		this.tail = tail;
 	}
 }
