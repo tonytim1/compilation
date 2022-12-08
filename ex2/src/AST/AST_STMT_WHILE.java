@@ -1,5 +1,4 @@
 package AST;
-import SYMBOL_TABLE.*
 
 public class AST_STMT_WHILE extends AST_STMT
 {

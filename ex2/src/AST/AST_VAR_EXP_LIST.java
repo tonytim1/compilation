@@ -4,11 +4,12 @@ public class AST_VAR_EXP_LIST extends AST_Node
 {
 	public AST_VAR var;
 	public AST_EXP_LIST expList;
+	public String name;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_EXP_LIST(AST_VAR var, AST_EXP_LIST expList)
+	public AST_VAR_EXP_LIST(AST_VAR var, AST_EXP_LIST expList, String name)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -28,5 +29,6 @@ public class AST_VAR_EXP_LIST extends AST_Node
 		/*******************************/
 		this.var = var;
 		this.expList = expList;
+		this.name = name;
 	}
 }

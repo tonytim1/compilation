@@ -1,5 +1,4 @@
 package AST;
-import SYMBOL_TABLE.*
 
 public class AST_TYPE extends AST_Node {
 
@@ -59,20 +58,5 @@ public class AST_TYPE extends AST_Node {
 		AST_GRAPHVIZ.getInstance().logNode(
 			SerialNumber,
 			"TYPE\n");
-	}
-
-	public TYPE SemantMe(){
-		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
-		
-		switch(t){
-			case 1: return TYPE_INT.getInstance();
-			case 2: return TYPE_STRING.getInstance();
-			case 3: return TYPE_VOID.getInstance();
-			case 4: 
-				TYPE t = s.find(id);
-				if(t != null && (t.isClass() || t.isArray()))
-					return t;
-		}
-		return null;
 	}
 }

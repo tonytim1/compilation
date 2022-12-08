@@ -1,5 +1,4 @@
 package AST;
-import SYMBOL_TABLE.*
 
 public class AST_VAR_LIST extends AST_Node {
 	/****************/
@@ -62,17 +61,5 @@ public class AST_VAR_LIST extends AST_Node {
 		/****************************************/
 		if (type != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,type.SerialNumber);
 		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
-	}
-
-	public TYPE SemantMe(){
-		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
-		TYPE head_type;
-		TYPE tail_type = null;
-		head_type = type.SemantMe();
-		if(!head_type || head_type.name.equals("void")) return null;
-		if(s.existInScope(head)) return null;
-		s.enter(head,head_type);
-		if(tail != null) tail_type = tail.SemantMe();
-		return new TYPE_LIST(head_type,tail_type);
 	}
 }

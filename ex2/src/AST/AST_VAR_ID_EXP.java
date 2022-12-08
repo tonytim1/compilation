@@ -2,12 +2,12 @@ package AST;
 
 public class AST_VAR_ID_EXP extends AST_Node
 {
-	public AST_VAR_EXP_LIST varExp;
+	public AST_VAR_ID_EXP varExp;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_ID_EXP(AST_VAR_EXP_LIST varExp)
+	public AST_VAR_ID_EXP(AST_VAR_ID_EXP varExp)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

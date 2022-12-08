@@ -1,5 +1,4 @@
 package AST;
-import SYMBOL_TABLE.*
 
 public class AST_STMT_VAR_FUNC extends AST_STMT {
 	
@@ -68,27 +67,4 @@ public class AST_STMT_VAR_FUNC extends AST_STMT {
 		if (var != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
 		if (exps != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,exps.SerialNumber);
 	}
-	
-	public TYPE SemantMe(){
-		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
-		TYPE id_type;
-		TYPE exp_type;
-		if(!var){
-			TYPE var_type = var.SemantMe();
-			if(!var_type || !var_type.isClass()) return null;
-			id_type = ((TYPE_CLASS) var_type).findInClassScope(id);
-		} else {
-			s.find(id);
-		}
-		if(!id_type || !id_type.isFunc()) return null;
-		if(!exps){
-			exp_type = exps.SemantMe();
-			if(!exp_type) return null;
-		} else {
-			exp_type = null;
-		}
-		if(!((TYPE_FUNCTION) id_type).isSameArgs(exp_type)) return null;
-		return ((TYPE_FUNCTION) id_type).returnType;
-	}
-	
 }

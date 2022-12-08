@@ -18,7 +18,7 @@ public class AST_TYPE_ID extends AST_Node {
 		/***************************************/
 		if (typeID==null) {
 			System.out.format("====================== typeID -> type ID( %s )\n", id);
-		else {
+		} else {
 			System.out.format("====================== typeID -> type ID( %s ) COMMA typeID\n", id);
 		}
 

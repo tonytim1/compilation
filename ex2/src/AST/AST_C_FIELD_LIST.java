@@ -6,7 +6,7 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	public AST_C_FIELD_LIST cFieldList;
 	
 	
-	public AST_C_FIELD_LIST(AST_C_FIELD cField, AST_C_FIELD cFieldList) 
+	public AST_C_FIELD_LIST(AST_C_FIELD cField, AST_C_FIELD_LIST cFieldList)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
