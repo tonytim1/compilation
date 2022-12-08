@@ -115,7 +115,6 @@ non terminal AST_STMT_ASSIGN_NEW stmtAssignNew;
 non terminal AST_STMT_RETURN stmtReturn;
 non terminal AST_STMT_IF stmtIf;
 non terminal AST_STMT_WHILE stmtWhile;
-non terminal AST_VAR_ID_EXP varIdExp;
 non terminal AST_EXP_LIST expList;
 non terminal AST_EXP_VAR expVar;
 non terminal AST_EXP_PAREN expParen;
@@ -210,7 +209,10 @@ stmt		::=		varDec:v {: RESULT = new AST_STMT_VAR_DEC(v); :}
                     | RETURN SEMICOLON								{: RESULT = new AST_STMT_RETURN(null); :}
 					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body); :}
 					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
-					| varIdExp:v SEMICOLON                         {: RESULT = new AST_VAR_ID_EXP(v); :}
+					| ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(null, e, name); :}
+                    | ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(null, null, name); :}
+                    | var:v DOT ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(v, null, name); :}
+                    | var:v DOT ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST(v, e, name); :}
 					;
 
 expList ::=         exp:e COMMA expList:l		{: RESULT = new AST_EXP_LIST(e,l);    :}
@@ -221,21 +223,18 @@ expList ::=         exp:e COMMA expList:l		{: RESULT = new AST_EXP_LIST(e,l);   
 exp			::=		var:v								{: RESULT = new AST_EXP_VAR(v);          :}
 					| LPAREN exp:e RPAREN				{: RESULT = new AST_EXP_PAREN(e);:}
 					| exp:e1 binop:op  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, op);:}
-                    | varIdExp:v                          {: RESULT = new AST_VAR_ID_EXP(v); :}
                     | INT:i                             {: RESULT = new AST_EXP_INT(i, 0); :}
                     | MINUS INT:i                       {: RESULT = new AST_EXP_INT(i, 1); :}
                     | NIL                             {: RESULT = new AST_EXP_NIL(); :}
                     | STRING:s                             {: RESULT = new AST_EXP_STRING(s); :}
+                    | ID:name LPAREN expList:e RPAREN    {: RESULT = new AST_VAR_EXP_LIST(null, e, name); :}
+                    | ID:name LPAREN RPAREN    {: RESULT = new AST_VAR_EXP_LIST(null, null, name); :}
+                    | var:v DOT ID:name LPAREN RPAREN    {: RESULT = new AST_VAR_EXP_LIST(v, null, name); :}
+                    | var:v DOT ID:name LPAREN expList:e RPAREN    {: RESULT = new AST_VAR_EXP_LIST(v, e, name); :}
                     ;
 
 newExp      ::=     NEW type:t                          {: RESULT = new AST_NEW_EXP(t, null); :}
                     | NEW type:t LBRACK exp:e RBRACK    {: RESULT = new AST_NEW_EXP(t, e); :}
-                    ;
-
-varIdExp   ::=      ID:name LPAREN expList:e RPAREN    {: RESULT = new AST_VAR_EXP_LIST(null, e, name); :}
-                    | ID:name LPAREN RPAREN    {: RESULT = new AST_VAR_EXP_LIST(null, null, name); :}
-                    | var:v DOT ID:name LPAREN RPAREN    {: RESULT = new AST_VAR_EXP_LIST(v, null, name); :}
-                    | var:v DOT ID:name LPAREN expList:e RPAREN    {: RESULT = new AST_VAR_EXP_LIST(v, e, name); :}
                     ;
 
 binop       ::=     PLUS                    {: RESULT = new AST_BINOP(1);:}
