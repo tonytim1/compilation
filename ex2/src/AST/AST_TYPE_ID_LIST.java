@@ -16,9 +16,9 @@ public class AST_TYPE_ID_LIST extends AST_Node {
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
 		if (tail==null) {
-			System.out.format("====================== typeID -> type ID( %s )\n", id);
+			System.out.format("====================== typeID -> typeID\n");
 		} else {
-			System.out.format("====================== typeID -> type ID( %s ) COMMA typeID\n", id);
+			System.out.format("====================== typeID -> type ID COMMA typeID\n");
 		}
 
 		/*******************************/
