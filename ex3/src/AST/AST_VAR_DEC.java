@@ -34,4 +34,37 @@ public class AST_VAR_DEC extends AST_Node {
 		this.exp = exp;
 		this.newExp = newExp;
 	}
+
+	public TYPE SemantMe()
+	{
+		TYPE t;
+	
+		/****************************/
+		/* [1] Check If Type exists */
+		/****************************/
+		t = SYMBOL_TABLE.getInstance().find(type);
+		if (t == null)
+		{
+			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
+			System.exit(0);
+		}
+		
+		/**************************************/
+		/* [2] Check That Name does NOT exist */
+		/**************************************/
+		if (SYMBOL_TABLE.getInstance().find(id) != null)
+		{
+			System.out.format(">> ERROR [%d:%d] variable %s already exists in scope\n",2,2,id);				
+		}
+
+		/***************************************************/
+		/* [3] Enter the Function Type to the Symbol Table */
+		/***************************************************/
+		SYMBOL_TABLE.getInstance().enter(id,t);
+
+		/*********************************************************/
+		/* [4] Return value is irrelevant for class declarations */
+		/*********************************************************/
+		return null;		
+	}
 }

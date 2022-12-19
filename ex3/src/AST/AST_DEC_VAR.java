@@ -21,4 +21,10 @@ public class AST_DEC_VAR extends AST_DEC {
 		/*******************************/
 		this.v = v;
 	}
+	
+	public TYPE SemantMe()
+	{	
+		v.SemantMe();
+		return null;		
+	}
 }

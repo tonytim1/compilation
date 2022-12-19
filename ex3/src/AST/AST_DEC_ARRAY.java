@@ -21,4 +21,10 @@ public class AST_DEC_ARRAY extends AST_DEC {
 		/*******************************/
 		this.a = a;
     }
+	
+	public TYPE SemantMe()
+	{	
+		a.SemantMe();
+		return null;		
+	}
 }
