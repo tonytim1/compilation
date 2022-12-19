@@ -1,11 +1,11 @@
 package AST;
 
-import TYPES.*;
-
-public abstract class AST_DEC extends AST_Node
-{
-	public TYPE SemantMe()
+public abstract class AST_DEC extends AST_Node {
+	/*********************************************************/
+	/* The default message for an unknown AST Dec node */
+	/*********************************************************/
+	public void PrintMe()
 	{
-		return null;
+		System.out.print("UNKNOWN AST DEC NODE");
 	}
 }
