@@ -24,7 +24,6 @@ public class AST_DEC_ARRAY extends AST_DEC {
 	
 	public TYPE SemantMe()
 	{	
-		a.SemantMe();
-		return null;		
+		return a.SemantMe();
 	}
 }

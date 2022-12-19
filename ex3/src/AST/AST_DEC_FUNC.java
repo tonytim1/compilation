@@ -24,7 +24,6 @@ public class AST_DEC_FUNC extends AST_DEC {
 	
 	public TYPE SemantMe()
 	{	
-		f.SemantMe();
-		return null;		
+		return f.SemantMe();
 	}
 }
