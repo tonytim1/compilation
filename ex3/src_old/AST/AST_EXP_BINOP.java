@@ -77,7 +77,7 @@ public class AST_EXP_BINOP extends AST_EXP
 		
 		if (left  != null) t1 = left.SemantMe();
 		if (right != null) t2 = right.SemantMe();
-		
+		//todo: check if deviding by 0
 		if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
 		{
 			return TYPE_INT.getInstance();
