@@ -182,6 +182,7 @@ dec ::= varDec:v {: RESULT = new AST_DEC_VAR(v); :}
         | arrayTypeDef:a {: RESULT = new AST_DEC_ARRAY(a); :}
         ;
 
+//tony
 type ::== TYPE_INT {: RESULT = new AST_TYPE(1); :}
         | TYPE_STRING {: RESULT = new AST_TYPE(2); :}
         | TYPE_VOID {: RESULT = new AST_TYPE(3); :}

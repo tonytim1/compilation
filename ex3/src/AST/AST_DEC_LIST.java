@@ -30,4 +30,12 @@ public class AST_DEC_LIST extends AST_Node
 		this.head = head;
 		this.tail = tail;
 	}
+	
+	public TYPE SemantMe()
+	{
+		if (head != null) head.SemantMe();
+		if (tail != null) tail.SemantMe();
+		
+		return null;
+	}
 }

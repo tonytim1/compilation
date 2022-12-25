@@ -23,4 +23,29 @@ public class AST_TYPE_ID extends AST_Node {
 		this.type = type;
 		this.id = id;
 	}
+
+	public TYPE SemantMe()
+	{
+		TYPE t = SYMBOL_TABLE.getInstance().find(type);
+		if (t == null)
+		{
+			/**************************/
+			/* ERROR: undeclared type */
+			/**************************/
+			System.exit(0);
+			return null;
+		}
+		else
+		{
+			/*******************************************************/
+			/* Enter var with name=name and type=t to symbol table */
+			/*******************************************************/
+			SYMBOL_TABLE.getInstance().enter(id,t);
+		}
+
+		/****************************/
+		/* return (existing) type t */
+		/****************************/
+		return t;
+	}	
 }

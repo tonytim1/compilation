@@ -28,4 +28,12 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		this.cField = cField;
 		this.cFieldList = cFieldList;
 	}
+	
+	public TYPE SemantMe()
+	{
+		if (head != null) head.SemantMe();
+		if (tail != null) tail.SemantMe();
+		
+		return null;
+	}
 }

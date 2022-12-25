@@ -21,4 +21,9 @@ public class AST_C_FIELD_FUNC extends AST_C_FIELD {
 		/*******************************/
 		this.funcDec = funcDec;
 	}
+
+	public TYPE SemantMe() 
+	{ 
+		return funcDec.SemantMe();
+	}
 }

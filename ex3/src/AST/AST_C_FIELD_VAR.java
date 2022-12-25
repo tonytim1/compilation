@@ -22,4 +22,8 @@ public class AST_C_FIELD_VAR extends AST_C_FIELD {
 		this.varDec = varDec;
 	}
 
+	public TYPE SemantMe() 
+	{ 
+		return varDec.SemantMe();
+	}
 }

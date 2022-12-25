@@ -59,4 +59,29 @@ public class AST_TYPE extends AST_Node {
 			SerialNumber,
 			"TYPE\n");
 	}
+
+	public TYPE SemantMe()
+	{
+		SYMBOL_TABLE st = SYMBOL_TABLE.getInstance();
+
+		switch(t){
+			case 1: return TYPE_INT.getInstance();
+			case 2: return TYPE_STRING.getInstance();
+			case 3: return TYPE_VOID.getInstance();
+			case 4: 
+				TYPE t = st.find(id);
+				if(t == null)
+				{
+					/**************************/
+					/* ERROR: undeclared type */
+					/**************************/
+					System.exit(0);
+					return null;
+				}
+				else
+				{
+					return t;
+				}
+		}
+	}	
 }

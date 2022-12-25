@@ -26,4 +26,9 @@ public class AST_PROGRAM extends AST_Node {
 		/*******************************/
 		this.decList = decList;
 	}
+	public TYPE SemantMe()
+	{
+		decList.SemantMe();		
+		return null;
+	}
 }
