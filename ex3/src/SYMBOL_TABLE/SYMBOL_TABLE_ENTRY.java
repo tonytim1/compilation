@@ -50,7 +50,8 @@ public class SYMBOL_TABLE_ENTRY
 		int index,
 		SYMBOL_TABLE_ENTRY next,
 		SYMBOL_TABLE_ENTRY prevtop,
-		int prevtop_index)
+		int prevtop_index,
+		int depth)
 	{
 		this.index = index;
 		this.name = name;

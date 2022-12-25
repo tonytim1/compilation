@@ -1,6 +1,6 @@
 package TYPES;
 
-public class TYPE_CLASS_VAR_DEC_LIST
+public class TYPE_CLASS_VAR_DEC_LIST 
 {
 	public TYPE_CLASS_VAR_DEC head;
 	public TYPE_CLASS_VAR_DEC_LIST tail;

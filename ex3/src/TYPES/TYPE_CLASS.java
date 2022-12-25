@@ -12,12 +12,12 @@ public class TYPE_CLASS extends TYPE
 	/* Note that data members coming from the AST are */
 	/* packed together with the class methods         */
 	/**************************************************/
-	public TYPE_LIST data_members;
+	public TYPE_CLASS_VAR_DEC_LIST data_members;
 	
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(TYPE_CLASS father,String name,TYPE_LIST data_members)
+	public TYPE_CLASS(TYPE_CLASS father,String name,TYPE_CLASS_VAR_DEC_LIST data_members)
 	{
 		this.typeName = "class";
 		this.name = name;
@@ -34,7 +34,7 @@ public class TYPE_CLASS extends TYPE
 		}
 
 		if (this.father != null)
-			return this.father.findInClassScope(name);
+			return this.father.findInClass(name);
 			
 		return null;
 	}

@@ -30,7 +30,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 		
 		//check if depth != 0 or class name already declared in scope
-		if (!(s.isGlobalScope()) || s.find(id1))
+		if (!(s.isGlobalScope()) || s.find(id))
 			System.exit(0);
 
 		TYPE t;

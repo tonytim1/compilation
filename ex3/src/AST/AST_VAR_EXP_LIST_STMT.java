@@ -34,7 +34,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 		this.name = name;
 	}
 
-	public Type SemantMe() {
+	public TYPE SemantMe() {
 
         if (expList != null) expList.SemantMe();
 
