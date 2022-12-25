@@ -74,6 +74,7 @@ terminal DOT;
 terminal PLUS;
 terminal MINUS;
 terminal EQ;
+terminal NE;
 terminal GT;
 terminal LT;
 terminal TIMES;
@@ -155,6 +156,7 @@ precedence left MINUS;
 precedence left TIMES;
 precedence left DIVIDE;
 precedence left EQ;
+precedence left NE;
 precedence left GT;
 precedence left LT;
 
@@ -284,4 +286,5 @@ binop       ::=     PLUS                    {: RESULT = new AST_BINOP(1);:}
                     | EQ                    {: RESULT = new AST_BINOP(5);:}
                     | LT                    {: RESULT = new AST_BINOP(6);:}
                     | GT                    {: RESULT = new AST_BINOP(7);:}
+                    | NE                    {: RESULT = new AST_BINOP(8);:}
                     ;

@@ -34,6 +34,7 @@ public class AST_BINOP extends AST_Node
 		if (this.OP == 5)  {sOP = "=";}
 		if (this.OP == 6)  {sOP = "<";}
 		if (this.OP == 7)  {sOP = ">";}
+		if (this.OP == 8)  {sOP = "!=";}
         return sOP;
     }
 	/*************************************************/

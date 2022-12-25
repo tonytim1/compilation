@@ -28,4 +28,52 @@ public class AST_EXP_BINOP extends AST_EXP
 		this.right = right;
 		this.OP = OP;
 	}
+
+	public TYPE SemantMe()
+	{
+	    /* binop  PLUS = 1
+        MINUS 2
+        TIMES 3
+        DIVIDE 4
+        EQ 5
+        LT 6
+        GT 7
+        NE 8 */
+		TYPE t1 = null;
+		TYPE t2 = null;
+
+		if (left  != null) t1 = left.SemantMe();
+		if (right != null) t2 = right.SemantMe();
+
+		if (t1.name != t2.name) {
+		    // the expressions don't have the same type
+            System.exit(0);
+		}
+
+		if (OP.OP == 1) { // binop is +
+		    // check if both expressions are from type int or string
+		    if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
+            {
+                return TYPE_INT.getInstance();
+            }
+            if ((t1 == TYPE_STRING.getInstance()) && (t2 == TYPE_STRING.getInstance()))
+            {
+                return TYPE_STRING.getInstance();
+            }
+            // error if there is exp + exp and the expressions are not from the same type type int or string
+            System.exit(0);
+		}
+
+		if ((OP.OP != 1) && (OP.OP != 5) && (OP.OP != 8))
+		{
+		    if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
+            {
+                return TYPE_INT.getInstance();
+            }
+		    // the expressions are not both ints for binops -, *, /, <, >
+            System.exit(0);
+		}
+
+		return null;
+	}
 }

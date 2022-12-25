@@ -24,4 +24,9 @@ public class AST_EXP_STRING extends AST_EXP {
 		/*******************************/
 		this.value = value;
 	}
+
+	public TYPE SemantMe()
+	{
+		return TYPE_STRING.getInstance();
+	}
 }

@@ -24,4 +24,9 @@ public class AST_EXP_VAR extends AST_EXP
 		/*******************************/
 		this.var = var;
 	}
+
+	public TYPE SemantMe()
+	{
+	    return var.SemantMe();
+    }
 }

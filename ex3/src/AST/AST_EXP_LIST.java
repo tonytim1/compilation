@@ -31,4 +31,11 @@ public class AST_EXP_LIST extends AST_Node
 		this.tail = tail;
 	}
 
+	public TYPE SemantMe()
+	{
+		if (head != null) head.SemantMe();
+		if (tail != null) tail.SemantMe();
+
+		return null;
+	}
 }

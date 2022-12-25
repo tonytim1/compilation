@@ -135,6 +135,7 @@ ERROR 			= .
 "string"			{ return symbol(TokenNames.TYPE_STRING);}
 "void"				{ return symbol(TokenNames.TYPE_VOID);}
 "="					{ return symbol(TokenNames.EQ);}
+"!="				{ return symbol(TokenNames.NE);}
 "."					{ return symbol(TokenNames.DOT);}
 "+"					{ return symbol(TokenNames.PLUS);}
 "-"					{ return symbol(TokenNames.MINUS);}

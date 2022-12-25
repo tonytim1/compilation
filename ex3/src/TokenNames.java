@@ -48,6 +48,7 @@ public class TokenNames {
   "PLUS",
   "MINUS",
   "EQ",
+  "NE",
   "GT",
   "LT",
   "TIMES",

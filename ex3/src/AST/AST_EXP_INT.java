@@ -26,4 +26,9 @@ public class AST_EXP_INT extends AST_EXP
 		this.value = value;
 		this.isPositive = isPositive;
 	}
+
+	public TYPE SemantMe()
+	{
+		return TYPE_INT.getInstance();
+	}
 }

@@ -24,4 +24,10 @@ public class AST_EXP_PAREN extends AST_EXP {
 		/*******************************/
 		this.exp = exp;
 	}
+
+
+	public TYPE SemantMe()
+	{
+	    return exp.SemantMe();
+    }
 }

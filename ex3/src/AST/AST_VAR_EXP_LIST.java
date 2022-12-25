@@ -31,4 +31,12 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 		this.expList = expList;
 		this.name = name;
 	}
+
+	public TYPE SemantMe()
+	{
+		if (head != null) head.SemantMe();
+		if (tail != null) tail.SemantMe();
+
+		return null;
+	}
 }
