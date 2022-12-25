@@ -1,4 +1,6 @@
 package AST;
+import TYPES.*;
+import SYMBOL_TABLE.*;
 
 public abstract class AST_C_FIELD extends AST_Node {
 	/*********************************************************/
