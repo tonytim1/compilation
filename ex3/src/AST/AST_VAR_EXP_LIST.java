@@ -36,9 +36,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 
 	public TYPE SemantMe()
 	{
-        if (head != null) head.SemantMe();
-        if (tail != null) tail.SemantMe();
-
+        if (expList != null) expList.SemantMe();
 
 	    TYPE nameType =  SYMBOL_TABLE.getInstance().find(name);
 	    if (nameType == null || nameType.typeName != "function") {
