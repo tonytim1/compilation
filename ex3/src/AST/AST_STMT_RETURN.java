@@ -24,4 +24,16 @@ public class AST_STMT_RETURN extends AST_STMT {
 		/*******************************/
 		this.exp = exp;
 	}
+	public TYPE SemantMe() {
+	// Check that exp's type agrees with function return type
+	if (exp != null) {
+	    expType = exp.SemantMe();
+	}
+	if (expType != SYMBOL_TABLE.required_return_type)
+	 // Error required return type is wrong
+	 {
+	    System.exit(0);
+	 }
+	 return null;
+	}
 }
