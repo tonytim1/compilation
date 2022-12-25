@@ -39,7 +39,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		/*******************/
 		/* [0] return type */
 		/*******************/
-		type.Semantme()
+		type.SemantMe();
 		returnType = SYMBOL_TABLE.getInstance().find(type.id);
 		if (returnType == null)
 		{
@@ -86,6 +86,9 @@ public class AST_FUNC_DEC extends AST_Node {
 		/*********************************************************/
 		/* [6] Return value is irrelevant for class declarations */
 		/*********************************************************/
+
+		// Update required return type
+		SYMBOL_TABLE.required_return_type = type.id;
 		return null;
 	}
 }
