@@ -31,7 +31,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 	TYPE expType;
 	if (exp != null) {
 	    expType = exp.SemantMe();
-	    if (expType.typeName != SYMBOL_TABLE.required_return_type.typeName) {
+	    if (expType.typeName != SYMBOL_TABLE.getInstance().required_return_type.typeName) {
 	        // Error required return type is wrong
 	        System.exit(0);
 	    }

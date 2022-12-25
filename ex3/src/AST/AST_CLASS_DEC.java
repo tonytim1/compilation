@@ -42,7 +42,10 @@ public class AST_CLASS_DEC extends AST_Node {
 		/***************************/
 		/* [2] Semant Data Members */
 		/***************************/
-        TYPE_CLASS classType = new TYPE_CLASS(id2, id1, cFieldList.SemantMe());
+		if ( id2 != null)
+        	TYPE_CLASS classType = new TYPE_CLASS(id2.id, id1.id, cFieldList.SemantMe());
+		else
+			TYPE_CLASS classType = new TYPE_CLASS(null, id1.id, cFieldList.SemantMe());
         /*****************/
         /* [3] End Scope */
         /*****************/

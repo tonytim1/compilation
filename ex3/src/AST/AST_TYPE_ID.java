@@ -28,7 +28,7 @@ public class AST_TYPE_ID extends AST_Node {
 
 	public TYPE SemantMe()
 	{
-		TYPE t = SYMBOL_TABLE.getInstance().find(type);
+		TYPE t = SYMBOL_TABLE.getInstance().find(type.id);
 		if (t == null)
 		{
 			/**************************/

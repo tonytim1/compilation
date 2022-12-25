@@ -44,7 +44,7 @@ public class AST_VAR_DEC extends AST_Node {
 		/****************************/
 		/* [1] Check If Type exists */
 		/****************************/
-		t = SYMBOL_TABLE.getInstance().find(type);
+		t = SYMBOL_TABLE.getInstance().find(type.id);
 		if (t == null)
 		{
 			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
