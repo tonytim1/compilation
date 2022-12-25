@@ -19,6 +19,8 @@ import TYPES.*;
 public class SYMBOL_TABLE
 {
 	private int hashArraySize = 13;
+	// TODO - Update symbol table with required_return_type when we create new function
+	private TYPE required_return_type = null;
 	
 	/**********************************************/
 	/* The actual symbol table data structure ... */
