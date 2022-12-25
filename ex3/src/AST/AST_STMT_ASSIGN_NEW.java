@@ -26,4 +26,20 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 		this.var = var;
 		this.exp = exp;
 	}
+
+	public TYPE SemantMe()
+	{
+		TYPE t1 = null;
+		TYPE t2 = null;
+
+		if (var != null) t1 = var.SemantMe();
+		if (exp != null) t2 = exp.SemantMe();
+
+		if (t1 != t2)
+		{
+			//System.out.format(">> ERROR [%d:%d] type mismatch for var := exp\n",6,6);
+			System.exit(0);
+		}
+		return null;
+	}
 }
