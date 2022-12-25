@@ -84,7 +84,7 @@ public class AST_TYPE extends AST_Node {
 				{
 					return t;
 				}
-            return null;
 		}
-	}	
+        return null;
+	}
 }
