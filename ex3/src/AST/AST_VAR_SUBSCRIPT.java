@@ -43,10 +43,10 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	    if (subscript != null)
 	    {
 	        TYPE varSubscript = subscript.SemantMe();
-	    }
-	    if (varSubscript.typeName != "int") {
-	        //subscript is not integer
-	        System.exit(0);
+	        if (varSubscript.typeName != "int") {
+	            //subscript is not integer
+	            System.exit(0);
+	        }
 	    }
 	    return null;
 	}

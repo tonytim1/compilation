@@ -46,7 +46,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 
 	    // In case var != null we want to check that id is a field in class var
         if (var != null) {
-            varType = var.SemantMe();
+            TYPE varType = var.SemantMe();
 
             if (varType.typeName != "class") {
                 //ERROR var isn't class but does exist
