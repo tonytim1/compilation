@@ -6,6 +6,7 @@ public abstract class TYPE
 	/*  Every type has a name ... */
 	/******************************/
 	public String name;
+	public String typeName;
 
 	/*************/
 	/* isClass() */

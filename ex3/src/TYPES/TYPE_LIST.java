@@ -13,6 +13,7 @@ public class TYPE_LIST extends TYPE
 	/******************/
 	public TYPE_LIST(TYPE head,TYPE_LIST tail)
 	{
+	    this.typeName = "list";
 		this.head = head;
 		this.tail = tail;
 	}
