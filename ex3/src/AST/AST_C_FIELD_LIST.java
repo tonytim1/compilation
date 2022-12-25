@@ -33,12 +33,12 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	
 	public TYPE SemantMe()
 	{
-		if (cField != null) 
-			cField.SemantMe();
-
-		if (cFieldList != null)
-			cFieldList.SemantMe();
-		
-		return null;
+		if (cField == null) {
+		    return new TYPE_LIST(null, null);
+		}
+		if (cFieldList == null) {
+			return new TYPE_LIST(cField.SemantMe(), null);
+		}
+		return new TYPE_LIST(cField.SemantMe(), cFieldList.SemantMe());
 	}
 }
