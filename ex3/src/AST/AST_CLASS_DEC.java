@@ -34,18 +34,30 @@ public class AST_CLASS_DEC extends AST_Node {
 
 	public TYPE SemantMe()
 	{	
+		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
+
+		//check if depth != 0 or class name already declared in scope
+		if (!(s.isGlobalScope()) || s.find(id1))
+			System.exit(0);
+
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
-		SYMBOL_TABLE.getInstance().beginScope();
+		s.beginScope();
+
+		TYPE father = null;
+
+		if ( id2 != null)
+		{
+			father = s.find(id2);
+			if (father == null || !(father.isClass))
+				System.exit(0);
+		}
 
 		/***************************/
 		/* [2] Semant Data Members */
-		/***************************/
-		if ( id2 != null)
-        	TYPE_CLASS classType = new TYPE_CLASS(id2.id, id1.id, cFieldList.SemantMe());
-		else
-			TYPE_CLASS classType = new TYPE_CLASS(null, id1.id, cFieldList.SemantMe());
+		/***************************/	
+		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, cFieldList.SemantMe());
         /*****************/
         /* [3] End Scope */
         /*****************/

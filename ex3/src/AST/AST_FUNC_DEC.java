@@ -34,31 +34,38 @@ public class AST_FUNC_DEC extends AST_Node {
 
 	public TYPE SemantMe()
 	{
+		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
+
 		TYPE t;
 		TYPE returnType = null;
 		TYPE_LIST type_list = null;
 
+		// check if function is defined in scope
+		if (s.findInScope(id) != null)
+			System.exit(0);
+
 		/*******************/
 		/* [0] return type */
 		/*******************/
-		type.SemantMe();
-		returnType = SYMBOL_TABLE.getInstance().find(type.id);
+		returnType = type.SemantMe();
 		if (returnType == null)
 		{
 			System.out.format(">> ERROR [%d:%d] non existing return type %s\n",6,6,returnType);
+			System.exit(0);
 		}
 
 		/****************************/
 		/* [1] Begin Function Scope */
 		/****************************/
-		SYMBOL_TABLE.getInstance().beginScope();
+		s.beginScope();
 
 		/***************************/
 		/* [2] Semant Input Params */
 		/***************************/
 		for (AST_TYPE_ID_LIST it = tid; it  != null; it = it.tail)
 		{
-			t = SYMBOL_TABLE.getInstance().find(it.head.type.id);
+			//t = SYMBOL_TABLE.getInstance().find(it.head.type.id);
+			t = it.head.SemantMe();
 			if (t == null)
 			{
 				System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,it.head.type);

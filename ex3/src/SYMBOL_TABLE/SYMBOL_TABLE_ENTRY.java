@@ -38,6 +38,8 @@ public class SYMBOL_TABLE_ENTRY
 	/* The prevtop_index is just for debug purposes ... */
 	/****************************************************/
 	public int prevtop_index;
+
+	int depth;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -56,5 +58,6 @@ public class SYMBOL_TABLE_ENTRY
 		this.next = next;
 		this.prevtop = prevtop;
 		this.prevtop_index = prevtop_index;
+		this.depth = depth;
 	}
 }

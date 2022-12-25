@@ -64,14 +64,14 @@ public class AST_TYPE extends AST_Node {
 
 	public TYPE SemantMe()
 	{
-		SYMBOL_TABLE st = SYMBOL_TABLE.getInstance();
+		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 
 		switch(t){
 			case 1: return TYPE_INT.getInstance();
 			case 2: return TYPE_STRING.getInstance();
 			case 3: return TYPE_VOID.getInstance();
 			case 4: 
-				TYPE t = st.find(id);
+				TYPE t = s.find(id);
 				if(t == null)
 				{
 					/**************************/

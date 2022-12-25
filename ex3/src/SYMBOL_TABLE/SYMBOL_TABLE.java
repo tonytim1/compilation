@@ -27,6 +27,7 @@ public class SYMBOL_TABLE
 	private SYMBOL_TABLE_ENTRY[] table = new SYMBOL_TABLE_ENTRY[hashArraySize];
 	private SYMBOL_TABLE_ENTRY top;
 	private int top_index = 0;
+	private int curr_depth = 0;
 	
 	/**************************************************************/
 	/* A very primitive hash function for exposition purposes ... */
@@ -63,7 +64,7 @@ public class SYMBOL_TABLE
 		/**************************************************************************/
 		/* [3] Prepare a new symbol table entry with name, type, next and prevtop */
 		/**************************************************************************/
-		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++);
+		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++,curr_depth);
 
 		/**********************************************/
 		/* [4] Update the top of the symbol table ... */
@@ -99,6 +100,21 @@ public class SYMBOL_TABLE
 		return null;
 	}
 
+	public TYPE findInScope(String name)
+	{
+		SYMBOL_TABLE_ENTRY e;
+				
+		for (e = table[hash(name)]; e != null; e = e.next)
+		{
+			if (name.equals(e.name) && e.depth == curr_depth)
+			{
+				return e.type;
+			}
+		}
+		
+		return null;
+	}
+
 	/***************************************************************************/
 	/* begine scope = Enter the <SCOPE-BOUNDARY> element to the data structure */
 	/***************************************************************************/
@@ -118,6 +134,7 @@ public class SYMBOL_TABLE
 		/* Print the symbol table after every change */
 		/*********************************************/
 		PrintMe();
+		curr_depth++;
 	}
 
 	/********************************************************************************/
@@ -146,6 +163,12 @@ public class SYMBOL_TABLE
 		/* Print the symbol table after every change */		
 		/*********************************************/
 		PrintMe();
+		curr_depth--;
+	}
+
+	public boolean isGlobalScope()
+	{
+		return curr_depth == 0;
 	}
 	
 	public static int n=0;

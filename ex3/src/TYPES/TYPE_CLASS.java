@@ -24,4 +24,18 @@ public class TYPE_CLASS extends TYPE
 		this.father = father;
 		this.data_members = data_members;
 	}
+
+	public TYPE findInClass(String name)
+	{
+		for (TYPE_CLASS_VAR_DEC_LIST member=data_members; member!=null; member=member.tail){
+			if (member.head.name.equals(name)){
+				return member.head.t;
+			}
+		}
+
+		if (this.father != null)
+			return this.father.findInClassScope(name);
+			
+		return null;
+	}
 }

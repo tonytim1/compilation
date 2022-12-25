@@ -32,6 +32,7 @@ public class AST_TYPE_ID_LIST extends AST_Node {
 	
 	public TYPE_LIST SemantMe()
 	{
+		// currently not used, checked from func dec 
 		if (tail == null)
 		{
 			return new TYPE_LIST(
