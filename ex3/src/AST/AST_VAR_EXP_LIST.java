@@ -54,7 +54,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
                 //ERROR var isn't class but does exist
                 System.exit(0);
             }
-            tc = (TYPE_CLASS) varType;
+            TYPE_CLASS tc = (TYPE_CLASS) varType;
             for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
 		    {
 		    	if (it.head.name == name)

@@ -31,13 +31,20 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 
 	public TYPE SemantMe()
 	{
-	    if (var != null) varType = var.SemantMe();
-	    if (varType.isArray() == false) {
+	    if (var == null) {
+	        return null;
+	    }
+
+	    TYPE varType = var.SemantMe();
+	    if (varType.typeName != "array") {
 	        //var is not an array
 	        System.exit(0);
 	    }
-	    if (subscript != null) varSubscript = subscript.SemantMe();
-	    if (varSubscript.isInteger() == false) {
+	    if (subscript != null)
+	    {
+	        TYPE varSubscript = subscript.SemantMe();
+	    }
+	    if (varSubscript.typeName != "int") {
 	        //subscript is not integer
 	        System.exit(0);
 	    }

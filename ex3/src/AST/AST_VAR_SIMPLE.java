@@ -32,7 +32,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 
 	public TYPE SemantMe()
 	{
-	    Type t = SYMBOL_TABLE.getInstance().find(name);
+	    TYPE t = SYMBOL_TABLE.getInstance().find(name);
 	    if (t == null) { // In case we use undefined variable
 		    System.exit(0);
 	    }

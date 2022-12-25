@@ -7,7 +7,6 @@ public class TYPE_CLASS_VAR_DEC
 	
 	public TYPE_CLASS_VAR_DEC(TYPE t,String name)
 	{
-	    this.typeName = "class";
 		this.t = t;
 		this.name = name;
 	}
