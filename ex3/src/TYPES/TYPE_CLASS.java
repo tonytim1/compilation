@@ -29,7 +29,7 @@ public class TYPE_CLASS extends TYPE
 	{
 		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
 			if (member.head.name.equals(name)){
-				return member.head.t;
+				return member.head.name;
 			}
 		}
 
