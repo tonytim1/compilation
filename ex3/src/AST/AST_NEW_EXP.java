@@ -29,6 +29,6 @@ public class AST_NEW_EXP extends AST_Node {
 
 	public TYPE SemantMe()
 	{
-		return type.getInstance();
+		return this.type.SemantMe();
 	}
 }

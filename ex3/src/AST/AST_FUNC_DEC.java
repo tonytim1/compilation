@@ -90,7 +90,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		/*********************************************************/
 
 		// Update required return type
-		SYMBOL_TABLE.required_return_type = type.id;
+		SYMBOL_TABLE.required_return_type = type.SemantMe().typeName;
 		return null;
 	}
 }
