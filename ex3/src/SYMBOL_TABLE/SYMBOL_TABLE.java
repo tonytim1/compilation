@@ -19,7 +19,7 @@ import TYPES.*;
 public class SYMBOL_TABLE
 {
 	private int hashArraySize = 13;
-	public TYPE required_return_type = null; // New field
+	public String required_return_type = null; // New field
 	
 	/**********************************************/
 	/* The actual symbol table data structure ... */
