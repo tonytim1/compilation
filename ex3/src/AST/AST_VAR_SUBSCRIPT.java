@@ -37,7 +37,7 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	    if (subscript != null) varSubscript = subscript.SemantMe();
 	    if (varSubscript.isInteger() == false) {
 	        //subscript is not integer
-	        System.exit(0)
+	        System.exit(0);
 	    }
 	    return null;
 	}
