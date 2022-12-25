@@ -17,6 +17,7 @@ public class TYPE_FUNCTION extends TYPE
 	/****************/
 	public TYPE_FUNCTION(TYPE returnType,String name,TYPE_LIST params)
 	{
+	    this.typeName = "function";
 		this.name = name;
 		this.returnType = returnType;
 		this.params = params;

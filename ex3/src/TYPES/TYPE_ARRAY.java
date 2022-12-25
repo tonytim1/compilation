@@ -14,6 +14,7 @@ public class TYPE_ARRAY extends TYPE
 	public TYPE_ARRAY(TYPE type)
 	{
 		this.type = type;
+		this.typeName = "array";
 		//this.size = size;
 	}
 }

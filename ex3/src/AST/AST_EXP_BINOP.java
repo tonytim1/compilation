@@ -45,18 +45,18 @@ public class AST_EXP_BINOP extends AST_EXP
 		if (left  != null) t1 = left.SemantMe();
 		if (right != null) t2 = right.SemantMe();
 
-		if (t1.name != t2.name) {
+		if (t1.typeName != t2.typeName) {
 		    // the expressions don't have the same type
             System.exit(0);
 		}
 
 		if (OP.OP == 1) { // binop is +
 		    // check if both expressions are from type int or string
-		    if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
+		    if (t1.typeName == "int")
             {
                 return TYPE_INT.getInstance();
             }
-            if ((t1 == TYPE_STRING.getInstance()) && (t2 == TYPE_STRING.getInstance()))
+            if (t1.typeName == "string")
             {
                 return TYPE_STRING.getInstance();
             }
@@ -66,7 +66,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
 		if ((OP.OP != 1) && (OP.OP != 5) && (OP.OP != 8))
 		{
-		    if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
+		    if (t1.typeName == "int")
             {
                 return TYPE_INT.getInstance();
             }
