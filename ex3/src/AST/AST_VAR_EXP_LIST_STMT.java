@@ -31,4 +31,8 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 		this.expList = expList;
 		this.name = name;
 	}
+
+	public Type SemantMe() {
+
+	}
 }
