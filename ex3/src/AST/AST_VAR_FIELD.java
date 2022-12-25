@@ -44,7 +44,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		/*********************************/
 		if (t.isClass() == false)
 		{
-			// System.out.format(">> ERROR [%d:%d] access %s field of a non-class variable\n",6,6,fieldName);
+			// System.out.format(">> ERROR [%d:%d] access %s field of a non-class variable\n",6,6,name);
 			System.exit(0);
 		}
 		else
@@ -57,16 +57,16 @@ public class AST_VAR_FIELD extends AST_VAR
 		/************************************/
 		for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
 		{
-			if (it.head.name == fieldName)
+			if (it.head.name == name)
 			{
 				return it.head;
 			}
 		}
 
 		/*********************************************/
-		/* [4] fieldName does not exist in class var */
+		/* [4] name does not exist in class var */
 		/*********************************************/
-		// System.out.format(">> ERROR [%d:%d] field %s does not exist in class\n",6,6,fieldName);
+		// System.out.format(">> ERROR [%d:%d] field %s does not exist in class\n",6,6,name);
 		System.exit(0);
 		return null;
 	}
