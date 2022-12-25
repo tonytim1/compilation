@@ -53,7 +53,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
                 System.exit(0);
             }
             TYPE_CLASS tc = (TYPE_CLASS) varType;
-            for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
+            for (TYPE_CLASS_VAR_DEC_LIST it=tc.data_members;it != null;it=it.tail)
 		    {
 		    	if (it.head.name == name)
 		    	{

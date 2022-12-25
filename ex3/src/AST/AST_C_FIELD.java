@@ -10,4 +10,8 @@ public abstract class AST_C_FIELD extends AST_Node {
 	{
 		System.out.print("UNKNOWN AST C FIELD NODE");
 	}
+	public TYPE SemantMe() 
+	{ 
+		return null;
+	}
 }
