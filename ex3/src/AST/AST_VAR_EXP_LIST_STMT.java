@@ -34,5 +34,36 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 
 	public Type SemantMe() {
 
+        if (head != null) head.SemantMe();
+        if (tail != null) tail.SemantMe();
+
+
+	    TYPE nameType =  SYMBOL_TABLE.getInstance().find(name);
+	    if (nameType == null || nameType.typeName != "function") {
+	        // ERROR - Not found function of type isn't function
+	        System.exit(0);
+	    }
+
+	    // In case var != null we want to check that id is a field in class var
+        if (var != null) {
+            varType = var.SemantMe();
+
+            if (varType.typeName != "class") {
+                //ERROR var isn't class but does exist
+                System.exit(0);
+            }
+            tc = (TYPE_CLASS) varType;
+            for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
+		    {
+		    	if (it.head.name == name)
+		    	{
+		    		return it.head;
+			    }
+		    }
+		    // ERROR - Didn't find a field that fits
+		    System.exit(0);
+		    return null;
+        }
+		return null;
 	}
 }
