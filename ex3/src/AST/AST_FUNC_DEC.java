@@ -68,7 +68,7 @@ public class AST_FUNC_DEC extends AST_Node {
 			t = it.head.SemantMe();
 			if (t == null)
 			{
-				System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,it.head.type);
+				System.exit(0);
 			}
 			else
 			{
