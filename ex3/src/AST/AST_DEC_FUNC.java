@@ -6,8 +6,9 @@ public class AST_DEC_FUNC extends AST_DEC {
 
 	public AST_FUNC_DEC f;
 
-	public AST_DEC_FUNC(AST_FUNC_DEC f)
+	public AST_DEC_FUNC(int lineNumber, AST_FUNC_DEC f)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

@@ -9,8 +9,9 @@ public class AST_EXP_PAREN extends AST_EXP {
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_PAREN(AST_EXP exp) 
-	{		
+	public AST_EXP_PAREN(int lineNumber, AST_EXP exp) 
+	{
+		super(lineNumber);		
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

@@ -12,8 +12,9 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_SIMPLE(String name)
+	public AST_VAR_SIMPLE(int lineNumber, String name)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -34,7 +35,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	{
 	    TYPE t = SYMBOL_TABLE.getInstance().find(name);
 	    if (t == null) { // In case we use undefined variable
-		    System.exit(0);
+		    return new TYPE_ERROR(lineNumber);
 	    }
 	    return t;
     }

@@ -7,7 +7,8 @@ public class AST_TYPE extends AST_Node {
 	public int t;
 	public String id;
 
-	public AST_TYPE(int t) {
+	public AST_TYPE(int lineNumber, int t) {
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -29,7 +30,8 @@ public class AST_TYPE extends AST_Node {
 		this.id = id;
 	}
 	
-	public AST_TYPE(String id) {
+	public AST_TYPE(int lineNumber, String id) {
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -77,7 +79,7 @@ public class AST_TYPE extends AST_Node {
 					/**************************/
 					/* ERROR: undeclared type */
 					/**************************/
-					System.exit(0);
+					return new TYPE_ERROR(lineNumber);
 					return null;
 				}
 				else

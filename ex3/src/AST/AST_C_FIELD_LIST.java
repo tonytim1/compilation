@@ -8,8 +8,9 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	public AST_C_FIELD_LIST cFieldList;
 	
 	
-	public AST_C_FIELD_LIST(AST_C_FIELD cField, AST_C_FIELD_LIST cFieldList)
+	public AST_C_FIELD_LIST(int lineNumber, AST_C_FIELD cField, AST_C_FIELD_LIST cFieldList)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

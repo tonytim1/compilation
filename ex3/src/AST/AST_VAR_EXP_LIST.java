@@ -11,8 +11,9 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_EXP_LIST(AST_VAR var, AST_EXP_LIST expList, String name)
+	public AST_VAR_EXP_LIST(int lineNumber, AST_VAR var, AST_EXP_LIST expList, String name)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -41,7 +42,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 	    TYPE nameType =  SYMBOL_TABLE.getInstance().find(name);
 	    if (nameType == null || nameType.typeName != "function") {
 	        // ERROR - Not found function of type isn't function
-	        System.exit(0);
+	        return new TYPE_ERROR(lineNumber);
 	    }
 
 	    // In case var != null we want to check that id is a field in class var
@@ -50,7 +51,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 
             if (varType.typeName != "class") {
                 //ERROR var isn't class but does exist
-                System.exit(0);
+                return new TYPE_ERROR(lineNumber);
             }
             TYPE_CLASS tc = (TYPE_CLASS) varType;
             for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
@@ -61,7 +62,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 			    }
 		    }
 		    // ERROR - Didn't find a field that fits
-		    System.exit(0);
+		    return new TYPE_ERROR(lineNumber);
 		    return null;
         }
 

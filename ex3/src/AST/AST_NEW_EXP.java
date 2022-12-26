@@ -7,7 +7,8 @@ public class AST_NEW_EXP extends AST_Node {
 	public AST_TYPE type;
 	public AST_EXP exp;
 	
-	public AST_NEW_EXP(AST_TYPE type, AST_EXP exp) {
+	public AST_NEW_EXP(int lineNumber, AST_TYPE type, AST_EXP exp) {
+		super(lineNumber);
 		
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

@@ -10,8 +10,9 @@ public class AST_STMT_IF extends AST_STMT
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_IF(AST_EXP cond,AST_STMT_LIST body)
+	public AST_STMT_IF(int lineNumber, AST_EXP cond,AST_STMT_LIST body)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -38,7 +39,7 @@ public class AST_STMT_IF extends AST_STMT
 		if (condType.typeName != "int")
 		{
 			// the expression it not int
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 		}
 
 		/*************************/

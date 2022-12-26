@@ -8,8 +8,9 @@ public class AST_STMT_RETURN extends AST_STMT {
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_RETURN(AST_EXP exp)
+	public AST_STMT_RETURN(int lineNumber, AST_EXP exp)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -33,7 +34,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 	    expType = exp.SemantMe();
 	    if (expType.typeName != SYMBOL_TABLE.getInstance().required_return_type) {
 	        // Error required return type is wrong
-	        System.exit(0);
+	        return new TYPE_ERROR(lineNumber);
 	    }
 	}
 	 return null;
