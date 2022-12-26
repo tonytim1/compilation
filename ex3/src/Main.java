@@ -3,6 +3,7 @@ import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
 import AST.*;
+import TYPES.*;
 
 public class Main
 {
@@ -52,11 +53,19 @@ public class Main
 			/**************************/
 			/* [7] Semant the AST ... */
 			/**************************/
-			AST.SemantMe();
+			System.out.print("start SemantMe\n");
+			TYPE returnType = AST.SemantMe();
+			System.out.format("return type %s\n", returnType.typeName);
 			
 			/*************************/
 			/* [8] Close output file */
 			/*************************/
+			try {
+				file_writer.print("OK");
+			}
+			catch (Exception e){
+				//TO DO: what if there is a problem
+			}
 			file_writer.close();
 
 			/*************************************/
