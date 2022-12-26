@@ -9,8 +9,9 @@ public class AST_FUNC_DEC extends AST_Node {
 	public AST_TYPE_ID_LIST tid;
 	public AST_STMT_LIST stmtList;
 
-	public AST_FUNC_DEC(AST_TYPE type, String id, AST_TYPE_ID_LIST tid, AST_STMT_LIST stmtList)
+	public AST_FUNC_DEC(int lineNumber, AST_TYPE type, String id, AST_TYPE_ID_LIST tid, AST_STMT_LIST stmtList)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -42,7 +43,7 @@ public class AST_FUNC_DEC extends AST_Node {
 
 		// check if function is defined in scope
 		if (s.findInScope(id) != null)
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 
 		/*******************/
 		/* [0] return type */
@@ -51,7 +52,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		if (returnType == null)
 		{
 			System.out.format(">> ERROR [%d:%d] non existing return type %s\n",6,6,returnType);
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 		}
 
 		/****************************/
@@ -68,7 +69,7 @@ public class AST_FUNC_DEC extends AST_Node {
 			t = it.head.SemantMe();
 			if (t == null)
 			{
-				System.exit(0);
+				return new TYPE_ERROR(lineNumber);
 			}
 			else
 			{

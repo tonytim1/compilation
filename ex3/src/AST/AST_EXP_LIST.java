@@ -13,8 +13,9 @@ public class AST_EXP_LIST extends AST_Node
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_LIST(AST_EXP head, AST_EXP_LIST tail)
+	public AST_EXP_LIST(int lineNumber, AST_EXP head, AST_EXP_LIST tail)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

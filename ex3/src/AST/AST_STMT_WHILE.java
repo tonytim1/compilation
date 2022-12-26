@@ -10,8 +10,9 @@ public class AST_STMT_WHILE extends AST_STMT
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_WHILE(AST_EXP cond,AST_STMT_LIST body)
+	public AST_STMT_WHILE(int lineNumber, AST_EXP cond,AST_STMT_LIST body)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -39,7 +40,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		if (cond.SemantMe() != TYPE_INT.getInstance())
 		{
 			// System.out.format(">> ERROR [%d:%d] condition inside WHILE is not integral\n",2,2);
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 		}
 
 		/*************************/

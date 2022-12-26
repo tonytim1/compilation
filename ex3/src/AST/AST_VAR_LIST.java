@@ -13,8 +13,9 @@ public class AST_VAR_LIST extends AST_Node {
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_LIST(String head, AST_VAR_LIST tail, AST_TYPE type)
+	public AST_VAR_LIST(int lineNumber, String head, AST_VAR_LIST tail, AST_TYPE type)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

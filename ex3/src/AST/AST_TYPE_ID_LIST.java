@@ -7,8 +7,9 @@ public class AST_TYPE_ID_LIST extends AST_Node {
 	public AST_TYPE_ID head;
 	public AST_TYPE_ID_LIST tail;
 
-	public AST_TYPE_ID_LIST(AST_TYPE_ID head, AST_TYPE_ID_LIST tail)
+	public AST_TYPE_ID_LIST(int lineNumber, AST_TYPE_ID head, AST_TYPE_ID_LIST tail)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

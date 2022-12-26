@@ -10,8 +10,9 @@ public class AST_EXP_FUNC extends AST_EXP {
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_FUNC(String fn, AST_EXP_LIST exps) 
+	public AST_EXP_FUNC(int lineNumber, String fn, AST_EXP_LIST exps) 
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

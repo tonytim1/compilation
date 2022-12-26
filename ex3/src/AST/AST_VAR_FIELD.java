@@ -10,8 +10,9 @@ public class AST_VAR_FIELD extends AST_VAR
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_FIELD(AST_VAR var,String name)
+	public AST_VAR_FIELD(int lineNumber, AST_VAR var,String name)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -47,7 +48,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		if (t.isClass() == false)
 		{
 			// System.out.format(">> ERROR [%d:%d] access %s field of a non-class variable\n",6,6,name);
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 		}
 		else
 		{
@@ -69,7 +70,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		/* [4] name does not exist in class var */
 		/*********************************************/
 		// System.out.format(">> ERROR [%d:%d] field %s does not exist in class\n",6,6,name);
-		System.exit(0);
+		return new TYPE_ERROR(lineNumber);
 		return null;
 	}
 }

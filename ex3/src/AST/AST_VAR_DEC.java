@@ -9,7 +9,8 @@ public class AST_VAR_DEC extends AST_Node {
 	public AST_EXP exp;
 	public AST_NEW_EXP newExp;
 
-	public AST_VAR_DEC(AST_TYPE type, String id, AST_EXP exp, AST_NEW_EXP newExp) {
+	public AST_VAR_DEC(int lineNumber, AST_TYPE type, String id, AST_EXP exp, AST_NEW_EXP newExp) {
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -48,7 +49,7 @@ public class AST_VAR_DEC extends AST_Node {
 		if (t == null)
 		{
 			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 		}
 		
 		/**************************************/

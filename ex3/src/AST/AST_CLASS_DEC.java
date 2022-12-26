@@ -9,8 +9,9 @@ public class AST_CLASS_DEC extends AST_Node {
 	public AST_C_FIELD_LIST cFieldList;
 
 	
-	public AST_CLASS_DEC(String id1, String id2, AST_C_FIELD_LIST cFieldList)
+	public AST_CLASS_DEC(int lineNumber, String id1, String id2, AST_C_FIELD_LIST cFieldList)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -38,7 +39,7 @@ public class AST_CLASS_DEC extends AST_Node {
 
 		//check if depth != 0 or class name already declared in scope
 		if (!(s.isGlobalScope()) || s.find(id1) != null)
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 
 		/*************************/
 		/* [1] Begin Class Scope */
@@ -51,7 +52,7 @@ public class AST_CLASS_DEC extends AST_Node {
 		{
 			father = s.find(id2);
 			if (father == null || !(father.isClass()))
-				System.exit(0);
+				return new TYPE_ERROR(lineNumber);
 		}
 
 		/***************************/

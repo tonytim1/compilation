@@ -7,8 +7,9 @@ public class AST_TYPE_ID extends AST_Node {
 	public AST_TYPE type;
 	public String id;
 
-	public AST_TYPE_ID(AST_TYPE type, String id)
+	public AST_TYPE_ID(int lineNumber, AST_TYPE type, String id)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -36,7 +37,7 @@ public class AST_TYPE_ID extends AST_Node {
 		// check if type is undeclared or void (void isnt allowed for ids) or name exists in scope
 		if (t == null || t == TYPE_VOID.getInstance() || s.findInScope(id) != null)
 		{
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 			return null;
 		}
 		else

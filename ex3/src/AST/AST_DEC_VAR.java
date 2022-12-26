@@ -6,8 +6,9 @@ public class AST_DEC_VAR extends AST_DEC {
 
 	public AST_VAR_DEC v;
 
-	public AST_DEC_VAR(AST_VAR_DEC v)
+	public AST_DEC_VAR(int lineNumber, AST_VAR_DEC v)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

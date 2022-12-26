@@ -11,8 +11,9 @@ public class AST_STMT_VAR_FUNC extends AST_STMT {
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_STMT_VAR_FUNC(AST_VAR var, String fn, AST_EXP_LIST exps) 
+	public AST_STMT_VAR_FUNC(int lineNumber, AST_VAR var, String fn, AST_EXP_LIST exps) 
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

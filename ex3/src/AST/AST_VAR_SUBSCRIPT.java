@@ -10,8 +10,9 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_SUBSCRIPT(AST_VAR var,AST_EXP subscript)
+	public AST_VAR_SUBSCRIPT(int lineNumber, AST_VAR var,AST_EXP subscript)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -38,14 +39,14 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	    TYPE varType = var.SemantMe();
 	    if (varType.typeName != "array") {
 	        //var is not an array
-	        System.exit(0);
+	        return new TYPE_ERROR(lineNumber);
 	    }
 	    if (subscript != null)
 	    {
 	        TYPE varSubscript = subscript.SemantMe();
 	        if (varSubscript.typeName != "int") {
 	            //subscript is not integer
-	            System.exit(0);
+	            return new TYPE_ERROR(lineNumber);
 	        }
 	    }
 	    return null;

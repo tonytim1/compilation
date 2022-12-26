@@ -7,7 +7,8 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 	public AST_TYPE type;
 	
 	
-	public AST_ARRAY_TYPE_DEF(String id, AST_TYPE type) {
+	public AST_ARRAY_TYPE_DEF(int lineNumber, String id, AST_TYPE type) {
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -31,7 +32,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		
 		//check if depth != 0 or class name already declared in scope
 		if (!(s.isGlobalScope()) || s.find(id) != null)
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 
 		TYPE t;
 
@@ -42,11 +43,11 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		if (t == null)
 		{
 			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 		}
 		// check that type is not void
 		if (t == TYPE_VOID.getInstance())
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 
 		/**************************************/
 		/* [2] Check That Name does NOT exist */

@@ -11,8 +11,9 @@ public class AST_EXP_BINOP extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_BINOP(AST_EXP left,AST_EXP right,AST_BINOP OP)
+	public AST_EXP_BINOP(int lineNumber, AST_EXP left,AST_EXP right,AST_BINOP OP)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -49,7 +50,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
 		if (t1.typeName != t2.typeName) {
 		    // the expressions don't have the same type
-            System.exit(0);
+            return new TYPE_ERROR(lineNumber);
 		}
 
 		if (OP.OP == 1) { // binop is +
@@ -63,7 +64,7 @@ public class AST_EXP_BINOP extends AST_EXP
                 return TYPE_STRING.getInstance();
             }
             // error if there is exp + exp and the expressions are not from the same type type int or string
-            System.exit(0);
+            return new TYPE_ERROR(lineNumber);
 		}
 
 		if ((OP.OP != 1) && (OP.OP != 5) && (OP.OP != 8))
@@ -73,7 +74,7 @@ public class AST_EXP_BINOP extends AST_EXP
                 return TYPE_INT.getInstance();
             }
 		    // the expressions are not both ints for binops -, *, /, <, >
-            System.exit(0);
+            return new TYPE_ERROR(lineNumber);
 		}
 
 		return null;

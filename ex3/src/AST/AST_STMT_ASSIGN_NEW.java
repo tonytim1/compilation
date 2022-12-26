@@ -10,8 +10,9 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_ASSIGN_NEW(AST_VAR var, AST_NEW_EXP exp)
+	public AST_STMT_ASSIGN_NEW(int lineNumber, AST_VAR var, AST_NEW_EXP exp)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -40,7 +41,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 		if (t1 != t2)
 		{
 			//System.out.format(">> ERROR [%d:%d] type mismatch for var := exp\n",6,6);
-			System.exit(0);
+			return new TYPE_ERROR(lineNumber);
 		}
 		return null;
 	}
