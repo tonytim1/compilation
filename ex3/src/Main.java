@@ -52,8 +52,15 @@ public class Main
 			/**************************/
 			/* [7] Semant the AST ... */
 			/**************************/
-			AST.SemantMe();
-			
+			try 
+			{
+				AST.SemantMe();
+				file_writer.print("OK");
+			}
+			catch (SEMANTIC_EXCEPTION e)
+			{
+				file_writer.print(String.format("ERROR(%d)", e.lineNumber));
+			}
 			/*************************/
 			/* [8] Close output file */
 			/*************************/

@@ -30,7 +30,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 		this.exp = exp;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t1 = null;
 		TYPE t2 = null;
@@ -41,7 +41,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 		if (t1 != t2)
 		{
 			//System.out.format(">> ERROR [%d:%d] type mismatch for var := exp\n",6,6);
-			return new TYPE_ERROR(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		return null;
 	}

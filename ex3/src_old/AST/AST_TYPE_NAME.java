@@ -52,7 +52,7 @@ public class AST_TYPE_NAME extends AST_Node
 	/*****************/
 	/* SEMANT ME ... */
 	/*****************/
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t = SYMBOL_TABLE.getInstance().find(type);
 		if (t == null)

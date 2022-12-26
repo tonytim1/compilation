@@ -50,7 +50,7 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 		/****************************************/
 		if (var  != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);		
 	}
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t = null;
 		TYPE_CLASS tc = null;

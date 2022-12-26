@@ -25,7 +25,7 @@ public class AST_DEC_FUNC extends AST_DEC {
 		this.f = f;
 	}
 	
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{	
 		return f.SemantMe();
 	}

@@ -31,20 +31,14 @@ public class AST_TYPE_ID_LIST extends AST_Node {
 		this.tail = tail;
 	}
 	
-	public TYPE_LIST SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		// currently not used, checked from func dec 
-		if (tail == null)
+		head.SemantMe();
+		if (tail != null)
 		{
-			return new TYPE_LIST(
-				head.SemantMe(),
-				null);
+			tail.SemantMe();
 		}
-		else
-		{
-			return new TYPE_LIST(
-				head.SemantMe(),
-				tail.SemantMe());
-		}
+		return null;
 	}
 }

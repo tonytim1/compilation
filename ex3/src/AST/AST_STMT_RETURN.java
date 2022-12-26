@@ -27,14 +27,14 @@ public class AST_STMT_RETURN extends AST_STMT {
 		/*******************************/
 		this.exp = exp;
 	}
-	public TYPE SemantMe() {
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION {
 	// Check that exp's type agrees with function return type
 	TYPE expType;
 	if (exp != null) {
 	    expType = exp.SemantMe();
 	    if (expType.typeName != SYMBOL_TABLE.getInstance().required_return_type) {
 	        // Error required return type is wrong
-	        return new TYPE_ERROR(lineNumber);
+	        throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 	}
 	 return null;

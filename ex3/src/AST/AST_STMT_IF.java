@@ -30,7 +30,7 @@ public class AST_STMT_IF extends AST_STMT
 		this.cond = cond;
 		this.body = body;
 	}
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		/****************************/
 		/* [0] Semant the Condition */
@@ -39,7 +39,7 @@ public class AST_STMT_IF extends AST_STMT
 		if (condType.typeName != "int")
 		{
 			// the expression it not int
-			return new TYPE_ERROR(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		/*************************/

@@ -25,7 +25,7 @@ public class AST_C_FIELD_FUNC extends AST_C_FIELD {
 		this.funcDec = funcDec;
 	}
 
-	public TYPE SemantMe() 
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION 
 	{ 
 		return funcDec.SemantMe();
 	}

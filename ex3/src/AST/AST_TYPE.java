@@ -64,7 +64,7 @@ public class AST_TYPE extends AST_Node {
 			"TYPE\n");
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 
@@ -79,8 +79,7 @@ public class AST_TYPE extends AST_Node {
 					/**************************/
 					/* ERROR: undeclared type */
 					/**************************/
-					return new TYPE_ERROR(lineNumber);
-					return null;
+					throw new SEMANTIC_EXCEPTION(lineNumber);
 				}
 				else
 				{

@@ -10,7 +10,7 @@ public abstract class AST_EXP extends AST_Node
         super(lineNumber);
     }
 
-    public TYPE SemantMe()
+    public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		return null;
 	}

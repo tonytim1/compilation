@@ -57,7 +57,7 @@ public class AST_DEC_VAR extends AST_DEC
 			
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t;
 	

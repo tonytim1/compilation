@@ -28,7 +28,7 @@ public class AST_EXP_VAR extends AST_EXP
 		this.var = var;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 	    return var.SemantMe();
     }

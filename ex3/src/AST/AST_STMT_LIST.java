@@ -34,7 +34,7 @@ public class AST_STMT_LIST extends AST_Node
 		this.tail = tail;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		if (head != null) head.SemantMe();
 		if (tail != null) tail.SemantMe();

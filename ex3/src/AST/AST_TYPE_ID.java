@@ -27,7 +27,7 @@ public class AST_TYPE_ID extends AST_Node {
 		this.id = id;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 		
@@ -37,8 +37,7 @@ public class AST_TYPE_ID extends AST_Node {
 		// check if type is undeclared or void (void isnt allowed for ids) or name exists in scope
 		if (t == null || t == TYPE_VOID.getInstance() || s.findInScope(id) != null)
 		{
-			return new TYPE_ERROR(lineNumber);
-			return null;
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		else
 		{

@@ -25,7 +25,7 @@ public class AST_C_FIELD_VAR extends AST_C_FIELD {
 		this.varDec = varDec;
 	}
 
-	public TYPE SemantMe() 
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION 
 	{ 
 		return varDec.SemantMe();
 	}

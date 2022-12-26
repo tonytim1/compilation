@@ -30,7 +30,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		this.name = name;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t = null;
 		TYPE_CLASS tc = null;
@@ -48,7 +48,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		if (t.isClass() == false)
 		{
 			// System.out.format(">> ERROR [%d:%d] access %s field of a non-class variable\n",6,6,name);
-			return new TYPE_ERROR(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		else
 		{
@@ -70,7 +70,6 @@ public class AST_VAR_FIELD extends AST_VAR
 		/* [4] name does not exist in class var */
 		/*********************************************/
 		// System.out.format(">> ERROR [%d:%d] field %s does not exist in class\n",6,6,name);
-		return new TYPE_ERROR(lineNumber);
-		return null;
+		throw new SEMANTIC_EXCEPTION(lineNumber);
 	}
 }

@@ -32,7 +32,7 @@ public class AST_EXP_BINOP extends AST_EXP
 		this.OP = OP;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 	    /* binop  PLUS = 1
         MINUS 2
@@ -50,7 +50,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
 		if (t1.typeName != t2.typeName) {
 		    // the expressions don't have the same type
-            return new TYPE_ERROR(lineNumber);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		if (OP.OP == 1) { // binop is +
@@ -64,7 +64,7 @@ public class AST_EXP_BINOP extends AST_EXP
                 return TYPE_STRING.getInstance();
             }
             // error if there is exp + exp and the expressions are not from the same type type int or string
-            return new TYPE_ERROR(lineNumber);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		if ((OP.OP != 1) && (OP.OP != 5) && (OP.OP != 8))
@@ -74,7 +74,7 @@ public class AST_EXP_BINOP extends AST_EXP
                 return TYPE_INT.getInstance();
             }
 		    // the expressions are not both ints for binops -, *, /, <, >
-            return new TYPE_ERROR(lineNumber);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		return null;
