@@ -58,6 +58,7 @@ public class AST_CLASS_DEC extends AST_Node {
 		}
 
 		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, null);
+		System.out.format("creating class type %s\n",id1);
 		SYMBOL_TABLE.getInstance().enter(id1, classType);
 
 		/*************************/

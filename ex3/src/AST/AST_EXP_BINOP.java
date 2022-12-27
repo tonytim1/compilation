@@ -42,11 +42,14 @@ public class AST_EXP_BINOP extends AST_EXP
         LT 6
         GT 7
         NE 8 */
-		TYPE t1 = null;
-		TYPE t2 = null;
+		TYPE t1 = left.SemantMe();
+		TYPE t2 = right.SemantMe();
 
-		if (left  != null) t1 = left.SemantMe();
-		if (right != null) t2 = right.SemantMe();
+		if (t1 == null || t2 == null)
+		{
+			System.out.format(">> ERROR [%d] binop -> at least one of the expressions type does not exist - class AST_EXP_BINOP", lineNumber);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
 
 		if (t1.typeName != t2.typeName) {
 		    // the expressions don't have the same type
