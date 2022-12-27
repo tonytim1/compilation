@@ -64,6 +64,6 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 		    // ERROR - Didn't find a field that fits
 		    throw new SEMANTIC_EXCEPTION(lineNumber);
         }
-		return null;
+		return nameType;
 	}
 }

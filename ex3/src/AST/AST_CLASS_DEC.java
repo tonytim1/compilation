@@ -73,6 +73,6 @@ public class AST_CLASS_DEC extends AST_Node {
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */
 		/*********************************************************/
-		return null;		
+		return classType;
 	}
 }

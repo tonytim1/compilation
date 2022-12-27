@@ -49,6 +49,6 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	            throw new SEMANTIC_EXCEPTION(lineNumber);
 	        }
 	    }
-	    return null;
+	    return varType;
 	}
 }

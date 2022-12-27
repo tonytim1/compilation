@@ -65,6 +65,6 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 		    throw new SEMANTIC_EXCEPTION(lineNumber);
         }
 
-		return null;
+		return nameType;
 	}
 }

@@ -68,6 +68,6 @@ public class AST_VAR_DEC extends AST_Node {
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
-		return null;		
+		return t;
 	}
 }

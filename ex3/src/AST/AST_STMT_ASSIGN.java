@@ -41,9 +41,9 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		if (var != null) t1 = var.SemantMe();
 		if (exp != null) t2 = exp.SemantMe();
 
-		if (t1 != t2)
+		if (t1.typeName != t2.typeName)
 		{
-			System.out.format(">> ERROR [%d] type mismatch for var := exp\n",lineNumber);
+			System.out.format(">> ERROR [%d] type mismatch for var := exp. %s, %s \n",lineNumber, t1.typeName, t2.typeName);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		return null;

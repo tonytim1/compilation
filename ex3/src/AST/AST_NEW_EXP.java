@@ -30,6 +30,6 @@ public class AST_NEW_EXP extends AST_Node {
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		return this.type.SemantMe();
+		return this.type;
 	}
 }

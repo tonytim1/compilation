@@ -39,6 +39,6 @@ public class AST_EXP_LIST extends AST_Node
 		if (head != null) head.SemantMe();
 		if (tail != null) tail.SemantMe();
 
-		return null;
+		return new TYPE_LIST(head, tail);
 	}
 }

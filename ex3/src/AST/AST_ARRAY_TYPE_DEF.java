@@ -65,6 +65,6 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
-		return null;
+		return new TYPE_ARRAY(t);
 	}
 }
