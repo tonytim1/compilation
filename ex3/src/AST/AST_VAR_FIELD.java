@@ -45,9 +45,9 @@ public class AST_VAR_FIELD extends AST_VAR
 		/*********************************/
 		/* [2] Make sure type is a class */
 		/*********************************/
-		if (t.isClass() == false)
+		if (t.typeName != "class")
 		{
-			// System.out.format(">> ERROR [%d] access %s field of a non-class variable\n",lineNumber,name);
+			System.out.format(">> ERROR [%d] access %s field of a non-class variable - class AST_VAR_FIELD\n",lineNumber,name);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		else
@@ -69,7 +69,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		/*********************************************/
 		/* [4] name does not exist in class var */
 		/*********************************************/
-		// System.out.format(">> ERROR [%d] field %s does not exist in class\n",lineNumber,name);
+		System.out.format(">> ERROR [%d] field %s does not exist in class - AST_VAR_FIELD\n",lineNumber,name);
 		throw new SEMANTIC_EXCEPTION(lineNumber);
 	}
 }

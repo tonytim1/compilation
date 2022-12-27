@@ -39,6 +39,7 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	    TYPE varType = var.SemantMe();
 	    if (varType.typeName != "array") {
 	        //var is not an array
+	        System.out.format(">> ERROR [%d] var is from type %s instead of array - class AST_VAR_SUBSCRIPT\n",lineNumber, varType.typeName);
 	        throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 	    if (subscript != null)
@@ -46,6 +47,7 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	        TYPE varSubscript = subscript.SemantMe();
 	        if (varSubscript.typeName != "int") {
 	            //subscript is not integer
+	            System.out.format(">> ERROR [%d] subscript is from type %s instead of array - class AST_VAR_SUBSCRIPT\n",lineNumber, varSubscript.typeName);
 	            throw new SEMANTIC_EXCEPTION(lineNumber);
 	        }
 	    }
