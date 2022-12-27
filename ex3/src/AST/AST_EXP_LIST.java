@@ -36,9 +36,12 @@ public class AST_EXP_LIST extends AST_Node
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		if (head != null) head.SemantMe();
-		if (tail != null) tail.SemantMe();
+		TYPE t1 = null;
+		TYPE t2 = null;
 
-		return new TYPE_LIST(head, tail);
+		if (head != null) t1 = head.SemantMe();
+		if (tail != null) t2 = tail.SemantMe();
+
+		return new TYPE_LIST(t1, t2);
 	}
 }

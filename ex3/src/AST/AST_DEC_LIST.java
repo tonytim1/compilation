@@ -37,9 +37,12 @@ public class AST_DEC_LIST extends AST_Node
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 	    // if there is an error in the declaration, it will throw one with this line number
-		if (head != null) head.SemantMe();
-		if (tail != null) tail.SemantMe();
-		
-		return new TYPE_LIST(head, tail);
+		TYPE t1 = null;
+		TYPE t2 = null;
+
+		if (head != null) t1 = head.SemantMe();
+		if (tail != null) t2 = tail.SemantMe();
+
+		return new TYPE_LIST(t1, t2);
 	}
 }
