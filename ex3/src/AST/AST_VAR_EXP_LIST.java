@@ -42,7 +42,12 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 	    TYPE nameType =  SYMBOL_TABLE.getInstance().find(name);
 	    if (nameType == null || nameType.typeName != "function") {
 	        // ERROR - Not found function of type isn't function
-	        System.out.format(">> ERROR [%d] nameType : %s isn't function - class AST_VAR_EXP_LIST\n",lineNumber, nameType.typeName);
+	        if (nameType == null) {
+	            System.out.format(">> ERROR [%d] name %s was not found - class AST_VAR_EXP_LIST\n",lineNumber, name);
+	        }
+	        else {
+	            System.out.format(">> ERROR [%d] nameType : %s isn't function - class AST_VAR_EXP_LIST\n",lineNumber, nameType.typeName);
+	        }
 	        throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 
