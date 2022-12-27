@@ -46,8 +46,8 @@ public class AST_CLASS_DEC extends AST_Node {
 		/************************************************/
 		/* [1] Enter the Class Type to the Symbol Table */
 		/************************************************/
-		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, (TYPE_LIST) cFieldList.SemantMe());
 		TYPE father = null;
+		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, (TYPE_LIST) cFieldList.SemantMe());
 
 		if ( id2 != null)
 		{
