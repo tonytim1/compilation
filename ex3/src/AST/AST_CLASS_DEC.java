@@ -46,6 +46,7 @@ public class AST_CLASS_DEC extends AST_Node {
 		/************************************************/
 		/* [1] Enter the Class Type to the Symbol Table */
 		/************************************************/
+		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, (TYPE_LIST) cFieldList.SemantMe());
 		SYMBOL_TABLE.getInstance().enter(id1, classType);
 
 		/*************************/
@@ -63,11 +64,6 @@ public class AST_CLASS_DEC extends AST_Node {
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 		}
-
-		/***************************/
-		/* [3] Semant Data Members */
-		/***************************/
-		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, (TYPE_LIST) cFieldList.SemantMe());
 
         /*****************/
         /* [4] End Scope */
