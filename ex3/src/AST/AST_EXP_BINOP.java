@@ -51,12 +51,6 @@ public class AST_EXP_BINOP extends AST_EXP
             throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
-		if (t1.typeName != t2.typeName) {
-		    // the expressions don't have the same type
-		    System.out.format(">> ERROR [%d] binop -> the expressions don't have the same type: %s, %s - class AST_EXP_BINOP", lineNumber, t1.typeName, t2.typeName);
-            throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
-
 		if (OP.OP == 1) { // binop is +
 		    // check if both expressions are from type int or string
 		    if (t1.typeName == "int")
@@ -90,6 +84,12 @@ public class AST_EXP_BINOP extends AST_EXP
             throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
-		return t1; // both left and right are from the same type
+		// EQ or NE
+		if (!(t1.canCompare(t2))) {
+		    System.out.format(">> ERROR [%d] binop -> the expressions don't have the same type: %s, %s - class AST_EXP_BINOP", lineNumber, t1.typeName, t2.typeName);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
+
+		return TYPE_INT.getInstance();
 	}
 }

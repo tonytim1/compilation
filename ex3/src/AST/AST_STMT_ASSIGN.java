@@ -35,13 +35,16 @@ public class AST_STMT_ASSIGN extends AST_STMT
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		TYPE t1 = null;
-		TYPE t2 = null;
+		TYPE t1 = var.SemantMe();
+		TYPE t2 = exp.SemantMe();
 
-		if (var != null) t1 = var.SemantMe();
-		if (exp != null) t2 = exp.SemantMe();
+		if (t1 == null || t2 == null)
+		{
+			System.out.format(">> ERROR [%d] -> at least one of the expressions type does not exist - class AST_STMT_ASSIGN", lineNumber);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
 
-		if (t1.typeName != t2.typeName)
+		if (!(t1.canAssign(t2)))
 		{
 			System.out.format(">> ERROR [%d] type mismatch for var := exp. %s, %s - class AST_STMT_ASSIGN\n",lineNumber, t1.typeName, t2.typeName);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
