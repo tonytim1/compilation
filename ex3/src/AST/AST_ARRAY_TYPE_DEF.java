@@ -26,13 +26,13 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		this.type = type;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 		
 		//check if depth != 0 or class name already declared in scope
 		if (!(s.isGlobalScope()) || s.find(id) != null)
-			return new TYPE_ERROR(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 
 		TYPE t;
 
@@ -42,19 +42,19 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		t = type.SemantMe();
 		if (t == null)
 		{
-			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
-			return new TYPE_ERROR(lineNumber);
+			System.out.format(">> ERROR [%d] non existing type %s\n",lineNumber,type);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		// check that type is not void
 		if (t == TYPE_VOID.getInstance())
-			return new TYPE_ERROR(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 
 		/**************************************/
 		/* [2] Check That Name does NOT exist */
 		/**************************************/
 		if (SYMBOL_TABLE.getInstance().find(id) != null)
 		{
-			System.out.format(">> ERROR [%d:%d] variable %s already exists in scope\n",2,2,id);
+			System.out.format(">> ERROR [%d] variable %s already exists in scope\n",lineNumber,id);
 		}
 
 		/***************************************************/

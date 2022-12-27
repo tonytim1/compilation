@@ -35,14 +35,14 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 		this.name = name;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
         if (expList != null) expList.SemantMe();
 
 	    TYPE nameType =  SYMBOL_TABLE.getInstance().find(name);
 	    if (nameType == null || nameType.typeName != "function") {
 	        // ERROR - Not found function of type isn't function
-	        return new TYPE_ERROR(lineNumber);
+	        throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 
 	    // In case var != null we want to check that id is a field in class var
@@ -51,7 +51,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 
             if (varType.typeName != "class") {
                 //ERROR var isn't class but does exist
-                return new TYPE_ERROR(lineNumber);
+                throw new SEMANTIC_EXCEPTION(lineNumber);
             }
             TYPE_CLASS tc = (TYPE_CLASS) varType;
             for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
@@ -62,8 +62,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 			    }
 		    }
 		    // ERROR - Didn't find a field that fits
-		    return new TYPE_ERROR(lineNumber);
-		    return null;
+		    throw new SEMANTIC_EXCEPTION(lineNumber);
         }
 
 		return null;

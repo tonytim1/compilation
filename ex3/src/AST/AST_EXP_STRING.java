@@ -28,7 +28,7 @@ public class AST_EXP_STRING extends AST_EXP {
 		this.value = value;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		return TYPE_STRING.getInstance();
 	}

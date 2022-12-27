@@ -30,7 +30,7 @@ public class AST_EXP_INT extends AST_EXP
 		this.isPositive = isPositive;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		return TYPE_INT.getInstance();
 	}

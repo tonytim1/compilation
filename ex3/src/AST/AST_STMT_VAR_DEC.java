@@ -48,7 +48,7 @@ public class AST_STMT_VAR_DEC extends AST_STMT {
 		/****************************************/
 		if (varDec != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,varDec.SerialNumber);
 	}
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		return varDec.SemantMe();
 	}

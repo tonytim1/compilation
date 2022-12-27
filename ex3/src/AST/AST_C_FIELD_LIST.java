@@ -32,7 +32,7 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		this.cFieldList = cFieldList;
 	}
 	
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		if (cField == null) {
 		    return new TYPE_LIST(null, null);

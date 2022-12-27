@@ -63,7 +63,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		if (body   != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,body.SerialNumber);		
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t;
 		TYPE returnType = null;
@@ -75,7 +75,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		returnType = SYMBOL_TABLE.getInstance().find(returnTypeName);
 		if (returnType == null)
 		{
-			System.out.format(">> ERROR [%d:%d] non existing return type %s\n",6,6,returnType);				
+			System.out.format(">> ERROR [%d] non existing return type %s\n",lineNumber,returnType);				
 		}
 	
 		/****************************/
@@ -91,7 +91,7 @@ public class AST_DEC_FUNC extends AST_DEC
 			t = SYMBOL_TABLE.getInstance().find(it.head.type);
 			if (t == null)
 			{
-				System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,it.head.type);				
+				System.out.format(">> ERROR [%d] non existing type %s\n",lineNumber,it.head.type);				
 			}
 			else
 			{

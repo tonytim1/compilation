@@ -53,7 +53,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,data_members.SerialNumber);		
 	}
 	
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{	
 		/*************************/
 		/* [1] Begin Class Scope */

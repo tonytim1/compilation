@@ -32,15 +32,15 @@ public class AST_STMT_WHILE extends AST_STMT
 		this.body = body;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		/****************************/
 		/* [0] Semant the Condition */
 		/****************************/
 		if (cond.SemantMe() != TYPE_INT.getInstance())
 		{
-			// System.out.format(">> ERROR [%d:%d] condition inside WHILE is not integral\n",2,2);
-			return new TYPE_ERROR(lineNumber);
+			System.out.format(">> ERROR [%d] condition inside WHILE is not integral\n",lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		/*************************/

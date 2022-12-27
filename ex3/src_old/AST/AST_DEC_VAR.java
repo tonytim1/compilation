@@ -57,7 +57,7 @@ public class AST_DEC_VAR extends AST_DEC
 			
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t;
 	
@@ -67,7 +67,7 @@ public class AST_DEC_VAR extends AST_DEC
 		t = SYMBOL_TABLE.getInstance().find(type);
 		if (t == null)
 		{
-			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
+			System.out.format(">> ERROR [%d] non existing type %s\n",lineNumber,type);
 			System.exit(0);
 		}
 		
@@ -76,7 +76,7 @@ public class AST_DEC_VAR extends AST_DEC
 		/**************************************/
 		if (SYMBOL_TABLE.getInstance().find(name) != null)
 		{
-			System.out.format(">> ERROR [%d:%d] variable %s already exists in scope\n",2,2,name);				
+			System.out.format(">> ERROR [%d] variable %s already exists in scope\n",lineNumber,name);				
 		}
 
 		/***************************************************/

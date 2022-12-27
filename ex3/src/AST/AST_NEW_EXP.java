@@ -28,7 +28,7 @@ public class AST_NEW_EXP extends AST_Node {
 		this.exp = exp;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		return this.type.SemantMe();
 	}

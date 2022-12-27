@@ -33,13 +33,13 @@ public class AST_CLASS_DEC extends AST_Node {
 		this.cFieldList = cFieldList;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{	
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 
 		//check if depth != 0 or class name already declared in scope
 		if (!(s.isGlobalScope()) || s.find(id1) != null)
-			return new TYPE_ERROR(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 
 		/*************************/
 		/* [1] Begin Class Scope */
@@ -52,7 +52,7 @@ public class AST_CLASS_DEC extends AST_Node {
 		{
 			father = s.find(id2);
 			if (father == null || !(father.isClass()))
-				return new TYPE_ERROR(lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		/***************************/

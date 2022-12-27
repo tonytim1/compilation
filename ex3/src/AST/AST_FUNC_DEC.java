@@ -33,7 +33,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		this.stmtList = stmtList;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 
@@ -43,7 +43,7 @@ public class AST_FUNC_DEC extends AST_Node {
 
 		// check if function is defined in scope
 		if (s.findInScope(id) != null)
-			return new TYPE_ERROR(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 
 		/*******************/
 		/* [0] return type */
@@ -51,8 +51,8 @@ public class AST_FUNC_DEC extends AST_Node {
 		returnType = type.SemantMe();
 		if (returnType == null)
 		{
-			System.out.format(">> ERROR [%d:%d] non existing return type %s\n",6,6,returnType);
-			return new TYPE_ERROR(lineNumber);
+			System.out.format(">> ERROR [%d] non existing return type %s\n",lineNumber,returnType);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		/****************************/
@@ -69,7 +69,7 @@ public class AST_FUNC_DEC extends AST_Node {
 			t = it.head.SemantMe();
 			if (t == null)
 			{
-				return new TYPE_ERROR(lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 			else
 			{

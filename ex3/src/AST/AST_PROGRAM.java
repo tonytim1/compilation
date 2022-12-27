@@ -29,7 +29,7 @@ public class AST_PROGRAM extends AST_Node {
 		/*******************************/
 		this.decList = decList;
 	}
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		decList.SemantMe();		
 		return null;

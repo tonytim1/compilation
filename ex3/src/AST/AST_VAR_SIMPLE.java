@@ -31,11 +31,11 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		this.name = name;
 	}
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 	    TYPE t = SYMBOL_TABLE.getInstance().find(name);
 	    if (t == null) { // In case we use undefined variable
-		    return new TYPE_ERROR(lineNumber);
+		    throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 	    return t;
     }

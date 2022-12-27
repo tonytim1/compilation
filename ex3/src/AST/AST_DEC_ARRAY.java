@@ -25,7 +25,7 @@ public class AST_DEC_ARRAY extends AST_DEC {
 		this.a = a;
     }
 	
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{	
 		return a.SemantMe();
 	}

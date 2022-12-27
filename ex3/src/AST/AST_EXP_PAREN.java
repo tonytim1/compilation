@@ -29,7 +29,7 @@ public class AST_EXP_PAREN extends AST_EXP {
 	}
 
 
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 	    return exp.SemantMe();
     }

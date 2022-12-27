@@ -25,7 +25,7 @@ public class AST_DEC_VAR extends AST_DEC {
 		this.v = v;
 	}
 	
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{	
 		return v.SemantMe();
 	}
