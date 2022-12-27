@@ -99,6 +99,6 @@ public class AST_FUNC_DEC extends AST_Node {
 
 		// Update required return type
 		SYMBOL_TABLE.getInstance().required_return_type = type.SemantMe().typeName;
-		return new TYPE_FUNCTION(returnType, this.id, this.tid);
+		return new TYPE_FUNCTION(returnType, this.id, (TYPE_LIST) this.tid.SemantMe();
 	}
 }
