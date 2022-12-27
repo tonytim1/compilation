@@ -42,9 +42,10 @@ public class AST_FUNC_DEC extends AST_Node {
 		TYPE_LIST type_list = null;
 
 		// check if function is defined in scope
-		if (s.findInScope(id) != null)
-		    System.out.format(">> ERROR [%d] id - %s isn't defined in scope - class AST_FUNC_DEC\n", lineNumber, id);
+		if (s.findInScope(id) != null) {
+			System.out.format(">> ERROR [%d] id - %s isn't defined in scope - class AST_FUNC_DEC\n", lineNumber, id);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
 
 		/*******************/
 		/* [0] return type */

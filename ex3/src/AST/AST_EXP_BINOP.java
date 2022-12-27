@@ -76,7 +76,7 @@ public class AST_EXP_BINOP extends AST_EXP
                 if (OP.OP == 4) { // check for divide in 0
                     TYPE_INT t2Int = (TYPE_INT) t2;
                     if (t2Int.isZero) {
-                        System.out.print(">> ERROR [%d] binop -> divide in 0 - class AST_EXP_BINOP", lineNumber);
+                        System.out.format(">> ERROR [%d] binop -> divide in 0 - class AST_EXP_BINOP", lineNumber);
                         throw new SEMANTIC_EXCEPTION(lineNumber);
                     }
                 }

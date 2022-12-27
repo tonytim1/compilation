@@ -35,9 +35,9 @@ public class AST_TYPE_ID extends AST_Node {
 		TYPE t = type.SemantMe();
 		
 		// check if type is undeclared or void (void isnt allowed for ids) or name exists in scope
-		if (t == null || t == TYPE_VOID.getInstance() || s.findInScope(id) != null)
+		if (t == null || t.typeName == "void" || s.findInScope(id) != null)
 		{
-		    System.out.format(">> ERROR [%d] type of %s is null or void or not exists in the scope - class AST_TYPE_ID\n" ,lineNumber, type.typeName);
+		    System.out.format(">> ERROR [%d] type of t is null or void or not exists in the scope - class AST_TYPE_ID\n" ,lineNumber);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		else
