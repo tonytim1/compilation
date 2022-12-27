@@ -241,7 +241,7 @@ var			::=		ID:name								{: RESULT = new AST_VAR_SIMPLE(lexer.getLine(),name); 
 					;
 
 //Royi					
-stmt		::=		varDec:v {: RESULT = new AST_STMT_VAR_DEC(v); :}
+stmt		::=		varDec:v {: RESULT = new AST_STMT_VAR_DEC(lexer.getLine(),v); :}
                     | var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(lexer.getLine(),v,e); :}
                     | var:v ASSIGN newExp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN_NEW(lexer.getLine(),v,e); :}
                     | RETURN exp:e SEMICOLON								{: RESULT = new AST_STMT_RETURN(lexer.getLine(),e); :}
