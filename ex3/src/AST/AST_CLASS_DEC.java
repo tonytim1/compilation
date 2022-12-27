@@ -59,18 +59,20 @@ public class AST_CLASS_DEC extends AST_Node {
 
 		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, null);
 		System.out.format("creating class type %s\n",id1);
-		SYMBOL_TABLE.getInstance().enter(id1, classType);
+		s.getInstance().enter(id1, classType);
 
 		/*************************/
 		/* [2] Begin Class Scope */
 		/*************************/
 		s.beginScope();
-		classType.data_members =  (TYPE_LIST) cFieldList.SemantMe();
+		s.curr_class = classType;
+		classType.data_members = (TYPE_LIST) cFieldList.SemantMe();
 
         /*****************/
         /* [4] End Scope */
         /*****************/
-        SYMBOL_TABLE.getInstance().endScope();
+		s.curr_class = null;
+        s.getInstance().endScope();
 
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */

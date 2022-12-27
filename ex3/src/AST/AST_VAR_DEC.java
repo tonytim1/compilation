@@ -21,12 +21,12 @@ public class AST_VAR_DEC extends AST_Node {
 		/***************************************/
 		if (exp == null) {
 		    if (newExp == null) {
-		        System.out.format("====================== varDec -> type ID( %s ) SEMICOLON\n", id);
+		        System.out.format("====================== varDec -> type:%s ID( %s ) SEMICOLON\n", type.id, id);
 		    } else {
-		        System.out.format("====================== varDec -> type ID( %s ) ASSIGN new_exp SEMICOLON\n", id);
+		        System.out.format("====================== varDec -> type:%s ID( %s ) ASSIGN new_exp SEMICOLON\n", type.id, id);
 		    }
 		} else {
-			System.out.format("====================== varDec -> type ID( %s ) ASSIGN exp SEMICOLON\n", id);
+			System.out.format("====================== varDec -> type:%s ID( %s ) ASSIGN exp SEMICOLON\n", type.id, id);
 		}
 
 		/*******************************/
@@ -69,6 +69,8 @@ public class AST_VAR_DEC extends AST_Node {
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
+		//System.out.format("[%d] ast var dec got type %s %s and id %s\n", lineNumber, t.name, t.typeName, id);
+		t.name = id;
 		return t;
 	}
 }

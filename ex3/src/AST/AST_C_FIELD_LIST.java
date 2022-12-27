@@ -34,12 +34,13 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		if (cField == null) {
-		    return new TYPE_LIST(null, null);
-		}
-		if (cFieldList == null) {
-			return new TYPE_LIST(cField.SemantMe(), null);
-		}
-		return new TYPE_LIST(cField.SemantMe(), (TYPE_LIST) cFieldList.SemantMe());
+		TYPE t1 = null;
+		TYPE t2 = null;
+		System.out.format("[%d] semanting cFieldList\n", lineNumber);
+
+		if (cField != null) t1 = cField.SemantMe();
+		if (cFieldList != null) t2 = cFieldList.SemantMe();
+
+		return new TYPE_LIST(t1, (TYPE_LIST) t2);
 	}
 }

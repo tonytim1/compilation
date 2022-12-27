@@ -20,6 +20,7 @@ public class SYMBOL_TABLE
 {
 	private int hashArraySize = 13;
 	public String required_return_type = ""; // New field
+	public TYPE_CLASS curr_class = null;
 	
 	/**********************************************/
 	/* The actual symbol table data structure ... */

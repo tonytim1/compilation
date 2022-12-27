@@ -43,7 +43,7 @@ public class AST_FUNC_DEC extends AST_Node {
 
 		// check if function is defined in scope
 		if (s.findInScope(id) != null) {
-			System.out.format(">> ERROR [%d] id - %s isn't defined in scope - class AST_FUNC_DEC\n", lineNumber, id);
+			System.out.format(">> ERROR [%d] function - %s already exists in scope - class AST_FUNC_DEC\n", lineNumber, id);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
@@ -57,56 +57,77 @@ public class AST_FUNC_DEC extends AST_Node {
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
-		/***************************************************/
-		/* [1] Enter the Function Type to the Symbol Table */
-		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+		// check if in not in global scope and not in a class
+		if (!(s.isGlobalScope()) && (s.curr_class == null))
+		{
+			System.out.format(">> ERROR [%d] function declared not in global scope and not under class %s - class AST_FUNC_DEC\n",lineNumber,id);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
 
 		/****************************/
-		/* [2] Begin Function Scope */
+		/* [1] Begin Function Scope */
 		/****************************/
 		s.beginScope();
 
 		/*********************************************************/
-		/* [3] Update required return type */
+		/* [2] Update required return type */
 		/*********************************************************/
 		//System.out.format(">> INFO[%d] setting required_return_type to %s - class AST_FUNC_DEC\n",lineNumber,returnType);
 		SYMBOL_TABLE.getInstance().required_return_type = returnType.typeName;
 
 		/***************************/
-		/* [4] Semant Input Params */
+		/* [3] Semant Input Params */
 		/***************************/
-		for (AST_TYPE_ID_LIST it = tid; it  != null; it = it.tail)
+		type_list = (TYPE_LIST) tid.SemantMe();
+
+		TYPE_FUNCTION type_function = new TYPE_FUNCTION(returnType,id,type_list);
+
+		/**********************************************/
+		/* [4] Check for overloading / overriding */
+		/**********************************************/
+		if (s.curr_class != null)
 		{
-			//t = SYMBOL_TABLE.getInstance().find(it.head.type.id);
-			t = it.head.SemantMe();
-			if (t == null)
+			TYPE overriden = s.curr_class.findInClass(id);
+			if (overriden != null) 
 			{
-			    System.out.format(">> ERROR [%d] in type_id_list - class AST_FUNC_DEC\n",lineNumber);
-				throw new SEMANTIC_EXCEPTION(lineNumber);
-			}
-			else
-			{
-				type_list = new TYPE_LIST(t,type_list);
-				SYMBOL_TABLE.getInstance().enter(it.head.id,t);
+				if (!(overriden.typeName == "function")) 
+				{
+					System.out.format(">> ERROR [%d] function %id overrides a variable instead of a method - class AST_FUNC_DEC\n",lineNumber,id);
+					throw new SEMANTIC_EXCEPTION(lineNumber);
+				}
+				if (!(type_function).isSignatureEqual((TYPE_FUNCTION) overriden)) 
+				{
+					System.out.format(">> ERROR [%d] function %id overrloads a method which in not legal - class AST_FUNC_DEC\n",lineNumber,id);
+					throw new SEMANTIC_EXCEPTION(lineNumber);
+				}
 			}
 		}
 
+		/***************************************************/
+		/* [5] Enter the Function Type to the Symbol Table (inside the function scope in case of a recursive function) */
+		/***************************************************/
+		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+
 		/*******************/
-		/* [5] Semant Body */
+		/* [6] Semant Body */
 		/*******************/
 		stmtList.SemantMe();
 
 		/*****************/
-		/* [5] End Scope */
+		/* [7] End Scope */
 		/*****************/
 		SYMBOL_TABLE.getInstance().endScope();
 
+		/***************************************************/
+		/* [8] Enter the Function Type to the Symbol Table */
+		/***************************************************/
+		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+
 		/*****************/
-		/* [6] reset return type */
+		/* [9] reset return type */
 		/*****************/
 		//System.out.format(">> INFO[%d] reset required_return_type - class AST_FUNC_DEC\n",lineNumber);
-		SYMBOL_TABLE.getInstance().required_return_type = "reset";
+		SYMBOL_TABLE.getInstance().required_return_type = "";
 
 		return returnType;
 	}

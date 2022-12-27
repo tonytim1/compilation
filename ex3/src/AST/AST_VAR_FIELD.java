@@ -56,15 +56,12 @@ public class AST_VAR_FIELD extends AST_VAR
 		}
 
 		/************************************/
-		/* [3] Look for fiedlName inside tc */
+		/* [3] Look for fiedlName inside tc or its parents */
 		/************************************/
-		for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
-		{
-			if (it.head.name == name)
-			{
-				return it.head;
-			}
-		}
+		TYPE member = tc.findInClass(name);
+
+		if (member != null)
+			return member;
 
 		/*********************************************/
 		/* [4] name does not exist in class var */

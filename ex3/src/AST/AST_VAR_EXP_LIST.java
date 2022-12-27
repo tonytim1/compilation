@@ -61,13 +61,11 @@ public class AST_VAR_EXP_LIST extends AST_EXP
                 throw new SEMANTIC_EXCEPTION(lineNumber);
             }
             TYPE_CLASS tc = (TYPE_CLASS) varType;
-            for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
-		    {
-		    	if (it.head.name == name)
-		    	{
-		    		return it.head;
-			    }
-		    }
+
+			TYPE member = tc.findInClass(name);
+			if (member != null && member.name == "function")
+				return member;
+
 		    // ERROR - Didn't find a field that fits
 		    System.out.format(">> ERROR [%d] didn't find the right field in class - class AST_VAR_EXP_LIST\n",lineNumber);
 		    throw new SEMANTIC_EXCEPTION(lineNumber);

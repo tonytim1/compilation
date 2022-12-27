@@ -25,16 +25,19 @@ public class TYPE_CLASS extends TYPE
 		this.data_members = data_members;
 	}
 
-	public TYPE findInClass(String name)
+	public TYPE findInClass(String id)
 	{
 		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
-			if (member.head.name.equals(name)){
+			if (member.head.name == null) {
+				System.out.format("Class members of %s has nulls if memeber of type %s!!! \n",name, member.head.typeName);
+			}
+			if (member.head.name.equals(id)){
 				return member.head;
 			}
 		}
 
 		if (this.father != null)
-			return this.father.findInClass(name);
+			return this.father.findInClass(id);
 			
 		return null;
 	}

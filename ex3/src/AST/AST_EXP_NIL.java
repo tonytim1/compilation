@@ -25,7 +25,6 @@ public class AST_EXP_NIL extends AST_EXP
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-	    System.out.print("return null for value nil\n");
 		return TYPE_NIL.getInstance();
 	}
 }

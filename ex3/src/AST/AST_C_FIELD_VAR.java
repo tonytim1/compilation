@@ -26,7 +26,9 @@ public class AST_C_FIELD_VAR extends AST_C_FIELD {
 	}
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION 
-	{ 
-		return varDec.SemantMe();
+	{
+		TYPE t = varDec.SemantMe();
+		//System.out.format("[%d] semanting cField var %s %s\n", lineNumber, t.name, t.typeName);
+		return t;
 	}
 }
