@@ -57,15 +57,15 @@ public class AST_FUNC_DEC extends AST_Node {
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
-		/****************************/
-		/* [1] Begin Function Scope */
-		/****************************/
-		s.beginScope();
-
 		/***************************************************/
-		/* [2] Enter the Function Type to the Symbol Table */
+		/* [1] Enter the Function Type to the Symbol Table */
 		/***************************************************/
 		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+
+		/****************************/
+		/* [2] Begin Function Scope */
+		/****************************/
+		s.beginScope();
 
 		/*********************************************************/
 		/* [3] Update required return type */
