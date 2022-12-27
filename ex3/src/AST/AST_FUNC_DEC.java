@@ -106,6 +106,11 @@ public class AST_FUNC_DEC extends AST_Node {
 		/*****************/
 		SYMBOL_TABLE.getInstance().required_return_type = "reset";
 
-		return new TYPE_FUNCTION(returnType, this.id, (TYPE_LIST) this.tid.SemantMe());
+		if (this.tid != null) {
+		    return new TYPE_FUNCTION(returnType, this.id, (TYPE_LIST) this.tid.SemantMe());
+        }
+        else {
+            return new TYPE_FUNCTION(returnType, this.id, null);
+        }
 	}
 }
