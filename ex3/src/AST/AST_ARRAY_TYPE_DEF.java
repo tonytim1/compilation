@@ -42,7 +42,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		t = type.SemantMe();
 		if (t == null)
 		{
-			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
+			System.out.format(">> ERROR [%d] non existing type %s\n",lineNumber,type);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		// check that type is not void
@@ -54,7 +54,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		/**************************************/
 		if (SYMBOL_TABLE.getInstance().find(id) != null)
 		{
-			System.out.format(">> ERROR [%d:%d] variable %s already exists in scope\n",2,2,id);
+			System.out.format(">> ERROR [%d] variable %s already exists in scope\n",lineNumber,id);
 		}
 
 		/***************************************************/

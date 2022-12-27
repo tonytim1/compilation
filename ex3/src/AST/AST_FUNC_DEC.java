@@ -51,7 +51,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		returnType = type.SemantMe();
 		if (returnType == null)
 		{
-			System.out.format(">> ERROR [%d:%d] non existing return type %s\n",6,6,returnType);
+			System.out.format(">> ERROR [%d] non existing return type %s\n",lineNumber,returnType);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 

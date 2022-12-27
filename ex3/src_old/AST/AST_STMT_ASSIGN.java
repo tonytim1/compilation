@@ -71,7 +71,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		
 		if (t1 != t2)
 		{
-			System.out.format(">> ERROR [%d:%d] type mismatch for var := exp\n",6,6);				
+			System.out.format(">> ERROR [%d] type mismatch for var := exp\n",lineNumber);				
 		}
 		return null;
 	}
