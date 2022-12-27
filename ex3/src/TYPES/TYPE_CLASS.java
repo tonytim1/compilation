@@ -25,20 +25,37 @@ public class TYPE_CLASS extends TYPE
 		this.data_members = data_members;
 	}
 
-	public TYPE findInClass(String id)
+	public TYPE findClassFunc(String id)
 	{
+		System.out.format("Looking for func %s in class %s\n",id, name);
 		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
-			if (member.head.name == null) {
-				System.out.format("Class members of %s has nulls if memeber of type %s!!! \n",name, member.head.typeName);
-			}
-			if (member.head.name.equals(id)){
+			if (member.typeName == "function" && member.head.name.equals(id))
+			{
 				return member.head;
 			}
 		}
 
 		if (this.father != null)
-			return this.father.findInClass(id);
+			return this.father.findClassFunc(id);
 			
 		return null;
 	}
+
+	public TYPE findClassVar(String id)
+	{
+		System.out.format("Looking for var %s in class %s\n",id, name);
+		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
+			//if (member.typeName != "function" && ((TYPE_CLASS_VAR_DEC) member.head).varName.equals(id))
+			if (member.typeName != "function" && member.head.varName.equals(id))
+			{
+				return member.head;
+			}
+		}
+
+		if (this.father != null)
+			return this.father.findClassVar(id);
+			
+		return null;
+	}
+
 }

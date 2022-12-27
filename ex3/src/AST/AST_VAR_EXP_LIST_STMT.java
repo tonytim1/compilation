@@ -63,8 +63,8 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
             }
             TYPE_CLASS tc = (TYPE_CLASS) varType;
             
-            TYPE member = tc.findInClass(name);
-			if (member != null && member.typeName == "function")
+            TYPE member = tc.findClassFunc(name);
+			if (member != null)
 				return member;
 				
 		    // ERROR - Didn't find a field that fits

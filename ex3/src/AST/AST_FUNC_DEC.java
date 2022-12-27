@@ -87,19 +87,16 @@ public class AST_FUNC_DEC extends AST_Node {
 		/**********************************************/
 		if (s.curr_class != null)
 		{
-			TYPE overriden = s.curr_class.findInClass(id);
-			if (overriden != null) 
+			if (s.curr_class.findClassVar(id) != null)
 			{
-				if (!(overriden.typeName == "function")) 
-				{
-					System.out.format(">> ERROR [%d] function %id overrides a variable instead of a method - class AST_FUNC_DEC\n",lineNumber,id);
-					throw new SEMANTIC_EXCEPTION(lineNumber);
-				}
-				if (!(type_function).isSignatureEqual((TYPE_FUNCTION) overriden)) 
-				{
-					System.out.format(">> ERROR [%d] function %id overrloads a method which in not legal - class AST_FUNC_DEC\n",lineNumber,id);
-					throw new SEMANTIC_EXCEPTION(lineNumber);
-				}
+				System.out.format(">> ERROR [%d] function %id overrides a variable instead of a method - class AST_FUNC_DEC\n",lineNumber,id);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+			TYPE overriden = s.curr_class.findClassFunc(id);
+			if (overriden != null && !(type_function).isSignatureEqual((TYPE_FUNCTION) overriden)) 
+			{
+				System.out.format(">> ERROR [%d] function %id overrloads a method which in not legal - class AST_FUNC_DEC\n",lineNumber,id);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 		}
 

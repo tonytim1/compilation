@@ -60,10 +60,11 @@ public class AST_VAR_EXP_LIST extends AST_EXP
                 System.out.format(">> ERROR [%d] varType : %s isn't class - class AST_VAR_EXP_LIST\n",lineNumber, varType.typeName);
                 throw new SEMANTIC_EXCEPTION(lineNumber);
             }
+
             TYPE_CLASS tc = (TYPE_CLASS) varType;
 
-			TYPE member = tc.findInClass(name);
-			if (member != null && member.name == "function")
+			TYPE member = tc.findClassFunc(name);
+			if (member != null)
 				return member;
 
 		    // ERROR - Didn't find a field that fits

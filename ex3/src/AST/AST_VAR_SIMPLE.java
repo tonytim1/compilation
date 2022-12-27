@@ -30,6 +30,10 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		/*******************************/
 		this.name = name;
 	}
+	public void PrintMe()
+	{
+		System.out.format("AST VAR SIMPLE %s\n", name);
+	}
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{

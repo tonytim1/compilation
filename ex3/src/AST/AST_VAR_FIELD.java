@@ -29,6 +29,10 @@ public class AST_VAR_FIELD extends AST_VAR
 		this.var = var;
 		this.name = name;
 	}
+	public void PrintMe()
+	{
+		System.out.format("AST VAR FIELD %s\n", name);
+	}
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
@@ -52,13 +56,14 @@ public class AST_VAR_FIELD extends AST_VAR
 		}
 		else
 		{
+			System.out.format("[%d] var name %s tc %s %s\n", lineNumber, name, t.name, t.typeName);
 			tc = (TYPE_CLASS) t;
 		}
 
 		/************************************/
 		/* [3] Look for fiedlName inside tc or its parents */
 		/************************************/
-		TYPE member = tc.findInClass(name);
+		TYPE member = tc.findClassVar(name);
 
 		if (member != null)
 			return member;

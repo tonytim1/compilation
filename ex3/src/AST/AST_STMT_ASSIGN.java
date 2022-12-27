@@ -46,7 +46,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 
 		if (!(t1.canAssign(t2)))
 		{
-			System.out.format(">> ERROR [%d] type mismatch for var := exp. %s, %s - class AST_STMT_ASSIGN\n",lineNumber, t1.typeName, t2.typeName);
+			System.out.format(">> ERROR [%d] type mismatch for var %s %s, exp %s %s - class AST_STMT_ASSIGN\n",lineNumber, t1.typeName, t1.name, t2.typeName, t2.name);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		return null;

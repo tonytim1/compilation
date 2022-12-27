@@ -29,6 +29,10 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 		this.var = var;
 		this.subscript = subscript;
 	}
+	public void PrintMe()
+	{
+		System.out.format("AST VAR SUBSCRIPT\n");
+	}
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{

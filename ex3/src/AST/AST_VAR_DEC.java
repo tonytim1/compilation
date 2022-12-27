@@ -62,15 +62,14 @@ public class AST_VAR_DEC extends AST_Node {
 		}
 
 		/***************************************************/
-		/* [3] Enter the Function Type to the Symbol Table */
+		/* [3] Enter the Var Type to the Symbol Table */
 		/***************************************************/
 		SYMBOL_TABLE.getInstance().enter(id,t);
 
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
-		//System.out.format("[%d] ast var dec got type %s %s and id %s\n", lineNumber, t.name, t.typeName, id);
-		t.name = id;
+		System.out.format("[%d] ast var dec got var:%s with type name:%s typeName:%s\n", lineNumber, id, t.name, t.typeName);
 		return t;
 	}
 }

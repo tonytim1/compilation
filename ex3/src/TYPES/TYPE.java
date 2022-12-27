@@ -7,6 +7,7 @@ public abstract class TYPE
 	/******************************/
 	public String name;
 	public String typeName;
+	public String varName;
 
 	/*************/
 	/* isClass() */
