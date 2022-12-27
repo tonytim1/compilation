@@ -62,8 +62,18 @@ public class AST_FUNC_DEC extends AST_Node {
 		/****************************/
 		s.beginScope();
 
+		/***************************************************/
+		/* [2] Enter the Function Type to the Symbol Table */
+		/***************************************************/
+		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+
+		/*********************************************************/
+		/* [3] Update required return type */
+		/*********************************************************/
+		SYMBOL_TABLE.getInstance().required_return_type = type.SemantMe().typeName;
+
 		/***************************/
-		/* [2] Semant Input Params */
+		/* [4] Semant Input Params */
 		/***************************/
 		for (AST_TYPE_ID_LIST it = tid; it  != null; it = it.tail)
 		{
@@ -82,26 +92,20 @@ public class AST_FUNC_DEC extends AST_Node {
 		}
 
 		/*******************/
-		/* [3] Semant Body */
+		/* [5] Semant Body */
 		/*******************/
 		stmtList.SemantMe();
 
 		/*****************/
-		/* [4] End Scope */
+		/* [5] End Scope */
 		/*****************/
 		SYMBOL_TABLE.getInstance().endScope();
 
-		/***************************************************/
-		/* [5] Enter the Function Type to the Symbol Table */
-		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+		/*****************/
+		/* [6] reset return type */
+		/*****************/
+		SYMBOL_TABLE.getInstance().required_return_type = "reset";
 
-		/*********************************************************/
-		/* [6] Return value is irrelevant for class declarations */
-		/*********************************************************/
-
-		// Update required return type
-		SYMBOL_TABLE.getInstance().required_return_type = type.SemantMe().typeName;
 		return new TYPE_FUNCTION(returnType, this.id, (TYPE_LIST) this.tid.SemantMe());
 	}
 }
