@@ -17,7 +17,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== arrayTypedef -> ARRAY ID( %s ) EQ type LBRACK RBRACK SEMICOLON", id);
+		System.out.format("====================== arrayTypedef -> ARRAY ID( %s ) EQ type(%s) LBRACK RBRACK SEMICOLON\n", id, type.id);
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
@@ -29,17 +29,24 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
-		
-		//check if depth != 0 or class name already declared in scope
-		if (!(s.isGlobalScope()) || s.find(id) != null)
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-
 		TYPE t;
+		
+		// check if if in global scope
+		if (!(s.isGlobalScope()))
+		{
+			System.out.format(">> ERROR [%d] Array defined not in global scope - class AST_ARRAY_TYPE_DEF\n",lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
+		// check if array name already declared
+		if (s.find(id) != null)
+		{
+			System.out.format(">> ERROR [%d] Array defined with name %s that already exists - class AST_ARRAY_TYPE_DEF\n",lineNumber,id);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
 
-		/****************************/
-		/* [1] Check If Type exists */
-		/****************************/
 		t = type.SemantMe();
+
+		// Check that Type exists
 		if (t == null)
 		{
 			System.out.format(">> ERROR [%d] non existing type - class AST_ARRAY_TYPE_DEF\n",lineNumber);
@@ -48,15 +55,6 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		// check that type is not void
 		if (t == TYPE_VOID.getInstance()) {
 		    System.out.format(">> ERROR [%d] type %s is void - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
-
-		/**************************************/
-		/* [2] Check That Name does NOT exist */
-		/**************************************/
-		if (SYMBOL_TABLE.getInstance().find(id) != null)
-		{
-			System.out.format(">> ERROR [%d] variable %s already exists in scope - class AST_ARRAY_TYPE_DEF\n",lineNumber,id);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 

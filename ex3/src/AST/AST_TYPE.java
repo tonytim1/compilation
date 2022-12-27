@@ -46,7 +46,7 @@ public class AST_TYPE extends AST_Node {
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.t = 4;
-		this.id = null;
+		this.id = id;
 	}
 	
 	public void PrintMe()
@@ -67,14 +67,14 @@ public class AST_TYPE extends AST_Node {
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
-
+		System.out.format("AST_TYPE attempting to semantme type %d %s\n", t, id);
 		switch(t){
 			case 1: return TYPE_INT.getInstance();
 			case 2: return TYPE_STRING.getInstance();
 			case 3: return TYPE_VOID.getInstance();
 			case 4: 
-				TYPE t = s.find(id);
-				if(t == null)
+				TYPE type = s.find(id);
+				if(type == null)
 				{
 					/**************************/
 					/* ERROR: undeclared type */
@@ -84,7 +84,7 @@ public class AST_TYPE extends AST_Node {
 				}
 				else
 				{
-					return t;
+					return type;
 				}
 		}
         return null;
