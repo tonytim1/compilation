@@ -42,6 +42,13 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 	    TYPE nameType =  SYMBOL_TABLE.getInstance().find(name);
 	    if (nameType == null || nameType.typeName != "function") {
 	        // ERROR - Not found function of type isn't function
+	        if (nameType == null)
+	        {
+	           System.out.format(">> ERROR [%d] nameType is null - class AST_VAR_EXP_LIST_STMT\n", lineNumber);
+	        }
+	        else {
+	            System.out.format(">> ERROR [%d] nameType : %s isn't function - class AST_VAR_EXP_LIST_STMT\n", lineNumber, nameType.typeName);
+	        }
 	        throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 
@@ -51,6 +58,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 
             if (varType.typeName != "class") {
                 //ERROR var isn't class but does exist
+                System.out.format(">> ERROR [%d] varType : %s isn't class - class AST_VAR_EXP_LIST_STMT\n", lineNumber, varType.typeName);
                 throw new SEMANTIC_EXCEPTION(lineNumber);
             }
             TYPE_CLASS tc = (TYPE_CLASS) varType;
@@ -62,6 +70,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 			    }
 		    }
 		    // ERROR - Didn't find a field that fits
+		    System.out.format(">> ERROR [%d] didn't find the right field in class - class AST_VAR_EXP_LIST_STMT\n",lineNumber);
 		    throw new SEMANTIC_EXCEPTION(lineNumber);
         }
 		return nameType;

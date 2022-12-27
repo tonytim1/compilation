@@ -48,7 +48,7 @@ public class AST_VAR_DEC extends AST_Node {
 		t = type.SemantMe();
 		if (t == null)
 		{
-			System.out.format(">> ERROR [%d] non existing type %s\n",lineNumber,type);
+			System.out.format(">> ERROR [%d] non existing type %s - class AST_VAR_DEC\n",lineNumber, type.id);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		
@@ -57,7 +57,8 @@ public class AST_VAR_DEC extends AST_Node {
 		/**************************************/
 		if (SYMBOL_TABLE.getInstance().findInScope(id) != null)
 		{
-			System.out.format(">> ERROR [%d] variable %s already exists in scope\n",lineNumber,id);				
+			System.out.format(">> ERROR [%d] variable %s already exists in scope - class AST_VAR_DEC\n",lineNumber,id);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		/***************************************************/
