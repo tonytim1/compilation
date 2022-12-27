@@ -57,13 +57,14 @@ public class AST_CLASS_DEC extends AST_Node {
 			}
 		}
 
-		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, (TYPE_LIST) cFieldList.SemantMe());
+		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, null);
 		SYMBOL_TABLE.getInstance().enter(id1, classType);
 
 		/*************************/
 		/* [2] Begin Class Scope */
 		/*************************/
 		s.beginScope();
+		classType.data_members =  (TYPE_LIST) cFieldList.SemantMe();
 
         /*****************/
         /* [4] End Scope */
