@@ -39,7 +39,7 @@ public class AST_STMT_IF extends AST_STMT
 		if (condType.typeName != "int")
 		{
 			// the expression it not int
-            System.out.format(">> ERROR [%d] condition type isn't int - class AST_STMT_IF\n",lineNumber);
+            System.out.format(">> ERROR [%d] condition type is %s and not int - class AST_STMT_IF\n",lineNumber, condType.typeName);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
