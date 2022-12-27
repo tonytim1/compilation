@@ -38,8 +38,10 @@ public class AST_CLASS_DEC extends AST_Node {
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 
 		//check if depth != 0 or class name already declared in scope
-		if (!(s.isGlobalScope()) || s.find(id1) != null)
+		if (!(s.isGlobalScope()) || s.find(id1) != null) {
+		    System.out.format(">> ERROR [%d] not in global scope or %s is not found - class AST_CLASS_DEC\n",lineNumber, id1);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
+        }
 
 		/*************************/
 		/* [1] Begin Class Scope */
@@ -51,8 +53,10 @@ public class AST_CLASS_DEC extends AST_Node {
 		if ( id2 != null)
 		{
 			father = s.find(id2);
-			if (father == null || !(father.isClass()))
+			if (father == null || father.typeName != "class") {
+			    System.out.format(">> ERROR [%d] can't find father %s or father's type isn't class - class AST_CLASS_DEC\n",lineNumber, id2);
 				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
 		}
 
 		/***************************/
