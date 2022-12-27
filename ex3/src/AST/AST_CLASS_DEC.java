@@ -47,23 +47,23 @@ public class AST_CLASS_DEC extends AST_Node {
 		/* [1] Enter the Class Type to the Symbol Table */
 		/************************************************/
 		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, (TYPE_LIST) cFieldList.SemantMe());
-		SYMBOL_TABLE.getInstance().enter(id1, classType);
-
-		/*************************/
-		/* [2] Begin Class Scope */
-		/*************************/
-		s.beginScope();
-
 		TYPE father = null;
 
 		if ( id2 != null)
 		{
 			father = s.find(id2);
 			if (father == null || father.typeName != "class") {
-			    System.out.format(">> ERROR [%d] can't find father %s or father's type isn't class - class AST_CLASS_DEC\n",lineNumber, id2);
+				System.out.format(">> ERROR [%d] can't find father %s or father's type isn't class - class AST_CLASS_DEC\n",lineNumber, id2);
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 		}
+
+		SYMBOL_TABLE.getInstance().enter(id1, classType);
+
+		/*************************/
+		/* [2] Begin Class Scope */
+		/*************************/
+		s.beginScope();
 
         /*****************/
         /* [4] End Scope */
