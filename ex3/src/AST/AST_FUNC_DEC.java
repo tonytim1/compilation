@@ -43,6 +43,7 @@ public class AST_FUNC_DEC extends AST_Node {
 
 		// check if function is defined in scope
 		if (s.findInScope(id) != null)
+		    System.out.format(">> ERROR [%d] id - %s isn't defined in scope - class AST_FUNC_DEC\n", lineNumber, id);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 
 		/*******************/
@@ -51,7 +52,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		returnType = type.SemantMe();
 		if (returnType == null)
 		{
-			System.out.format(">> ERROR [%d] non existing return type %s\n",lineNumber,returnType);
+			System.out.format(">> ERROR [%d] non existing return type %s - class AST_FUNC_DEC\n",lineNumber,returnType);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
@@ -69,6 +70,7 @@ public class AST_FUNC_DEC extends AST_Node {
 			t = it.head.SemantMe();
 			if (t == null)
 			{
+			    System.out.format(">> ERROR [%d] in type_id_list - class AST_FUNC_DEC\n",lineNumber);
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 			else

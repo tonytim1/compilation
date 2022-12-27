@@ -34,6 +34,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 	    expType = exp.SemantMe();
 	    if (expType.typeName != SYMBOL_TABLE.getInstance().required_return_type) {
 	        // Error required return type is wrong
+            System.out.format(">> ERROR [%d] required return type is : %s but our return type is : %s - class AST_STMT_RETURN\n",lineNumber, SYMBOL_TABLE.getInstance().required_return_type, expType.typeName);
 	        throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 	}

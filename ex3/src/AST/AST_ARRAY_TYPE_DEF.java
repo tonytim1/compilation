@@ -42,19 +42,22 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		t = type.SemantMe();
 		if (t == null)
 		{
-			System.out.format(">> ERROR [%d] non existing type %s\n",lineNumber,type);
+			System.out.format(">> ERROR [%d] non existing type - class AST_ARRAY_TYPE_DEF\n",lineNumber);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		// check that type is not void
-		if (t == TYPE_VOID.getInstance())
+		if (t == TYPE_VOID.getInstance()) {
+		    System.out.format(">> ERROR [%d] type %s is void - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
 
 		/**************************************/
 		/* [2] Check That Name does NOT exist */
 		/**************************************/
 		if (SYMBOL_TABLE.getInstance().find(id) != null)
 		{
-			System.out.format(">> ERROR [%d] variable %s already exists in scope\n",lineNumber,id);
+			System.out.format(">> ERROR [%d] variable %s already exists in scope - class AST_ARRAY_TYPE_DEF\n",lineNumber,id);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		/***************************************************/

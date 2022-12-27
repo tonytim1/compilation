@@ -37,6 +37,7 @@ public class AST_TYPE_ID extends AST_Node {
 		// check if type is undeclared or void (void isnt allowed for ids) or name exists in scope
 		if (t == null || t == TYPE_VOID.getInstance() || s.findInScope(id) != null)
 		{
+		    System.out.format(">> ERROR [%d] type of %s is null or void or not exists in the scope - class AST_TYPE_ID\n" ,lineNumber, type.typeName);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		else

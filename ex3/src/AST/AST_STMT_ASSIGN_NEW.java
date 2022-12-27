@@ -40,7 +40,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 
 		if (t1 != t2)
 		{
-			System.out.format(">> ERROR [%d] type mismatch for var := exp\n",lineNumber);
+			System.out.format(">> ERROR [%d] type mismatch for var := exp - class AST_STMT_ASSIGN_NEW\n",lineNumber);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		return null;
