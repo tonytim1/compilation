@@ -14,7 +14,7 @@ public class TYPE_CLASS_VAR_DEC extends TYPE
 	}
 
 	public TYPE clone() {
-		TYPE_CLASS_VAR_DEC newType = new TYPE_CLASS_VAR_DEC(this.t, this.varName);
+		TYPE_CLASS_VAR_DEC newType = new TYPE_CLASS_VAR_DEC(this.type, this.varName);
 		newType.name = name;
 		newType.typeName = typeName;
 		newType.varName = varName;

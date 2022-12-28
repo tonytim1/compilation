@@ -9,17 +9,8 @@ public abstract class TYPE
 	public String typeName;
 	public String varName;
 
-	/*************/
-	/* isClass() */
-	/*************/
-	public boolean isClass(){ return false;}
+	public TYPE clone() { return this; }
 
-	/*************/
-	/* isArray() */
-	/*************/
-	public boolean isArray(){ return false;}
-
-	//TODO - isInteger
 
 	public boolean canAssign(TYPE t)
 	{

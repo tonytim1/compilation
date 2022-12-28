@@ -19,7 +19,7 @@ public class TYPE_ARRAY extends TYPE
 	}
 
 	public TYPE clone() {
-		TYPE_ARRAY newType = new TYPE_ARRAY();
+		TYPE_ARRAY newType = new TYPE_ARRAY(this.type);
 		newType.name = name;
 		newType.typeName = typeName;
 		newType.varName = varName;
