@@ -26,7 +26,9 @@ public class AST_DEC_FUNC extends AST_DEC {
 	}
 	
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{	
-		return f.SemantMe();
+	{
+	    TYPE t = f.SemantMe();
+	    System.out.format("ROY'S DEBUGGING - %s", t.typeName);
+		return t;
 	}
 }
