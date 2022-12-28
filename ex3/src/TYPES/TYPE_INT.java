@@ -14,10 +14,14 @@ public class TYPE_INT extends TYPE
 	/*****************************/
 	public TYPE_INT() {
 	    this.isZero = false;
+		this.name = "int";
+		this.typeName = "int";
 	}
 
 	public TYPE_INT(boolean isZero) {
 	    this.isZero = isZero;
+		this.name = "int";
+		this.typeName = "int";
 	}
 
 	/******************************/

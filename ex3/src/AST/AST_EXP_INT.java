@@ -33,8 +33,8 @@ public class AST_EXP_INT extends AST_EXP
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 	    if (this.value == 0) {
-	        return TYPE_INT.getInstanceZero();
+	        return new TYPE_INT(true);
 	    }
-		return TYPE_INT.getInstance();
+		return new TYPE_INT();
 	}
 }

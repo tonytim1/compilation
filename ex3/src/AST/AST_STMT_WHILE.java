@@ -37,7 +37,8 @@ public class AST_STMT_WHILE extends AST_STMT
 		/****************************/
 		/* [0] Semant the Condition */
 		/****************************/
-		if (cond.SemantMe() != TYPE_INT.getInstance())
+		TYPE condType = cond.SemantMe();
+		if (condType.typeName != "int")
 		{
 			System.out.format(">> ERROR [%d] condition inside WHILE is not integral - class AST_STMT_WHILE\n",lineNumber);
 			throw new SEMANTIC_EXCEPTION(lineNumber);

@@ -69,9 +69,9 @@ public class AST_TYPE extends AST_Node {
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 		System.out.format("AST_TYPE attempting to semantme type %d %s\n", t, id);
 		switch(t){
-			case 1: return TYPE_INT.getInstance();
-			case 2: return TYPE_STRING.getInstance();
-			case 3: return TYPE_VOID.getInstance();
+			case 1: return new TYPE_INT();
+			case 2: return new TYPE_STRING();
+			case 3: return new TYPE_VOID();
 			case 4: 
 				TYPE type = s.find(id);
 				if(type == null)

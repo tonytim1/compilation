@@ -88,7 +88,7 @@ public class AST_CLASS_DEC extends AST_Node {
 			System.out.format("print list %s\n", "fathers' members");
 			currList = fatherDataMembers;
 			while (currList.head != null) {
-				System.out.format(" - %s, %s: %s\b", currList.head.varName, currList.head.typeName, currList.head);
+				System.out.format(" - %s, %s: %s\n", currList.head.varName, currList.head.typeName, currList.head);
 				if (currList.tail == null) {
 					break;
 				}

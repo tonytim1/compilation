@@ -55,11 +55,11 @@ public class AST_EXP_BINOP extends AST_EXP
 		    // check if both expressions are from type int or string
 		    if (t1.typeName == "int")
             {
-                return TYPE_INT.getInstance();
+                return new TYPE_INT();
             }
             if (t1.typeName == "string")
             {
-                return TYPE_STRING.getInstance();
+                return new TYPE_STRING();
             }
             // error if there is exp + exp and the expressions are not from the same type type int or string
             System.out.format(">> ERROR [%d] binop -> there is exp + exp and the expressions are not both int or string: %s, %s - class AST_EXP_BINOP\n",lineNumber,t1.typeName, t2.typeName);
@@ -77,7 +77,7 @@ public class AST_EXP_BINOP extends AST_EXP
                         throw new SEMANTIC_EXCEPTION(lineNumber);
                     }
                 }
-                return TYPE_INT.getInstance();
+                return new TYPE_INT();
             }
 		    // the expressions are not both ints for binops -, *, /, <, >
 		    System.out.format(">> ERROR [%d] binop -> the expressions are not both ints for binops -, *, /, <, >: %s, %s", lineNumber, t1.typeName, t2.typeName);
@@ -90,6 +90,6 @@ public class AST_EXP_BINOP extends AST_EXP
             throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
-		return TYPE_INT.getInstance();
+		return new TYPE_INT();
 	}
 }

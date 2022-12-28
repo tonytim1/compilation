@@ -53,7 +53,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		// check that type is not void
-		if (t == TYPE_VOID.getInstance()) {
+		if (t.typeName == "void") {
 		    System.out.format(">> ERROR [%d] type %s is void - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}

@@ -30,6 +30,6 @@ public class AST_EXP_STRING extends AST_EXP {
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		return TYPE_STRING.getInstance();
+		return new TYPE_STRING();
 	}
 }

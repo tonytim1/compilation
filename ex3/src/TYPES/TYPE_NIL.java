@@ -10,7 +10,10 @@ public class TYPE_NIL extends TYPE
 	/*****************************/
 	/* PREVENT INSTANTIATION ... */
 	/*****************************/
-	protected TYPE_NIL() {}
+	public TYPE_NIL() {
+		this.name = "nil";
+		this.typeName = "nil";
+	}
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
 	/******************************/

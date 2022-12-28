@@ -46,6 +46,9 @@ public class TYPE_CLASS extends TYPE
 		System.out.format("Looking for var %s in class %s\n",id, name);
 		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
 			//if (member.typeName != "function" && ((TYPE_CLASS_VAR_DEC) member.head).varName.equals(id))
+			if ((member == null) || member.head == null) {
+				break;
+			}
 			if (member.typeName != "function" && member.head.varName.equals(id))
 			{
 				return member.head;
