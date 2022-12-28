@@ -24,6 +24,14 @@ public class TYPE_INT extends TYPE
 		this.typeName = "int";
 	}
 
+	public TYPE clone() {
+		TYPE_INT newType = new TYPE_INT(this.isZero);
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
+
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
 	/******************************/

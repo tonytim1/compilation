@@ -84,7 +84,7 @@ public class AST_TYPE extends AST_Node {
 				}
 				else
 				{
-					return type;
+					return type.clone();
 				}
 		}
         return null;

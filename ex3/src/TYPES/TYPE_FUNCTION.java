@@ -23,6 +23,14 @@ public class TYPE_FUNCTION extends TYPE
 		this.params = params;
 	}
 
+	public TYPE clone() {
+		TYPE_FUNCTION newType = new TYPE_FUNCTION(this.returnType, this.name, this.params);
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
+
 	public boolean isSignatureEqual(TYPE_FUNCTION other){
 		if (!(returnType.typeName.equals(other.returnType.typeName)))
 			return false;

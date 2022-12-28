@@ -18,6 +18,14 @@ public class TYPE_LIST extends TYPE
 		this.tail = tail;
 	}
 
+	public TYPE clone() {
+		TYPE_LIST newType = new TYPE_LIST(this.head, this.tail);
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
+
 	public void printList() {
 		System.out.format("print list %s\n", this.varName);
 		TYPE_LIST currList = this;

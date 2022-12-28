@@ -14,6 +14,15 @@ public class TYPE_NIL extends TYPE
 		this.name = "nil";
 		this.typeName = "nil";
 	}
+
+	public TYPE clone() {
+		TYPE_NIL newType = new TYPE_NIL();
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
+
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
 	/******************************/

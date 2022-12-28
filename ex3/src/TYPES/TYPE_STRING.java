@@ -15,6 +15,14 @@ public class TYPE_STRING extends TYPE
 		this.typeName = "string";
 	}
 
+	public TYPE clone() {
+		TYPE_STRING newType = new TYPE_STRING();
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
+
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
 	/******************************/

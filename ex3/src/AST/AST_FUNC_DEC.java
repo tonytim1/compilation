@@ -120,7 +120,8 @@ public class AST_FUNC_DEC extends AST_Node {
 		/***************************************************/
 		/* [8] Enter the Function Type to the Symbol Table */
 		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+		TYPE function = new TYPE_FUNCTION(returnType,id,type_list);
+		SYMBOL_TABLE.getInstance().enter(id,function);
 
 		/*****************/
 		/* [9] reset return type */
@@ -128,6 +129,6 @@ public class AST_FUNC_DEC extends AST_Node {
 		//System.out.format(">> INFO[%d] reset required_return_type - class AST_FUNC_DEC\n",lineNumber);
 		SYMBOL_TABLE.getInstance().required_return_type = "";
 
-		return returnType;
+		return function;
 	}
 }

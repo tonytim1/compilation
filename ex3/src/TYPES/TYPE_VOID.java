@@ -14,6 +14,14 @@ public class TYPE_VOID extends TYPE
 		this.typeName = "void";
 	}
 
+	public TYPE clone() {
+		TYPE_VOID newType = new TYPE_VOID();
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
+
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
 	/******************************/

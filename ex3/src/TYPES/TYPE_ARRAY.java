@@ -17,4 +17,13 @@ public class TYPE_ARRAY extends TYPE
 		this.typeName = "array";
 		//this.size = size;
 	}
+
+	public TYPE clone() {
+		TYPE_ARRAY newType = new TYPE_ARRAY();
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		newType.type = type;
+		return newType;
+	}
 }

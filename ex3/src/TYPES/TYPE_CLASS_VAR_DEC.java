@@ -12,4 +12,12 @@ public class TYPE_CLASS_VAR_DEC extends TYPE
 		this.typeName = t.typeName;
 		this.varName = varName;
 	}
+
+	public TYPE clone() {
+		TYPE_CLASS_VAR_DEC newType = new TYPE_CLASS_VAR_DEC(this.t, this.varName);
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
 }
