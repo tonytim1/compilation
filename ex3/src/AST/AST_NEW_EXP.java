@@ -30,6 +30,18 @@ public class AST_NEW_EXP extends AST_Node {
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		return this.type.SemantMe();
+		TYPE varType = type.SemantMe();
+		if (exp != null) {
+			// the derivation is NEW type:t LBRACK exp:e RBRACK - so it's an array
+			//check that exp is int
+			TYPE expType = exp.SemantMe();
+			if (expType.typeName != "int") {
+				System.out.format(">> ERROR [%d] type of exp is not int and is: %s for rule NEW type:t LBRACK exp:e RBRACK - class AST_NEW_EXP\n",lineNumber,expType.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+			return new TYPE_ARRAY(varType);
+		}
+
+		return varType;
 	}
 }

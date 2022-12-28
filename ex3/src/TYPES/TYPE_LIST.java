@@ -17,4 +17,16 @@ public class TYPE_LIST extends TYPE
 		this.head = head;
 		this.tail = tail;
 	}
+
+	public void printList() {
+		System.out.format("print list %s\n", this.varName);
+		TYPE_LIST currList = this;
+		while (currList.head != null) {
+			System.out.format(" - %s, %s: %s\n", currList.head.varName, currList.head.typeName, currList.head);
+			if (currList.tail == null) {
+				break;
+			}
+			currList = currList.tail;
+		}
+	}
 }
