@@ -41,7 +41,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		if (condType.typeName != "int")
 		{
 			System.out.format(">> ERROR [%d] condition inside WHILE is not integral - class AST_STMT_WHILE\n",lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		/*************************/

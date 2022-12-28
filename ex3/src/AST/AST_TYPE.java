@@ -80,7 +80,7 @@ public class AST_TYPE extends AST_Node {
 					/* ERROR: undeclared type */
 					/**************************/
 					System.out.format(">> ERROR [%d] undeclared type for %s - class AST_TYPE\n",lineNumber, id);
-					throw new SEMANTIC_EXCEPTION(lineNumber);
+					throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 				}
 				else
 				{

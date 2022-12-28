@@ -50,7 +50,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 			if (varType.typeName != "class") {
 				//ERROR var isn't class but does exist
 				System.out.format(">> ERROR [%d] varType : %s isn't class - class AST_VAR_EXP_LIST\n",lineNumber, varType.typeName);
-				throw new SEMANTIC_EXCEPTION(lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 			}
 
 			TYPE_CLASS tc = (TYPE_CLASS) varType;
@@ -59,7 +59,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 			if (member != null) {
 				if (member.typeName != "function") {
 					System.out.format(">> ERROR [%d] member : %s isn't function - class AST_VAR_EXP_LIST\n", lineNumber, member.typeName);
-					throw new SEMANTIC_EXCEPTION(lineNumber);
+					throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 				}
 				functionType = (TYPE_FUNCTION) member;
 				return functionType.returnType;
@@ -67,18 +67,18 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 
 			// ERROR - Didn't find a field that fits
 			System.out.format(">> ERROR [%d] didn't find the right field in class - class AST_VAR_EXP_LIST\n",lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		TYPE nameType =  SYMBOL_TABLE.getInstance().find(name);
 		// ERROR - Not found function of type isn't function
 		if (nameType == null) {
 			System.out.format(">> ERROR [%d] name %s was not found - class AST_VAR_EXP_LIST\n",lineNumber, name);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 		if (nameType.typeName != "function") {
 			System.out.format(">> ERROR [%d] nameType : %s isn't function - class AST_VAR_EXP_LIST\n",lineNumber, nameType.typeName);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		functionType = (TYPE_FUNCTION) nameType;

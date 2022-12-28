@@ -41,13 +41,13 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		if (t1 == null || t2 == null)
 		{
 			System.out.format(">> ERROR [%d] -> at least one of the expressions type does not exist - class AST_STMT_ASSIGN", lineNumber);
-            throw new SEMANTIC_EXCEPTION(lineNumber);
+            throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		if (!(t1.canAssign(t2)))
 		{
 			System.out.format(">> ERROR [%d] type mismatch for var %s %s, exp %s %s - class AST_STMT_ASSIGN\n",lineNumber, t1.typeName, t1.name, t2.typeName, t2.name);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 		return null;
 	}

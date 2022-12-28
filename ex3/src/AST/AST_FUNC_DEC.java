@@ -44,7 +44,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		// check if function is defined in scope
 		if (s.findInScope(id) != null) {
 			System.out.format(">> ERROR [%d] function - %s already exists in scope - class AST_FUNC_DEC\n", lineNumber, id);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		/*******************/
@@ -54,14 +54,14 @@ public class AST_FUNC_DEC extends AST_Node {
 		if (returnType == null)
 		{
 			System.out.format(">> ERROR [%d] non existing return type %s - class AST_FUNC_DEC\n",lineNumber,returnType);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		// check if in not in global scope and not in a class
 		if (!(s.isGlobalScope()) && (s.curr_class == null))
 		{
 			System.out.format(">> ERROR [%d] function declared not in global scope and not under class %s - class AST_FUNC_DEC\n",lineNumber,id);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		/****************************/
@@ -92,13 +92,13 @@ public class AST_FUNC_DEC extends AST_Node {
 			if (s.curr_class.findClassVar(id) != null)
 			{
 				System.out.format(">> ERROR [%d] function %s overrides a variable instead of a method - class AST_FUNC_DEC\n",lineNumber,id);
-				throw new SEMANTIC_EXCEPTION(lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 			}
 			TYPE overriden = s.curr_class.findClassFunc(id);
 			if (overriden != null && !(type_function).isSignatureEqual((TYPE_FUNCTION) overriden)) 
 			{
 				System.out.format(">> ERROR [%d] function %s overrloads a method which in not legal - class AST_FUNC_DEC\n",lineNumber,id);
-				throw new SEMANTIC_EXCEPTION(lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 			}
 		}
 

@@ -35,13 +35,13 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		if (!(s.isGlobalScope()))
 		{
 			System.out.format(">> ERROR [%d] Array defined not in global scope - class AST_ARRAY_TYPE_DEF\n",lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 		// check if array name already declared
 		if (s.find(id) != null)
 		{
 			System.out.format(">> ERROR [%d] Array defined with name %s that already exists - class AST_ARRAY_TYPE_DEF\n",lineNumber,id);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		t = type.SemantMe();
@@ -50,12 +50,12 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		if (t == null)
 		{
 			System.out.format(">> ERROR [%d] non existing type - class AST_ARRAY_TYPE_DEF\n",lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 		// check that type is not void
 		if (t.typeName == "void") {
 		    System.out.format(">> ERROR [%d] type %s is void - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
 		/***************************************************/
