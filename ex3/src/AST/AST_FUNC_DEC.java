@@ -78,7 +78,9 @@ public class AST_FUNC_DEC extends AST_Node {
 		/***************************/
 		/* [3] Semant Input Params */
 		/***************************/
-		type_list = (TYPE_LIST) tid.SemantMe();
+		if (tid != null) {
+			type_list = (TYPE_LIST) tid.SemantMe();
+		}
 
 		TYPE_FUNCTION type_function = new TYPE_FUNCTION(returnType,id,type_list);
 
