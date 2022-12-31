@@ -62,10 +62,23 @@ public class AST_VAR_DEC extends AST_Node {
 		}
 
 		/**************************************/
+		/* [3] Check That it can be assign to exp */
+		/**************************************/
+		if (exp != null) {
+			TYPE t3 = exp.SemantMe();
+			System.out.format(">> INFO [%d] trying to assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
+			if (!t.canAssign(t3)) {
+				System.out.format(">> ERROR [%d] can't assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			}
+		}
+
+		/**************************************/
 		/* [3] Check That it can be assign to newExp */
 		/**************************************/
 		if (newExp != null) {
 			TYPE t2 = newExp.SemantMe();
+			System.out.format(">> INFO [%d] trying to assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
 			if (!t.canAssign(t2)) {
 				System.out.format(">> ERROR [%d] can't assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
 				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
@@ -102,7 +115,7 @@ public class AST_VAR_DEC extends AST_Node {
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */
 		/*********************************************************/
-		System.out.format("[%d] ast var dec got var:%s with type name:%s typeName:%s - class AST_VAR_DEC\n", lineNumber, id, t.name, t.typeName);
+		System.out.format("INFO [%d] ast var dec got var:%s with type name:%s typeName:%s - class AST_VAR_DEC\n", lineNumber, id, t.name, t.typeName);
 		return t;
 	}
 }
