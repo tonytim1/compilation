@@ -53,11 +53,11 @@ public class AST_EXP_BINOP extends AST_EXP
 
 		if (OP.OP == 1) { // binop is +
 		    // check if both expressions are from type int or string
-		    if (t1.typeName == "int")
+		    if ((t1.typeName == "int") && (t2.typeName == "int"))
             {
                 return new TYPE_INT();
             }
-            if (t1.typeName == "string")
+			if ((t1.typeName == "string") && (t2.typeName == "string"))
             {
                 return new TYPE_STRING();
             }

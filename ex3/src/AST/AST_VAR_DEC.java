@@ -62,35 +62,61 @@ public class AST_VAR_DEC extends AST_Node {
 			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
 
-		if (exp != null) 
-		{
-			expType = exp.SemantMe();
-			if (!(t.canAssign(expType)))
-			{
-				System.out.format(">> ERROR [%d] assignment has incompatible types: tried to assign new %s to %s - class AST_VAR_DEC\n",lineNumber,expType.typeName, t.typeName);
+		/**************************************/
+		/* [3] Check That it can be assign to exp */
+		/**************************************/
+		if (exp != null) {
+			TYPE t3 = exp.SemantMe();
+			System.out.format(">> INFO [%d] trying to assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
+			if (!t.canAssign(t3)) {
+				System.out.format(">> ERROR [%d] can't assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
 				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 			}
 		}
 
-		if (newExp != null) 
-		{
-			expType = exp.SemantMe();
-			if (!(t.canAssign(expType)))
-			{
-				System.out.format(">> ERROR [%d] assignment has incompatible types: tried to assign %s to %s - class AST_VAR_DEC\n",lineNumber,expType.typeName, t.typeName);
+		/**************************************/
+		/* [3] Check That it can be assign to newExp */
+		/**************************************/
+		if (newExp != null) {
+			TYPE t2 = newExp.SemantMe();
+			System.out.format(">> INFO [%d] trying to assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
+			if (!t.canAssign(t2)) {
+				System.out.format(">> ERROR [%d] can't assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
 				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			}
+			else {
+				if (t.typeName == "class") {
+					TYPE_CLASS class1 = (TYPE_CLASS) t;
+					TYPE_CLASS class2 = (TYPE_CLASS) t2;
+					System.out.format(">> INFO [%d] Assign to %s father: %s, %s father %s - class AST_STMT_ASSIGN_NEW\n",lineNumber, class1.name, class1.father, class2.name, class2.father);
+					boolean isOk = false;
+					if (class1.name != class2.name) {
+						// check if class1 is a father of class2 and then it's ok
+						TYPE_CLASS father = class2.father;
+						while (father != null) {
+							if (father.name == class1.name) {
+								isOk = true;
+							}
+							father = father.father;
+						}
+						if (!isOk) {
+							System.out.format(">> ERROR [%d] can't assign class %s to class %s - class AST_VAR_DEC\n",lineNumber,class2.name, class1.name);
+							throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+						}
+					}
+				}
 			}
 		}
 
 		/***************************************************/
-		/* [3] Enter the Var Type to the Symbol Table */
+		/* [4] Enter the Var Type to the Symbol Table */
 		/***************************************************/
 		SYMBOL_TABLE.getInstance().enter(id,t);
 
 		/*********************************************************/
-		/* [4] Return value is irrelevant for class declarations */
+		/* [5] Return value is irrelevant for class declarations */
 		/*********************************************************/
-		System.out.format("[%d] ast var dec got var:%s with type name:%s typeName:%s\n", lineNumber, id, t.name, t.typeName);
+		System.out.format("INFO [%d] ast var dec got var:%s with type name:%s typeName:%s - class AST_VAR_DEC\n", lineNumber, id, t.name, t.typeName);
 		return t;
 	}
 }
