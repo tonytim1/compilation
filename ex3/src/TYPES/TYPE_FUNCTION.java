@@ -35,17 +35,17 @@ public class TYPE_FUNCTION extends TYPE
 		if (!(returnType.typeName.equals(other.returnType.typeName)))
 			return false;
 
-		TYPE_LIST p1 = this.params;
-		TYPE_LIST p2 = other.params;
+		// TYPE_LIST p1 = this.params;
+		// TYPE_LIST p2 = other.params;
 		
-		while(p1 != null && p2 != null){
-			if(!(p1.head.canAssign(p2.head)))
-				return false;
+		// while(p1 != null && p2 != null){
+		// 	if(!(p1.head.canAssign(p2.head)))
+		// 		return false;
 
-			p1 = p1.tail;
-			p2 = p2.tail;
+		// 	p1 = p1.tail;
+		// 	p2 = p2.tail;
 			
-		}
-		return (p1 == null && p2 == null);
+		// }
+		return this.params.canAssignList(other.params);
 	}
 }

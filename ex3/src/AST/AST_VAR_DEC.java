@@ -41,6 +41,7 @@ public class AST_VAR_DEC extends AST_Node {
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
 		TYPE t;
+		TYPE expType;
 	
 		/****************************/
 		/* [1] Check If Type exists */
@@ -59,6 +60,26 @@ public class AST_VAR_DEC extends AST_Node {
 		{
 			System.out.format(">> ERROR [%d] variable %s already exists in scope - class AST_VAR_DEC\n",lineNumber,id);
 			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+		}
+
+		if (exp != null) 
+		{
+			expType = exp.SemantMe();
+			if (!(t.canAssign(expType)))
+			{
+				System.out.format(">> ERROR [%d] assignment has incompatible types: tried to assign new %s to %s - class AST_VAR_DEC\n",lineNumber,expType.typeName, t.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			}
+		}
+
+		if (newExp != null) 
+		{
+			expType = exp.SemantMe();
+			if (!(t.canAssign(expType)))
+			{
+				System.out.format(">> ERROR [%d] assignment has incompatible types: tried to assign %s to %s - class AST_VAR_DEC\n",lineNumber,expType.typeName, t.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			}
 		}
 
 		/***************************************************/

@@ -18,7 +18,7 @@ public class AST_TYPE_ID extends AST_Node {
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-        System.out.format("====================== type:t id:name \n", id);
+        System.out.format("====================== type:%s id:%s \n", type.id, id);
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */

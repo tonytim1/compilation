@@ -37,11 +37,11 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION {
 
-        if (expList != null) expList.SemantMe();
-
 		TYPE_FUNCTION functionType = null;
+		TYPE_LIST paramTypes = null;
 
-		if (expList != null) expList.SemantMe();
+        if (expList != null) 
+			paramTypes = (TYPE_LIST) expList.SemantMe();
 
 		// In case var != null we want to check that id is a field in class var
 		if (var != null) {
@@ -62,6 +62,13 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 					throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 				}
 				functionType = (TYPE_FUNCTION) member;
+
+				//check params type match
+				if (!(functionType.params.canAssignList(paramTypes))) {
+					System.out.format(">> ERROR [%d] mismatch in params number/type in function %s call - class AST_VAR_EXP_LIST\n", lineNumber, member.name);
+					throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+				}
+
 				return functionType.returnType;
 			}
 
@@ -82,6 +89,13 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 		}
 
 		functionType = (TYPE_FUNCTION) nameType;
+
+		//check params type match
+		if (!(functionType.params.canAssignList(paramTypes))) {
+			System.out.format(">> ERROR [%d] mismatch in params number/type in function %s call - class AST_VAR_EXP_LIST\n", lineNumber, nameType.name);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+		}
+
 		return functionType.returnType;
 	}
 }

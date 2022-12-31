@@ -37,4 +37,20 @@ public class TYPE_LIST extends TYPE
 			currList = currList.tail;
 		}
 	}
+
+	public boolean canAssignList(TYPE_LIST other){
+		TYPE_LIST p1 = this;
+		TYPE_LIST p2 = other;
+		System.out.format("comparing params of 2 lists \n");
+		while(p1 != null && p2 != null){
+			System.out.format("    comparing params: %s, %s\n", p1.head.typeName, p2.head.typeName);
+			if(!(p1.head.canAssign(p2.head)))
+				return false;
+
+			p1 = p1.tail;
+			p2 = p2.tail;
+			
+		}
+		return (p1 == null && p2 == null);
+	}
 }
