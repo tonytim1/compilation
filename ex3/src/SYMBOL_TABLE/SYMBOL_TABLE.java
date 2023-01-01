@@ -332,6 +332,17 @@ public class SYMBOL_TABLE
 							new TYPE_LIST(
 								TYPE_STRING.getInstance(),
 								null)));
+
+			/***************************************/
+			/* [3] Enter library function PrintTrace */
+			/***************************************/
+			instance.enter(
+					"PrintTrace",
+					new TYPE_FUNCTION(
+							TYPE_VOID.getInstance(),
+							"PrintTrace",
+							new TYPE_LIST(null,
+									null)));
 			
 		}
 		return instance;

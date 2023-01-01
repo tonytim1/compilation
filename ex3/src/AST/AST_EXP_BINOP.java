@@ -92,6 +92,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
         if (t1.typeName == "void" || t2.typeName == "void") {
             System.out.format(">> ERROR [%d] binop -> one of the expressions is void - type1 - %s and type2 - %s", lineNumber, t1.typeName, t2.typeName);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
         }
 		return new TYPE_INT();
 	}
