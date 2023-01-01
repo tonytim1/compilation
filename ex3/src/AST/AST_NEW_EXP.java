@@ -39,6 +39,11 @@ public class AST_NEW_EXP extends AST_Node {
 				System.out.format(">> ERROR [%d] type of exp is not int and is: %s for rule NEW type:t LBRACK exp:e RBRACK - class AST_NEW_EXP\n",lineNumber,expType.typeName);
 				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 			}
+			TYPE_INT expInt = (TYPE_INT) expType;
+			if (expInt.isZero) {
+				System.out.format(">> ERROR [%d] exp is 0 for rule NEW type:t LBRACK exp:e RBRACK - class AST_NEW_EXP\n",lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			}
 			return new TYPE_ARRAY(varType);
 		}
 
