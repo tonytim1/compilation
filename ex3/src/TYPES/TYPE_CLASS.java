@@ -56,7 +56,6 @@ public class TYPE_CLASS extends TYPE
 	{
 		System.out.format("Looking for var %s in class %s\n",id, name);
 		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
-			//if (member.typeName != "function" && ((TYPE_CLASS_VAR_DEC) member.head).varName.equals(id))
 			if ((member == null) || member.head == null) {
 				break;
 			}
@@ -70,6 +69,16 @@ public class TYPE_CLASS extends TYPE
 			return this.father.findClassVar(id);
 			
 		return null;
+	}
+
+	public TYPE findinClass(String id)
+	{
+		TYPE result = findClassFunc(id);
+		if (result != null)
+		{
+			return result;
+		}
+		return findClassVar(id);
 	}
 
 }

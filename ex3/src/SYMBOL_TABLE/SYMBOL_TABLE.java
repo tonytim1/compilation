@@ -82,7 +82,9 @@ public class SYMBOL_TABLE
 	public TYPE find(String name)
 	{
 		SYMBOL_TABLE_ENTRY e;
-				
+		TYPE result;
+
+		//temp
 		for (e = table[hash(name)]; e != null; e = e.next)
 		{
 			if (name.equals(e.name))
@@ -90,8 +92,34 @@ public class SYMBOL_TABLE
 				return e.type;
 			}
 		}
-		
 		return null;
+
+		// for (e = table[hash(name)]; e != null; e = e.next)
+		// {
+		// 	if (name.equals(e.name))
+		// 	{
+		// 		if ((curr_class != null) && (e.depth == 0)){
+		// 			break;
+		// 		}
+		// 		return e.type;
+		// 	}
+		// }
+		
+		// if (curr_class != null)
+		// {
+		// 	result = curr_class.findinClass(name);
+		// 	if (result != null)
+		// 	{
+		// 		return result;
+		// 	}
+		// }
+
+		// if (e != null)
+		// {
+		// 	return e.type;
+		// }
+		
+		// return null;
 	}
 
 	public TYPE findInScope(String name)

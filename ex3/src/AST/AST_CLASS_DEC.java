@@ -73,13 +73,31 @@ public class AST_CLASS_DEC extends AST_Node {
 		s.beginScope();
 		s.curr_class = classType;
 
+		// insert father members to current scope
+		// currList = allDataMembersHolder;
+		// while (currList.head != null) {
+		// 	System.out.format(" - %s, %s: %s\n", currList.head.varName, currList.head.typeName, currList.head);
+		// 	if (currList.head.typeName == "function")
+		// 	{
+		// 		s.enter(currList.head.name, currList.head);
+		// 	}
+		// 	else
+		// 	{
+		// 		s.enter(currList.head.varName, currList.head);
+		// 	}
+		// 	if (currList.tail == null) {
+		// 		break;
+		// 	}
+		// 	currList = currList.tail;
+		// }
+
 		/*************************/
 		/* [3] Add the class data members one by one */
 		/*************************/
 		TYPE newClassAttr = null;
 		while ((cFieldList != null) && (cFieldList.cField != null)) {
 			newClassAttr = cFieldList.cField.SemantMe();
-			// add to father
+			// add to datamembers
 			if (fatherDataMembers.head == null) {
 				fatherDataMembers.head = newClassAttr;
 			} else {

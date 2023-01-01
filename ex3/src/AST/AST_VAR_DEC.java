@@ -40,7 +40,7 @@ public class AST_VAR_DEC extends AST_Node {
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		TYPE t;
+		TYPE t, t2 = null, t3 = null;
 		TYPE expType;
 	
 		/****************************/
@@ -71,7 +71,7 @@ public class AST_VAR_DEC extends AST_Node {
 		/* [3] Check That it can be assign to exp */
 		/**************************************/
 		if (exp != null) {
-			TYPE t3 = exp.SemantMe();
+			t3 = exp.SemantMe();
 			System.out.format(">> INFO [%d] trying to assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
 			if (!t.canAssign(t3)) {
 				System.out.format(">> ERROR [%d] can't assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
@@ -83,21 +83,33 @@ public class AST_VAR_DEC extends AST_Node {
 		/* [3] Check That it can be assign to newExp */
 		/**************************************/
 		if (newExp != null) {
-			TYPE t2 = newExp.SemantMe();
+			t2 = newExp.SemantMe();
 			System.out.format(">> INFO [%d] trying to assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
 			if (!t.canAssign(t2)) {
 				System.out.format(">> ERROR [%d] can't assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 		}
+		
+		/***************************************************/
+		/* [4] If in class scope, declared members can only be initialized with a constant value  */
+		/***************************************************/
+		if (SYMBOL_TABLE.getInstance().curr_class != null) {
+			if (newExp != null || (exp != null && t3.name != "int" && t3.name != "nil" && t3.name != "string")) {
+				System.out.format(">> INFO [%d] In class members can only be assigned with consts for member %s - class AST_VAR_DEC\n",lineNumber,id);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+		}
+
+
 
 		/***************************************************/
-		/* [4] Enter the Var Type to the Symbol Table */
+		/* [5] Enter the Var Type to the Symbol Table */
 		/***************************************************/
 		SYMBOL_TABLE.getInstance().enter(id,t);
 
 		/*********************************************************/
-		/* [5] Return value is irrelevant for class declarations */
+		/* [6] Return value is irrelevant for class declarations */
 		/*********************************************************/
 		System.out.format("INFO [%d] ast var dec got var:%s with type name:%s typeName:%s - class AST_VAR_DEC\n", lineNumber, id, t.name, t.typeName);
 		return t;
