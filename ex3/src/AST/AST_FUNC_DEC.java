@@ -73,6 +73,19 @@ public class AST_FUNC_DEC extends AST_Node {
 		/* [2] Update required return type */
 		/*********************************************************/
 		//System.out.format(">> INFO[%d] setting required_return_type to %s - class AST_FUNC_DEC\n",lineNumber,returnType);
+
+//		//create return_type TYPE
+//		TYPE returnTypeType = new TYPE_NIL();
+//		if ((returnType == "string") || (returnType == "int") || (returnType == "void") || (returnType == "function")) {
+//			returnTypeType.typeName = returnType;
+//		} else {
+//			returnTypeType = s.find(returnType);
+//			if (returnTypeType == null) {
+//				System.out.format(">> ERROR [%d] return type %s of func %s is not defined - class AST_FUNC_DEC\n",lineNumber,returnType, id);
+//				throw new SEMANTIC_EXCEPTION(lineNumber);
+//			}
+//		}
+
 		SYMBOL_TABLE.getInstance().required_return_type = returnType;
 
 		/***************************/

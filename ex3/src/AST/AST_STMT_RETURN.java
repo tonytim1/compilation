@@ -4,12 +4,12 @@ import SYMBOL_TABLE.*;
 
 public class AST_STMT_RETURN extends AST_STMT {
 	public AST_EXP exp;
-	
+
 	/*******************/
 	/*  CONSTRUCTOR(S) */
+
 	/*******************/
-	public AST_STMT_RETURN(int lineNumber, AST_EXP exp)
-	{
+	public AST_STMT_RETURN(int lineNumber, AST_EXP exp) {
 		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -19,23 +19,37 @@ public class AST_STMT_RETURN extends AST_STMT {
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		if(exp != null) System.out.print("====================== stmt -> RETURN exp SEMICOLON\n");
-		if(exp == null) System.out.print("====================== stmt -> RETURN SEMICOLON\n");
+		if (exp != null) System.out.print("====================== stmt -> RETURN exp SEMICOLON\n");
+		if (exp == null) System.out.print("====================== stmt -> RETURN SEMICOLON\n");
 
 		/*******************************/
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.exp = exp;
 	}
+
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION {
-	// Check that exp's type agrees with function return type
-	TYPE expType;
-	if (exp != null) {
-	    expType = exp.SemantMe();
-	    if (SYMBOL_TABLE.getInstance().required_return_type.canAssign(expType) == false) {
-	        System.out.format(">> ERROR [%d] returned type %s and expected return %s type don't match\n",lineNumber, expType.typeName, SYMBOL_TABLE.getInstance().required_return_type.typeName);
-	        throw new SEMANTIC_EXCEPTION(lineNumber);
-	        }
+		// Check that exp's type agrees with function return type
+		TYPE expType;
+		if (exp != null) {
+			if (SYMBOL_TABLE.getInstance().required_return_type.typeName == "void") {
+				System.out.format(">> ERROR [%d] return type is not empty and expected return type is void\n", lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+			expType = exp.SemantMe();
+			if (SYMBOL_TABLE.getInstance().required_return_type.canAssign(expType) == false) {
+				System.out.format(">> ERROR [%d] returned type %s and expected return type %s don't match\n", lineNumber, expType.typeName, SYMBOL_TABLE.getInstance().required_return_type.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+		} else {
+			if (SYMBOL_TABLE.getInstance().required_return_type.typeName != "void") {
+				System.out.format(">> ERROR [%d] returned type %s and expected return type %s don't match\n", lineNumber, "void", SYMBOL_TABLE.getInstance().required_return_type.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+		}
+		return null;
+	}
+}
 
 
 	    /*
