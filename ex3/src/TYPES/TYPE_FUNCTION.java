@@ -36,20 +36,16 @@ public class TYPE_FUNCTION extends TYPE
 			return false;
 		}
 
-		// TYPE_LIST p1 = this.params;
-		// TYPE_LIST p2 = other.params;
-		
-		// while(p1 != null && p2 != null){
-		// 	if(!(p1.head.canAssign(p2.head)))
-		// 		return false;
-
-		// 	p1 = p1.tail;
-		// 	p2 = p2.tail;
-			
-		// }
 		if ((this.params == null) && (other.params == null)) {
 			return true;
 		}
 		return this.params.canAssignList(other.params);
+	}
+
+	public boolean canAssignParams(TYPE_LIST params){
+		if ((this.params == null) && (params == null)) {
+			return true;
+		}
+		return this.params.canAssignList(params);
 	}
 }

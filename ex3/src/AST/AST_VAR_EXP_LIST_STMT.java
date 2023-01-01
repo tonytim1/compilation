@@ -64,7 +64,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 				functionType = (TYPE_FUNCTION) member;
 
 				//check params type match
-				if (!(functionType.params.canAssignList(paramTypes))) {
+				if (!(functionType.canAssignParams(paramTypes))) {
 					System.out.format(">> ERROR [%d] mismatch in params number/type in function %s call - class AST_VAR_EXP_LIST\n", lineNumber, member.name);
 					throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 				}
@@ -91,7 +91,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 		functionType = (TYPE_FUNCTION) nameType;
 
 		//check params type match
-		if (!(functionType.params.canAssignList(paramTypes))) {
+		if (!(functionType.canAssignParams(paramTypes))) {
 			System.out.format(">> ERROR [%d] mismatch in params number/type in function %s call - class AST_VAR_EXP_LIST\n", lineNumber, nameType.name);
 			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
