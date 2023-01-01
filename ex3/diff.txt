@@ -1,0 +1,102 @@
+diff output/o/output14.txt ../Compilation_Tests/test_folder_proj3/output/output1/output14.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> OK
+diff output/o/output15.txt ../Compilation_Tests/test_folder_proj3/output/output1/output15.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> OK
+diff output/o/output17.txt ../Compilation_Tests/test_folder_proj3/output/output1/output17.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(33)
+\ No newline at end of file
+diff output/o/output19.txt ../Compilation_Tests/test_folder_proj3/output/output1/output19.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(29)
+\ No newline at end of file
+diff output/o/output35.txt ../Compilation_Tests/test_folder_proj3/output/output1/output35.txt
+1c1
+< ERROR(5)
+\ No newline at end of file
+---
+> OK
+\ No newline at end of file
+diff output/o/output37.txt ../Compilation_Tests/test_folder_proj3/output/output1/output37.txt
+1c1
+< ERROR(11)
+\ No newline at end of file
+---
+> OK
+\ No newline at end of file
+diff output/o/output45.txt ../Compilation_Tests/test_folder_proj3/output/output1/output45.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(7)
+\ No newline at end of file
+diff output/o/output47.txt ../Compilation_Tests/test_folder_proj3/output/output1/output47.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(8)
+\ No newline at end of file
+diff output/o/output4.txt ../Compilation_Tests/test_folder_proj3/output/output1/output4.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> OK
+diff output/o/output50.txt ../Compilation_Tests/test_folder_proj3/output/output1/output50.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(4)
+\ No newline at end of file
+diff output/o/output52.txt ../Compilation_Tests/test_folder_proj3/output/output1/output52.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(5)
+\ No newline at end of file
+diff output/o/output53.txt ../Compilation_Tests/test_folder_proj3/output/output1/output53.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(5)
+\ No newline at end of file
+diff output/o/output58.txt ../Compilation_Tests/test_folder_proj3/output/output1/output58.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(4)
+\ No newline at end of file
+diff output/o/output64.txt ../Compilation_Tests/test_folder_proj3/output/output1/output64.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(2)
+\ No newline at end of file
+diff output/o/output65.txt ../Compilation_Tests/test_folder_proj3/output/output1/output65.txt
+1c1
+< OK
+\ No newline at end of file
+---
+> ERROR(7)
+\ No newline at end of file

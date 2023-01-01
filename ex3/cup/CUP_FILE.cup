@@ -209,21 +209,21 @@ classDec ::= CLASS ID:name LBRACE cFieldList:cfl RBRACE {: RESULT = new AST_CLAS
              | CLASS ID:name EXTENDS ID:name2 LBRACE cFieldList:cfl RBRACE {: RESULT = new AST_CLASS_DEC(nameleft, name, name2, cfl); :}
              ;
 
-cField ::= varDec:v {: RESULT = new AST_C_FIELD_VAR(lexer.getLine(), v); :}
-            | funcDec:f {: RESULT = new AST_C_FIELD_FUNC(lexer.getLine(), f); :}
+cField ::= varDec:v {: RESULT = new AST_C_FIELD_VAR(vleft, v); :}
+            | funcDec:f {: RESULT = new AST_C_FIELD_FUNC(fleft, f); :}
             ;
 
-cFieldList	::=		cField:c	cFieldList:l		{: RESULT = new AST_C_FIELD_LIST(lexer.getLine(), c,l);    :}
-					| cField:c				{: RESULT = new AST_C_FIELD_LIST(lexer.getLine(), c,null); :}
+cFieldList	::=		cField:c	cFieldList:l		{: RESULT = new AST_C_FIELD_LIST(cleft, c,l);    :}
+					| cField:c				{: RESULT = new AST_C_FIELD_LIST(cleft, c,null); :}
 					;
 
-stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(lexer.getLine(), s,l);    :}
-					| stmt:s				{: RESULT = new AST_STMT_LIST(lexer.getLine(), s,null); :}
+stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(sleft, s,l);    :}
+					| stmt:s				{: RESULT = new AST_STMT_LIST(sleft, s,null); :}
 					;
 
-var			::=		ID:name								{: RESULT = new AST_VAR_SIMPLE(lexer.getLine(), name);       :}
-					| var:v DOT ID:name			{: RESULT = new AST_VAR_FIELD(lexer.getLine(), v,name); :}
-					| var:v LBRACK exp:e RBRACK			{: RESULT = new AST_VAR_SUBSCRIPT(lexer.getLine(), v,e);     :} 
+var			::=		ID:name								{: RESULT = new AST_VAR_SIMPLE(nameleft, name);       :}
+					| var:v DOT ID:name			{: RESULT = new AST_VAR_FIELD(vleft, v,name); :}
+					| var:v LBRACK exp:e RBRACK			{: RESULT = new AST_VAR_SUBSCRIPT(vleft, v,e);     :} 
 					;
 
 stmt		::=		varDec:v {: RESULT = new AST_STMT_VAR_DEC(vleft, v); :}
@@ -231,10 +231,10 @@ stmt		::=		varDec:v {: RESULT = new AST_STMT_VAR_DEC(vleft, v); :}
                     | var:v ASSIGN newExp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN_NEW(vleft, v,e); :}
                     | RETURN exp:e SEMICOLON								{: RESULT = new AST_STMT_RETURN(eleft, e); :}
                     | RETURN SEMICOLON								{: RESULT = new AST_STMT_RETURN(lexer.getLine(), null); :}
-					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(lexer.getLine(),    cond,body); :}
-					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(lexer.getLine(), cond,body); :}
+					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(condleft,    cond,body); :}
+					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(condleft, cond,body); :}
 					| ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(eleft, null, e, name); :}
-                    | ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(lexer.getLine(), null, null, name); :}
+                    | ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(nameleft, null, null, name); :}
                     | var:v DOT ID:name LPAREN RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(vleft, v, null, name); :}
                     | var:v DOT ID:name LPAREN expList:e RPAREN SEMICOLON   {: RESULT = new AST_VAR_EXP_LIST_STMT(vleft, v, e, name); :}
 					;
