@@ -341,8 +341,7 @@ public class SYMBOL_TABLE
 					new TYPE_FUNCTION(
 							TYPE_VOID.getInstance(),
 							"PrintTrace",
-							new TYPE_LIST(null,
-									null)));
+							null));
 			
 		}
 		return instance;
