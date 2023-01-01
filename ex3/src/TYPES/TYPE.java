@@ -18,7 +18,7 @@ public abstract class TYPE
 		{
 			return (typeName.equals("array") || typeName.equals("class"));
 		}
-		if ((typeName == "class") && (t.typeName == "class") {
+		if ((typeName == "class") && (t.typeName == "class")) {
 			TYPE_CLASS class1 = (TYPE_CLASS) this;
 			TYPE_CLASS class2 = (TYPE_CLASS) t;
 			System.out.format(">> INFO [%d] Assign to %s father: %s, %s father %s - class AST_STMT_ASSIGN_NEW\n",lineNumber, class1.name, class1.father, class2.name, class2.father);
