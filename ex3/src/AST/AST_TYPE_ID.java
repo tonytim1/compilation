@@ -38,7 +38,7 @@ public class AST_TYPE_ID extends AST_Node {
 		if (t == null || t.typeName == "void" || s.findInScope(id) != null)
 		{
 		    System.out.format(">> ERROR [%d] type of t is null or void or not exists in the scope - class AST_TYPE_ID\n" ,lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		else
 		{

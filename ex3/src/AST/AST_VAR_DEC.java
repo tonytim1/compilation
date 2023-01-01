@@ -50,12 +50,12 @@ public class AST_VAR_DEC extends AST_Node {
 		if (t == null)
 		{
 			System.out.format(">> ERROR [%d] non existing type %s - class AST_VAR_DEC\n",lineNumber, type.id);
-			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		if (t.typeName == "void")
 		{
 			System.out.format(">> ERROR [%d] the type void can be used only as a return type in a declaration of a func: %s - class AST_VAR_DEC\n",lineNumber, type.id);
-			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 		
 		/**************************************/
@@ -64,7 +64,7 @@ public class AST_VAR_DEC extends AST_Node {
 		if (SYMBOL_TABLE.getInstance().findInScope(id) != null)
 		{
 			System.out.format(">> ERROR [%d] variable %s already exists in scope - class AST_VAR_DEC\n",lineNumber,id);
-			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
 		/**************************************/
@@ -75,7 +75,7 @@ public class AST_VAR_DEC extends AST_Node {
 			System.out.format(">> INFO [%d] trying to assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
 			if (!t.canAssign(t3)) {
 				System.out.format(">> ERROR [%d] can't assign exp %s to var %s - class AST_VAR_DEC\n", lineNumber, t3.typeName, t.typeName);
-				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 		}
 
@@ -87,7 +87,7 @@ public class AST_VAR_DEC extends AST_Node {
 			System.out.format(">> INFO [%d] trying to assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
 			if (!t.canAssign(t2)) {
 				System.out.format(">> ERROR [%d] can't assign new exp %s to var %s - class AST_VAR_DEC\n",lineNumber,t2.typeName, t.typeName);
-				throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 		}
 
