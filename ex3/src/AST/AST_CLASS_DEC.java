@@ -51,7 +51,7 @@ public class AST_CLASS_DEC extends AST_Node {
 		TYPE_LIST fatherDataMembers = new TYPE_LIST(null, null);
 		TYPE_LIST currList;
 
-		if ( id2 != null)
+		if (id2 != null)
 		{
 			father = s.find(id2);
 			if (father == null || father.typeName != "class") {
@@ -59,7 +59,8 @@ public class AST_CLASS_DEC extends AST_Node {
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 			fatherClass = (TYPE_CLASS) father;
-			fatherDataMembers = (TYPE_LIST) fatherClass.data_members;
+			TYPE_LIST fatherDataMembersList = (TYPE_LIST) fatherClass.data_members;
+			fatherDataMembers = (TYPE_LIST) fatherDataMembersList.clone();
 		}
 
 		TYPE_LIST allDataMembersHolder = fatherDataMembers;

@@ -19,7 +19,16 @@ public class TYPE_LIST extends TYPE
 	}
 
 	public TYPE clone() {
-		TYPE_LIST newType = new TYPE_LIST(this.head, this.tail);
+		TYPE head = this.head;
+		TYPE_LIST tail = this.tail;
+		if (head != null) {
+			head = head.clone();
+		}
+		if (tail != null) {
+			tail = (TYPE_LIST) tail.clone();
+		}
+
+		TYPE_LIST newType = new TYPE_LIST(head, tail);
 		newType.name = name;
 		newType.typeName = typeName;
 		newType.varName = varName;
