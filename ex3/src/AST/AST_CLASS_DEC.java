@@ -48,7 +48,8 @@ public class AST_CLASS_DEC extends AST_Node {
 		/************************************************/
 		TYPE father = null;
 		TYPE_CLASS fatherClass;
-		TYPE_LIST fatherDataMembers = null;
+		TYPE_LIST fatherDataMembers = new TYPE_LIST(null, null);
+		TYPE_LIST currList;
 
 		if ( id2 != null)
 		{
@@ -61,7 +62,8 @@ public class AST_CLASS_DEC extends AST_Node {
 			fatherDataMembers = (TYPE_LIST) fatherClass.data_members;
 		}
 
-		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, null);
+		TYPE_LIST allDataMembersHolder = fatherDataMembers;
+		TYPE_CLASS classType = new TYPE_CLASS((TYPE_CLASS) father, id1, fatherDataMembers); // starts with father's data members
 		System.out.format("creating class type %s\n",id1);
 		s.getInstance().enter(id1, classType);
 
@@ -70,23 +72,25 @@ public class AST_CLASS_DEC extends AST_Node {
 		/*************************/
 		s.beginScope();
 		s.curr_class = classType;
-		TYPE_LIST dataMembers = (TYPE_LIST) cFieldList.SemantMe();
 
-//		dataMembers.printList();
-		System.out.format("print list %s\n", "data members");
-		TYPE_LIST currList = dataMembers;
-		while (currList.head != null) {
-			System.out.format(" - %s, %s: %s\n", currList.head.varName, currList.head.typeName, currList.head);
-			if (currList.tail == null) {
-				break;
+		/*************************/
+		/* [3] Add the class data members one by one */
+		/*************************/
+		TYPE newClassAttr = null;
+		while ((cFieldList != null) && (cFieldList.cField != null)) {
+			newClassAttr = cFieldList.cField.SemantMe();
+			if (fatherDataMembers.head == null) {
+				fatherDataMembers.head = newClassAttr;
+			} else {
+				while (fatherDataMembers.tail != null) {
+					fatherDataMembers = fatherDataMembers.tail;
+				}
+				fatherDataMembers.tail = new TYPE_LIST(newClassAttr, null);
 			}
-			currList = currList.tail;
-		}
+			cFieldList = cFieldList.cFieldList;
 
-//		fatherDataMembers.printList();
-		if (fatherDataMembers != null) {
-			System.out.format("print list %s\n", "fathers' members");
-			currList = fatherDataMembers;
+			System.out.format("print list %s\n", "all");
+			currList = allDataMembersHolder;
 			while (currList.head != null) {
 				System.out.format(" - %s, %s: %s\n", currList.head.varName, currList.head.typeName, currList.head);
 				if (currList.tail == null) {
@@ -94,31 +98,6 @@ public class AST_CLASS_DEC extends AST_Node {
 				}
 				currList = currList.tail;
 			}
-		}
-
-		/*************************/
-		/* [3] Add fathers' data members */
-		/*************************/
-		if (fatherDataMembers != null) {
-			TYPE_LIST currDataMembers = dataMembers;
-			while (currDataMembers.tail != null) {
-				currDataMembers = currDataMembers.tail;
-			}
-			System.out.format("INFO[%d] added to class the fathers' data members: %s", lineNumber, fatherDataMembers);
-			currDataMembers.tail = fatherDataMembers;
-		}
-
-		//update class
-		classType.data_members = dataMembers;
-//		dataMembers.printList();
-		System.out.format("print list %s\n", "all");
-		currList = dataMembers;
-		while (currList.head != null) {
-			System.out.format(" - %s, %s: %s\n", currList.head.varName, currList.head.typeName, currList.head);
-			if (currList.tail == null) {
-				break;
-			}
-			currList = currList.tail;
 		}
 
         /*****************/
