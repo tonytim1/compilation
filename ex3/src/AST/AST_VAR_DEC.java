@@ -42,6 +42,7 @@ public class AST_VAR_DEC extends AST_Node {
 	{
 		TYPE t, t2 = null, t3 = null;
 		TYPE expType;
+		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
 	
 		/****************************/
 		/* [1] Check If Type exists */
@@ -66,9 +67,21 @@ public class AST_VAR_DEC extends AST_Node {
 			System.out.format(">> ERROR [%d] variable %s already exists in scope - class AST_VAR_DEC\n",lineNumber,id);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
+		
+		/***************************************************/
+		/* [3] Check Shadowing (cant have the same name of a previosly defined member) */
+		/***************************************************/
+		if (s.isClassDecleration()) {
+			TYPE_CLASS tc = s.curr_class;
+			TYPE tm = tc.findinClass(id);
+			if (tm != null && tm.typeName != t.typeName) {
+				System.out.format(">> INFO [%d] Shadowing member %s in class %s, tried new - class AST_VAR_DEC\n",lineNumber,id,tc.name);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+		}
 
 		/**************************************/
-		/* [3] Check That it can be assign to exp */
+		/* [4] Check That it can be assign to exp */
 		/**************************************/
 		if (exp != null) {
 			t3 = exp.SemantMe();
@@ -80,7 +93,7 @@ public class AST_VAR_DEC extends AST_Node {
 		}
 
 		/**************************************/
-		/* [3] Check That it can be assign to newExp */
+		/* [5] Check That it can be assign to newExp */
 		/**************************************/
 		if (newExp != null) {
 			t2 = newExp.SemantMe();
@@ -92,24 +105,26 @@ public class AST_VAR_DEC extends AST_Node {
 		}
 		
 		/***************************************************/
-		/* [4] If in class scope, declared members can only be initialized with a constant value  */
+		/* [6] If in class decleration, declared members can only be initialized with a constant value  */
 		/***************************************************/
-		if (SYMBOL_TABLE.getInstance().curr_class != null) {
-			if (newExp != null || (exp != null && t3.name != "int" && t3.name != "nil" && t3.name != "string")) {
+		if (s.isClassDecleration()) {
+			if (newExp != null) {
+				System.out.format(">> INFO [%d] In class members can only be assigned with consts for member %s, tried new - class AST_VAR_DEC\n",lineNumber,id);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+			if (exp != null && !(exp instanceof AST_EXP_INT) && !(exp instanceof AST_EXP_STRING) && !(exp instanceof AST_EXP_NIL)) {
 				System.out.format(">> INFO [%d] In class members can only be assigned with consts for member %s - class AST_VAR_DEC\n",lineNumber,id);
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 		}
 
-
-
 		/***************************************************/
-		/* [5] Enter the Var Type to the Symbol Table */
+		/* [7] Enter the Var Type to the Symbol Table */
 		/***************************************************/
 		SYMBOL_TABLE.getInstance().enter(id,t);
 
 		/*********************************************************/
-		/* [6] Return value is irrelevant for class declarations */
+		/* [8] Return value is irrelevant for class declarations */
 		/*********************************************************/
 		System.out.format("INFO [%d] ast var dec got var:%s with type name:%s typeName:%s - class AST_VAR_DEC\n", lineNumber, id, t.name, t.typeName);
 		return t;

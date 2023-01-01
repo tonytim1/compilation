@@ -28,7 +28,7 @@ public class SYMBOL_TABLE
 	private SYMBOL_TABLE_ENTRY[] table = new SYMBOL_TABLE_ENTRY[hashArraySize];
 	private SYMBOL_TABLE_ENTRY top;
 	private int top_index = 0;
-	private int curr_depth = 0;
+	public int curr_depth = 0;
 	
 	/**************************************************************/
 	/* A very primitive hash function for exposition purposes ... */
@@ -84,42 +84,40 @@ public class SYMBOL_TABLE
 		SYMBOL_TABLE_ENTRY e;
 		TYPE result;
 
-		//temp
+		System.out.format("SYMBOL TABLE FIND looking for %s\n", name);
 		for (e = table[hash(name)]; e != null; e = e.next)
 		{
+			System.out.format("   ENTRY name=%s type={name=%s typeName=%s}\n", e.name, e.type.name, e.type.typeName);
+		}
+
+		for (e = table[hash(name)]; e != null; e = e.next)
+		{
+			//System.out.format("   ENTRY name:%s type: name:%s typeName:%s\n", e.name, e.type.name, e.type.typeName);
+
 			if (name.equals(e.name))
 			{
+				if ((curr_class != null) && (e.depth == 0)){
+					break;
+				}
 				return e.type;
 			}
 		}
+		
+		if (curr_class != null)
+		{
+			result = curr_class.findinClass(name);
+			if (result != null)
+			{
+				return result;
+			}
+		}
+
+		if (e != null)
+		{
+			return e.type;
+		}
+		
 		return null;
-
-		// for (e = table[hash(name)]; e != null; e = e.next)
-		// {
-		// 	if (name.equals(e.name))
-		// 	{
-		// 		if ((curr_class != null) && (e.depth == 0)){
-		// 			break;
-		// 		}
-		// 		return e.type;
-		// 	}
-		// }
-		
-		// if (curr_class != null)
-		// {
-		// 	result = curr_class.findinClass(name);
-		// 	if (result != null)
-		// 	{
-		// 		return result;
-		// 	}
-		// }
-
-		// if (e != null)
-		// {
-		// 	return e.type;
-		// }
-		
-		// return null;
 	}
 
 	public TYPE findInScope(String name)
@@ -191,6 +189,11 @@ public class SYMBOL_TABLE
 	public boolean isGlobalScope()
 	{
 		return curr_depth == 0;
+	}
+
+	public boolean isClassDecleration()
+	{
+		return curr_class != null && curr_depth == 1;
 	}
 	
 	public static int n=0;
