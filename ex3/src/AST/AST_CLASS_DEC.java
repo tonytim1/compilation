@@ -79,6 +79,7 @@ public class AST_CLASS_DEC extends AST_Node {
 		TYPE newClassAttr = null;
 		while ((cFieldList != null) && (cFieldList.cField != null)) {
 			newClassAttr = cFieldList.cField.SemantMe();
+			// add to father
 			if (fatherDataMembers.head == null) {
 				fatherDataMembers.head = newClassAttr;
 			} else {
@@ -87,8 +88,10 @@ public class AST_CLASS_DEC extends AST_Node {
 				}
 				fatherDataMembers.tail = new TYPE_LIST(newClassAttr, null);
 			}
+			// next variable
 			cFieldList = cFieldList.cFieldList;
 
+			// print
 			System.out.format("print list %s\n", "all");
 			currList = allDataMembersHolder;
 			while (currList.head != null) {
