@@ -40,8 +40,13 @@ public class AST_NEW_EXP extends AST_Node {
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 			TYPE_INT expInt = (TYPE_INT) expType;
+			System.out.format(">> INFO [%d] exp is zero: %s, negative: %s, for rule NEW type:t LBRACK exp:e RBRACK - class AST_NEW_EXP\n",lineNumber, expInt.isZero, expInt.isNegative);
 			if (expInt.isZero) {
 				System.out.format(">> ERROR [%d] exp is 0 for rule NEW type:t LBRACK exp:e RBRACK - class AST_NEW_EXP\n",lineNumber);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+			if (expInt.isNegative) {
+				System.out.format(">> ERROR [%d] exp is negative for rule NEW type:t LBRACK exp:e RBRACK - class AST_NEW_EXP\n",lineNumber);
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 			return new TYPE_ARRAY(varType);

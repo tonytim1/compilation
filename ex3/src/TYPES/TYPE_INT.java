@@ -3,6 +3,7 @@ package TYPES;
 public class TYPE_INT extends TYPE
 {
     public boolean isZero;
+    public boolean isNegative;
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/
@@ -20,6 +21,13 @@ public class TYPE_INT extends TYPE
 
 	public TYPE_INT(boolean isZero) {
 	    this.isZero = isZero;
+		this.name = "int";
+		this.typeName = "int";
+	}
+
+	public TYPE_INT(boolean isZero, boolean isNegative) {
+		this.isZero = isZero;
+		this.isNegative = isNegative;
 		this.name = "int";
 		this.typeName = "int";
 	}

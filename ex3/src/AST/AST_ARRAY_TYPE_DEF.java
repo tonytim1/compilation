@@ -45,17 +45,24 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		}
 
 		t = type.SemantMe();
-
 		// Check that Type exists
 		if (t == null)
 		{
 			System.out.format(">> ERROR [%d] non existing type - class AST_ARRAY_TYPE_DEF\n",lineNumber);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
-		// check that type is not void
-		if (t.typeName == "void") {
-		    System.out.format(">> ERROR [%d] type %s is void - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+
+		if (this.type.t != 4) { // is primitive type - int, String or void
+			// check that type is not void
+			if (t.typeName == "void") {
+				System.out.format(">> ERROR [%d] type %s is void - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
+		} else {
+			if ((t.typeName != "class") && (t.typeName != "array")) {
+				System.out.format(">> ERROR [%d] type %s not primitive and not class or array - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
+				throw new SEMANTIC_EXCEPTION(lineNumber);
+			}
 		}
 
 		/***************************************************/

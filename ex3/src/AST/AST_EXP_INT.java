@@ -5,12 +5,12 @@ import SYMBOL_TABLE.*;
 public class AST_EXP_INT extends AST_EXP
 {
 	public int value;
-	public int isPositive;
+	public int isNegative;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_INT(int lineNumber, int value, int isPositive)
+	public AST_EXP_INT(int lineNumber, int value, int isNegative)
 	{
 		super(lineNumber);
 		/******************************/
@@ -27,14 +27,20 @@ public class AST_EXP_INT extends AST_EXP
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.value = value;
-		this.isPositive = isPositive;
+		this.isNegative = isNegative;
 	}
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
+		boolean intNegative = false;
+		boolean intZero = false;
+
+		if (isNegative == 1) {
+			intNegative = true;
+		}
 	    if (this.value == 0) {
-	        return new TYPE_INT(true);
+			intZero = true;
 	    }
-		return new TYPE_INT();
+		return new TYPE_INT(intZero, intNegative);
 	}
 }
