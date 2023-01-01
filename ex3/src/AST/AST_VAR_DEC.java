@@ -52,6 +52,11 @@ public class AST_VAR_DEC extends AST_Node {
 			System.out.format(">> ERROR [%d] non existing type %s - class AST_VAR_DEC\n",lineNumber, type.id);
 			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
 		}
+		if (t.typeName == "void")
+		{
+			System.out.format(">> ERROR [%d] the type void can be used only as a return type in a declaration of a func: %s - class AST_VAR_DEC\n",lineNumber, type.id);
+			throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+		}
 		
 		/**************************************/
 		/* [2] Check That Name does NOT exist */

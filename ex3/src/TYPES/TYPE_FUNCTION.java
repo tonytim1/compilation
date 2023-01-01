@@ -32,8 +32,9 @@ public class TYPE_FUNCTION extends TYPE
 	}
 
 	public boolean isSignatureEqual(TYPE_FUNCTION other){
-		if (!(returnType.typeName.equals(other.returnType.typeName)))
+		if (!(returnType.typeName.equals(other.returnType.typeName))) {
 			return false;
+		}
 
 		// TYPE_LIST p1 = this.params;
 		// TYPE_LIST p2 = other.params;
@@ -46,6 +47,9 @@ public class TYPE_FUNCTION extends TYPE
 		// 	p2 = p2.tail;
 			
 		// }
+		if ((this.params == null) && (other.params == null)) {
+			return true;
+		}
 		return this.params.canAssignList(other.params);
 	}
 }
