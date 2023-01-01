@@ -6,7 +6,7 @@ public class TYPE_ARRAY extends TYPE
 	/* DATA MEMBERS */
 	/****************/
 	public TYPE type;
-	//public int size;
+	public String arrayName;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -15,7 +15,13 @@ public class TYPE_ARRAY extends TYPE
 	{
 		this.type = type;
 		this.typeName = "array";
-		//this.size = size;
+	}
+
+	public TYPE_ARRAY(TYPE type, String arrayName)
+	{
+		this.type = type;
+		this.typeName = "array";
+		this.arrayName = arrayName;
 	}
 
 	public TYPE clone() {
@@ -24,6 +30,7 @@ public class TYPE_ARRAY extends TYPE
 		newType.typeName = typeName;
 		newType.varName = varName;
 		newType.type = type;
+		newType.arrayName = arrayName;
 		return newType;
 	}
 }

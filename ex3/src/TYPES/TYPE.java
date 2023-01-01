@@ -18,7 +18,10 @@ public abstract class TYPE
 		{
 			return (typeName.equals("array") || typeName.equals("class"));
 		}
-		if ((typeName == "class") && (t.typeName == "class")) {
+		if (!typeName.equals(t.typeName)) {
+			return false;
+		}
+		if (typeName == "class") {
 			TYPE_CLASS class1 = (TYPE_CLASS) this;
 			TYPE_CLASS class2 = (TYPE_CLASS) t;
 			boolean isOk = false;
@@ -37,7 +40,16 @@ public abstract class TYPE
 				}
 			}
 		}
-		return typeName.equals(t.typeName);
+
+		if (typeName == "array") {
+			TYPE_ARRAY array1 = (TYPE_ARRAY) this;
+			TYPE_ARRAY array2 = (TYPE_ARRAY) t;
+			if (array2.arrayName == null) {
+				return true; // it can be in a case Array a := new int[];
+			}
+			return array1.arrayName.equals(array2.arrayName);
+		}
+		return true;
 	}
 
 	public boolean canCompare(TYPE t)

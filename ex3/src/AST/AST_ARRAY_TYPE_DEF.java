@@ -61,11 +61,11 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		/***************************************************/
 		/* [3] Enter the Function Type to the Symbol Table */
 		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(id, new TYPE_ARRAY(t));
+		SYMBOL_TABLE.getInstance().enter(id, new TYPE_ARRAY(t, id));
 
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
-		return new TYPE_ARRAY(t);
+		return new TYPE_ARRAY(t, id);
 	}
 }
