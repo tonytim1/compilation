@@ -40,7 +40,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	    TYPE t = SYMBOL_TABLE.getInstance().find(name);
 	    if (t == null) { // In case we use undefined variable
 	        System.out.format(">> ERROR [%d] field %s was not found - AST_VAR_SIMPLE\n",lineNumber,name);
-		    throw new SEMANTIC_EXCEPTION(lineNumber + 1);
+		    throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
 	    return t;
     }
