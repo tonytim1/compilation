@@ -19,7 +19,7 @@ import TYPES.*;
 public class SYMBOL_TABLE
 {
 	private int hashArraySize = 13;
-	public String required_return_type = ""; // New field
+	public TYPE required_return_type; // New field
 	public TYPE_CLASS curr_class = null;
 	
 	/**********************************************/
@@ -282,7 +282,10 @@ public class SYMBOL_TABLE
 	/*****************************/
 	/* PREVENT INSTANTIATION ... */
 	/*****************************/
-	protected SYMBOL_TABLE() {}
+	protected SYMBOL_TABLE() {
+	    required_return_type = new TYPE_NIL(); // New field
+	    required_return_type.typeName = "";
+	}
 
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */

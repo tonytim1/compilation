@@ -73,7 +73,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		/* [2] Update required return type */
 		/*********************************************************/
 		//System.out.format(">> INFO[%d] setting required_return_type to %s - class AST_FUNC_DEC\n",lineNumber,returnType);
-		SYMBOL_TABLE.getInstance().required_return_type = returnType.typeName;
+		SYMBOL_TABLE.getInstance().required_return_type = returnType;
 
 		/***************************/
 		/* [3] Semant Input Params */
@@ -127,7 +127,8 @@ public class AST_FUNC_DEC extends AST_Node {
 		/* [9] reset return type */
 		/*****************/
 		//System.out.format(">> INFO[%d] reset required_return_type - class AST_FUNC_DEC\n",lineNumber);
-		SYMBOL_TABLE.getInstance().required_return_type = "";
+		SYMBOL_TABLE.getInstance().required_return_type = new TYPE_NIL();
+		SYMBOL_TABLE.getInstance().required_return_type.typeName = "";
 
 		return function;
 	}

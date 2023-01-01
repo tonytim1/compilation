@@ -32,10 +32,17 @@ public class AST_STMT_RETURN extends AST_STMT {
 	TYPE expType;
 	if (exp != null) {
 	    expType = exp.SemantMe();
-	    if (expType.typeName != SYMBOL_TABLE.getInstance().required_return_type) {
+	    if (SYMBOL_TABLE.getInstance().required_return_type.canAssign(expType) == false) {
+	        System.out.format(">> ERROR [%d] returned type %s and expected return %s type don't match\n",lineNumber, expType.typeName, SYMBOL_TABLE.getInstance().required_return_type.typeName);
+	        throw new SEMANTIC_EXCEPTION(lineNumber);
+	        }
+
+
+	    /*
+	    if (expType.typeName != SYMBOL_TABLE.getInstance().required_return_type.typeName) {
 	        // Error required return type is wrong
 	        if (expType.typeName == "nil") {
-	            if (SYMBOL_TABLE.getInstance().required_return_type != "array" && SYMBOL_TABLE.getInstance().required_return_type != "class") {
+	            if (SYMBOL_TABLE.getInstance().required_return_type.typeName != "array" && SYMBOL_TABLE.getInstance().required_return_type.typeName != "class") {
 	                System.out.format(">> ERROR [%d] required return type is : %s but our return type is : %s - class AST_STMT_RETURN\n",lineNumber, SYMBOL_TABLE.getInstance().required_return_type, expType.typeName);
 	                throw new SEMANTIC_EXCEPTION(lineNumber);
 	            }
@@ -45,7 +52,14 @@ public class AST_STMT_RETURN extends AST_STMT {
                 throw new SEMANTIC_EXCEPTION(lineNumber);
 	        }
 	    }
-	}
-	 return null;
-	}
-}
+	    else {
+	        if(expType.typeName == "array") {
+	            TYPE_ARRAY expTypeArray = (TYPE_ARRAY) expType;
+	            TYPE_ARRAY requiredReturnTypeArray = (TYPE_ARRAY) SYMBOL_TABLE.getInstance().required_return_type;
+	            if (expTypeArray.arrayName != requiredReturnTypeArray.arrayName) {
+	                System.out.format(">> ERROR [%d] both array but different arrayName, we returned one is %s but required is %s", expTypeArray.arrayName, requiredReturnTypeArray.arrayName);
+	                throw new SEMANTIC_EXCEPTION(lineNumber);
+	            }
+	        }
+	        */
+
