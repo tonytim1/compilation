@@ -1,13 +1,23 @@
 package TYPES;
 
-public class TYPE_CLASS_VAR_DEC
+public class TYPE_CLASS_VAR_DEC extends TYPE
 {
-	public TYPE t;
-	public String name;
+	public String varName;
+	public TYPE type;
 	
-	public TYPE_CLASS_VAR_DEC(TYPE t,String name)
+	public TYPE_CLASS_VAR_DEC(TYPE t,String varName)
 	{
-		this.t = t;
-		this.name = name;
+		this.type = t;
+		this.name = t.name;
+		this.typeName = t.typeName;
+		this.varName = varName;
+	}
+
+	public TYPE clone() {
+		TYPE_CLASS_VAR_DEC newType = new TYPE_CLASS_VAR_DEC(this.type, this.varName);
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
 	}
 }

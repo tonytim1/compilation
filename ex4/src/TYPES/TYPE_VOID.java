@@ -10,7 +10,17 @@ public class TYPE_VOID extends TYPE
 	/*****************************/
 	/* PREVENT INSTANTIATION ... */
 	/*****************************/
-	protected TYPE_VOID() {}
+	public TYPE_VOID() {
+		this.typeName = "void";
+	}
+
+	public TYPE clone() {
+		TYPE_VOID newType = new TYPE_VOID();
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
 
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
@@ -20,6 +30,7 @@ public class TYPE_VOID extends TYPE
 		if (instance == null)
 		{
 			instance = new TYPE_VOID();
+			instance.typeName = "void";
 		}
 		return instance;
 	}

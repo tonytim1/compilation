@@ -1,6 +1,6 @@
 package TYPES;
 
-public class TYPE_CLASS_VAR_DEC_LIST
+public class TYPE_CLASS_VAR_DEC_LIST extends TYPE
 {
 	public TYPE_CLASS_VAR_DEC head;
 	public TYPE_CLASS_VAR_DEC_LIST tail;
@@ -9,5 +9,13 @@ public class TYPE_CLASS_VAR_DEC_LIST
 	{
 		this.head = head;
 		this.tail = tail;
-	}	
+	}
+
+	public TYPE clone() {
+		TYPE_CLASS_VAR_DEC_LIST newType = new TYPE_CLASS_VAR_DEC_LIST(this.head, this.tail);
+		newType.name = name;
+		newType.typeName = typeName;
+		newType.varName = varName;
+		return newType;
+	}
 }

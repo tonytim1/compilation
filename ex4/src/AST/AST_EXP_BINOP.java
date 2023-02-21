@@ -1,30 +1,19 @@
-/***********/
-/* PACKAGE */
-/***********/
 package AST;
-
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
-
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TYPES.*;
-import TEMP.*;
-import IR.*;
+import SYMBOL_TABLE.*;
 
 public class AST_EXP_BINOP extends AST_EXP
 {
-	int OP;
+	AST_BINOP OP;
 	public AST_EXP left;
 	public AST_EXP right;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_BINOP(AST_EXP left,AST_EXP right,int OP)
+	public AST_EXP_BINOP(int lineNumber, AST_EXP left,AST_EXP right,AST_BINOP OP)
 	{
+		super(lineNumber);
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -36,100 +25,71 @@ public class AST_EXP_BINOP extends AST_EXP
 		System.out.print("====================== exp -> exp BINOP exp\n");
 
 		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
+		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.left = left;
 		this.right = right;
 		this.OP = OP;
 	}
-	
-	/*************************************************/
-	/* The printing message for a binop exp AST node */
-	/*************************************************/
-	public void PrintMe()
-	{
-		String sOP="";
-		
-		/*********************************/
-		/* CONVERT OP to a printable sOP */
-		/*********************************/
-		if (OP == 0) {sOP = "+";}
-		if (OP == 1) {sOP = "-";}
-		if (OP == 3) {sOP = "=";}
 
-		/*************************************/
-		/* AST NODE TYPE = AST SUBSCRIPT VAR */
-		/*************************************/
-		System.out.print("AST NODE BINOP EXP\n");
-		System.out.format("BINOP EXP(%s)\n",sOP);
-
-		/**************************************/
-		/* RECURSIVELY PRINT left + right ... */
-		/**************************************/
-		if (left != null) left.PrintMe();
-		if (right != null) right.PrintMe();
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			String.format("BINOP(%s)",sOP));
-		
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (left  != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,left.SerialNumber);
-		if (right != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,right.SerialNumber);
-	}
-	public TYPE SemantMe()
+	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-		TYPE t1 = null;
-		TYPE t2 = null;
-		
-		if (left  != null) t1 = left.SemantMe();
-		if (right != null) t2 = right.SemantMe();
-		
-		if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
+	    /* binop  PLUS = 1
+        MINUS 2
+        TIMES 3
+        DIVIDE 4
+        EQ 5
+        LT 6
+        GT 7
+        NE 8 */
+		TYPE t1 = left.SemantMe();
+		TYPE t2 = right.SemantMe();
+
+		if (t1 == null || t2 == null)
 		{
-			return TYPE_INT.getInstance();
+			System.out.format(">> ERROR [%d] binop -> at least one of the expressions type does not exist - class AST_EXP_BINOP", lineNumber);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
-		System.exit(0);
-		return null;
-	}
-	public TEMP IRme()
-	{
-		TEMP t1 = null;
-		TEMP t2 = null;
-		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
-				
-		if (left  != null) t1 = left.IRme();
-		if (right != null) t2 = right.IRme();
-		
-		if (OP == 0)
+
+		if (OP.OP == 1) { // binop is +
+		    // check if both expressions are from type int or string
+		    if ((t1.typeName == "int") && (t2.typeName == "int"))
+            {
+                return new TYPE_INT();
+            }
+			if ((t1.typeName == "string") && (t2.typeName == "string"))
+            {
+                return new TYPE_STRING();
+            }
+            // error if there is exp + exp and the expressions are not from the same type type int or string
+            System.out.format(">> ERROR [%d] binop -> there is exp + exp and the expressions are not both int or string: %s, %s - class AST_EXP_BINOP\n",lineNumber,t1.typeName, t2.typeName);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
+
+		if ((OP.OP != 1) && (OP.OP != 5) && (OP.OP != 8))
 		{
-			IR.
-			getInstance().
-			Add_IRcommand(new IRcommand_Binop_Add_Integers(dst,t1,t2));
+		    if (t1.typeName == "int")
+            {
+                if (OP.OP == 4) { // check for divide in 0
+                    TYPE_INT t2Int = (TYPE_INT) t2;
+                    if (t2Int.isZero) {
+                        System.out.format(">> ERROR [%d] binop -> divide in 0 - class AST_EXP_BINOP", lineNumber);
+                        throw new SEMANTIC_EXCEPTION(lineNumber);
+                    }
+                }
+                return new TYPE_INT();
+            }
+		    // the expressions are not both ints for binops -, *, /, <, >
+		    System.out.format(">> ERROR [%d] binop -> the expressions are not both ints for binops -, *, /, <, >: %s, %s", lineNumber, t1.typeName, t2.typeName);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
-		if (OP == 2)
-		{
-			IR.
-			getInstance().
-			Add_IRcommand(new IRcommand_Binop_Mul_Integers(dst,t1,t2));
+
+		// EQ or NE
+		if (!(t1.canCompare(t2))) {
+		    System.out.format(">> ERROR [%d] binop -> the expressions don't have the same type: %s, %s - class AST_EXP_BINOP", lineNumber, t1.typeName, t2.typeName);
+            throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
-		if (OP == 3)
-		{
-			IR.
-			getInstance().
-			Add_IRcommand(new IRcommand_Binop_EQ_Integers(dst,t1,t2));
-		}
-		if (OP == 4)
-		{
-			IR.
-			getInstance().
-			Add_IRcommand(new IRcommand_Binop_LT_Integers(dst,t1,t2));
-		}
-		return dst;
+
+		return new TYPE_INT();
 	}
 }
