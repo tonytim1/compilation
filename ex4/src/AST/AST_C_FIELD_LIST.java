@@ -1,6 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
 
 public class AST_C_FIELD_LIST extends AST_Node {
 
@@ -42,5 +44,21 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		if (cFieldList != null) t2 = cFieldList.SemantMe();
 
 		return new TYPE_LIST(t1, (TYPE_LIST) t2);
+	}
+
+	public TEMP IRme(boolean irFunction) {
+	    if (cField.typeCField == null) {
+	        return null;
+	    }
+	    if (irFunction && cField.typeCField == 'funcDec') {
+            cField.IRme();
+	    }
+	    if (!irFunction && cField.typeCField == 'varDec') {
+            cField.IRme();
+	    }
+	    if (cFieldList != null) {
+            cFieldList.IRme(irFunction);
+	    }
+        return null;
 	}
 }
