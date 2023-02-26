@@ -1,6 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
 
 public class AST_C_FIELD_FUNC extends AST_C_FIELD {
 
@@ -28,5 +30,12 @@ public class AST_C_FIELD_FUNC extends AST_C_FIELD {
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION 
 	{ 
 		return funcDec.SemantMe();
+	}
+
+	public TEMP IRme(){
+        if(funcDec != null) {
+            return funcDec.IRme();
+        }
+        return null;
 	}
 }

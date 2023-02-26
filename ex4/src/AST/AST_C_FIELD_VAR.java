@@ -1,6 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
 
 public class AST_C_FIELD_VAR extends AST_C_FIELD {
 
@@ -33,5 +35,11 @@ public class AST_C_FIELD_VAR extends AST_C_FIELD {
 		t.varName = varDec.id;
 
 		return t;
+	}
+	public TEMP IRme(){
+        if(varDec != null) {
+            return varDec.IRme();
+        }
+        return null;
 	}
 }
