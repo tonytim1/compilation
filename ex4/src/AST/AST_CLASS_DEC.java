@@ -1,12 +1,16 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
 
 public class AST_CLASS_DEC extends AST_Node {
 
 	public String id1;
 	public String id2;
 	public AST_C_FIELD_LIST cFieldList;
+
+	public TYPE_CLASS decClass; //new for IR
 
 	
 	public AST_CLASS_DEC(int lineNumber, String id1, String id2, AST_C_FIELD_LIST cFieldList)
@@ -109,9 +113,25 @@ public class AST_CLASS_DEC extends AST_Node {
 		s.curr_class = null;
         s.getInstance().endScope();
 
+        this.decClass = classType; //NEW for IR
+
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */
 		/*********************************************************/
 		return classType;
+	}
+	public TEMP IRme()
+    {
+        if (this.cFieldList != null) {
+            this.cFieldList.IRme(true); //True - IR only functions / False - IR only vars
+        }
+        // build new class flow save pointer on the stack
+        IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Class(this.decClass));
+        // visit all AST_VAR_DEC of the class
+        if(this.cFieldList != null) {
+            this.cFieldList.IRme(false);
+        }
+        IR.getInstance().Add_IRcommand(new IRcommand_Jump_Label("back"));
+		return null;
 	}
 }
