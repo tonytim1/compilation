@@ -1,6 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
 
 public class AST_STMT_RETURN extends AST_STMT {
 	public AST_EXP exp;
@@ -39,5 +41,16 @@ public class AST_STMT_RETURN extends AST_STMT {
 	    }
 	}
 	 return null;
+	}
+
+	public TEMP IRme()
+	{
+	    Temp t = null;
+	    if (exp != null)
+	    {
+	        t = exp.IRme();
+	    }
+	    IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(t));
+	    return null;
 	}
 }

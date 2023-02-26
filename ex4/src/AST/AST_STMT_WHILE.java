@@ -1,6 +1,9 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
+
 
 public class AST_STMT_WHILE extends AST_STMT
 {
@@ -62,6 +65,20 @@ public class AST_STMT_WHILE extends AST_STMT
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
+		return null;
+	}
+
+	public TEMP IRme()
+	{
+	    String loop_start = IRcommand.getFreshLabel("loop_start");
+		String loop_end = IRcommand.getFreshLabel("loop_end");
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(loop_start));
+		TEMP t = cond.IRme();
+		IR.getInstance().Add_IRcommand(new IRcommand_Jump_If_Eq_To_Zero(t, loop_end));
+		if(body != null) body.IRme();
+		IR.getInstance().Add_IRcommand(new IRcommand_Jump_Label(loop_start));
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(loop_end));
+
 		return null;
 	}
 }
