@@ -25,6 +25,7 @@ public class AST_C_FIELD_VAR extends AST_C_FIELD {
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.varDec = varDec;
+		this.typeCField = 'varDec'; // For IR
 	}
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION 
