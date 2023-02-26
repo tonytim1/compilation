@@ -1,6 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
 
 public class AST_ARRAY_TYPE_DEF extends AST_Node {
 	public String id;
@@ -68,4 +70,8 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		/*********************************************************/
 		return new TYPE_ARRAY(t);
 	}
+	public TEMP IRme() {
+	    return null;
+	}
+
 }
