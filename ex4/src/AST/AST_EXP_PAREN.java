@@ -33,4 +33,8 @@ public class AST_EXP_PAREN extends AST_EXP {
 	{
 	    return exp.SemantMe();
     }
+
+    public TEMP IRme() {
+        return exp.IRme();
+    }
 }
