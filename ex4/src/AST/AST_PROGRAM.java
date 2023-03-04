@@ -36,4 +36,9 @@ public class AST_PROGRAM extends AST_Node {
 		decList.SemantMe();		
 		return null;
 	}
+
+	public TYPE IRme(){
+        decList.IRme();
+        return null;
+	}
 }
