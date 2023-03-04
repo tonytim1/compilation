@@ -29,4 +29,10 @@ public class AST_EXP_NIL extends AST_EXP
 	{
 		return new TYPE_NIL();
 	}
+
+	public TEMP IRme() {
+	    TEMP t = TEMP_FACTORY.getInstance().getFreshTemp();
+	    IR.getInstance().Add_IRcommand(new IRcommandConstNil(t));
+	    return t;
+	}
 }
