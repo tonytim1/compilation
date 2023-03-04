@@ -29,4 +29,8 @@ public class AST_DEC_FUNC extends AST_DEC {
 	{
 		return f.SemantMe();
 	}
+
+	public TEMP IRme() {
+	    return f.IRme();
+	}
 }
