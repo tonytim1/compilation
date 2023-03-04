@@ -25,5 +25,10 @@ public class IRcommand_Binop_String_Concat extends IRcommand
 		this.t1 = t1;
 		this.t2 = t2;
 	}
+
+	public void MIPSme()
+	{	
+        
+    }
 }
 

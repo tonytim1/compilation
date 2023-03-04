@@ -25,4 +25,9 @@ public class IRcommand_Binop_Div_Integers extends IRcommand
 		this.t1 = t1;
 		this.t2 = t2;
 	}
+
+	public void MIPSme()
+	{	
+        
+    }
 }

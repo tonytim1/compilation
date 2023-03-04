@@ -78,6 +78,14 @@ public class MIPSGenerator
 
 		fileWriter.format("\tadd Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
 	}
+	public void sub(TEMP dst,TEMP oprnd1,TEMP oprnd2)
+	{
+		int i1 =oprnd1.getSerialNumber();
+		int i2 =oprnd2.getSerialNumber();
+		int dstidx=dst.getSerialNumber();
+
+		fileWriter.format("\tsubu Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
+	}
 	public void mul(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{
 		int i1 =oprnd1.getSerialNumber();
@@ -135,6 +143,39 @@ public class MIPSGenerator
 		int i1 =oprnd1.getSerialNumber();
 				
 		fileWriter.format("\tbeq Temp_%d,$zero,%s\n",i1,label);				
+	}
+	public void move(TEMP oprnd1, TEMP oprnd2)
+	{
+		int i1 =oprnd1.getSerialNumber();
+		int i2 =oprnd2.getSerialNumber();
+				
+		fileWriter.format("\tmove Temp_%d,Temp_%d\n",i1,i2);				
+	}
+	public void jr(String dst)
+	{
+		fileWriter.format("\tjr %s\n",dst);				
+	}
+	public void jal(String label)
+	{
+		fileWriter.format("\tjal %s\n",label);				
+	}
+	public void push(String var)
+	{
+		fileWriter.format("\tsubu $sp,$sp,4\n");
+		fileWriter.format("\tsw %s,0($sp)\n", var);		
+	}
+	public int pushLst(TEMP_LIST lst){
+		if(lst == null){
+			return 0;
+		}
+		int stack_offset = pushLst(lst.next);
+		push(lst.value.toString());
+		return stack_offset + 4;
+	}
+	public void pop(String var)
+	{
+		fileWriter.format("\tlw %s,0($sp)\n", var);
+		fileWriter.format("\taddu $sp,$sp,4\n");
 	}
 	
 	/**************************************/

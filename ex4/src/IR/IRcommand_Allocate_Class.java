@@ -22,4 +22,11 @@ public class IRcommand_Allocate_Class extends IRcommand
     {
         this.my_class = my_class;
     }
+
+    public void MIPSme()
+	{	
+        // build virtual table
+
+        // alocate 
+    }
 }

@@ -23,4 +23,9 @@ public class IRcommand_ArrayNew extends IRcommand
 		this.dst = dst;
 		this.size = size;
 	}
+
+	public void MIPSme()
+	{	
+        
+    }
 }

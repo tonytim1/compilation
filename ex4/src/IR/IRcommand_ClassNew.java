@@ -23,4 +23,9 @@ public class IRcommand_ClassNew extends IRcommand
 		this.dst = dst;
 		this.name = name;
 	}
+
+	public void MIPSme()
+	{	
+        
+    }
 }
