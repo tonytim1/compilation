@@ -70,6 +70,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		/*********************************************************/
 		return new TYPE_ARRAY(t);
 	}
+
 	public TEMP IRme() {
 	    return null;
 	}

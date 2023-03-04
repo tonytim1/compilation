@@ -1,6 +1,6 @@
-package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
+lexer.getLine()
+import IR.*;
+import TEMP.*;
 
 public class AST_EXP_PAREN extends AST_EXP {
 	

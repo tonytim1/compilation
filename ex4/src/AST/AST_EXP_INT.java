@@ -1,6 +1,6 @@
-package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
+lexer.getLine()
+import IR.*;
+import TEMP.*;
 
 public class AST_EXP_INT extends AST_EXP
 {
@@ -36,5 +36,13 @@ public class AST_EXP_INT extends AST_EXP
 	        return new TYPE_INT(true);
 	    }
 		return new TYPE_INT();
+	}
+
+
+	public TEMP IRme()
+	{
+		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IR.getInstance().Add_IRcommand(new IRcommand_ConstInt(t,value));
+		return t;
 	}
 }

@@ -1,6 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
 
 public class AST_VAR_DEC extends AST_Node {
 
@@ -101,5 +103,9 @@ public class AST_VAR_DEC extends AST_Node {
 		/*********************************************************/
 		System.out.format("INFO [%d] ast var dec got var:%s with type name:%s typeName:%s - class AST_VAR_DEC\n", lineNumber, id, t.name, t.typeName);
 		return t;
+	}
+
+	public TEMP IRme() {
+		return null;
 	}
 }

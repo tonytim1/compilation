@@ -1,6 +1,4 @@
-package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
+lexer.getLine()
 
 public class AST_FUNC_DEC extends AST_Node {
 

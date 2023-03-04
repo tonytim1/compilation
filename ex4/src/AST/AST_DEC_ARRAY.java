@@ -1,6 +1,4 @@
-package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
+lexer.getLine()
 
 public class AST_DEC_ARRAY extends AST_DEC {
 
