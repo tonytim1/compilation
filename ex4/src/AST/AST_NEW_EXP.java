@@ -49,4 +49,16 @@ public class AST_NEW_EXP extends AST_Node {
 
 		return varType;
 	}
+
+    public TEMP IRme(){
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		if(exp != null){
+			TEMP size = exp.IRme();
+			IR.getInstance().Add_IRcommand(new IRcommand_ArrayNew(dst, size));
+		} else {
+			// Exp -> null than type -> Identifier
+			IR.getInstance().Add_IRcommand(new IRcommand_ClassNew(dst, type.id));
+		}
+		return dst;
+    }
 }
