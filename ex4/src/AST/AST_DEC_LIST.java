@@ -43,4 +43,14 @@ public class AST_DEC_LIST extends AST_Node
 
 		return new TYPE_LIST(t1, (TYPE_LIST) t2);
 	}
+
+	public TYPE IRme() {
+	    if (head != null) {
+	        head.IRme();
+	    }
+	    if (tail != null) {
+            tail.IRme();
+	    }
+	    return null;
+	}
 }
