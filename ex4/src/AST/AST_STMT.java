@@ -18,4 +18,7 @@ public abstract class AST_STMT extends AST_Node
 	{
 		return null;
 	}
+    public TEMP IRme() {
+        return null;
+    }
 }
