@@ -46,4 +46,12 @@ public class AST_EXP_LIST extends AST_Node
 
 		return new TYPE_LIST(t1, (TYPE_LIST) t2);
 	}
+
+	public TEMP_LIST IRme() {
+		// Returns a linked list of IR expressions according to each element on list.
+		TEMP t_head = head.IRme();
+		TEMP_LIST t_tail = null;
+		if (tail != null) t_tail = tail.IRme();
+		return new TEMP_LIST (t_head, t_tail);
+	}
 }
