@@ -31,4 +31,8 @@ public class AST_DEC_VAR extends AST_DEC {
 	{	
 		return v.SemantMe();
 	}
+
+	public TEMP IRme() {
+	    return v.IRme();
+	}
 }
