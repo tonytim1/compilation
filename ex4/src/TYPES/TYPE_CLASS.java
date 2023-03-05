@@ -92,8 +92,8 @@ public class TYPE_CLASS extends TYPE
 		if (father != null)
 		{
 			func_list = father.getFuncList();
-		} 
-		else 
+		}
+		else
 		{
 			func_list = new LinkedList<String>();
 		}
@@ -114,8 +114,8 @@ public class TYPE_CLASS extends TYPE
 		if (father != null)
 		{
 			field_list = father.getFuncList();
-		} 
-		else 
+		}
+		else
 		{
 			field_list = new LinkedList<String>();
 		}
@@ -138,5 +138,19 @@ public class TYPE_CLASS extends TYPE
 	public int getFuncIndex(String func_name)
 	{
 		return this.getFuncList().indexOf(func_name);
+	}
+	//For IR part
+	public boolean existInFatherScope(String name){
+		if(this.father != null){
+			TYPE_CLASS fatherClass = this.father;
+			for (TYPE_CLASS_VAR_DEC_LIST e=fatherClass.data_members;e!=null;e=e.tail){
+				if (e.head.name.equals(name)){
+					return true;
+				}
+			}
+			if (fatherClass.father != null)
+				return fatherClass.father.existInFatherScope(name);
+		}
+		return false;
 	}
 }

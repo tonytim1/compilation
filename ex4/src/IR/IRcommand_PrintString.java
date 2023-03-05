@@ -14,14 +14,16 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-public class IRcommand_PrintInt extends IRcommand {
+public class IRcommand_PrintString extends IRcommand {
     TEMP t;
 
-    public IRcommand_PrintInt(TEMP t) {
+    public IRcommand_PrintString(TEMP t) {
         this.t = t;
     }
 
+
     public void MIPSme() {
-        MIPSGenerator.getInstance().print_int(t);
+        MIPSGenerator.getInstance().mov("$a0", t.toString());
+        MIPSGenerator.getInstance().print_string();
     }
 }
