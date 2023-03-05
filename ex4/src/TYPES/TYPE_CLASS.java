@@ -72,4 +72,18 @@ public class TYPE_CLASS extends TYPE
 		return null;
 	}
 
+	//For IR part
+	public boolean existInFatherScope(String name){
+		if(this.father != null){
+			TYPE_CLASS fatherClass = this.father;
+			for (TYPE_CLASS_VAR_DEC_LIST e=fatherClass.data_members;e!=null;e=e.tail){
+				if (e.head.name.equals(name)){
+					return true;
+				}
+			}
+			if (fatherClass.father != null)
+				return fatherClass.father.existInFatherScope(name);
+		}
+		return false;
+	}
 }
