@@ -98,4 +98,30 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 
 		return functionType.returnType;
 	}
+	public TEMP IRme(){
+		if(var == null){
+			if(this.exps == null)
+				IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(null,fn,null));
+			else {
+				TEMP_LIST args = this.exps.IRme();
+				if(fn.equals("PrintInt") && args != null && args.next == null){
+					IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(args.value));
+				}else if(fn.equals("PrintString") && args != null && args.next == null){
+					IR.getInstance().Add_IRcommand(new IRcommand_PrintString(args.value));
+				} else {
+					IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(null,fn,args));
+				}
+			}
+		} else {
+			TEMP t1 = var.IRme();
+			int func_index = class_type.getFuncIndex(fn);
+			if(this.exps == null)
+				IR.getInstance().Add_IRcommand(new IRcommand_ClassVirtualCall(null,t1,fn,null,func_index));
+			else{
+				TEMP_LIST args = this.exps.IRme();
+				IR.getInstance().Add_IRcommand(new IRcommand_ClassVirtualCall(null,t1,fn,args,func_index));
+			}
+		}
+		return null;
+	}
 }

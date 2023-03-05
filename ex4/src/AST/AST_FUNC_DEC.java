@@ -129,4 +129,18 @@ public class AST_FUNC_DEC extends AST_Node {
 
 		return function;
 	}
+
+	public TEMP IRme() { 
+		// add function label
+		System.out.format("function %s num %d\n",this.id,this.numOfLocalVar);
+		if(scope_type.equals("local_class"))
+			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(class_name,id,numOfLocalVar));
+		else
+			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(null,id,numOfLocalVar));
+		// process statements (should have a list of commands representing the function body)
+		if(stmts != null) stmts.IRme();
+		// add return statement if there isn't any return statement
+		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(null));
+		return null; // a function declaration is not placed in a temporary variable
+	}
 }

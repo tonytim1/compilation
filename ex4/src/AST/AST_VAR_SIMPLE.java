@@ -44,4 +44,10 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	    }
 	    return t;
     }
+	
+	public TEMP IRme(){
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IR.getInstance().Add_IRcommand(new IRcommand_Load(dst, name, this.scope_type, this.index, this.is_string));
+		return dst;
+	}
 }

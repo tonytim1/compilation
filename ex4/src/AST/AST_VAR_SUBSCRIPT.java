@@ -57,4 +57,12 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 	    }
 	    return ((TYPE_ARRAY) varType).type;
 	}
+	
+	public TEMP IRme(){
+		TEMP arr = var.IRme();
+		TEMP offset = subscript.IRme();
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IR.getInstance().Add_IRcommand(new IRcommand_ArrayAccess(dst,arr,offset));
+		return dst;
+	}
 }

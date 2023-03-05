@@ -27,4 +27,8 @@ public class AST_DEC_ARRAY extends AST_DEC {
 	{	
 		return a.SemantMe();
 	}
+	
+	public TEMP IRme() {
+	    return a.IRme();
+	}
 }

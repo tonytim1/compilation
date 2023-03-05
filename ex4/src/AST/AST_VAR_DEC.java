@@ -106,6 +106,34 @@ public class AST_VAR_DEC extends AST_Node {
 	}
 
 	public TEMP IRme() {
+		/* if the variable is global need to set it in data section */
+		if(this.scope_type.equals("global")){
+			if(this.type.t == 1){ // type int
+				// we expect contant int when initiallize global int
+				int value = 0;
+				if(exp != null)
+					value = ((AST_EXP_INT) exp).value;
+				IR.getInstance().Add_IRcommand(new IRcommand_Allocate(scope_type,id,value));	
+			} else if(this.type.t == 2)	{ // type string
+				// we expect contant string when initiallize global string
+				String value = "";
+				if(exp != null)
+					value = ((AST_EXP_STRING) exp).value;
+				IR.getInstance().Add_IRcommand(new IRcommand_Allocate(scope_type,id,value));	
+			} else { // pointer
+				// we expect nil value when initiallize global pointer
+				IR.getInstance().Add_IRcommand(new IRcommand_Allocate(scope_type,id,0));	
+			}	
+		} else{
+			TEMP t1;
+			if(exp != null) t1 = exp.IRme();
+			else if (newexp != null) t1 = newexp.IRme();
+			else t1 = null;
+			if(this.scope_type.equals("local_func")){
+				IR.getInstance().Add_IRcommand(new IRcommand_Store(id,t1,this.scope_type,this.index));
+			} else if(this.scope_type.equals("local_class"))
+				IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldSet(null,id,t1,this.index));		
+		}	
 		return null;
 	}
 }

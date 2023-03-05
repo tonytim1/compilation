@@ -74,4 +74,11 @@ public class AST_VAR_FIELD extends AST_VAR
 		System.out.format(">> ERROR [%d] field %s does not exist in class - AST_VAR_FIELD\n",lineNumber,name);
 		throw new SEMANTIC_EXCEPTION(lineNumber);
 	}
+	
+	public TEMP IRme(){
+		TEMP t = var.IRme();
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAccess(dst,t,name,index));
+		return dst;
+	}
 }
