@@ -1,4 +1,5 @@
 lexer.getLine()
+package AST; import TYPES.*; import TEMP.*; import IR.*; import SYMBOL_TABLE.*;
 
 public class AST_FUNC_DEC extends AST_Node {
 
@@ -6,6 +7,11 @@ public class AST_FUNC_DEC extends AST_Node {
 	public String id;
 	public AST_TYPE_ID_LIST tid;
 	public AST_STMT_LIST stmtList;
+
+    // New type for IR part
+    String scope_type;
+    String class_name; //The nearest class in the tree that contains the function name
+    int numOfLocalVar;
 
 	public AST_FUNC_DEC(int lineNumber, AST_TYPE type, String id, AST_TYPE_ID_LIST tid, AST_STMT_LIST stmtList)
 	{
@@ -115,11 +121,24 @@ public class AST_FUNC_DEC extends AST_Node {
 		/*****************/
 		SYMBOL_TABLE.getInstance().endScope();
 
+		/****************/
+		/* [7.5] For IR part
+		/****************/
+		this.numOfLocalVar = s.func_local_index;
+
 		/***************************************************/
 		/* [8] Enter the Function Type to the Symbol Table */
 		/***************************************************/
 		TYPE function = new TYPE_FUNCTION(returnType,id,type_list);
 		SYMBOL_TABLE.getInstance().enter(id,function);
+
+		/****************/
+		/* [8.5] For IR part
+		/****************/
+		this.scope_type = s.getVarScope(id);
+		if(this.scope_type.equals("local_class")){
+			this.class_name = s.curClass.name;
+		}
 
 		/*****************/
 		/* [9] reset return type */
