@@ -26,6 +26,7 @@ public class IRcommand_ClassNew extends IRcommand
 
 	public void MIPSme()
 	{	
-        
+		MIPSGenerator.getInstance().jal(String.format("class_%s",name));
+		MIPSGenerator.getInstance().pop(dst.toString());        
     }
 }

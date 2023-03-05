@@ -70,6 +70,10 @@ public class MIPSGenerator
 		int idx=t.getSerialNumber();
 		fileWriter.format("\tli Temp_%d,%d\n",idx,value);
 	}
+	public void la(String dst,String src)
+	{
+		fileWriter.format("\tla %s, %s\n",dst,src);
+	}
 	public void add(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{
 		int i1 =oprnd1.getSerialNumber();
@@ -105,6 +109,16 @@ public class MIPSGenerator
 		{
 			fileWriter.format("%s:\n",inlabel);
 		}
+	}	
+	public void label_text(String inlabel)
+	{
+		fileWriter.format(".text\n");
+		fileWriter.format("%s:\n",inlabel);
+	}	
+	public void label_data(String inlabel)
+	{
+		fileWriter.format(".data\n");
+		fileWriter.format("%s:\n",inlabel);
 	}	
 	public void jump(String inlabel)
 	{
