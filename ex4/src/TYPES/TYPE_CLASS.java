@@ -72,6 +72,73 @@ public class TYPE_CLASS extends TYPE
 		return null;
 	}
 
+	public String getClassNameOfFunc(String func_name)
+	{
+		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
+			if (member.head != null && member.head.typeName == "function" && member.head.name.equals(name))
+				return this.name;
+		}
+		return this.father.getClassNameOfFunc(func_name);
+	}
+
+	public int getMallocSize()
+	{
+		return 4 * (this.getFieldList().size() + 1);
+	}
+
+	public List<String> getFuncList()
+	{
+		List<String> func_list;
+		if (father != null)
+		{
+			func_list = father.getFuncList();
+		}
+		else
+		{
+			func_list = new LinkedList<String>();
+		}
+
+		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
+			if (member.head != null && member.head.typeName == "function" && !func_list.contains(member.head.name))
+			{
+				func_list.add(member.head.name);
+			}
+		}
+
+		return func_list;
+	}
+
+	public LinkedList<String> getFieldList()
+	{
+		LinkedList<String> field_list;
+		if (father != null)
+		{
+			field_list = father.getFuncList();
+		}
+		else
+		{
+			field_list = new LinkedList<String>();
+		}
+
+		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
+			if (member.head != null && member.head.typeName != "function" && !field_list.contains(member.head.varName))
+			{
+				field_list.add(member.head.varName);
+			}
+		}
+
+		return field_list;
+	}
+
+	public int getFieldIndex(String field_name)
+	{
+		return this.getFieldList().indexOf(field_name);
+	}
+
+	public int getFuncIndex(String func_name)
+	{
+		return this.getFuncList().indexOf(func_name);
+	}
 	//For IR part
 	public boolean existInFatherScope(String name){
 		if(this.father != null){
