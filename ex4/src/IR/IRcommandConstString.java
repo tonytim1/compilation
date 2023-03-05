@@ -22,4 +22,11 @@ public class IRcommandConstString extends IRcommand  {
         this.t = t;
         this.value = value;
     }
+
+    public void MIPSme() {
+		String str_name = getFreshLabel(value);
+		MIPSGenerator.getInstance().allocate_string(str_name,value); // Allocating constant string on the data segment
+		MIPSGenerator.getInstance().text_segment(); // Back to text segment
+		MIPSGenerator.getInstance().la(t.toString(),str_name); // Loads the address of the string to register
+	}
 }
