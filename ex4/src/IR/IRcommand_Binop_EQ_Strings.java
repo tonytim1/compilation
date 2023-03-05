@@ -76,9 +76,9 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand {
         MIPSGenerator.getInstance().label(label_end);
 
         //clean stack
-        MIPSGenerator.getInstance().popStackTo("$s3");
-        MIPSGenerator.getInstance().popStackTo("$s2");
-        MIPSGenerator.getInstance().popStackTo("$s1");
-        MIPSGenerator.getInstance().popStackTo("$s0");
+        MIPSGenerator.getInstance().pop_from_stack("$s3");
+        MIPSGenerator.getInstance().pop_from_stack("$s2");
+        MIPSGenerator.getInstance().pop_from_stack("$s1");
+        MIPSGenerator.getInstance().pop_from_stack("$s0");
     }
 }

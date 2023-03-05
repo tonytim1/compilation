@@ -29,19 +29,25 @@ public class IRcommand_FuncCall extends IRcommand
 	{	
         MIPSGenerator m = MIPSGenerator.getInstance();
 
+		// push temps to stack
         m.funcPrologue();
 
-		int stack_offset = this.saveToStack(this.args);
-
+		// save args to stack
+		int stack_offset = m.pushList(args);
+		
+		// jump and link to function
 		m.jal(String.format("func_%s",name));
 
+		// pop arguments from stack
 		m.addu("$sp","$sp",stack_offset);
 
+        // pop temps from stack
+        m.funcEpilogue();
+
+		// save return value
         if(dst != null)
         {
             m.mov(dst.toString(),"$v0");
         }
-        
-        m.funcEpilogue();
     }
 }

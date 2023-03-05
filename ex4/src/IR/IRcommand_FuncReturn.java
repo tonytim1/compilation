@@ -33,9 +33,9 @@ public class IRcommand_FuncReturn extends IRcommand
 		// pop out all local func variables from stack
 		m.move("$sp","$fp");
 		// pop fp from stack
-		m.pop("$fp");
+		m.pop_from_stack("$fp");
 		// pop return address from stack
-		m.pop("$ra");
+		m.pop_from_stack("$ra");
 		// jump to the return address
 		m.jr("$ra");
     }

@@ -63,7 +63,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		   // pointer to the class
 		   dst = ((AST_VAR_FIELD) var).var.IRme();
 		   t = exp.IRme();
-		   IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldSet(dst,var.name,t,var.index));
+		   IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst,var.name,t,var.index));
 	   } else if(var instanceof AST_VAR_SUBSCRIPT){
 		   // subscript value
 		   dst = ((AST_VAR_SUBSCRIPT) var).var.IRme(); 

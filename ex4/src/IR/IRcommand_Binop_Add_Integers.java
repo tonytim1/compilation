@@ -49,6 +49,6 @@ public class IRcommand_Binop_Add_Integers extends IRcommand {
         MIPSGenerator.getInstance().bge(dst.toString(), "$s0", minIntLabel);
         MIPSGenerator.getInstance().mov(dst.toString(), "$s0");
         MIPSGenerator.getInstance().label(minIntLabel);
-        MIPSGenerator.getInstance().popStackTo("$s0");
+        MIPSGenerator.getInstance().pop_from_stack("$s0");
     }
 }

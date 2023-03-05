@@ -105,10 +105,10 @@ public class IRcommand_Binop_String_Concat extends IRcommand {
         MIPSGenerator.getInstance().mov(dst.toString(), "$v0");
 
         // clear stack
-        MIPSGenerator.getInstance().popStackTo("$s3");
-        MIPSGenerator.getInstance().popStackTo("$s2");
-        MIPSGenerator.getInstance().popStackTo("$s1");
-        MIPSGenerator.getInstance().popStackTo("$s0");
+        MIPSGenerator.getInstance().pop_from_stack("$s3");
+        MIPSGenerator.getInstance().pop_from_stack("$s2");
+        MIPSGenerator.getInstance().pop_from_stack("$s1");
+        MIPSGenerator.getInstance().pop_from_stack("$s0");
     }
 }
 

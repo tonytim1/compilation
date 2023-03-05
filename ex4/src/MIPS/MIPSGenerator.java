@@ -173,20 +173,20 @@ public class MIPSGenerator
 	{
 		fileWriter.format("\tjal %s\n",label);				
 	}
-	public void push(String var)
+	public void push_to_stack(String var)
 	{
 		fileWriter.format("\tsubu $sp,$sp,4\n");
 		fileWriter.format("\tsw %s,0($sp)\n", var);		
 	}
-	public int pushLst(TEMP_LIST lst){
+	public int pushList(TEMP_LIST lst){
 		if(lst == null){
 			return 0;
 		}
-		int stack_offset = pushLst(lst.next);
-		push(lst.value.toString());
+		int stack_offset = pushList(lst.next);
+		push_to_stack(lst.value.toString());
 		return stack_offset + 4;
 	}
-	public void pop(String var)
+	public void pop_from_stack(String var)
 	{
 		fileWriter.format("\tlw %s,0($sp)\n", var);
 		fileWriter.format("\taddu $sp,$sp,4\n");

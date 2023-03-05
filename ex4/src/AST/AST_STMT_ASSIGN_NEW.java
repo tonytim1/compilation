@@ -58,7 +58,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 		} else if(var instanceof AST_VAR_FIELD){
 			dst = ((AST_VAR_FIELD) var).var.IRme();
 			t = exp.IRme();
-			IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldSet(dst,var.name,t,var.index));
+			IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst,var.name,t,var.index));
 		} else if(var instanceof AST_VAR_SUBSCRIPT){
 			dst = ((AST_VAR_SUBSCRIPT) var).var.IRme(); 
 			TEMP index = ((AST_VAR_SUBSCRIPT) var).subscript.IRme();

@@ -43,7 +43,7 @@ public class IRcommand_Allocate_Class extends IRcommand
 		m.malloc(my_class.getMallocSize());
 
 		// virtual table to class pointer
-		m.push("$s0");
+		m.push_to_stack("$s0");
 		if (!funcList.isEmpty())
         {
 			m.la("$s0", String.format("vt_%s", my_class.name));
@@ -53,13 +53,13 @@ public class IRcommand_Allocate_Class extends IRcommand
 			m.mov("$s0", "$zero");
         }
         m.sw("$s0","$v0",0);
-		m.pop("$s0");
-		m.push("$v0");
+		m.pop_from_stack("$s0");
+		m.push_to_stack("$v0");
 		
 		// pointer to stack
 		m.mov("$a0", "$v0");
 		m.label(String.format("init_class_%s",this.my_class.name));
-		m.push("$ra");
+		m.push_to_stack("$ra");
 		if(this.my_class.father != null)
         {
 			m.jal(String.format("init_class_%s",this.my_class.father.name));

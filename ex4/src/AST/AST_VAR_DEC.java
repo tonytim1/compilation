@@ -132,7 +132,7 @@ public class AST_VAR_DEC extends AST_Node {
 			if(this.scope_type.equals("local_func")){
 				IR.getInstance().Add_IRcommand(new IRcommand_Store(id,t1,this.scope_type,this.index));
 			} else if(this.scope_type.equals("local_class"))
-				IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldSet(null,id,t1,this.index));		
+				IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(null,id,t1,this.index));		
 		}	
 		return null;
 	}
