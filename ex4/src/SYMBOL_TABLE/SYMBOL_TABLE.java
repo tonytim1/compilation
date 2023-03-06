@@ -82,7 +82,7 @@ public class SYMBOL_TABLE
 		else if(var_scope.equals("local")){
 			if(required_return_type.equals("") == false){
 				var_scope = "local_func";
-				if(!t.isFunc() && !(name.equals("SCOPE-BOUNDARY")))
+				if(!(t instanceof TYPE_FUNCTION) && !(name.equals("SCOPE-BOUNDARY")))
 					local_index = func_local_index++;
 			} else {
 				var_scope = "local_class";
