@@ -119,8 +119,8 @@ public class SYMBOL_TABLE
 				return e.var_scope;
 			}
 		}
-		if(curClass != null){
-			if(curClass.existInFatherScope(name)){
+		if(curr_class != null){
+			if(curr_class.existInFatherScope(name)){
 				return "local_class";
 			}
 		}
