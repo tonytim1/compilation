@@ -65,20 +65,23 @@ public class AST_VAR_FIELD extends AST_VAR
 		/************************************/
 		TYPE member = tc.findClassVar(name);
 
-		if (member != null)
-			return member;
-
-		/*********************************************/
-		/* [4] name does not exist in class var */
-		/*********************************************/
-		System.out.format(">> ERROR [%d] field %s does not exist in class - AST_VAR_FIELD\n",lineNumber,name);
-		throw new SEMANTIC_EXCEPTION(lineNumber);
+		if (member == null)
+		{
+			System.out.format(">> ERROR [%d] field %s does not exist in class - AST_VAR_FIELD\n",lineNumber,name);
+			throw new SEMANTIC_EXCEPTION(lineNumber);
+		}
+		
+		// For IRME
+		this.scope_type = SYMBOL_TABLE.getInstance().getVarScope(name); 
+		this.index = ((TYPE_CLASS) var_type).getFieldIndex(name);
+		
+		return member;
 	}
 	
 	public TEMP IRme(){
 		TEMP t = var.IRme();
 		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
-		IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAccess(dst,t,name,index));
+		IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAccess(dst, t, name, index));
 		return dst;
 	}
 }

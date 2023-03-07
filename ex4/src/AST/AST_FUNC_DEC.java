@@ -11,7 +11,7 @@ public class AST_FUNC_DEC extends AST_Node {
     // New type for IR part
     String scope_type;
     String class_name; //The nearest class in the tree that contains the function name
-    int numOfLocalVar;
+    int varNum;
 
 	public AST_FUNC_DEC(int lineNumber, AST_TYPE type, String id, AST_TYPE_ID_LIST tid, AST_STMT_LIST stmtList)
 	{
@@ -124,7 +124,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		/****************/
 		/* [7.5] For IR part
 		/****************/
-		this.numOfLocalVar = s.func_local_index;
+		this.varNum = s.func_local_index;
 
 		/***************************************************/
 		/* [8] Enter the Function Type to the Symbol Table */
@@ -136,7 +136,8 @@ public class AST_FUNC_DEC extends AST_Node {
 		/* [8.5] For IR part
 		/****************/
 		this.scope_type = s.getVarScope(id);
-		if(this.scope_type.equals("local_class")){
+		if (this.scope_type.equals("local_class"))
+		{
 			this.class_name = s.curClass.name;
 		}
 
@@ -151,15 +152,15 @@ public class AST_FUNC_DEC extends AST_Node {
 
 	public TEMP IRme() { 
 		// add function label
-		System.out.format("function %s num %d\n",this.id,this.numOfLocalVar);
+		System.out.format("function %s num %d\n" ,id, varNum);
 		if(scope_type.equals("local_class"))
-			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(class_name,id,numOfLocalVar));
+			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(class_name, id, varNum));
 		else
-			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(null,id,numOfLocalVar));
-		// process statements (should have a list of commands representing the function body)
+			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(null, id, varNum));
+		// process statements
 		if(stmts != null) stmts.IRme();
-		// add return statement if there isn't any return statement
+		// add return statement if there is none
 		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(null));
-		return null; // a function declaration is not placed in a temporary variable
+		return null;
 	}
 }

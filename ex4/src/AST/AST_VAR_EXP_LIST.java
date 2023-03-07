@@ -99,28 +99,45 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 
 		return functionType.returnType;
 	}
+	
 	public TEMP IRme(){
-		if(var == null){
-			if(this.exps == null)
-				IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(null,fn,null));
-			else {
-				TEMP_LIST args = this.exps.IRme();
-				if(fn.equals("PrintInt") && args != null && args.next == null){
-					IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(args.value));
-				}else if(fn.equals("PrintString") && args != null && args.next == null){
-					IR.getInstance().Add_IRcommand(new IRcommand_PrintString(args.value));
-				} else {
-					IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(null,fn,args));
+		ir = IR.getInstance();
+		TEMP_LIST args;
+		if (var == null)
+		{
+			if (expList == null)
+			{
+				ir.Add_IRcommand(new IRcommand_Allocate_Func(null, name, null));
+			}
+			else 
+			{
+				args = expList.IRme();
+				if (name.equals("PrintInt") && args != null && args.next == null)
+				{
+					ir.Add_IRcommand(new IRcommand_PrintInt(args.value));
+				}
+				else if (name.equals("PrintString") && args != null && args.next == null)
+				{
+					ir.Add_IRcommand(new IRcommand_PrintString(args.value));
+				} 
+				else 
+				{
+					ir.Add_IRcommand(new IRcommand_Allocate_Func(null, name, args));
 				}
 			}
-		} else {
+		} 
+		else 
+		{
 			TEMP t1 = var.IRme();
-			int func_index = class_type.getFuncIndex(fn);
-			if(this.exps == null)
-				IR.getInstance().Add_IRcommand(new IRcommand_ClassMethodCall(null,t1,fn,null,func_index));
-			else{
-				TEMP_LIST args = this.exps.IRme();
-				IR.getInstance().Add_IRcommand(new IRcommand_ClassMethodCall(null,t1,fn,args,func_index));
+			int func_index = class_type.getFuncIndex(name);
+			if (expList == null)
+			{
+				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, null, func_index));
+			}
+			else
+			{
+				args = expList.IRme();
+				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, args, func_index));
 			}
 		}
 		return null;

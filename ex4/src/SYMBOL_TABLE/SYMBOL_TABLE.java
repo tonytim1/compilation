@@ -74,17 +74,26 @@ public class SYMBOL_TABLE
 
 		//NEW IR PART
 		int local_index = 0;
-		if(var_scope.equals("param"))
+		if (var_scope.equals("param"))
+		{
 			local_index = param_local_index++;
-		else if(var_scope.equals("global"))
-			local_index = 0;
-			// the index doesn't matter if this is global var
-		else if(var_scope.equals("local")){
-			if(required_return_type.equals("") == false){
+		}
+		else if (var_scope.equals("global"))
+		{
+			local_index = 0; // the index doesn't matter if this is global var
+		}
+		else if (var_scope.equals("local"))
+		{
+			if (required_return_type.equals("") == false)
+			{
 				var_scope = "local_func";
-				if(!(t instanceof TYPE_FUNCTION) && !(name.equals("SCOPE-BOUNDARY")))
+				if (!(t instanceof TYPE_FUNCTION) && !(name.equals("SCOPE-BOUNDARY")))
+				{
 					local_index = func_local_index++;
-			} else {
+				}
+			} 
+			else 
+			{
 				var_scope = "local_class";
 			}
 		}
@@ -119,12 +128,34 @@ public class SYMBOL_TABLE
 				return e.var_scope;
 			}
 		}
-		if(curr_class != null){
-			if(curr_class.existInFatherScope(name)){
+		if (curr_class != null){
+			if (curr_class.existInFatherScope(name))
+			{
 				return "local_class";
 			}
 		}
 		return null;
+	}
+
+	/***************************************/
+	/* get the local index of the variable */
+	/***************************************/
+	public int getLocalIndex(String name){
+		for (SYMBOL_TABLE_ENTRY e = table[hash(name)]; e != null; e = e.next)
+		{
+			if (name.equals(e.name))
+			{	
+				return e.local_index;
+			}
+		}
+		return -1;
+	}
+
+	/**************************************/
+	/* get the attribute index in a class */
+	/**************************************/
+	public int getFieldIndex(String name){
+		return cur_class.getFieldIndex(name);
 	}
 
 

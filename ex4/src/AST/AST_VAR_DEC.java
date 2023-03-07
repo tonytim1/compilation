@@ -11,6 +11,11 @@ public class AST_VAR_DEC extends AST_Node {
 	public AST_EXP exp;
 	public AST_NEW_EXP newExp;
 
+	// New type for IR part
+	String scope_type;
+	public int index;
+	public TYPE_CLASS var_class; //The nearest class in the tree that contains the field name
+
 	public AST_VAR_DEC(int lineNumber, AST_TYPE type, String id, AST_EXP exp, AST_NEW_EXP newExp) {
 		super(lineNumber);
 		/******************************/
@@ -97,6 +102,21 @@ public class AST_VAR_DEC extends AST_Node {
 		/* [4] Enter the Var Type to the Symbol Table */
 		/***************************************************/
 		SYMBOL_TABLE.getInstance().enter(id,t);
+
+		/****************/
+		/* [4.5] For IR part
+		/****************/
+		this.scope_type = s.getVarScope(id);
+		
+		if(this.scope_type.equals("local_func"))
+		{
+			this.index = s.getLocalIndex(id);
+		} 
+		else if(this.scope_type.equals("local_class"))
+		{
+			this.index = s.getFieldIndex(id);
+			System.out.format("local name %s index %d\n", this.id, this.index);
+		}
 
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */

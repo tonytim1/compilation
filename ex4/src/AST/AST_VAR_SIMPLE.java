@@ -8,6 +8,8 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	/* simple variable name */
 	/************************/
 	public String name;
+	// For IRME
+	Boolean is_string = false;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -37,17 +39,34 @@ public class AST_VAR_SIMPLE extends AST_VAR
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{
-	    TYPE t = SYMBOL_TABLE.getInstance().find(name);
+		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
+	    TYPE t = s.find(name);
 	    if (t == null) { // In case we use undefined variable
 	        System.out.format(">> ERROR [%d] field %s was not found - AST_VAR_SIMPLE\n",lineNumber,name);
 		    throw new SEMANTIC_EXCEPTION(lineNumber);
 	    }
+		
+		// For IRME
+		this.scope_type = s.getVarScope(name);
+		if (this.scope_type.equals("local_class"))
+		{
+			this.index = s.getFieldIndex(name);
+		}
+		else
+		{
+			this.index = s.getLocalIndex(name);
+		}
+		if (id_type == TYPE_STRING.getInstance()) 
+		{
+			this.is_string = true;
+		}
+
 	    return t;
     }
 	
 	public TEMP IRme(){
 		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
-		IR.getInstance().Add_IRcommand(new IRcommand_Load(dst, name, this.scope_type, this.index, this.is_string));
+		IR.getInstance().Add_IRcommand(new IRcommand_Load(dst, name, scope_type, index, is_string));
 		return dst;
 	}
 }
