@@ -1,0 +1,117 @@
+/***********/
+/* PACKAGE */
+/***********/
+package REG_ALLOC;
+
+/*******************/
+/* GENERAL IMPORTS */
+/*******************/
+
+import java.util.*;
+/*******************/
+/* PROJECT IMPORTS */
+/*******************/
+import TEMP.*;
+
+public class VertexList {
+    public Vertex head;
+    public VertexList tail;
+
+    public VertexList(Vertex head, VertexList tail) {
+        this.head = head;
+        this.tail = tail;
+    }
+
+    /* return the vertex in the graph with the provided label */
+    public Vertex getVertex(String name) {
+        System.out.format("get vertex: %s\n", name);
+
+        VertexList curVertex = new VertexList(head, tail);
+
+        while (curVertex != null && curVertex.head != null) {
+            if (curVertex.head.command instanceof IRcommand_Label &&
+                    ((IRcommand_Label) curVertex.head.command).label_name.equals(name)) {
+                return curVertex.head;
+            } else if (curVertex.head.command instanceof IRcommand_Jump_Label &&
+                    ((IRcommand_Jump_Label) curVertex.head.command).label_name.equals(name)) {
+                return curVertex.head;
+            } else if (curVertex.head.command instanceof IRcommand_Jump_If_Eq_To_Zero &&
+                    ((IRcommand_Jump_If_Eq_To_Zero) curVertex.head.command).label_name.equals(name)) {
+                return curVertex.head;
+            }
+            curVertex = curVertex.tail;
+        }
+        return null;
+    }
+}
+
+public class Vertex {
+    public IRcommand command;
+    public VertexList next;
+    public VertexList prev;
+    public TEMP_LIST input;
+    public TEMP_LIST output;
+    public boolean isVisited = false;
+
+    public Vertex(IRcommand command) {
+        this.command = command;
+        if (command instanceof IRcommand_FuncReturn && ((IRcommand_FuncReturn) command).value != null) {
+            this.input = new TEMP_LIST(((IRcommand_FuncReturn) command).value, new TEMP_LIST(null, null));
+        } else {
+            // value is null when the list is empty
+            this.input = new TEMP_LIST(null, null);
+        }
+        this.output = null;
+    }
+
+    public void addNext(Vertex other) {
+        if (other != null)
+            this.next = new VertexList(other, next);
+    }
+
+    public void addPrev(Vertex other) {
+        if (other != null)
+            this.prev = new VertexList(other, prev);
+    }
+
+    public void liveness() {
+        if (this.next != null) {
+            if (this.next.head.output != null)
+                this.input = this.next.head.output.clone();
+            for (VertexList e = this.next.tail; e != null; e = e.tail) {
+                this.input.union(e.head.output);
+            }
+        }
+        TEMP_LIST IRLiveTemp = command.getLiveTemp(this.input);
+        // if after liveness there isn't any change dont do anything
+        if (IRLiveTemp.equals(this.output)) {
+            return;
+        }
+        this.output = IRLiveTemp;
+        // then run liveness for every neighbor
+        for (VertexList e = this.prev; e != null; e = e.tail) {
+            e.head.liveness();
+        }
+    }
+
+    public void buildDependancyGraph() {
+        if (!this.visitedVertex) {
+            System.out.format("command: %s\n", this.command.getClass());
+            this.input.printList();
+            System.out.println();
+
+            for (TEMP_LIST e = this.input; e.value != null; e = e.next) {
+                for (TEMP_LIST f = e.next; f.value != null; f = f.next) {
+                    f.value.addNeighbor(e.value);
+                    e.value.addNeighbor(f.value);
+                }
+            }
+            this.visitedVertex = true;
+            // go to every neighbor and add his TEMPS
+            for (VertexList j = this.next; j != null; j = j.tail) {
+                if (j.head != null)
+                    j.head.buildDependancyGraph();
+            }
+        }
+    }
+}
