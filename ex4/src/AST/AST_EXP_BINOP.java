@@ -1,5 +1,4 @@
-lexer.getLine()
-import IR.*;
+package AST;import IR.*;
 import TEMP.*;
 
 public class AST_EXP_BINOP extends AST_EXP
@@ -153,7 +152,7 @@ public class AST_EXP_BINOP extends AST_EXP
 					IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Integers(dst,t1,t2));
 				}
 				break;
-
+			}
 			case 6: {
 				// case: LT testing
 				IR.getInstance().Add_IRcommand(new IRcommand_Binop_LT_Integers(dst,t1,t2));

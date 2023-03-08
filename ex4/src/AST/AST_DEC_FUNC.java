@@ -1,5 +1,4 @@
-lexer.getLine()
-import IR.*;
+package AST;import IR.*;
 import TEMP.*;
 
 public class AST_DEC_FUNC extends AST_DEC {

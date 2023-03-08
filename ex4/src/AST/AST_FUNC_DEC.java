@@ -1,5 +1,4 @@
-lexer.getLine()
-package AST; import TYPES.*; import TEMP.*; import IR.*; import SYMBOL_TABLE.*;
+package AST;package AST; import TYPES.*; import TEMP.*; import IR.*; import SYMBOL_TABLE.*;
 
 public class AST_FUNC_DEC extends AST_Node {
 

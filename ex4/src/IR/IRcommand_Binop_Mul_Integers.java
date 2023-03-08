@@ -29,7 +29,7 @@ public class IRcommand_Binop_Mul_Integers extends IRcommand {
         int maxInt = 32767;
         int minInt = -32768;
         String maxIntLabel = getFreshLabel("max_int_label");
-        String minIntLabel = getFreshLabel("min_int_label")
+        String minIntLabel = getFreshLabel("min_int_label");
 
         MIPSGenerator.getInstance().push_to_stack("$s0");
         MIPSGenerator.getInstance().mul(dst.toString(), t1.toString(), t2.toString());

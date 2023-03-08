@@ -25,7 +25,7 @@ public class AST_C_FIELD_FUNC extends AST_C_FIELD {
 		/* COPY INPUT DATA MEMBERS ... */
 		/*******************************/
 		this.funcDec = funcDec;
-		this.typeCField = 'funcDec'; // For IR
+		this.typeCField = "funcDec"; // For IR
 	}
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION 

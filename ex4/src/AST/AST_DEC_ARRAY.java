@@ -1,5 +1,4 @@
-lexer.getLine()
-
+package AST;
 public class AST_DEC_ARRAY extends AST_DEC {
 
 	public AST_ARRAY_TYPE_DEF a;

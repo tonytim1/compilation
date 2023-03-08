@@ -1,5 +1,4 @@
-lexer.getLine()
-import IR.*;
+package AST;import IR.*;
 import TEMP.*;
 
 public abstract class AST_DEC extends AST_Node {

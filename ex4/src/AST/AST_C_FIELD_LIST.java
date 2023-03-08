@@ -50,10 +50,10 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	    if (cField.typeCField == null) {
 	        return null;
 	    }
-	    if (irFunction && cField.typeCField == 'funcDec') {
+	    if (irFunction && cField.typeCField == "funcDec") {
             cField.IRme();
 	    }
-	    if (!irFunction && cField.typeCField == 'varDec') {
+	    if (!irFunction && cField.typeCField == "varDec") {
             cField.IRme();
 	    }
 	    if (cFieldList != null) {

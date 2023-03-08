@@ -1,5 +1,4 @@
-lexer.getLine()
-import IR.*;
+package AST;import IR.*;
 import TEMP.*;
 
 public class AST_EXP_INT extends AST_EXP
