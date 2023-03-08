@@ -49,13 +49,13 @@ public class IR {
     /********************/
     public void OPTme() {
         IRcommandList commandList = new IRcommandList(head, tail);
-        VertexList labels;
-        VertexList jumps;
-        VertexList functions;
-        VertexList returns;
+        VertexList labels = null;
+        VertexList jumps = null;
+        VertexList functions = null;
+        VertexList returns = null;
 
-        Vertex prevVertex;
-        Vertex curVertex;
+        Vertex prevVertex = null;
+        Vertex curVertex = null;
 
         // go over the ir commands
         while (commandList != null && commandList.head != null) {
