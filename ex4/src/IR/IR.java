@@ -85,7 +85,7 @@ public class IR {
 
                     // if the command is type of conditional jump then add edge to the label without setting current to null
                 } else if (commandList.head instanceof IRcommand_Jump_If_Eq_To_Zero) {
-                    Vertex labelVertex;
+                    Vertex labelVertex = null;
                     if (labels != null)
                         labelVertex = labels.getVertex(((IRcommand_Jump_If_Eq_To_Zero) commandList.head).label_name);
                     if (labelVertex != null) {
