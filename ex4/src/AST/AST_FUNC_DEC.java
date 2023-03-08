@@ -1,4 +1,9 @@
-package AST;package AST; import TYPES.*; import TEMP.*; import IR.*; import SYMBOL_TABLE.*;
+package AST;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
+
 
 public class AST_FUNC_DEC extends AST_Node {
 

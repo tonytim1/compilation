@@ -2,6 +2,11 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
+import java.util.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -10,9 +15,6 @@ package IR;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-import TEMP.*;
-import MIPS.*;
-import TYPES.*;
 
 public class IRcommand_Allocate_Class extends IRcommand
 {
@@ -50,14 +52,14 @@ public class IRcommand_Allocate_Class extends IRcommand
         }
         else
         {
-			m.mov("$s0", "$zero");
+			m.move("$s0", "$zero");
         }
         m.sw("$s0","$v0",0);
 		m.pop_from_stack("$s0");
 		m.push_to_stack("$v0");
 		
 		// pointer to stack
-		m.mov("$a0", "$v0");
+		m.move("$a0", "$v0");
 		m.label(String.format("init_class_%s",this.my_class.name));
 		m.push_to_stack("$ra");
 		if(this.my_class.father != null)

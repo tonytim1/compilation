@@ -2,6 +2,7 @@
 /* PACKAGE */
 /***********/
 package AST;
+import TEMP.*;
 
 /*******************/
 /* PROJECT IMPORTS */

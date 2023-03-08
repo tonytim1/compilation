@@ -1,7 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-
+import IR.*;
+import TEMP.*;
 public class AST_NEW_EXP extends AST_Node {
 
 	public AST_TYPE type;

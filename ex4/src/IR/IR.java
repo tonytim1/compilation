@@ -2,6 +2,10 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -10,8 +14,6 @@ package IR;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-
-import REG_ALLOC.*;
 
 public class IR {
     private IRcommand head = null;
@@ -103,7 +105,7 @@ public class IR {
                     Vertex returnVertex;
                     if (jumps != null)
                         returnVertex = jumps.getVertex(((IRcommand_Label) commandList.head).label_name);
-                    else returnVertex;
+                    else returnVertex = null;
                     if (returnVertex != null) {
                         returnVertex.addNext(curVertex);
                         curVertex.addPrev(returnVertex);

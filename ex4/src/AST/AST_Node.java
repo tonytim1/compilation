@@ -1,7 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-
+import IR.*;
+import TEMP.*;
 public abstract class AST_Node
 {
 	/*******************************************/

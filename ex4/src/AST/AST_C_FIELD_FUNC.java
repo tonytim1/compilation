@@ -4,6 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
+
 public class AST_C_FIELD_FUNC extends AST_C_FIELD {
 
 	public AST_FUNC_DEC funcDec;

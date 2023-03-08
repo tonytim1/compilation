@@ -4,6 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
+
 public class AST_TYPE extends AST_Node {
 
 	public int t;

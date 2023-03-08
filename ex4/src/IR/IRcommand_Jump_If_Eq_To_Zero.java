@@ -2,6 +2,10 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -10,8 +14,6 @@ package IR;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-import TEMP.*;
-import MIPS.*;
 
 public class IRcommand_Jump_If_Eq_To_Zero extends IRcommand
 {

@@ -1,6 +1,8 @@
 package IR;
+import TYPES.*;
 import TEMP.*;
 import MIPS.*;
+import REGALLOC.*;
 
 public class IRcommandConstNil extends IRcommand {
 

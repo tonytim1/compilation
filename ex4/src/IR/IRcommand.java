@@ -2,6 +2,10 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
 
 /*******************/
 /* GENERAL IMPORTS */

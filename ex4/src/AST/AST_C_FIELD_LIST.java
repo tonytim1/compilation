@@ -4,6 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
+
 public class AST_C_FIELD_LIST extends AST_Node {
 
 	public AST_C_FIELD cField;

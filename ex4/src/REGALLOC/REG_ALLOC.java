@@ -1,6 +1,8 @@
-package REG_ALLOC;
+package REGALLOC;
 
 import java.util.*;
+import TEMP.*;
+import IR.*;
 
 public class REG_ALLOC {
     private TEMP_LIST temps = new TEMP_LIST(null, null); // a list of all created temporaries in a sorted order (graph nodes)

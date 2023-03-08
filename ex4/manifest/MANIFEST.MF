@@ -8,5 +8,6 @@ Class-Path: ./external_jars/java-cup-11b-runtime.jar
   ./bin/MIPS/*.class
   ./bin/TYPES/*.class
   ./bin/SYMBOL_TABLE/*.class
+  ./bin/REGALLOC/*.class
 Main-Class: Main
 

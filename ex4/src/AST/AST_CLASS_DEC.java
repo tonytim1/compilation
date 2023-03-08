@@ -4,6 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
+
 public class AST_CLASS_DEC extends AST_Node {
 
 	public String id1;

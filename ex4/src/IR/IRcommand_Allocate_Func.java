@@ -2,6 +2,10 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -10,9 +14,6 @@ package IR;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-import TEMP.*;
-import MIPS.*;
-import TYPES.*;
 
 public class IRcommand_Allocate_Func extends IRcommand
 {
@@ -46,7 +47,7 @@ public class IRcommand_Allocate_Func extends IRcommand
 
         m.push_to_stack("$ra");
         m.push_to_stack("$fp");
-        m.mov("$fp","$sp");
+        m.move("$fp","$sp");
         
 		if(num_args > 0)
         {

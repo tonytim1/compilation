@@ -1,6 +1,8 @@
-package AST;import IR.*;
+package AST;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import IR.*;
 import TEMP.*;
-
 public class AST_C_FIELD_VAR extends AST_C_FIELD {
 
 	public AST_VAR_DEC varDec;

@@ -2,6 +2,10 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -10,8 +14,6 @@ package IR;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-import TEMP.*;
-import MIPS.*;
 
 public class IRcommand_FuncReturn extends IRcommand
 {
@@ -28,10 +30,10 @@ public class IRcommand_FuncReturn extends IRcommand
         // move value to $v0
 		if(value != null)
         {
-            m.move("$v0",value.toString());	
+            m.movee("$v0",value.toString());	
         }
 		// pop out all local func variables from stack
-		m.move("$sp","$fp");
+		m.movee("$sp","$fp");
 		// pop fp from stack
 		m.pop_from_stack("$fp");
 		// pop return address from stack

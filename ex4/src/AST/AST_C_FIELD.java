@@ -4,6 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
+
 public abstract class AST_C_FIELD extends AST_Node {
 	/*********************************************************/
 	/* The default message for an unknown AST c field node */

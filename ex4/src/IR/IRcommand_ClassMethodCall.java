@@ -2,6 +2,10 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -10,8 +14,6 @@ package IR;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-import TEMP.*;
-import MIPS.*;
 
 public class IRcommand_ClassMethodCall extends IRcommand
 {
@@ -66,7 +68,7 @@ public class IRcommand_ClassMethodCall extends IRcommand
 
         // save return value
 		if(dst != null){
-			m.mov(dst.toString(),"$v0");
+			m.move(dst.toString(),"$v0");
 		}
 	}
 }

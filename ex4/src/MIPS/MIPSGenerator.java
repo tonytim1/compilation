@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import REGALLOC.*;
+import IR.*;
 
 public class MIPSGenerator
 {
@@ -73,6 +75,21 @@ public class MIPSGenerator
 	public void la(String dst,String src)
 	{
 		fileWriter.format("\tla %s, %s\n",dst,src);
+	}
+	public void allocate(String var_name,int value)
+	{
+		fileWriter.format(".data\n");
+		fileWriter.format("\tglobal_%s: .word %d\n",var_name, value);
+	}
+	public void allocate_func(String var_name)
+	{
+		fileWriter.format("\t.word %s\n",var_name);
+	}
+	public void allocate_string(String var_name, String value)
+	{
+		fileWriter.format(".data\n");
+		fileWriter.format("\t%s:\n",var_name);
+		fileWriter.format("\t .asciiz \"%s\"\n",value);
 	}
 	public void add(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{

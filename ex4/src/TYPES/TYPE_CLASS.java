@@ -1,4 +1,5 @@
 package TYPES;
+import java.util.*;
 
 public class TYPE_CLASS extends TYPE
 {

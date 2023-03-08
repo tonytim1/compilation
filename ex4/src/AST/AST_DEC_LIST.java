@@ -1,4 +1,9 @@
 package AST;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
+
 public class AST_DEC_LIST extends AST_Node
 {
 	/****************/

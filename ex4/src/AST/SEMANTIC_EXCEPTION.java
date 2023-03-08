@@ -1,4 +1,9 @@
 package AST;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import IR.*;
+import TEMP.*;
+
 
 public class SEMANTIC_EXCEPTION extends Exception { 
     public int lineNumber;

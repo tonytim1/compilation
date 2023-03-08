@@ -4,6 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
+
 public class AST_VAR_EXP_LIST extends AST_EXP
 {
 	public AST_VAR var;

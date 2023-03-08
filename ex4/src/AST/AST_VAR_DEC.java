@@ -4,6 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
+
 public class AST_VAR_DEC extends AST_Node {
 
 	public AST_TYPE type;

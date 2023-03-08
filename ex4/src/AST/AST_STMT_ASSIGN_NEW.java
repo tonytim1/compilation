@@ -1,7 +1,8 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-
+import IR.*;
+import TEMP.*;
 public class AST_STMT_ASSIGN_NEW extends AST_STMT 
 {
 	public AST_VAR var;
@@ -67,4 +68,5 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 			IR.getInstance().Add_IRcommand(new IRcommand_ArraySet(dst, index, t));
 		}
 		return null;
+	}
 }
