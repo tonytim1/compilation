@@ -79,7 +79,7 @@ public class IR {
                     } else {
                         jumps = new VertexList(curVertex, jumps);
                     }
-                    curVertex;
+                    curVertex = null;
 
                     // if the command is type of conditional jump then add edge to the label without setting current to null
                 } else if (commandList.head instanceof IRcommand_Jump_If_Eq_To_Zero) {
@@ -96,7 +96,7 @@ public class IR {
                     // if the command is return then invalidate current vertex
                 } else if (commandList.head instanceof IRcommand_FuncReturn) {
                     returns = new VertexList(curVertex, returns);
-                    curVertex;
+                    curVertex = null;
 
                     // if the command is label then set a pointer to the right jump command
                 } else if (commandList.head instanceof IRcommand_Label) {
