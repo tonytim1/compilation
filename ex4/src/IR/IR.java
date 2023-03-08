@@ -71,7 +71,7 @@ public class IR {
                 curVertex.addPrev(prevVertex);
                 // if the command is type of jump then add edge to the label
                 if (commandList.head instanceof IRcommand_Jump_Label) {
-                    Vertex labelVertex;
+                    Vertex labelVertex = null;
                     if (labels != null) {
                         labelVertex = labels.getVertex(((IRcommand_Jump_Label) commandList.head).label_name);
                     }
