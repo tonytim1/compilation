@@ -25,7 +25,7 @@ public class IRcommand_PrintString extends IRcommand {
 
 
     public void MIPSme() {
-        MIPSGenerator.getInstance().mov("$a0", t.toString());
+        MIPSGenerator.getInstance().move("$a0", t.toString());
         MIPSGenerator.getInstance().print_string();
     }
 }

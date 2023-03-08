@@ -13,6 +13,6 @@ public class IRcommandConstNil extends IRcommand {
     }
 
     public void MIPSme() {
-        MIPSGenerator.getInstance().mov(t.toString(),"$zero");
+        MIPSGenerator.getInstance().move(t.toString(),"$zero");
     }
 }

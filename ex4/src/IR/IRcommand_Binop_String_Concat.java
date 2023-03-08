@@ -44,7 +44,7 @@ public class IRcommand_Binop_String_Concat extends IRcommand {
 
         // calculate the size of the strings
         MIPSGenerator.getInstance().li("$s0", 0);
-        MIPSGenerator.getInstance().mov("$s2", t1.toString());
+        MIPSGenerator.getInstance().move("$s2", t1.toString());
         MIPSGenerator.getInstance().label(first_loop);
         MIPSGenerator.getInstance().lb("$s3", "$s2", 0);
         MIPSGenerator.getInstance().beqz("$s3", end_first_loop);
@@ -52,7 +52,7 @@ public class IRcommand_Binop_String_Concat extends IRcommand {
         MIPSGenerator.getInstance().addu("$s2", "$s2", 1);
         MIPSGenerator.getInstance().jump(first_loop);
         MIPSGenerator.getInstance().label(end_first_loop);
-        MIPSGenerator.getInstance().mov("$s2", t2.toString());
+        MIPSGenerator.getInstance().move("$s2", t2.toString());
         MIPSGenerator.getInstance().label(second_loop);
         MIPSGenerator.getInstance().lb("$s3", "$s2", 0);
         MIPSGenerator.getInstance().beqz("$s3", end_second_loop);
@@ -68,10 +68,10 @@ public class IRcommand_Binop_String_Concat extends IRcommand {
         MIPSGenerator.getInstance().malloc();
 
         // get the pointer from $v0
-        MIPSGenerator.getInstance().mov("$s2", "$v0");
+        MIPSGenerator.getInstance().move("$s2", "$v0");
 
-        MIPSGenerator.getInstance().mov("$s0", t1.toString());
-        MIPSGenerator.getInstance().mov("$s1", t2.toString());
+        MIPSGenerator.getInstance().move("$s0", t1.toString());
+        MIPSGenerator.getInstance().move("$s1", t2.toString());
 
         // label assign_first
         MIPSGenerator.getInstance().label(assign_first);
@@ -104,7 +104,7 @@ public class IRcommand_Binop_String_Concat extends IRcommand {
 
         // set the last char to null
         MIPSGenerator.getInstance().sb("$zero", "$s2", 0);
-        MIPSGenerator.getInstance().mov(dst.toString(), "$v0");
+        MIPSGenerator.getInstance().move(dst.toString(), "$v0");
 
         // clear stack
         MIPSGenerator.getInstance().pop_from_stack("$s3");

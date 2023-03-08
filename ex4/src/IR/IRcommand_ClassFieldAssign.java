@@ -40,17 +40,17 @@ public class IRcommand_ClassFieldAssign extends IRcommand
 		if (my_class != null)
 		{
 			MIPSGenerator.getInstance().beqz(my_class.toString(), "abort_pointer");
-			MIPSGenerator.getInstance().sw(value.toString(), my_class.toString(), offset);
+			MIPSGenerator.getInstance().store_word(value.toString(), my_class.toString(), offset);
 		} 
 		else
 		{
 			if (value != null)
 			{
-				MIPSGenerator.getInstance().sw(value.toString(), "$a0", offset);
+				MIPSGenerator.getInstance().store_word(value.toString(), "$a0", offset);
 			} 
 			else 
 			{
-				MIPSGenerator.getInstance().sw("$zero", "$a0", offset);
+				MIPSGenerator.getInstance().store_word("$zero", "$a0", offset);
 			}
 		}
 	}

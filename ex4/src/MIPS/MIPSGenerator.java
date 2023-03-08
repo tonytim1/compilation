@@ -208,6 +208,24 @@ public class MIPSGenerator
 		fileWriter.format("\tlw %s,0($sp)\n", var);
 		fileWriter.format("\taddu $sp,$sp,4\n");
 	}
+	public void malloc()
+	{
+		fileWriter.format("\tli $v0,9\n");
+		fileWriter.format("\tsyscall\n");
+	}
+	public void malloc_num_bytes(int numOfBytes)
+	{
+		fileWriter.format("\tli $a0,%d\n",numOfBytes);
+		fileWriter.format("\tli $v0,9\n");
+		fileWriter.format("\tsyscall\n");
+	}
+	public void text_segment(){
+		fileWriter.format(".text\n");
+	}
+	public void store_word(String src,String dst, int offset)
+	{
+		fileWriter.format("\tsw %s, %d(%s)\n",src,offset,dst);
+	}
 	
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */

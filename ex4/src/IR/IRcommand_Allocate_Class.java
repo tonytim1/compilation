@@ -42,7 +42,7 @@ public class IRcommand_Allocate_Class extends IRcommand
 
 		// class allocation function
 		m.label_text(String.format("class_%s", my_class.name));
-		m.malloc(my_class.getMallocSize());
+		m.malloc_num_bytes(my_class.getMallocSize());
 
 		// virtual table to class pointer
 		m.push_to_stack("$s0");
