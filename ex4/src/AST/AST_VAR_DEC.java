@@ -148,7 +148,7 @@ public class AST_VAR_DEC extends AST_Node {
 		} else{
 			TEMP t1;
 			if(exp != null) t1 = exp.IRme();
-			else if (newexp != null) t1 = newexp.IRme();
+			else if (newExp != null) t1 = newExp.IRme();
 			else t1 = null;
 			if(this.scope_type.equals("local_func")){
 				IR.getInstance().Add_IRcommand(new IRcommand_Store(id,t1,this.scope_type,this.index));

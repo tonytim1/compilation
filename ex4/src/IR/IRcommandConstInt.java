@@ -31,6 +31,6 @@ public class IRcommandConstInt extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
-		MIPSGenerator.getInstance().li(t,value);
+		MIPSGenerator.getInstance().li(t.toString(),value);
 	}
 }

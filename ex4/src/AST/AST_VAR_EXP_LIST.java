@@ -102,7 +102,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 	}
 	
 	public TEMP IRme(){
-		ir = IR.getInstance();
+		IR ir = IR.getInstance();
 		TEMP_LIST args;
 		if (var == null)
 		{

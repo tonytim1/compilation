@@ -101,7 +101,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 	}
 	
 	public TEMP IRme(){
-		ir = IR.getInstance();
+		IR ir = IR.getInstance();
 		TEMP_LIST args;
 		if (var == null)
 		{
