@@ -2,6 +2,10 @@
 /* PACKAGE */
 /***********/
 package IR;
+import TYPES.*;
+import TEMP.*;
+import MIPS.*;
+import REGALLOC.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -10,15 +14,13 @@ package IR;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-import TEMP.*;
-import MIPS.*;
 
-public class IRcommand_ConstInt extends IRcommand
+public class IRcommandConstInt extends IRcommand
 {
 	TEMP t;
 	int value;
 	
-	public IRcommand_ConstInt(TEMP t,int value)
+	public IRcommandConstInt(TEMP t,int value)
 	{
 		this.t = t;
 		this.value = value;
@@ -31,7 +33,6 @@ public class IRcommand_ConstInt extends IRcommand
 	{
 		MIPSGenerator.getInstance().li(t.toString(),value);
 	}
-
 	public TEMP_LIST getLiveTemp(TEMP_LIST input){
 		TEMP_LIST result = input.clone();
 		result.remove(t);
