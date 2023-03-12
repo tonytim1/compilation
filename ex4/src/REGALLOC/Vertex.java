@@ -64,7 +64,7 @@ public class Vertex {
     }
 
     public void buildDependancyGraph() {
-        if (!this.visitedVertex) {
+        if (!this.isVisited) {
             System.out.format("command: %s\n", this.command.getClass());
             this.input.printList();
             System.out.println();
@@ -75,7 +75,7 @@ public class Vertex {
                     e.value.addNeighbor(f.value);
                 }
             }
-            this.visitedVertex = true;
+            this.isVisited = true;
             // go to every neighbor and add his TEMPS
             for (VertexList j = this.next; j != null; j = j.tail) {
                 if (j.head != null)
