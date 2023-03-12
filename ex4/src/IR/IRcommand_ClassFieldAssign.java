@@ -54,4 +54,11 @@ public class IRcommand_ClassFieldAssign extends IRcommand
 			}
 		}
 	}
+	
+	public TEMP_LIST getLiveTemp(TEMP_LIST input){
+		TEMP_LIST result = input.clone();
+		result.add(my_class);
+		result.add(value);
+		return result;
+	}
 }

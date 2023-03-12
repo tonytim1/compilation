@@ -31,4 +31,10 @@ public class IRcommand_ClassNew extends IRcommand
 		MIPSGenerator.getInstance().jal(String.format("class_%s", name));
 		MIPSGenerator.getInstance().pop_from_stack(dst.toString());        
     }
+		
+	public TEMP_LIST getLiveTemp(TEMP_LIST input){
+		TEMP_LIST result = input.clone();
+		result.remove(dst);
+		return result;
+	}
 }

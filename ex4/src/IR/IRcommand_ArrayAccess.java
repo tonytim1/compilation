@@ -45,4 +45,12 @@ public class IRcommand_ArrayAccess extends IRcommand
 		
 		m.pop_from_stack("$s0");
 	}
+
+	public TEMP_LIST getLiveTemp(TEMP_LIST input){
+		TEMP_LIST result = input.clone();
+		result.add(array);
+		result.add(index);
+		result.remove(dst);
+		return result;
+	}
 }

@@ -52,4 +52,13 @@ public class IRcommand_FuncCall extends IRcommand
             m.move(dst.toString(),"$v0");
         }
     }
+
+	public TEMP_LIST getLiveTemp(TEMP_LIST input){
+		TEMP_LIST result = input.clone();
+		for(TEMP_LIST e=args;e!=null;e=e.next){
+			result.add(e.value);
+		}
+		if(dst != null) result.remove(dst);
+		return result;
+	}
 }

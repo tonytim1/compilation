@@ -37,4 +37,5 @@ public class IRcommand_ConstInt extends IRcommand
 		result.remove(t);
 		return result;
 	}
+
 }

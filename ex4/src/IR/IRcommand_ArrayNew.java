@@ -34,4 +34,11 @@ public class IRcommand_ArrayNew extends IRcommand
 		MIPSGenerator.getInstance().move(dst.toString(),"$v0");
 		MIPSGenerator.getInstance().store_word(size.toString(),dst.toString(),0);
 	}
+
+	public TEMP_LIST getLiveTemp(TEMP_LIST input){
+		TEMP_LIST result = input.clone();
+		result.add(size);
+		result.add(dst);
+		return result;
+	}
 }
