@@ -17,7 +17,7 @@ import REGALLOC.*;
 
 public class IR {
     private IRcommand head = null;
-    private IRcommandList tail = null;
+    private IRcommand_List tail = null;
 
     /******************/
     /* Add IR command */
@@ -27,13 +27,13 @@ public class IR {
         if ((head == null) && (tail == null)) {
             this.head = cmd;
         } else if ((head != null) && (tail == null)) {
-            this.tail = new IRcommandList(cmd, null);
+            this.tail = new IRcommand_List(cmd, null);
         } else {
-            IRcommandList it = tail;
+            IRcommand_List it = tail;
             while ((it != null) && (it.tail != null)) {
                 it = it.tail;
             }
-            it.tail = new IRcommandList(cmd, null);
+            it.tail = new IRcommand_List(cmd, null);
         }
     }
 
@@ -50,7 +50,7 @@ public class IR {
 
     /********************/
     public void OPTme() {
-        IRcommandList commandList = new IRcommandList(head, tail);
+        IRcommand_List commandList = new IRcommand_List(head, tail);
         VertexList labels = null;
         VertexList jumps = null;
         VertexList functions = null;

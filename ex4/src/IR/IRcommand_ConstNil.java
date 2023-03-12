@@ -4,11 +4,11 @@ import TEMP.*;
 import MIPS.*;
 import REGALLOC.*;
 
-public class IRcommandConstNil extends IRcommand {
+public class IRcommand_ConstNil extends IRcommand {
 
 	TEMP t;
 
-	public IRcommandConstNil(TEMP t) {
+	public IRcommand_ConstNil(TEMP t) {
 	    this.t = t;
     }
 

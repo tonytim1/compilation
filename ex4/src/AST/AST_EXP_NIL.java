@@ -33,7 +33,7 @@ public class AST_EXP_NIL extends AST_EXP
 
 	public TEMP IRme() {
 	    TEMP t = TEMP_FACTORY.getInstance().getFreshTemp();
-	    IR.getInstance().Add_IRcommand(new IRcommandConstNil(t));
+	    IR.getInstance().Add_IRcommand(new IRcommand_ConstNil(t));
 	    return t;
 	}
 }

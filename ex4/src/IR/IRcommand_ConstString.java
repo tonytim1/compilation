@@ -15,11 +15,11 @@ import REGALLOC.*;
 /* PROJECT IMPORTS */
 /*******************/
 
-public class IRcommandConstString extends IRcommand  {
+public class IRcommand_ConstString extends IRcommand  {
     TEMP t;
     String value;
 
-    public IRcommandConstString(TEMP t, String value)
+    public IRcommand_ConstString(TEMP t, String value)
     {
         this.t = t;
         this.value = value;

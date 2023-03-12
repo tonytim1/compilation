@@ -15,12 +15,12 @@ import REGALLOC.*;
 /* PROJECT IMPORTS */
 /*******************/
 
-public class IRcommandList
+public class IRcommand_List
 {
 	public IRcommand head;
-	public IRcommandList tail;
+	public IRcommand_List tail;
 
-	IRcommandList(IRcommand head, IRcommandList tail)
+	IRcommand_List(IRcommand head, IRcommand_List tail)
 	{
 		this.head = head;
 		this.tail = tail;
@@ -33,10 +33,5 @@ public class IRcommandList
 	{
 		if (head != null) head.MIPSme();
 		if (tail != null) tail.MIPSme();
-	}
-	public TEMP_LIST getLiveTemp(TEMP_LIST input){
-		TEMP_LIST result = input.clone();
-		result.add(src);
-		return result;
 	}
 }
