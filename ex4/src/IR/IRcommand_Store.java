@@ -46,7 +46,7 @@ public class IRcommand_Store extends IRcommand {
             MIPSGenerator.getInstance().push_to_stack("$s0");
             MIPSGenerator.getInstance().lw("$s0", "$fp", 8);
             MIPSGenerator.getInstance().sw(src.toString(), "$s0", (index + 1) * 4);
-            MIPSGenerator.getInstance().popStackTo("$s0");
+            MIPSGenerator.getInstance().pop_from_stack("$s0");
         }
 
     }
@@ -56,3 +56,4 @@ public class IRcommand_Store extends IRcommand {
         result.add(src);
         return result;
     }
+}

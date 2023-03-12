@@ -142,7 +142,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		this.scope_type = s.getVarScope(id);
 		if (this.scope_type.equals("local_class"))
 		{
-			this.class_name = s.curClass.name;
+			this.class_name = s.curr_class.name;
 		}
 
 		/*****************/
@@ -162,7 +162,9 @@ public class AST_FUNC_DEC extends AST_Node {
 		else
 			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(null, id, varNum));
 		// process statements
-		if(stmts != null) stmts.IRme();
+		if(stmtList != null) {
+			stmtList.IRme();
+		}
 		// add return statement if there is none
 		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(null));
 		return null;

@@ -67,6 +67,10 @@ public class MIPSGenerator
 		int idxsrc=src.getSerialNumber();
 		fileWriter.format("\tsw Temp_%d,global_%s\n",idxsrc,var_name);		
 	}
+	public void load_label(String dst,String var_name)
+	{
+		fileWriter.format("\tlw %s,global_%s\n",dst,var_name);
+	}
 	public void li(String t,int value)
 	{
 		int idx=t.getSerialNumber();

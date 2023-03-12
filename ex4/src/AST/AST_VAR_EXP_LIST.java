@@ -108,7 +108,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 		{
 			if (expList == null)
 			{
-				ir.Add_IRcommand(new IRcommand_Allocate_Func(null, name, null));
+				ir.Add_IRcommand(new IRcommand_FunCall(null, name, null));
 			}
 			else 
 			{
@@ -123,7 +123,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 				} 
 				else 
 				{
-					ir.Add_IRcommand(new IRcommand_Allocate_Func(null, name, args));
+					ir.Add_IRcommand(new IRcommand_FunCall(null, name, args));
 				}
 			}
 		} 

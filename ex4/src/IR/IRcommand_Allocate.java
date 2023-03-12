@@ -23,12 +23,30 @@ public class IRcommand_Allocate extends IRcommand
 	{
 		this.var_name = var_name;
 	}
+	public IRcommand_Allocate(String scope_type,String var_name,int var_value)
+	{
+		this(scope_type);
+		this.var_name = var_name;
+		this.var_value_word = var_value;
+	}
+	public IRcommand_Allocate(String scope_type,String var_name,String var_value)
+	{
+		this(scope_type);
+		this.var_name = var_name;
+		this.var_value_string = var_value;
+	}
 	
 	/***************/
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme()
 	{
-		MIPSGenerator.getInstance().allocate(var_name);
+		if(scope_type.equals("global")){
+			if(var_value_string != null){
+				MIPSGenerator.getInstance().allocate_string(String.format("global_%s",var_name),var_value_string);
+			} else {
+				MIPSGenerator.getInstance().allocate(var_name,var_value_word);
+			}
+		}
 	}
 }
