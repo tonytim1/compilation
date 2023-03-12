@@ -34,9 +34,7 @@ public class MIPSGenerator
 	}
 	public void print_int(String t)
 	{
-		int idx=t.getSerialNumber();
-		// fileWriter.format("\taddi $a0,Temp_%d,0\n",idx);
-		fileWriter.format("\tmove $a0,Temp_%d\n",idx);
+		fileWriter.format("\tmove $a0,%s\n",t);
 		fileWriter.format("\tli $v0,1\n");
 		fileWriter.format("\tsyscall\n");
 		fileWriter.format("\tli $a0,32\n");
@@ -52,20 +50,18 @@ public class MIPSGenerator
 	//	
 	//	return t;
 	//}
-	public void allocate(String var_name)
+	public void allocate(String var_name,int value)
 	{
 		fileWriter.format(".data\n");
-		fileWriter.format("\tglobal_%s: .word 721\n",var_name);
+		fileWriter.format("\tglobal_%s: .word %d\n",var_name, value);
 	}
 	public void load(String dst,String var_name)
 	{
-		int idxdst=dst.getSerialNumber();
-		fileWriter.format("\tlw Temp_%d,global_%s\n",idxdst,var_name);
+		fileWriter.format("\tla %s,global_%s\n",dst,var_name);
 	}
 	public void store(String var_name,String src)
 	{
-		int idxsrc=src.getSerialNumber();
-		fileWriter.format("\tsw Temp_%d,global_%s\n",idxsrc,var_name);		
+		fileWriter.format("\tsw %s,global_%s\n",src,var_name);		
 	}
 	public void load_label(String dst,String var_name)
 	{
@@ -73,8 +69,7 @@ public class MIPSGenerator
 	}
 	public void li(String t,int value)
 	{
-		int idx=t.getSerialNumber();
-		fileWriter.format("\tli Temp_%d,%d\n",idx,value);
+		fileWriter.format("\tli %s, %d\n",t,value);
 	}
 	public void la(String dst,String src)
 	{
@@ -100,27 +95,15 @@ public class MIPSGenerator
 	}
 	public void add(String dst,String oprnd1,String oprnd2)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		int dstidx=dst.getSerialNumber();
-
-		fileWriter.format("\tadd Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
+		fileWriter.format("\tadd %s,%s,%s\n",dst,oprnd1,oprnd2);
 	}
 	public void sub(String dst,String oprnd1,String oprnd2)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		int dstidx=dst.getSerialNumber();
-
-		fileWriter.format("\tsubu Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
+		fileWriter.format("\tsub %s,%s,%s\n",dst,oprnd1,oprnd2);
 	}
 	public void mul(String dst,String oprnd1,String oprnd2)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		int dstidx=dst.getSerialNumber();
-
-		fileWriter.format("\tmul Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
+		fileWriter.format("\tmul %s,%s,%s\n",dst,oprnd1,oprnd2);
 	}
 	public void addi(String dst, String src, int val) {
 		fileWriter.format("\taddi %s,%s,%d\n", dst, src, val);
@@ -158,47 +141,37 @@ public class MIPSGenerator
 	{
 		fileWriter.format("\tj %s\n",inlabel);
 	}	
+	public void blt(String oprnd1,String oprnd2,String label)
+	{
+		fileWriter.format("\tblt %s,%s,%s\n",oprnd1,oprnd2,label);				
+	}	
+	public void bge(String oprnd1,String oprnd2,String label)
+	{
+		fileWriter.format("\tbge %s,%s,%s\n",oprnd1,oprnd2,label);				
+	}	
 	public void ble(String oprnd1,String oprnd2,String label)
 	{
 		fileWriter.format("\tble %s,%s,%s\n",oprnd1,oprnd2,label);				
-	}
-	public void blt(String oprnd1,String oprnd2,String label)
-	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		
-		fileWriter.format("\tblt Temp_%d,Temp_%d,%s\n",i1,i2,label);				
-	}
-	public void bge(String oprnd1,String oprnd2,String label)
-	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		
-		fileWriter.format("\tbge Temp_%d,Temp_%d,%s\n",i1,i2,label);				
-	}
+	}	
 	public void bne(String oprnd1,String oprnd2,String label)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		
-		fileWriter.format("\tbne Temp_%d,Temp_%d,%s\n",i1,i2,label);				
+		fileWriter.format("\tbne %s,%s,%s\n",oprnd1,oprnd2,label);				
 	}
 	public void beq(String oprnd1,String oprnd2,String label)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		
-		fileWriter.format("\tbeq Temp_%d,Temp_%d,%s\n",i1,i2,label);				
+		fileWriter.format("\tbeq %s,%s,%s\n",oprnd1,oprnd2,label);				
 	}
 	public void beqz(String oprnd1,String label)
-	{
-		int i1 =oprnd1.getSerialNumber();
-				
-		fileWriter.format("\tbeq Temp_%d,$zero,%s\n",i1,label);				
+	{		
+		fileWriter.format("\tbeqz %s,%s\n",oprnd1,label);				
+	}
+	public void bltz(String oprnd1,String label)
+	{		
+		fileWriter.format("\tbltz %s,%s\n",oprnd1,label);				
 	}
 	public void move(String oprnd1, String oprnd2)
 	{
-		fileWriter.format("\tmove %s, %s\n",dst,src);
+		fileWriter.format("\tmove %s, %s\n",oprnd1,oprnd2);
 	}
 	public void sll(String dst,String oprnd1,int times)
 	{
@@ -276,13 +249,14 @@ public class MIPSGenerator
 	{
 		fileWriter.format("\tdiv %s,%s,%s\n",dst,oprnd1,oprnd2);
 	}
-	public void bltz(String oprnd1,String label)
-	{		
-		fileWriter.format("\tbltz %s,%s\n",oprnd1,label);				
-	}
 	public void print_string(){
 		fileWriter.format("\tli $v0,4\n");
 		fileWriter.format("\tsyscall\n");
+	}
+	public void exit()
+	{
+		fileWriter.print("\tli $v0,10\n");
+		fileWriter.print("\tsyscall\n");
 	}
 	
 	/**************************************/

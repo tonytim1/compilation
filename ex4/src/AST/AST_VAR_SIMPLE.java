@@ -57,7 +57,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		{
 			this.index = s.getLocalIndex(name);
 		}
-		if (id_type == TYPE_STRING.getInstance()) 
+		if (t == TYPE_STRING.getInstance()) 
 		{
 			this.is_string = true;
 		}

@@ -17,7 +17,11 @@ import REGALLOC.*;
 
 public class IRcommand_Allocate extends IRcommand
 {
-	String var_name;
+	String scope_type;
+	String var_name = null;
+	int var_value_word = 0;
+	String var_value_string = null;
+
 	
 	public IRcommand_Allocate(String var_name)
 	{

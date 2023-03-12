@@ -41,7 +41,7 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand {
         MIPSGenerator.getInstance().push_to_stack("$s2");
         MIPSGenerator.getInstance().push_to_stack("$s3");
 
-        // mov the pointer of the 2 string to a register
+        // move the pointer of the 2 string to a register
         MIPSGenerator.getInstance().move("$s2", t1.toString());
         MIPSGenerator.getInstance().move("$s3", t2.toString());
 

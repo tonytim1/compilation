@@ -74,7 +74,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		
 		// For IRME
 		this.scope_type = SYMBOL_TABLE.getInstance().getVarScope(name); 
-		this.index = ((TYPE_CLASS) var_type).getFieldIndex(name);
+		this.index = ((TYPE_CLASS) t).getFieldIndex(name);
 		
 		return member;
 	}

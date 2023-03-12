@@ -155,7 +155,7 @@ public class SYMBOL_TABLE
 	/* get the attribute index in a class */
 	/**************************************/
 	public int getFieldIndex(String name){
-		return cur_class.getFieldIndex(name);
+		return curr_class.getFieldIndex(name);
 	}
 
 

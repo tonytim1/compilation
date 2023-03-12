@@ -10,6 +10,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 	public AST_VAR var;
 	public AST_EXP_LIST expList;
 	public String name;
+	public TYPE_CLASS tc;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -56,7 +57,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 				throw new SEMANTIC_EXCEPTION(lineNumber);
 			}
 
-			TYPE_CLASS tc = (TYPE_CLASS) varType;
+			this.tc = (TYPE_CLASS) varType;
 
 			TYPE member = tc.findClassFunc(name);
 			if (member != null) {
@@ -108,7 +109,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 		{
 			if (expList == null)
 			{
-				ir.Add_IRcommand(new IRcommand_FunCall(null, name, null));
+				ir.Add_IRcommand(new IRcommand_FuncCall(null, name, null));
 			}
 			else 
 			{
@@ -123,14 +124,14 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 				} 
 				else 
 				{
-					ir.Add_IRcommand(new IRcommand_FunCall(null, name, args));
+					ir.Add_IRcommand(new IRcommand_FuncCall(null, name, args));
 				}
 			}
 		} 
 		else 
 		{
 			TEMP t1 = var.IRme();
-			int func_index = class_type.getFuncIndex(name);
+			int func_index = tc.getFuncIndex(name);
 			if (expList == null)
 			{
 				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, null, func_index));
