@@ -144,8 +144,8 @@ public class TYPE_CLASS extends TYPE
 	public boolean existInFatherScope(String name){
 		if(this.father != null){
 			TYPE_CLASS fatherClass = this.father;
-			for (TYPE_CLASS_VAR_DEC_LIST e=fatherClass.data_members;e!=null;e=e.tail){
-				if (e.head.name.equals(name)){
+			for (TYPE_LIST member=fatherClass.data_members;member!=null;member=member.tail){
+				if (member.head != null && member.head.name.equals(name)){
 					return true;
 				}
 			}

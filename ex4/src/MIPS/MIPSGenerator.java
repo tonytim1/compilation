@@ -99,6 +99,12 @@ public class MIPSGenerator
 
 		fileWriter.format("\tadd Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
 	}
+	public void addi(String dst, String src, int val) {
+		fileWriter.format("\taddi %s,%s,%d\n", dst, src, val);
+	}
+	public void addu(String dst, String src, int val) {
+		fileWriter.format("\taddu %s,%s,%d\n", dst, src, val);
+	}
 	public void sub(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{
 		int i1 =oprnd1.getSerialNumber();
@@ -106,6 +112,10 @@ public class MIPSGenerator
 		int dstidx=dst.getSerialNumber();
 
 		fileWriter.format("\tsubu Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
+	}
+	public void subu(String dst,String src,int offset)
+	{
+		fileWriter.format("\tsubu %s,%s,%d\n",dst,src,offset);
 	}
 	public void mul(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{
@@ -175,12 +185,9 @@ public class MIPSGenerator
 				
 		fileWriter.format("\tbeq Temp_%d,$zero,%s\n",i1,label);				
 	}
-	public void move(TEMP oprnd1, TEMP oprnd2)
+	public void move(String dst,String src)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-				
-		fileWriter.format("\tmove Temp_%d,Temp_%d\n",i1,i2);				
+		fileWriter.format("\tmove %s, %s\n",dst,src);
 	}
 	public void jr(String dst)
 	{
@@ -189,6 +196,10 @@ public class MIPSGenerator
 	public void jal(String label)
 	{
 		fileWriter.format("\tjal %s\n",label);				
+	}
+	public void jalr(String dst)
+	{
+		fileWriter.format("\tjalr %s\n",dst);				
 	}
 	public void push_to_stack(String var)
 	{
@@ -225,6 +236,18 @@ public class MIPSGenerator
 	public void store_word(String src,String dst, int offset)
 	{
 		fileWriter.format("\tsw %s, %d(%s)\n",src,offset,dst);
+	}
+	public void funcPrologue(){
+		for(int i=0;i<10;i++){
+			fileWriter.format("\tsubu $sp,$sp,4\n");
+			fileWriter.format("\tsw $t%d,0($sp)\n", i);
+		}
+	}
+	public void funcEpilogue(){
+		for(int i=0;i<10;i++){
+			fileWriter.format("\tlw $t%d,0($sp)\n", 9-i);
+			fileWriter.format("\taddu $sp,$sp,4\n");			
+		}
 	}
 	
 	/**************************************/
