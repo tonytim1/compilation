@@ -30,7 +30,7 @@ public class IRcommand_ArrayAccess extends IRcommand
 	
 	public void MIPSme()
 	{
-        m = MIPSGenerator.getInstance();
+		MIPSGenerator m = MIPSGenerator.getInstance();
 		m.push_to_stack("$s0");
 		// put in dst the size of the array
 		m.bltz(index.toString(), "abort_array");
