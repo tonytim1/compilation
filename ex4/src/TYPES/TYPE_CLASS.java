@@ -87,9 +87,9 @@ public class TYPE_CLASS extends TYPE
 		return 4 * (this.getFieldList().size() + 1);
 	}
 
-	public List<String> getFuncList()
+	public LinkedList<String> getFuncList()
 	{
-		List<String> func_list;
+		LinkedList<String> func_list;
 		if (father != null)
 		{
 			func_list = father.getFuncList();

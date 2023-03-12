@@ -29,7 +29,7 @@ public class IRcommand_Allocate_Class extends IRcommand
 	{	
 		MIPSGenerator m = MIPSGenerator.getInstance();
         // virtual table
-		List<String> funcList = my_class.getFuncList();
+		LinkedList<String> funcList = my_class.getFuncList();
         if (!funcList.isEmpty())
         {
 			m.label_data(String.format("vt_%s", my_class.name));

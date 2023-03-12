@@ -44,8 +44,8 @@ public class IRcommand_Binop_LT_Integers extends IRcommand
 		/* [2] if (t1< t2) goto label_AssignOne;  */
 		/*     if (t1>=t2) goto label_AssignZero; */
 		/******************************************/
-		MIPSGenerator.getInstance().blt(t1,t2,label_AssignOne);
-		MIPSGenerator.getInstance().bge(t1,t2,label_AssignZero);
+		MIPSGenerator.getInstance().blt(t1.toString(),t2.toString(),label_AssignOne);
+		MIPSGenerator.getInstance().bge(t1.toString(),t2.toString(),label_AssignZero);
 
 		/************************/
 		/* [3] label_AssignOne: */
@@ -55,7 +55,7 @@ public class IRcommand_Binop_LT_Integers extends IRcommand
 		/*                      */
 		/************************/
 		MIPSGenerator.getInstance().label(label_AssignOne);
-		MIPSGenerator.getInstance().li(dst,1);
+		MIPSGenerator.getInstance().li(dst.toString(),1);
 		MIPSGenerator.getInstance().jump(label_end);
 
 		/*************************/
@@ -66,7 +66,7 @@ public class IRcommand_Binop_LT_Integers extends IRcommand
 		/*                       */
 		/*************************/
 		MIPSGenerator.getInstance().label(label_AssignZero);
-		MIPSGenerator.getInstance().li(dst,0);
+		MIPSGenerator.getInstance().li(dst.toString(),0);
 		MIPSGenerator.getInstance().jump(label_end);
 
 		/******************/

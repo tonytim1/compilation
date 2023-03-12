@@ -76,10 +76,13 @@ public class MIPSGenerator
 	{
 		fileWriter.format("\tla %s, %s\n",dst,src);
 	}
-	public void allocate(String var_name,int value)
+	public void sb(String dst,String src,int offset)
 	{
-		fileWriter.format(".data\n");
-		fileWriter.format("\tglobal_%s: .word %d\n",var_name, value);
+		fileWriter.format("\tsb %s, %d(%s)\n",dst,offset,src);
+	}
+	public void lb(String dst,String src,int offset)
+	{
+		fileWriter.format("\tlb %s, %d(%s)\n",dst,offset,src);
 	}
 	public void allocate_func(String var_name)
 	{
@@ -115,6 +118,16 @@ public class MIPSGenerator
 
 		fileWriter.format("\tmul Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
 	}
+	public void addi(String dst, String src, int val) {
+		fileWriter.format("\taddi %s,%s,%d\n", dst, src, val);
+	}
+	public void addu(String dst, String src, int val) {
+		fileWriter.format("\taddu %s,%s,%d\n", dst, src, val);
+	}
+	public void subu(String dst,String src,int offset)
+	{
+		fileWriter.format("\tsubu %s,%s,%d\n",dst,src,offset);
+	}
 	public void label(String inlabel)
 	{
 		if (inlabel.equals("main"))
@@ -141,6 +154,10 @@ public class MIPSGenerator
 	{
 		fileWriter.format("\tj %s\n",inlabel);
 	}	
+	public void ble(String oprnd1,String oprnd2,String label)
+	{
+		fileWriter.format("\tble %s,%s,%s\n",oprnd1,oprnd2,label);				
+	}
 	public void blt(String oprnd1,String oprnd2,String label)
 	{
 		int i1 =oprnd1.getSerialNumber();
@@ -179,6 +196,10 @@ public class MIPSGenerator
 	{
 		fileWriter.format("\tmove %s, %s\n",dst,src);
 	}
+	public void sll(String dst,String oprnd1,int times)
+	{
+		fileWriter.format("\tsll %s,%s,%d\n",dst,oprnd1,times);
+	}
 	public void jr(String dst)
 	{
 		fileWriter.format("\tjr %s\n",dst);				
@@ -195,6 +216,14 @@ public class MIPSGenerator
 	{
 		fileWriter.format("\tsubu $sp,$sp,4\n");
 		fileWriter.format("\tsw %s,0($sp)\n", var);		
+	}
+	public void lw(String dst,String src, int offset)
+	{
+		fileWriter.format("\tlw %s, %d(%s)\n",dst,offset,src);
+	}
+	public void sw(String src,String dst, int offset)
+	{
+		fileWriter.format("\tsw %s, %d(%s)\n",src,offset,dst);
 	}
 	public int pushList(TEMP_LIST lst){
 		if(lst == null){
@@ -238,6 +267,27 @@ public class MIPSGenerator
 			fileWriter.format("\tlw $t%d,0($sp)\n", 9-i);
 			fileWriter.format("\taddu $sp,$sp,4\n");			
 		}
+	}
+	public void div(String dst,String oprnd1,String oprnd2)
+	{
+		fileWriter.format("\tdiv %s,%s,%s\n",dst,oprnd1,oprnd2);
+	}
+	public void bltz(String oprnd1,String label)
+	{		
+		fileWriter.format("\tbltz %s,%s\n",oprnd1,label);				
+	}
+	public void print_string(){
+		fileWriter.format("\tli $v0,4\n");
+		fileWriter.format("\tsyscall\n");
+	}
+	public void print_int(String t)
+	{
+		fileWriter.format("\tmove $a0,%s\n",t);
+		fileWriter.format("\tli $v0,1\n");
+		fileWriter.format("\tsyscall\n");
+		fileWriter.format("\tli $a0,32\n");
+		fileWriter.format("\tli $v0,11\n");
+		fileWriter.format("\tsyscall\n");
 	}
 	
 	/**************************************/

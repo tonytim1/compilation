@@ -30,10 +30,10 @@ public class IRcommand_FuncReturn extends IRcommand
         // move value to $v0
 		if(value != null)
         {
-            m.movee("$v0",value.toString());	
+            m.move("$v0",value.toString());	
         }
 		// pop out all local func variables from stack
-		m.movee("$sp","$fp");
+		m.move("$sp","$fp");
 		// pop fp from stack
 		m.pop_from_stack("$fp");
 		// pop return address from stack
