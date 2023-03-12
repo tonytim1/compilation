@@ -14,7 +14,7 @@ public abstract class AST_C_FIELD extends AST_Node {
 
 	public AST_C_FIELD(int lineNumber){
         super(lineNumber);
-        self.typeCField = null;
+        this.typeCField = null;
     }
 	public void PrintMe()
 	{

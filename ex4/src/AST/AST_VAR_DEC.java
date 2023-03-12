@@ -102,7 +102,8 @@ public class AST_VAR_DEC extends AST_Node {
 		/***************************************************/
 		/* [4] Enter the Var Type to the Symbol Table */
 		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(id,t);
+		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
+		s.enter(id,t);
 
 		/****************/
 		/* [4.5] For IR part

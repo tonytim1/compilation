@@ -120,7 +120,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
 	    t1 = left.IRme();
 	    t2 = right.IRme();
-	    switch(OP) {
+	    switch(OP.OP) {
 			case 1: {
 				// case: addition
 				if (this.stringConcat) {
