@@ -50,5 +50,6 @@ public class AST_STMT_LIST extends AST_Node
 	    if (tail != null) {
 	        tail.IRme();
 	    }
+		return null;
 	}
 }
