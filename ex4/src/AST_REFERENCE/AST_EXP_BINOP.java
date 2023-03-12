@@ -102,7 +102,7 @@ public class AST_EXP_BINOP extends AST_EXP
 	{
 		TEMP t1 = null;
 		TEMP t2 = null;
-		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
 				
 		if (left  != null) t1 = left.IRme();
 		if (right != null) t2 = right.IRme();

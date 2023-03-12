@@ -46,7 +46,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 
 	public TEMP IRme()
 	{
-	    Temp t = null;
+	    TEMP t = null;
 	    if (exp != null)
 	    {
 	        t = exp.IRme();

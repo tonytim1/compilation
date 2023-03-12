@@ -66,7 +66,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
     }
 	
 	public TEMP IRme(){
-		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
 		IR.getInstance().Add_IRcommand(new IRcommand_Load(dst, name, scope_type, index, is_string));
 		return dst;
 	}

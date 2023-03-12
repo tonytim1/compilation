@@ -52,7 +52,7 @@ public class AST_NEW_EXP extends AST_Node {
 	}
 
     public TEMP IRme(){
-		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
 		if(exp != null){
 			TEMP size = exp.IRme();
 			IR.getInstance().Add_IRcommand(new IRcommand_ArrayNew(dst, size));

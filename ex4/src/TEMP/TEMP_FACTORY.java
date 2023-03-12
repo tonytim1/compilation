@@ -16,7 +16,7 @@ public class TEMP_FACTORY
 {
 	private int counter=0;
 	
-	public TEMP getFreshTEMP()
+	public TEMP getFreshTemp()
 	{
 		TEMP fresh = new TEMP(counter++);
 		REG_ALLOC.getInstance().addTemp(fresh);
