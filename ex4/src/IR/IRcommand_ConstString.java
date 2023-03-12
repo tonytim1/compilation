@@ -31,4 +31,10 @@ public class IRcommandConstString extends IRcommand  {
 		MIPSGenerator.getInstance().text_segment(); // Back to text segment
 		MIPSGenerator.getInstance().la(t.toString(),str_name); // Loads the address of the string to register
 	}
+
+    public TEMP_LIST getLiveTemp(TEMP_LIST input){
+        TEMP_LIST result = input.clone();
+        result.remove(t);
+        return result;
+    }
 }

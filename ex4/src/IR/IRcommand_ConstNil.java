@@ -15,4 +15,9 @@ public class IRcommandConstNil extends IRcommand {
     public void MIPSme() {
         MIPSGenerator.getInstance().move(t.toString(),"$zero");
     }
+    public TEMP_LIST getLiveTemp(TEMP_LIST input){
+        TEMP_LIST result = input.clone();
+        result.remove(t);
+        return result;
+    }
 }
