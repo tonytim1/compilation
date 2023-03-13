@@ -52,14 +52,16 @@ public class AST_NEW_EXP extends AST_Node {
 	}
 
     public TEMP IRme(){
-		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
-		if(exp != null){
-			TEMP size = exp.IRme();
-			IR.getInstance().Add_IRcommand(new IRcommand_ArrayNew(dst, size));
-		} else {
-			// Exp -> null than type -> Identifier
-			IR.getInstance().Add_IRcommand(new IRcommand_ClassNew(dst, type.id));
-		}
-		return dst;
+        if (exp == null) {
+            TEMP t1 = TEMP_FACTORY.getInstance().getFreshTEMP();
+            IR.getInstance().Add_IRcommand(new IRcommand_New_Class_Object(t1, type.typeName));
+            return t1;
+        }
+        if (exp != null) {
+            TEMP t1 = exp.IRme();
+            TEMP t2 = TEMP_FACTORY.getInstance().getFreshTEMP();
+            IR.getInstance().Add_IRcommand(new IRcommand_New_Array(t2, t1));
+            return t2;
+        }
     }
 }
