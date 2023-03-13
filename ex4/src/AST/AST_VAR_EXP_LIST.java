@@ -103,18 +103,56 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 	}
 	
 	public TEMP IRme(){
-
-
+		IR ir = IR.getInstance();
 		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
-		TEMP_LIST args = null;
-		if (expList != null) args = expList.IRme();
-		if(name.equals("PrintInt") && args != null && args.next == null){
-			IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(args.value));
-		}else if(name.equals("PrintString") && args != null && args.next == null){
-			IR.getInstance().Add_IRcommand(new IRcommand_PrintString(args.value));
-		}else {
-			IR.getInstance().Add_IRcommand(new IRcommand_FuncCall(dst, name, args));
+		TEMP_LIST args;
+		if (var == null)
+		{
+			if (expList == null)
+			{
+				ir.Add_IRcommand(new IRcommand_FuncCall(null, name, null));
+			}
+			else 
+			{
+				args = expList.IRme();
+				if (name.equals("PrintInt") && args != null && args.next == null)
+				{
+					ir.Add_IRcommand(new IRcommand_PrintInt(args.value));
+				}
+				else if (name.equals("PrintString") && args != null && args.next == null)
+				{
+					ir.Add_IRcommand(new IRcommand_PrintString(args.value));
+				} 
+				else 
+				{
+					ir.Add_IRcommand(new IRcommand_FuncCall(null, name, args));
+				}
+			}
+		} 
+		else 
+		{
+			TEMP t1 = var.IRme();
+			int func_index = tc.getFuncIndex(name);
+			if (expList == null)
+			{
+				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, null, func_index));
+			}
+			else
+			{
+				args = expList.IRme();
+				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, args, func_index));
+			}
 		}
+		// TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
+		// TEMP_LIST args = null;
+		// if (expList != null) args = expList.IRme();
+		// if(name.equals("PrintInt") && args != null && args.next == null){
+		// 	IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(args.value));
+		// }else if(name.equals("PrintString") && args != null && args.next == null){
+		// 	IR.getInstance().Add_IRcommand(new IRcommand_PrintString(args.value));
+		// }else {
+		// 	IR.getInstance().Add_IRcommand(new IRcommand_FuncCall(dst, name, args));
+		// }
 		
 		return dst;
 	}

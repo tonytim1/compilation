@@ -43,7 +43,7 @@ func_monthJuly:
 	addu $sp,$sp,4
 	jr $ra
 .text
-func_getAge:
+Person_getAge:
 	subu $sp,$sp,4
 	sw $ra,0($sp)
 	subu $sp,$sp,4
@@ -66,7 +66,7 @@ func_getAge:
 	addu $sp,$sp,4
 	jr $ra
 .text
-func_birthday:
+Person_birthday:
 	subu $sp,$sp,4
 	sw $ra,0($sp)
 	subu $sp,$sp,4
@@ -141,7 +141,7 @@ init_class_Person:
 	addu $sp,$sp,4
 	jr $ra
 .text
-func_getAverage:
+Student_getAverage:
 	subu $sp,$sp,4
 	sw $ra,0($sp)
 	subu $sp,$sp,4
@@ -288,440 +288,446 @@ main:
 	move $fp, $sp
 	subu $sp,$sp,56
 	jal class_Student
-	lw $t1,0($sp)
+	lw $t0,0($sp)
 	addu $sp,$sp,4
-	sw $t1, -16($fp)
-	li $t1, 10
-	addi $a0,$t1,1
+	sw $t0, -16($fp)
+	li $t0, 10
+	addi $a0,$t0,1
 	sll $a0,$a0,2
 	li $v0,9
 	syscall
-	move $t5, $v0
-	sw $t1, 0($t5)
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	sw $t5, 28($t1)
-	li $t1, 13
-	addi $a0,$t1,1
+	move $t7, $v0
+	sw $t0, 0($t7)
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	sw $t7, 28($t0)
+	li $t0, 13
+	addi $a0,$t0,1
 	sll $a0,$a0,2
 	li $v0,9
 	syscall
-	move $t4, $v0
-	sw $t1, 0($t4)
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	sw $t4, 24($t1)
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 0
+	move $t6, $v0
+	sw $t0, 0($t6)
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	sw $t6, 24($t0)
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 0
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 1
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 1
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 2
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 2
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 3
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 3
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 4
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 4
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 5
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 5
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 6
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 6
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 7
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 7
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 8
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 8
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 9
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 9
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 10
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 10
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 11
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 11
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 7400
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 24($t1)
-	li $t1, 12
+	li $t7, 7400
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 24($t0)
+	li $t0, 12
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t1, 0
-	sw $t1, -20($fp)
-	li $t1, 1
-	sw $t1, -24($fp)
-	li $t1, 2
-	sw $t1, -28($fp)
-	li $t1, 3
-	sw $t1, -32($fp)
-	li $t1, 4
-	sw $t1, -36($fp)
-	li $t1, 5
-	sw $t1, -40($fp)
-	li $t1, 6
-	sw $t1, -44($fp)
-	li $t1, 7
-	sw $t1, -48($fp)
-	li $t1, 8
-	sw $t1, -52($fp)
-	li $t1, 9
-	sw $t1, -56($fp)
-	li $t5, 96
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -20($fp)
+	li $t0, 0
+	sw $t0, -20($fp)
+	li $t0, 1
+	sw $t0, -24($fp)
+	li $t0, 2
+	sw $t0, -28($fp)
+	li $t0, 3
+	sw $t0, -32($fp)
+	li $t0, 4
+	sw $t0, -36($fp)
+	li $t0, 5
+	sw $t0, -40($fp)
+	li $t0, 6
+	sw $t0, -44($fp)
+	li $t0, 7
+	sw $t0, -48($fp)
+	li $t0, 8
+	sw $t0, -52($fp)
+	li $t0, 9
+	sw $t0, -56($fp)
+	li $t7, 96
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -20($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 100
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -24($fp)
+	li $t7, 100
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -24($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 95
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -28($fp)
+	li $t7, 95
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -28($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 81
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -32($fp)
+	li $t7, 81
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -32($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 95
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -36($fp)
+	li $t7, 95
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -36($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 95
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -40($fp)
+	li $t7, 95
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -40($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 100
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -44($fp)
+	li $t7, 100
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -44($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 100
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -48($fp)
+	li $t7, 100
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -48($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 74
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -52($fp)
+	li $t7, 74
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -52($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
-	li $t5, 99
-	lw $t1, -16($fp)
-	beqz $t1,abort_pointer
-	lw $t4, 28($t1)
-	lw $t1, -56($fp)
+	li $t7, 99
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t6, 28($t0)
+	lw $t0, -56($fp)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
-	bltz $t1,abort_array
-	lw $s0, 0($t4)
-	bge $t1,$s0,abort_array
-	move $s0, $t1
+	bltz $t0,abort_array
+	lw $s0, 0($t6)
+	bge $t0,$s0,abort_array
+	move $s0, $t0
 	add $s0,$s0,1
 	mul $s0,$s0,4
-	add $s0,$t4,$s0
-	sw $t5, 0($s0)
+	add $s0,$t6,$s0
+	sw $t7, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	lw $s0, 0($t0)
+	lw $s0, 8($s0)
 	subu $sp,$sp,4
 	sw $t0,0($sp)
 	subu $sp,$sp,4
@@ -742,8 +748,10 @@ main:
 	sw $t8,0($sp)
 	subu $sp,$sp,4
 	sw $t9,0($sp)
-	jal func_getAverage
-	addu $sp,$sp,0
+	subu $sp,$sp,4
+	sw $t0,0($sp)
+	jalr $s0
+	addu $sp,$sp,4
 	lw $t9,0($sp)
 	addu $sp,$sp,4
 	lw $t8,0($sp)
@@ -764,21 +772,28 @@ main:
 	addu $sp,$sp,4
 	lw $t0,0($sp)
 	addu $sp,$sp,4
-	move $t0, $v0
+	lw $s0,0($sp)
+	addu $sp,$sp,4
 	li $t0, 60
 	blt $t0,$t0,Label_17_AssignOne
 	bge $t0,$t0,Label_18_AssignZero
 Label_17_AssignOne:
-	li $t0, 1
+	li $t5, 1
 	j Label_16_end
 Label_18_AssignZero:
-	li $t0, 0
+	li $t5, 0
 	j Label_16_end
 Label_16_end:
-	beqz $t0,Label_2_end_label
+	beqz $t5,Label_2_end_label
 	lw $t0, -16($fp)
 	beqz $t0,abort_pointer
-	lw $t1, 24($t0)
+	lw $t5, 24($t0)
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	lw $s0, 0($t0)
+	lw $s0, 4($s0)
 	subu $sp,$sp,4
 	sw $t0,0($sp)
 	subu $sp,$sp,4
@@ -799,8 +814,10 @@ Label_16_end:
 	sw $t8,0($sp)
 	subu $sp,$sp,4
 	sw $t9,0($sp)
-	jal func_birthday
-	addu $sp,$sp,0
+	subu $sp,$sp,4
+	sw $t0,0($sp)
+	jalr $s0
+	addu $sp,$sp,4
 	lw $t9,0($sp)
 	addu $sp,$sp,4
 	lw $t8,0($sp)
@@ -821,15 +838,115 @@ Label_16_end:
 	addu $sp,$sp,4
 	lw $t0,0($sp)
 	addu $sp,$sp,4
-	move $t0, $v0
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	bltz $t2,abort_array
+	lw $s0, 0($t5)
+	bge $t2,$s0,abort_array
+	addi $s0,$t2,1
+	sll $s0,$s0,2
+	add $s0,$t5,$s0
+	lw $t0, 0($s0)
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	li $t0, 1000
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	add $t4,$t0,$t0
+	li $s0, 32767
+	ble $t4,$s0,Label_19_max_int_label
+	move $t4, $s0
+	j Label_20_min_int_label
+Label_19_max_int_label:
+	li $s0, -32768
+	bge $t4,$s0,Label_20_min_int_label
+	move $t4, $s0
+Label_20_min_int_label:
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t2, 24($t0)
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t0, 20($t0)
 	subu $sp,$sp,4
 	sw $s0,0($sp)
 	bltz $t0,abort_array
-	lw $s0, 0($t1)
+	lw $s0, 0($t2)
 	bge $t0,$s0,abort_array
-	addi $s0,$t0,1
+	move $s0, $t0
+	add $s0,$s0,1
+	mul $s0,$s0,4
+	add $s0,$t2,$s0
+	sw $t4, 0($s0)
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	lw $t2, 24($t0)
+	lw $t0, -16($fp)
+	beqz $t0,abort_pointer
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	lw $s0, 0($t0)
+	lw $s0, 4($s0)
+	subu $sp,$sp,4
+	sw $t0,0($sp)
+	subu $sp,$sp,4
+	sw $t1,0($sp)
+	subu $sp,$sp,4
+	sw $t2,0($sp)
+	subu $sp,$sp,4
+	sw $t3,0($sp)
+	subu $sp,$sp,4
+	sw $t4,0($sp)
+	subu $sp,$sp,4
+	sw $t5,0($sp)
+	subu $sp,$sp,4
+	sw $t6,0($sp)
+	subu $sp,$sp,4
+	sw $t7,0($sp)
+	subu $sp,$sp,4
+	sw $t8,0($sp)
+	subu $sp,$sp,4
+	sw $t9,0($sp)
+	subu $sp,$sp,4
+	sw $t0,0($sp)
+	jalr $s0
+	addu $sp,$sp,4
+	lw $t9,0($sp)
+	addu $sp,$sp,4
+	lw $t8,0($sp)
+	addu $sp,$sp,4
+	lw $t7,0($sp)
+	addu $sp,$sp,4
+	lw $t6,0($sp)
+	addu $sp,$sp,4
+	lw $t5,0($sp)
+	addu $sp,$sp,4
+	lw $t4,0($sp)
+	addu $sp,$sp,4
+	lw $t3,0($sp)
+	addu $sp,$sp,4
+	lw $t2,0($sp)
+	addu $sp,$sp,4
+	lw $t1,0($sp)
+	addu $sp,$sp,4
+	lw $t0,0($sp)
+	addu $sp,$sp,4
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	bltz $t1,abort_array
+	lw $s0, 0($t2)
+	bge $t1,$s0,abort_array
+	addi $s0,$t1,1
 	sll $s0,$s0,2
-	add $s0,$t1,$s0
+	add $s0,$t2,$s0
 	lw $t0, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
@@ -838,103 +955,13 @@ Label_16_end:
 	sw $s0,0($sp)
 	add $t3,$t0,$t0
 	li $s0, 32767
-	ble $t3,$s0,Label_19_max_int_label
+	ble $t3,$s0,Label_21_max_int_label
 	move $t3, $s0
-	j Label_20_min_int_label
-Label_19_max_int_label:
-	li $s0, -32768
-	bge $t3,$s0,Label_20_min_int_label
-	move $t3, $s0
-Label_20_min_int_label:
-	lw $s0,0($sp)
-	addu $sp,$sp,4
-	lw $t0, -16($fp)
-	beqz $t0,abort_pointer
-	lw $t1, 24($t0)
-	lw $t0, -16($fp)
-	beqz $t0,abort_pointer
-	lw $t0, 20($t0)
-	subu $sp,$sp,4
-	sw $s0,0($sp)
-	bltz $t0,abort_array
-	lw $s0, 0($t1)
-	bge $t0,$s0,abort_array
-	move $s0, $t0
-	add $s0,$s0,1
-	mul $s0,$s0,4
-	add $s0,$t1,$s0
-	sw $t3, 0($s0)
-	lw $s0,0($sp)
-	addu $sp,$sp,4
-	lw $t0, -16($fp)
-	beqz $t0,abort_pointer
-	lw $t1, 24($t0)
-	subu $sp,$sp,4
-	sw $t0,0($sp)
-	subu $sp,$sp,4
-	sw $t1,0($sp)
-	subu $sp,$sp,4
-	sw $t2,0($sp)
-	subu $sp,$sp,4
-	sw $t3,0($sp)
-	subu $sp,$sp,4
-	sw $t4,0($sp)
-	subu $sp,$sp,4
-	sw $t5,0($sp)
-	subu $sp,$sp,4
-	sw $t6,0($sp)
-	subu $sp,$sp,4
-	sw $t7,0($sp)
-	subu $sp,$sp,4
-	sw $t8,0($sp)
-	subu $sp,$sp,4
-	sw $t9,0($sp)
-	jal func_birthday
-	addu $sp,$sp,0
-	lw $t9,0($sp)
-	addu $sp,$sp,4
-	lw $t8,0($sp)
-	addu $sp,$sp,4
-	lw $t7,0($sp)
-	addu $sp,$sp,4
-	lw $t6,0($sp)
-	addu $sp,$sp,4
-	lw $t5,0($sp)
-	addu $sp,$sp,4
-	lw $t4,0($sp)
-	addu $sp,$sp,4
-	lw $t3,0($sp)
-	addu $sp,$sp,4
-	lw $t2,0($sp)
-	addu $sp,$sp,4
-	lw $t1,0($sp)
-	addu $sp,$sp,4
-	lw $t0,0($sp)
-	addu $sp,$sp,4
-	move $t0, $v0
-	subu $sp,$sp,4
-	sw $s0,0($sp)
-	bltz $t0,abort_array
-	lw $s0, 0($t1)
-	bge $t0,$s0,abort_array
-	addi $s0,$t0,1
-	sll $s0,$s0,2
-	add $s0,$t1,$s0
-	lw $t0, 0($s0)
-	lw $s0,0($sp)
-	addu $sp,$sp,4
-	li $t0, 1000
-	subu $sp,$sp,4
-	sw $s0,0($sp)
-	add $t2,$t0,$t0
-	li $s0, 32767
-	ble $t2,$s0,Label_21_max_int_label
-	move $t2, $s0
 	j Label_22_min_int_label
 Label_21_max_int_label:
 	li $s0, -32768
-	bge $t2,$s0,Label_22_min_int_label
-	move $t2, $s0
+	bge $t3,$s0,Label_22_min_int_label
+	move $t3, $s0
 Label_22_min_int_label:
 	lw $s0,0($sp)
 	addu $sp,$sp,4
@@ -953,7 +980,7 @@ Label_22_min_int_label:
 	add $s0,$s0,1
 	mul $s0,$s0,4
 	add $s0,$t1,$s0
-	sw $t2, 0($s0)
+	sw $t3, 0($s0)
 	lw $s0,0($sp)
 	addu $sp,$sp,4
 	lw $t0, -16($fp)
