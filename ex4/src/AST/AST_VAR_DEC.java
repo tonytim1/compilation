@@ -139,7 +139,7 @@ public class AST_VAR_DEC extends AST_Node {
 				}
 			}
 			else {
-				if (this.scope_type.equals("local_class") {
+				if (this.scope_type.equals("local_class")) {
 					String namec = var_class.name + "_" + id; // Gal - maybe we need the class name
 					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(namec));
 				}
@@ -147,18 +147,18 @@ public class AST_VAR_DEC extends AST_Node {
 		} else if (exp != null && newExp == null) {
 			String TrueId = id;
 			if (this.scope_type.equals("global") || this.scope_type.equals("local_class")) { // global or class field
-				if (!this.scope_type.equals("local_func") && var_class.name != "")
+				if (!this.scope_type.equals("local_func") && var_class.name != null)
 					TrueId = var_class.name + "_" + id;
 				if (type.typeName == "string") {
 					String value = ((AST_EXP_STRING) exp).value;
 					System.out.format("AST_VAR_DEC allocate string: %s", value);
 					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(TrueId, value));
-					if (var_class.name != "")
+					if (var_class.name != null)
 						defaultFields.put(var_class.name + "_" + id, value);
 				} else if (type.typeName == "int") {
 					int value = ((AST_EXP_INT) exp).value;
 					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(TrueId, value));
-					if (var_class.name != "")
+					if (var_class.name != null)
 						defaultFields.put(var_class.name+"_"+id, String.valueOf(value));
 				} else {
 					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(TrueId));
