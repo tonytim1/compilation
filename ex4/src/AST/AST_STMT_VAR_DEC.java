@@ -54,6 +54,7 @@ public class AST_STMT_VAR_DEC extends AST_STMT {
 		return varDec.SemantMe();
 	}
 	public TEMP IRme(){
-		return varDec.IRme();
+		varDec.IRme();
+		return null;
 	}
 }
