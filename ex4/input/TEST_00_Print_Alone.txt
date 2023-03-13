@@ -1,0 +1,12 @@
+int AlwaysOne()
+{
+    return 1;
+}
+
+void main()
+{
+    if(AlwaysOne())
+    {
+        PrintInt(15);
+    }
+}
