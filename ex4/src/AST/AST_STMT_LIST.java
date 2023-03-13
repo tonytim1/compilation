@@ -45,6 +45,7 @@ public class AST_STMT_LIST extends AST_Node
 
 	public TEMP IRme(){
 	    if (head != null) {
+			System.out.format("AST_STMT_LIST IR head %s\n", head);
 	        head.IRme();
 	    }
 	    if (tail != null) {

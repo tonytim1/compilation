@@ -1,6 +1,7 @@
 int AlwaysOne()
 {
-    return 1;
+    int a := 1;
+    return a;
 }
 
 void main()
@@ -8,5 +9,11 @@ void main()
     if(AlwaysOne())
     {
         PrintInt(15);
+    }
+
+    int i := 0;
+    while (i < 7) {
+        PrintInt(i);
+        i := i + 1;
     }
 }

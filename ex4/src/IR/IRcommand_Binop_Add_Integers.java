@@ -53,4 +53,12 @@ public class IRcommand_Binop_Add_Integers extends IRcommand {
         MIPSGenerator.getInstance().label(minIntLabel);
         MIPSGenerator.getInstance().pop_from_stack("$s0");
     }
+
+    public TEMP_LIST getLiveTemp(TEMP_LIST input){
+        TEMP_LIST result = input.clone();
+        result.add(t1);
+        result.add(t2);
+        result.remove(dst);
+        return result;
+    }
 }

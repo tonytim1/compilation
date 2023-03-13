@@ -83,4 +83,12 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand {
         MIPSGenerator.getInstance().pop_from_stack("$s1");
         MIPSGenerator.getInstance().pop_from_stack("$s0");
     }
+
+    public TEMP_LIST getLiveTemp(TEMP_LIST input){
+        TEMP_LIST result = input.clone();
+        result.add(t1);
+        result.add(t2);
+        result.remove(dst);
+        return result;
+    }
 }

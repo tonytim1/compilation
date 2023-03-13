@@ -63,4 +63,12 @@ public class IRcommand_Binop_Div_Integers extends IRcommand {
         MIPSGenerator.getInstance().exit();
         MIPSGenerator.getInstance().label(endLabel);
     }
+
+    public TEMP_LIST getLiveTemp(TEMP_LIST input){
+        TEMP_LIST result = input.clone();
+        result.add(t1);
+        result.add(t2);
+        result.remove(dst);
+        return result;
+    }
 }

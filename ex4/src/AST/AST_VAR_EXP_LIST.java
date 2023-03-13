@@ -106,6 +106,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 		IR ir = IR.getInstance();
 		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
 		TEMP_LIST args;
+		System.out.format("IR AST_VAR_EXP_LIST name %s, var %s, exps %s\n", name, var, expList);
 		if (var == null)
 		{
 			if (expList == null)
