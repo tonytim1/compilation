@@ -9,6 +9,7 @@ public class AST_STMT_IF extends AST_STMT
 {
 	public AST_EXP cond;
 	public AST_STMT_LIST body;
+	public boolean inFunc;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
@@ -61,6 +62,8 @@ public class AST_STMT_IF extends AST_STMT
 		/*****************/
 		SYMBOL_TABLE.getInstance().endScope();
 
+		inFunc = SYMBOL_TABLE.getInstance().inFuncScope();
+
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
@@ -68,15 +71,49 @@ public class AST_STMT_IF extends AST_STMT
 	}
 	public TEMP IRme()
 	{
-	    TEMP t1 = cond.IRme();
-		System.out.format("AST_STMT_IF ---------- %s ,body %s\n", cond.getClass().getName(), body);
-	    String end_label = IRcommand.getFreshLabel("end_label");
-	    IR.getInstance().Add_IRcommand(new IRcommand_Jump_If_Eq_To_Zero(t1,end_label));
-		if(body != null) {
-			System.out.format("AST_STMT_IF ---------- %s ,body %s ------- IR body\n", cond.getClass().getName(), body);
-			body.IRme();
-		}
-		IR.getInstance().Add_IRcommand(new IRcommand_Label(end_label));
+		System.out.format("AST_STMT_IF" + "- IRme\n");
+
+		/*******************************/
+		/* [1] Allocate 2 fresh labels */
+		/*******************************/
+	
+		String label_end = IRcommand.getFreshLabel("end");
+		String label_start = IRcommand.getFreshLabel("start");
+	
+		/*********************************/
+		/* [2] entry label for the while */
+		/*********************************/
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_start));
+	
+		/********************/
+		/* [3] cond.IRme(); */
+		/********************/
+		TEMP cond_temp = cond.IRme();
+	
+		/******************************************/
+		/* [4] Jump conditionally to the loop end */
+		/******************************************/
+		IR.getInstance().Add_IRcommand(new IRcommand_Jump_beqz(cond_temp, label_end));
+	
+		/*******************/
+		/* [5] body.IRme() */
+		/*******************/
+	
+		if (infunc)
+		  ifScope(body);
+	
+		else
+		  body.IRme();
+		// how do you store locals in if?
+	
+		/**********************/
+		/* [7] Loop end label */
+		/**********************/
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_end));
+	
+		/*******************/
+		/* [8] return null */
+		/*******************/
 		return null;
 	}
 }

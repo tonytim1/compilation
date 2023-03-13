@@ -9,7 +9,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 	public AST_EXP_LIST expList;
 	public String name;
 	public TYPE_CLASS tc;
-	public TYPE_FUNCTION func; // for IRme
+	public TYPE_FUNCTION functionType; // for IRme
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -40,7 +40,6 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION {
 
-		TYPE_FUNCTION functionType = null;
 		TYPE_LIST paramTypes = null;
 
         if (expList != null) 
@@ -64,15 +63,15 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 					System.out.format(">> ERROR [%d] member : %s isn't function - class AST_VAR_EXP_LIST\n", lineNumber, member.typeName);
 					throw new SEMANTIC_EXCEPTION(lineNumber);
 				}
-				functionType = (TYPE_FUNCTION) member;
+				this.functionType = (TYPE_FUNCTION) member;
 
 				//check params type match
-				if (!(functionType.canAssignParams(paramTypes))) {
+				if (!(this.functionType.canAssignParams(paramTypes))) {
 					System.out.format(">> ERROR [%d] mismatch in params number/type in function %s call - class AST_VAR_EXP_LIST\n", lineNumber, member.name);
 					throw new SEMANTIC_EXCEPTION(lineNumber);
 				}
 
-				return functionType.returnType;
+				return this.functionType.returnType;
 			}
 
 			// ERROR - Didn't find a field that fits
@@ -91,15 +90,15 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
-		functionType = (TYPE_FUNCTION) nameType;
+		this.functionType = (TYPE_FUNCTION) nameType;
 
 		//check params type match
-		if (!(functionType.canAssignParams(paramTypes))) {
+		if (!(this.functionType.canAssignParams(paramTypes))) {
 			System.out.format(">> ERROR [%d] mismatch in params number/type in function %s call - class AST_VAR_EXP_LIST\n", lineNumber, nameType.name);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
 
-		return functionType.returnType;
+		return this.functionType.returnType;
 	}
 	
 	public TEMP IRme(){
