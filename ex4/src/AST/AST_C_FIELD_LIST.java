@@ -48,6 +48,7 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	}
 
 	public TEMP IRme(boolean irFunction) {
+		System.out.format("IRME AST_C_FIELD_LIST --------- %s %s \n", irFunction, cField.typeCField);
 	    if (cField.typeCField == null) {
 	        return null;
 	    }

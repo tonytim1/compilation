@@ -67,7 +67,6 @@ public class Vertex {
         if (!this.isVisited) {
             //System.out.format("command: %s\n", this.command.getClass());
             this.input.printList();
-            System.out.println();
 
             for (TEMP_LIST e = this.input; e.value != null; e = e.next) {
                 for (TEMP_LIST f = e.next; f.value != null; f = f.next) {

@@ -41,6 +41,7 @@ public class AST_CLASS_DEC extends AST_Node {
 	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
 	{	
 		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
+		System.out.format("SEMANT-ME AST_CLASS_DEC %s\n", cFieldList);
 
 		//check if depth != 0 or class name already declared in scope
 		if (!(s.isGlobalScope()) || s.find(id1) != null) {
@@ -82,8 +83,9 @@ public class AST_CLASS_DEC extends AST_Node {
 		/* [3] Add the class data members one by one */
 		/*************************/
 		TYPE newClassAttr = null;
-		while ((cFieldList != null) && (cFieldList.cField != null)) {
-			newClassAttr = cFieldList.cField.SemantMe();
+		AST_C_FIELD_LIST head_copy = cFieldList;
+		while ((head_copy != null) && (head_copy.cField != null)) {
+			newClassAttr = head_copy.cField.SemantMe();
 			// add to father
 			if (fatherDataMembers.head == null) {
 				fatherDataMembers.head = newClassAttr;
@@ -94,7 +96,7 @@ public class AST_CLASS_DEC extends AST_Node {
 				fatherDataMembers.tail = new TYPE_LIST(newClassAttr, null);
 			}
 			// next variable
-			cFieldList = cFieldList.cFieldList;
+			head_copy = head_copy.cFieldList;
 
 			// print
 			System.out.format("print list %s\n", "all");
@@ -123,6 +125,7 @@ public class AST_CLASS_DEC extends AST_Node {
 	}
 	public TEMP IRme()
     {
+		System.out.format("IRME CLASS_DEC --------- %s %s: %s \n", id1, id2, cFieldList);
         if (this.cFieldList != null) {
             this.cFieldList.IRme(true); //True - IR only functions / False - IR only vars
         }

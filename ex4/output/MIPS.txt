@@ -42,6 +42,75 @@ func_monthJuly:
 	lw $ra,0($sp)
 	addu $sp,$sp,4
 	jr $ra
+.text
+func_getAge:
+	subu $sp,$sp,4
+	sw $ra,0($sp)
+	subu $sp,$sp,4
+	sw $fp,0($sp)
+	move $fp, $sp
+	subu $sp,$sp,4
+	lw $t0, 8($fp)
+	lw $t0, 8($t0)
+	move $v0, $t0
+	move $sp, $fp
+	lw $fp,0($sp)
+	addu $sp,$sp,4
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+	move $sp, $fp
+	lw $fp,0($sp)
+	addu $sp,$sp,4
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+.text
+func_birthday:
+	subu $sp,$sp,4
+	sw $ra,0($sp)
+	subu $sp,$sp,4
+	sw $fp,0($sp)
+	move $fp, $sp
+	subu $sp,$sp,4
+	lw $t0, 8($fp)
+	lw $t0, 8($t0)
+	li $t0, 1
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	add $t0,$t0,$t0
+	li $s0, 32767
+	ble $t0,$s0,Label_3_max_int_label
+	move $t0, $s0
+	j Label_4_min_int_label
+Label_3_max_int_label:
+	li $s0, -32768
+	bge $t0,$s0,Label_4_min_int_label
+	move $t0, $s0
+Label_4_min_int_label:
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	lw $s0, 8($fp)
+	sw $t0, 8($s0)
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	lw $t0, 8($fp)
+	lw $t0, 8($t0)
+	move $v0, $t0
+	move $sp, $fp
+	lw $fp,0($sp)
+	addu $sp,$sp,4
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+	move $sp, $fp
+	lw $fp,0($sp)
+	addu $sp,$sp,4
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
 .data
 vt_Person:
 	.word Person_getAge
@@ -64,6 +133,122 @@ class_Person:
 init_class_Person:
 	subu $sp,$sp,4
 	sw $ra,0($sp)
+	sw $zero, 0($a0)
+	li $t0, 10
+	sw $t0, 0($a0)
+	sw $zero, 0($a0)
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+.text
+func_getAverage:
+	subu $sp,$sp,4
+	sw $ra,0($sp)
+	subu $sp,$sp,4
+	sw $fp,0($sp)
+	move $fp, $sp
+	subu $sp,$sp,12
+	li $t2, 0
+	sw $t2, -8($fp)
+	li $t2, 0
+	sw $t2, -12($fp)
+Label_0_loop_start:
+	lw $t0, -8($fp)
+	li $t0, 10
+	blt $t0,$t0,Label_6_AssignOne
+	bge $t0,$t0,Label_7_AssignZero
+Label_6_AssignOne:
+	li $t5, 1
+	j Label_5_end
+Label_7_AssignZero:
+	li $t5, 0
+	j Label_5_end
+Label_5_end:
+	beqz $t5,Label_1_loop_end
+	lw $t0, -12($fp)
+	lw $t3, 8($fp)
+	lw $t3, 24($t3)
+	lw $t2, -8($fp)
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	bltz $t2,abort_array
+	lw $s0, 0($t3)
+	bge $t2,$s0,abort_array
+	addi $s0,$t2,1
+	sll $s0,$s0,2
+	add $s0,$t3,$s0
+	lw $t0, 0($s0)
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	add $t4,$t0,$t0
+	li $s0, 32767
+	ble $t4,$s0,Label_8_max_int_label
+	move $t4, $s0
+	j Label_9_min_int_label
+Label_8_max_int_label:
+	li $s0, -32768
+	bge $t4,$s0,Label_9_min_int_label
+	move $t4, $s0
+Label_9_min_int_label:
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	sw $t4, -12($fp)
+	lw $t0, -8($fp)
+	li $t0, 1
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	add $t1,$t0,$t0
+	li $s0, 32767
+	ble $t1,$s0,Label_10_max_int_label
+	move $t1, $s0
+	j Label_11_min_int_label
+Label_10_max_int_label:
+	li $s0, -32768
+	bge $t1,$s0,Label_11_min_int_label
+	move $t1, $s0
+Label_11_min_int_label:
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	sw $t1, -8($fp)
+	j Label_0_loop_start
+Label_1_loop_end:
+	lw $t0, -12($fp)
+	li $t0, 10
+	subu $sp,$sp,4
+	sw $s0,0($sp)
+	beqz $t0,Label_12_abort_label
+	div $t0,$t0,$t0
+	li $s0, 32767
+	ble $t0,$s0,Label_14_max_int_label
+	move $t0, $s0
+	j Label_15_min_int_label
+Label_14_max_int_label:
+	li $s0, -32768
+	bge $t0,$s0,Label_15_min_int_label
+	move $t0, $s0
+Label_15_min_int_label:
+	lw $s0,0($sp)
+	addu $sp,$sp,4
+	j Label_13_end_label
+Label_12_abort_label:
+	la $a0, string_illegal_div_by_0
+	li $v0,4
+	syscall
+	li $v0,10
+	syscall
+Label_13_end_label:
+	move $v0, $t0
+	move $sp, $fp
+	lw $fp,0($sp)
+	addu $sp,$sp,4
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+	move $sp, $fp
+	lw $fp,0($sp)
+	addu $sp,$sp,4
 	lw $ra,0($sp)
 	addu $sp,$sp,4
 	jr $ra
@@ -90,6 +275,7 @@ init_class_Student:
 	subu $sp,$sp,4
 	sw $ra,0($sp)
 	jal init_class_Person
+	sw $zero, 0($a0)
 	lw $ra,0($sp)
 	addu $sp,$sp,4
 	jr $ra
@@ -580,16 +766,16 @@ main:
 	addu $sp,$sp,4
 	move $t0, $v0
 	li $t0, 60
-	blt $t0,$t0,Label_2_AssignOne
-	bge $t0,$t0,Label_3_AssignZero
-Label_2_AssignOne:
+	blt $t0,$t0,Label_17_AssignOne
+	bge $t0,$t0,Label_18_AssignZero
+Label_17_AssignOne:
 	li $t0, 1
-	j Label_1_end
-Label_3_AssignZero:
+	j Label_16_end
+Label_18_AssignZero:
 	li $t0, 0
-	j Label_1_end
-Label_1_end:
-	beqz $t0,Label_0_end_label
+	j Label_16_end
+Label_16_end:
+	beqz $t0,Label_2_end_label
 	lw $t0, -16($fp)
 	beqz $t0,abort_pointer
 	lw $t1, 24($t0)
@@ -652,14 +838,14 @@ Label_1_end:
 	sw $s0,0($sp)
 	add $t3,$t0,$t0
 	li $s0, 32767
-	ble $t3,$s0,Label_4_max_int_label
+	ble $t3,$s0,Label_19_max_int_label
 	move $t3, $s0
-	j Label_5_min_int_label
-Label_4_max_int_label:
+	j Label_20_min_int_label
+Label_19_max_int_label:
 	li $s0, -32768
-	bge $t3,$s0,Label_5_min_int_label
+	bge $t3,$s0,Label_20_min_int_label
 	move $t3, $s0
-Label_5_min_int_label:
+Label_20_min_int_label:
 	lw $s0,0($sp)
 	addu $sp,$sp,4
 	lw $t0, -16($fp)
@@ -742,14 +928,14 @@ Label_5_min_int_label:
 	sw $s0,0($sp)
 	add $t2,$t0,$t0
 	li $s0, 32767
-	ble $t2,$s0,Label_6_max_int_label
+	ble $t2,$s0,Label_21_max_int_label
 	move $t2, $s0
-	j Label_7_min_int_label
-Label_6_max_int_label:
+	j Label_22_min_int_label
+Label_21_max_int_label:
 	li $s0, -32768
-	bge $t2,$s0,Label_7_min_int_label
+	bge $t2,$s0,Label_22_min_int_label
 	move $t2, $s0
-Label_7_min_int_label:
+Label_22_min_int_label:
 	lw $s0,0($sp)
 	addu $sp,$sp,4
 	lw $t0, -16($fp)
@@ -812,7 +998,7 @@ Label_7_min_int_label:
 	li $a0,32
 	li $v0,11
 	syscall
-Label_0_end_label:
+Label_2_end_label:
 	move $sp, $fp
 	lw $fp,0($sp)
 	addu $sp,$sp,4

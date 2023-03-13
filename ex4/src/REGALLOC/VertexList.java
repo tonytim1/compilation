@@ -22,7 +22,6 @@ public class VertexList {
 
     /* return the vertex in the graph with the provided label */
     public Vertex getVertex(String name) {
-        System.out.format("get vertex: %s\n", name);
 
         VertexList curVertex = new VertexList(head, tail);
 

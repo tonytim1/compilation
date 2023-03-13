@@ -35,17 +35,17 @@ public class IRcommand_Allocate_Func extends IRcommand
         if(class_name != null)
         {
             m.label_text(String.format("%s_%s", class_name, func_name));
-            System.out.println("1");
+            System.out.format("IRcommand_Allocate_Func ---------- %s_%s\n", class_name, func_name);
         }
         else if(func_name.equals("main"))
         {
 			m.label_text("main");
-             System.out.println("2");
+            System.out.format("IRcommand_Allocate_Func ---------- main\n");
 		} 
         else
         {
             m.label_text(String.format("func_%s",func_name));
-             System.out.println("3");
+            System.out.format("IRcommand_Allocate_Func ---------- func_%s\n", func_name);
         }
 
         m.push_to_stack("$ra");

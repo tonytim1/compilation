@@ -110,7 +110,7 @@ public class TEMP_LIST {
         return new TEMP_LIST(this.value,tmp);
     }
     public void printList(){
-        System.out.format("%s ",this.value);
+        //System.out.format("%s ",this.value);
         if(this.next != null) this.next.printList();
     }
 }
