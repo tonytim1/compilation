@@ -74,9 +74,10 @@ public class TYPE_CLASS extends TYPE
 	}
 
 	public String getClassNameOfFunc(String func_name)
-	{
+	{	
 		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
-			if (member.head != null && member.head.typeName == "function" && member.head.name.equals(name))
+			System.out.format("getClassNameOfFunc in class ###### data member %s %s\n", member.head.typeName, member.head.name);
+			if (member.head != null && member.head.typeName == "function" && member.head.name.equals(func_name))
 				return this.name;
 		}
 		System.out.format("getClassNameOfFunc in class %s ###### func %s\n", name,func_name);
