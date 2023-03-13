@@ -7,6 +7,7 @@ public class AST_VAR_FIELD extends AST_VAR
 {
 	public AST_VAR var;
 	public String name;
+	public String classN;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -45,6 +46,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		/******************************/
 		if (var != null) {
 		    t = var.SemantMe();
+			this.classN = t.name;
         }
 
 		/*********************************/
@@ -80,9 +82,13 @@ public class AST_VAR_FIELD extends AST_VAR
 	}
 	
 	public TEMP IRme(){
-		TEMP t = var.IRme();
-		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
-		IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAccess(dst, t, name, index));
-		return dst;
+		System.out.format("VAR_FIELD- IRme\n");
+
+		TEMP t1 = var.IRme();
+		TEMP t2 = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IRcommand r = new IRcommand_Field_Access(t2, t1, this.name);
+		IR.getInstance().Add_IRcommand(r);
+		r.offset = GetOffset(this.classN + "_" + this.name);
+		return t2;
 	}
 }
