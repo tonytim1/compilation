@@ -98,7 +98,7 @@ public class SYMBOL_TABLE
 			}
 		}
 
-
+		System.out.format("variable %s is in scope %s, top index %d, local index %d\n", name, var_scope, top_index, local_index);
 		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++,curr_depth, local_index, var_scope);
 
 		/**********************************************/

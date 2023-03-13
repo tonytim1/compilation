@@ -40,7 +40,7 @@ public class IRcommand_Load extends IRcommand {
         if (scope_type.equals("global")) {
             if (is_string)
                 MIPSGenerator.getInstance().load(dst.toString() ,var_name);
-	else
+	        else
                 MIPSGenerator.getInstance().load_label(dst.toString(), var_name);
         } else if (scope_type.equals("param"))
             MIPSGenerator.getInstance().lw(dst.toString(), "$fp", (index + 2) * 4);
