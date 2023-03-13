@@ -152,21 +152,74 @@ public class AST_FUNC_DEC extends AST_Node {
 		return function;
 	}
 
-	public TEMP IRme() { 
-		// add function label
-		System.out.format("function %s class %s num %d\n" ,id, class_name, varNum);
-		if(scope_type.equals("local_class")) {
-			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(id, class_name, varNum));
+	public TEMP IRme() {
+		if (id.equals("main")) {
+			this.id = "user_main";
 		}
-		else {
-			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(id, null, varNum));
+
+		int argCnt = 0; // number of arguments
+		if (class_name != "")
+			argCnt += 1; // this
+
+		/////////// arguments ///////////////////////
+		for (AST_TYPE_ID_LIST it = tid; it != null; it = it.tail) {
+			String off = String.valueOf(8 + 4 * argCnt);
+			offsets.put(it.head.id, off);
+			argCnt += 1;
 		}
-		// process statements
-		if(stmtList != null) {
-			stmtList.IRme();
+
+		/////////// local variables///////////////////////
+		int varCnt = 0; // number of local variables
+		for (AST_STMT_LIST it = stmtList; it != null; it = it.tail) {
+			if (it.head instanceof AST_STMT_VARDEC) {
+				varCnt += 1;
+				continue;
+			}
+			if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
+				varCnt += localsInIfOrWhile(it.head);
+			}
 		}
-		// add return statement if there is none
-		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(null));
+
+		///////////////////////////////////////////////////////////////////////////////////////
+		// prologue
+		String labelStart = null;
+		if (id.equals("user_main")) {
+			labelStart = id;
+		} else {
+			if (className != null)
+				labelStart = className + "_" + id;
+			else {
+				labelStart = IRcommand.getFreshLabel("start_" + id);
+				offsets.put(id, labelStart);
+			}
+		}
+
+		this.func.startLabel = labelStart;
+
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(labelStart));
+		IR.getInstance().Add_IRcommand(new IRcommand_Prologue(varCnt));
+
+		// body
+		varCnt = 0;
+		for (AST_STMT_LIST it = list; it != null; it = it.tail) {
+			if (it.head instanceof AST_STMT_VARDEC) {
+				varCnt += 1;
+				AST_STMT_VARDEC a = (AST_STMT_VARDEC) (it.head);
+				AST_VARDEC b = (AST_VARDEC) (a.v);
+				String off = String.valueOf(varCnt * (-4) + -40);
+				offsets.put(b.id, off);
+			}
+			if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
+				varsInFunc = varCnt;
+				varCnt += localsInIfOrWhile(it.head);
+			}
+			it.head.IRme();
+		}
+
+		// epilogue
+		IR.getInstance().Add_IRcommand(new IRcommand_Epilogue());
+
+		System.out.println(offsets);
 		return null;
 	}
 }
