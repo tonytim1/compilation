@@ -110,7 +110,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 		{
 			if (expList == null)
 			{
-				ir.Add_IRcommand(new IRcommand_FuncCall(null, name, null));
+				ir.Add_IRcommand(new IRcommand_FuncCall(dst, name, null));
 			}
 			else 
 			{
@@ -125,7 +125,7 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 				} 
 				else 
 				{
-					ir.Add_IRcommand(new IRcommand_FuncCall(null, name, args));
+					ir.Add_IRcommand(new IRcommand_FuncCall(dst, name, args));
 				}
 			}
 		} 
@@ -135,12 +135,12 @@ public class AST_VAR_EXP_LIST extends AST_EXP
 			int func_index = tc.getFuncIndex(name);
 			if (expList == null)
 			{
-				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, null, func_index));
+				ir.Add_IRcommand(new IRcommand_ClassMethodCall(dst, t1, name, null, func_index));
 			}
 			else
 			{
 				args = expList.IRme();
-				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, args, func_index));
+				ir.Add_IRcommand(new IRcommand_ClassMethodCall(dst, t1, name, args, func_index));
 			}
 		}
 		// TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
