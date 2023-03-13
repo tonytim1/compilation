@@ -274,6 +274,10 @@ public class SYMBOL_TABLE
 		return curr_depth == 0;
 	}
 
+	public boolean inFuncScope() {
+		return required_return_type.equals("");
+	}
+
 	public boolean isClassDecleration()
 	{
 		return curr_class != null && curr_depth == 1;
