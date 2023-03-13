@@ -128,34 +128,52 @@ public class AST_VAR_DEC extends AST_Node {
 	}
 
 	public TEMP IRme() {
-		/* if the variable is global need to set it in data section */
-		if(this.scope_type.equals("global")){
-			if(this.type.t == 1){ // type int
-				// we expect contant int when initiallize global int
-				int value = 0;
-				if(exp != null)
-					value = ((AST_EXP_INT) exp).value;
-				IR.getInstance().Add_IRcommand(new IRcommand_Allocate(scope_type,id,value));	
-			} else if(this.type.t == 2)	{ // type string
-				// we expect contant string when initiallize global string
-				String value = "";
-				if(exp != null)
-					value = ((AST_EXP_STRING) exp).value;
-				IR.getInstance().Add_IRcommand(new IRcommand_Allocate(scope_type,id,value));	
-			} else { // pointer
-				// we expect nil value when initiallize global pointer
-				IR.getInstance().Add_IRcommand(new IRcommand_Allocate(scope_type,id,0));	
-			}	
-		} else{
-			TEMP t1;
-			if(exp != null) t1 = exp.IRme();
-			else if (newExp != null) t1 = newExp.IRme();
-			else t1 = null;
-			if(this.scope_type.equals("local_func")){
-				IR.getInstance().Add_IRcommand(new IRcommand_Store(id,t1,this.scope_type,this.index));
-			} else if(this.scope_type.equals("local_class"))
-				IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(null,id,t1,this.index));		
-		}	
-		return null;
+		if (exp == null) {
+		    if (newExp == null) {
+		        // System.out.format("====================== varDec -> type:%s ID( %s ) SEMICOLON\n", type.id, id);
+                if (scope.equals("global")) {
+                      if (type instanceof AST_TYPE_STRING) {
+                        IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(id, "aaa"));
+                      } else if (type instanceof AST_TYPE_INT) {
+                        IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id, 0));
+                      } else { // AST_TYPE_ID
+                        IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id));
+                      }
+                }
+                // local
+                else {
+                  if (!inFunc && inclass != null) {
+                    String namec = inclass + "_" + id;
+                    IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(namec));
+                  }
+                  // no need to do anything for regular types
+                  // maybe allocate space for arrays or classes?
+                }
+                // ret value doesn't matter for a declaration
+                return null;
+		    } else {
+		            // System.out.format("====================== varDec -> type:%s ID( %s ) ASSIGN new_exp SEMICOLON\n", type.id, id);
+                    TEMP t = exp.IRme();
+
+                    if (scope.equals("global")) {
+                      // can only use "new" on local context or inside class dec
+                      printError(666);
+                    }
+                    else {
+                      // class case?
+
+                      // local case
+                      IRcommand command = new IRcommand_Store_Local(id, t);
+
+                      command.offset = GetOffset(id);
+
+                      IR.getInstance().Add_IRcommand(command);
+                    }
+                    return null;
+		    }
+		}
+		else {
+			// System.out.format("====================== varDec -> type:%s ID( %s ) ASSIGN exp SEMICOLON\n", type.id, id);
+		}
 	}
 }
