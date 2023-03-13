@@ -54,22 +54,39 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	}
 
 	public TEMP IRme(){
-		TEMP t = exp.IRme();
+		TEMP exp_temp = exp.IRme();
 		TEMP dst;
 		if(var instanceof AST_VAR_SIMPLE)
 		{
-		   IR.getInstance().Add_IRcommand(new IRcommand_Store(var.name, t ,var.scope_type ,var.index));
+			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_SIMPLE\n");
+
+		    //IR.getInstance().Add_IRcommand(new IRcommand_Store(var.name, exp_temp ,var.scope_type ,var.index));
+			
+			if (var.scope_type == "global") {
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(exp_temp, var.name));
+			}
+			else if (var.scope_type == "local_class") {
+				String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
+				IRcommand c = new IRcommand_store_field(inclass, varName, value);
+				c.offset = GetOffset(varName);
+				IR.getInstance().Add_IRcommand(c);
+			}
+
 	    }
 	    else if(var instanceof AST_VAR_FIELD)
 		{
-		   dst = ((AST_VAR_FIELD) var).var.IRme(); // class pointer
-		   IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst, var.name, t, var.index));
+			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_FIELD\n");
+
+		    dst = ((AST_VAR_FIELD) var).var.IRme(); // class pointer
+		    IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst, var.name, exp_temp, var.index));
 	    } 
-	    else // AST_VAR_SUBSCRIPT
+	    else
 	    {
-		   dst = ((AST_VAR_SUBSCRIPT) var).var.IRme(); 
-		   TEMP index = ((AST_VAR_SUBSCRIPT) var).subscript.IRme();
-		   IR.getInstance().Add_IRcommand(new IRcommand_ArraySet(dst, index, t));
+			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_SUBSCRIPT\n");
+
+		    dst = ((AST_VAR_SUBSCRIPT) var).var.IRme(); 
+		    TEMP index = ((AST_VAR_SUBSCRIPT) var).subscript.IRme();
+		    IR.getInstance().Add_IRcommand(new IRcommand_ArraySet(dst, index, exp_temp));
 	    }
 	    return null;
 	}
