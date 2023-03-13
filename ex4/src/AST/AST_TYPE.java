@@ -92,4 +92,8 @@ public class AST_TYPE extends AST_Node {
 		}
         return null;
 	}
+
+	public TEMP IRme(){
+		return null;
+	}
 }

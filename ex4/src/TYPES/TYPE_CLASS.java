@@ -79,6 +79,7 @@ public class TYPE_CLASS extends TYPE
 			if (member.head != null && member.head.typeName == "function" && member.head.name.equals(name))
 				return this.name;
 		}
+		System.out.format("getClassNameOfFunc in class %s ###### func %s\n", name,func_name);
 		return this.father.getClassNameOfFunc(func_name);
 	}
 

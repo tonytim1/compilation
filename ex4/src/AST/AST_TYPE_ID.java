@@ -46,7 +46,7 @@ public class AST_TYPE_ID extends AST_Node {
 			/*******************************************************/
 			/* Enter var with name=name and type=t to symbol table */
 			/*******************************************************/
-			SYMBOL_TABLE.getInstance().enter(id, t);
+			SYMBOL_TABLE.getInstance().enter(id, t, "param");
 		}
 
 		/****************************/
@@ -54,4 +54,8 @@ public class AST_TYPE_ID extends AST_Node {
 		/****************************/
 		return t;
 	}	
+		
+	public TEMP IRme(){
+		return null;
+	}
 }

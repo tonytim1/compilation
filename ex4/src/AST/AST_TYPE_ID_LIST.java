@@ -43,4 +43,8 @@ public class AST_TYPE_ID_LIST extends AST_Node {
 
 		return new TYPE_LIST(t1, (TYPE_LIST) t2);
 	}
+	
+	public TEMP IRme(){
+		return null;
+	}
 }
