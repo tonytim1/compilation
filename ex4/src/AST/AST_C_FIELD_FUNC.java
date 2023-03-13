@@ -36,7 +36,7 @@ public class AST_C_FIELD_FUNC extends AST_C_FIELD {
 
 	public TEMP IRme(){
         if(funcDec != null) {
-            return funcDec.IRme();
+            funcDec.IRme();
         }
         return null;
 	}

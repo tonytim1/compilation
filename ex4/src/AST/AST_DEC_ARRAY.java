@@ -33,6 +33,7 @@ public class AST_DEC_ARRAY extends AST_DEC {
 	}
 	
 	public TEMP IRme() {
-	    return a.IRme();
+	    a.IRme();
+	    return null;
 	}
 }

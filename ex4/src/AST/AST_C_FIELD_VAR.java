@@ -38,7 +38,7 @@ public class AST_C_FIELD_VAR extends AST_C_FIELD {
 	}
 	public TEMP IRme(){
         if(varDec != null) {
-            return varDec.IRme();
+            varDec.IRme();
         }
         return null;
 	}

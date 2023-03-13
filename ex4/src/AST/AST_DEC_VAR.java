@@ -34,6 +34,9 @@ public class AST_DEC_VAR extends AST_DEC {
 	}
 
 	public TEMP IRme() {
+	if (v != null) {
 	    return v.IRme();
+    }
+    return null;
 	}
 }

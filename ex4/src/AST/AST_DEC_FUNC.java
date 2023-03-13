@@ -35,6 +35,7 @@ public class AST_DEC_FUNC extends AST_DEC {
 	}
 
 	public TEMP IRme() {
-	    return f.IRme();
+	    f.IRme();
+	    return null;
 	}
 }

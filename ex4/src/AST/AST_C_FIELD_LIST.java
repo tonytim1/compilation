@@ -47,20 +47,16 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		return new TYPE_LIST(t1, (TYPE_LIST) t2);
 	}
 
-	public TEMP IRme(boolean irFunction) {
+	public TEMP IRme(int ignore) {
 		System.out.format("IRME AST_C_FIELD_LIST --------- %s %s \n", irFunction, cField.typeCField);
-	    if (cField.typeCField == null) {
-	        return null;
-	    }
-	    if (irFunction && cField.typeCField == "funcDec") {
-            cField.IRme();
-	    }
-	    if (!irFunction && cField.typeCField == "varDec") {
-            cField.IRme();
-	    }
-	    if (cFieldList != null) {
-            cFieldList.IRme(irFunction);
-	    }
-        return null;
+	    if ((cField == null) && (cFieldList == null)) {
+			return null;
+		}
+		else if ((cField != null) && (cFieldList == null)) {
+			return new TEMP_LIST(cField.IRme(), null);
+		}
+		else {
+			return new TEMP_LIST(cField.IRme(), cFieldList.IRme(0));
+		}
 	}
 }
