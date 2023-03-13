@@ -11,6 +11,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	public String name;
 	// For IRME
 	Boolean is_string = false;
+	TYPE varType;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -61,13 +62,38 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		{
 			this.is_string = true;
 		}
-
+	
+		this.varType = t;
 	    return t;
     }
-	
-	public TEMP IRme(){
-		TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
-		IR.getInstance().Add_IRcommand(new IRcommand_Load(dst, name, scope_type, index, is_string));
-		return dst;
+
+	public TEMP IRme() {
+		System.out.format("VAR SIMPLE - IRme (%s)\n", name);
+
+		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+
+		if(this.scope_type.equals("global") {
+			IR.getInstance().Add_IRcommand(new IRcommand_Load_Global(t, name));
+		}
+		else {
+			String irName = name;
+			boolean c = false;
+			IRcommand command;
+			if (className != null && offsets.get(name) == null) { // var is class field
+				c = true;
+				irName = className + "_" + name;
+			}
+			if (c == true && (!(this.varType instanceof TYPE_CLASS) || !(((TYPE_CLASS) this.varType).name.equals(className)))) // var is
+			{																// field and																																																			// itself
+				command = new IRcommand_ThisDotField(irName, t);
+				((IRcommand_ThisDotField)command).cfg = cfgVar;
+			}
+			else
+				command = new IRcommand_Load_Local(irName, t);
+
+			command.offset = GetOffset(irName);
+			IR.getInstance().Add_IRcommand(command);
+		}
+		return t;
 	}
 }

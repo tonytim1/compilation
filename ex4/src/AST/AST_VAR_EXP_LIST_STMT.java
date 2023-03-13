@@ -9,6 +9,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 	public AST_EXP_LIST expList;
 	public String name;
 	public TYPE_CLASS tc;
+	public TYPE_FUNCTION func; // for IRme
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -102,46 +103,63 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 	}
 	
 	public TEMP IRme(){
-		System.out.format("IR AST_VAR_EXP_LIST_STMT name %s, var %s, exps %s\n", name, var, expList);
-		IR ir = IR.getInstance();
-		TEMP_LIST args;
-		if (var == null)
+		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+
+		if(var == null & expList == null) 
 		{
-			if (expList == null)
-			{
-				ir.Add_IRcommand(new IRcommand_FuncCall(null, name, null));
+			System.out.print("AST_VAR_EXP_LIST_STMT IRME --- CASE:  ID ();\n");
+
+			String startLabel = null;
+			if (name.equals("PrintInt")) {
+			startLabel = "PrintInt";
+			} else if (name.equals("PrintString")) {
+			startLabel = "PrintString";
+			} else {
+			startLabel = this.func.startLabel;
 			}
-			else 
-			{
-				args = expList.IRme();
-				if (name.equals("PrintInt") && args != null && args.next == null)
-				{
-					ir.Add_IRcommand(new IRcommand_PrintInt(args.value));
-				}
-				else if (name.equals("PrintString") && args != null && args.next == null)
-				{
-					ir.Add_IRcommand(new IRcommand_PrintString(args.value));
-				} 
-				else 
-				{
-					ir.Add_IRcommand(new IRcommand_FuncCall(null, name, args));
-				}
-			}
-		} 
-		else 
-		{
-			TEMP t1 = var.IRme();
-			int func_index = tc.getFuncIndex(name);
-			if (expList == null)
-			{
-				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, null, func_index));
-			}
-			else
-			{
-				args = expList.IRme();
-				ir.Add_IRcommand(new IRcommand_ClassMethodCall(null, t1, name, args, func_index));
-			}
+
+			IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(t, startLabel, null));
+			return t;
 		}
-		return null;
+		else if(var == null & expList != null) 
+		{
+			System.out.print("AST_VAR_EXP_LIST_STMT IRME --- CASE:  ID ( exp );\n");
+
+			TEMP_LIST resTempsList = null;
+
+			// set resTempList
+			for (AST_EXPLIST it = expList; it != null; it = it.tail) {
+			  TEMP curr = it.head.IRme();
+			  resTempsList = new TEMP_LIST(curr, resTempsList);
+			}
+		
+			// reverse expList
+			if (resTempsList != null) {
+			  resTempsList = resTempsList.reverseList();
+			}
+		
+			String startLabel = null;
+			if (name.equals("PrintInt")) {
+			  startLabel = "PrintInt";
+			} else if (name.equals("PrintString")) {
+			  startLabel = "PrintString";
+			} else {
+			  startLabel = this.func.startLabel;
+			}
+			IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(t, startLabel, resTempsList));
+			return t;
+		}
+		else if(var != null & expList == null) 
+		{
+			System.out.print("AST_VAR_EXP_LIST_STMT IRME --- CASE:  var DOT ID ();\n");
+
+			return vardotIR(var, null, tc, name);
+		}
+		else if(var != null & expList != null) 
+		{
+			System.out.print("AST_VAR_EXP_LIST_STMT IRME --- CASE:  var DOT ID ( exp );\n");
+
+			return vardotIR(var, expList, tc, name);
+		}
 	}
 }
