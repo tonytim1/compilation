@@ -38,8 +38,9 @@ public class AST_EXP_STRING extends AST_EXP {
 	}
 	public TEMP IRme()
 	{
-	    TEMP t = TEMP_FACTORY.getInstance().getFreshTemp();
-	    IR.getInstance().Add_IRcommand(new IRcommand_ConstString(t,value));
-	    return t;
+	    TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+		this.label = IRcommand.getFreshLabel("const_string");
+		IR.getInstance().Add_IRcommand(new IRcommand_Const_String(t, label, s));
+		return t;
 	}
 }

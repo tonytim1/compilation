@@ -118,61 +118,64 @@ public class AST_EXP_BINOP extends AST_EXP
 	    TEMP t2 = null;
 	    TEMP dst = TEMP_FACTORY.getInstance().getFreshTemp();
 
-	    t1 = left.IRme();
-	    t2 = right.IRme();
+		if (left != null)
+			t1 = left.IRme();
+		if (right != null)
+			t2 = right.IRme();
+
 		System.out.format("AST_EXP_BINOP IR --------------- left type %s, right type %s \n", left.getClass().getName(), right.getClass().getName());
 		System.out.format("AST_EXP_BINOP IR --------------- t1  %s, t2 type %s \n", t1, t2);
 	    switch(OP.OP) {
 			case 1: {
 				// case: addition
 				if (this.stringConcat) {
-				    IR.getInstance().Add_IRcommand(new IRcommand_Binop_String_Concat(dst, t1, t2));
+				    IR.getInstance().Add_IRcommand(new IRcommand_Binop_Concat_Strings(dst, t1, t2));
 				}
 				else {
-				    IR.getInstance().Add_IRcommand(new IRcommand_Binop_Add_Integers(dst,t1,t2));
+				    IR.getInstance().Add_IRcommand(new IRcommand_Binop_Add_Integers(dst, t1, t2));
                 }
 				break;
 			}
 			case 2: {
 				// case: subtraction
-				IR.getInstance().Add_IRcommand(new IRcommand_Binop_Sub_Integers(dst,t1,t2));
+				IR.getInstance().Add_IRcommand(new IRcommand_Binop_SUB_Integers(dst, t1, t2));
 				break;
 			}
 			case 3: {
 				// case: multiplication
-				IR.getInstance().Add_IRcommand(new IRcommand_Binop_Mul_Integers(dst,t1,t2));
+				IR.getInstance().Add_IRcommand(new IRcommand_Binop_Mul_Integers(dst, t1, t2));
 				break;
 			}
 			case 4: {
 				// case: division
-				IR.getInstance().Add_IRcommand(new IRcommand_Binop_Div_Integers(dst,t1,t2));
+				IR.getInstance().Add_IRcommand(new IRcommand_Binop_DIV_Integers(dst, t1, t2));
 				break;
 			}
 			case 5: {
 				// case: equality testing
 				if(this.stringEQ) {
 					// string equality testing
-					IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Strings(dst,t1,t2));
+					IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Strings(dst, t1, t2));
 				}
 				else {
 					// NOTE: equality testing between arrays and class instances is similar to integer equality testing
-					IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Integers(dst,t1,t2));
+					IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Contents(dst, t1, t2));
 				}
 				break;
 			}
 			case 6: {
 				// case: LT testing
-				IR.getInstance().Add_IRcommand(new IRcommand_Binop_LT_Integers(dst,t1,t2));
+				IR.getInstance().Add_IRcommand(new IRcommand_Binop_LT_Integers(dst, t1, t2));
 				break;
 			}
 			case 7: {
-				// case: GT testing (equivalent to LT testing with swapped parameters)
-				IR.getInstance().Add_IRcommand(new IRcommand_Binop_LT_Integers(dst,t2,t1));
+				// case: GT testing
+				IR.getInstance().Add_IRcommand(new IRcommand_Binop_GT_Integers(dst, t1, t2));;
 				break;
 			}
 			case 8: {
 			    // case: NEQ testing
-			    IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Integers(dst,t2,t1));
+			    IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Integers(dst, t1, t2));
 			    break;
 			}
 		}

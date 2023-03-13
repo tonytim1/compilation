@@ -10,6 +10,7 @@ public class AST_STMT_WHILE extends AST_STMT
 {
 	public AST_EXP cond;
 	public AST_STMT_LIST body;
+	public boolean inFunc;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
@@ -63,6 +64,8 @@ public class AST_STMT_WHILE extends AST_STMT
 		/*****************/
 		SYMBOL_TABLE.getInstance().endScope();
 
+		inFunc = SYMBOL_TABLE.getInstance().inFuncScope();
+		
 		/*********************************************************/
 		/* [4] Return value is irrelevant for class declarations */
 		/*********************************************************/
@@ -71,16 +74,51 @@ public class AST_STMT_WHILE extends AST_STMT
 
 	public TEMP IRme()
 	{
-	    String loop_start = IRcommand.getFreshLabel("loop_start");
-		String loop_end = IRcommand.getFreshLabel("loop_end");
-		IR.getInstance().Add_IRcommand(new IRcommand_Label(loop_start));
-		TEMP t = cond.IRme();
-		System.out.format("AST_STMT_WHILE ---------- %s, %s\n", cond.getClass().getName(), t);
-		IR.getInstance().Add_IRcommand(new IRcommand_Jump_If_Eq_To_Zero(t, loop_end));
-		if(body != null) body.IRme();
-		IR.getInstance().Add_IRcommand(new IRcommand_Jump_Label(loop_start));
-		IR.getInstance().Add_IRcommand(new IRcommand_Label(loop_end));
+		System.out.format("AST_STMT_WHILE" + "- IRme\n");
 
+		/*******************************/
+		/* [1] Allocate 2 fresh labels */
+		/*******************************/
+
+		String label_end = IRcommand.getFreshLabel("end");
+		String label_start = IRcommand.getFreshLabel("start");
+
+		/*********************************/
+		/* [2] entry label for the while */
+		/*********************************/
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_start));
+
+		/********************/
+		/* [3] cond.IRme(); */
+		/********************/
+		TEMP cond_temp = cond.IRme();
+
+		/******************************************/
+		/* [4] Jump conditionally to the loop end */
+		/******************************************/
+		IR.getInstance().Add_IRcommand(new IRcommand_Jump_beqz(cond_temp, label_end));
+
+		/*******************/
+		/* [5] body.IRme() */
+		/*******************/
+		if (inFunc)
+			ifScope(body);
+		else
+			body.IRme();
+
+		/******************************/
+		/* [6] Jump to the loop entry */
+		/******************************/
+		IR.getInstance().Add_IRcommand(new IRcommand_Jump_Label(label_start));
+
+		/**********************/
+		/* [7] Loop end label */
+		/**********************/
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_end));
+
+		/*******************/
+		/* [8] return null */
+		/*******************/
 		return null;
 	}
 }

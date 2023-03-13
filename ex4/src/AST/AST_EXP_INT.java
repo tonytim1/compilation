@@ -46,7 +46,7 @@ public class AST_EXP_INT extends AST_EXP
 	public TEMP IRme()
 	{
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTemp();
-		IR.getInstance().Add_IRcommand(new IRcommand_ConstInt(t,value));
+		IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, value));
 		return t;
 	}
 }
