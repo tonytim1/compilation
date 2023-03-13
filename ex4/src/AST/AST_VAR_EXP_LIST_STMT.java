@@ -115,7 +115,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 			} else if (name.equals("PrintString")) {
 			startLabel = "PrintString";
 			} else {
-			startLabel = this.func.startLabel;
+			startLabel = this.func.name;
 			}
 
 			IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(t, startLabel, null));
@@ -144,7 +144,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 			} else if (name.equals("PrintString")) {
 			  startLabel = "PrintString";
 			} else {
-			  startLabel = this.func.startLabel;
+			  startLabel = this.func.name;
 			}
 			IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(t, startLabel, resTempsList));
 			return t;
