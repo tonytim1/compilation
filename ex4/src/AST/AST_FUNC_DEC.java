@@ -77,12 +77,6 @@ public class AST_FUNC_DEC extends AST_Node {
 		/****************************/
 		s.beginScope();
 
-		/*********************************************************/
-		/* [2] Update required return type */
-		/*********************************************************/
-		//System.out.format(">> INFO[%d] setting required_return_type to %s - class AST_FUNC_DEC\n",lineNumber,returnType);
-		SYMBOL_TABLE.getInstance().required_return_type = returnType.typeName;
-
 		/***************************/
 		/* [3] Semant Input Params */
 		/***************************/
@@ -114,6 +108,11 @@ public class AST_FUNC_DEC extends AST_Node {
 		/* [5] Enter the Function Type to the Symbol Table (inside the function scope in case of a recursive function) */
 		/***************************************************/
 		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+
+		/*********************************************************/
+		/* [2] Update required return type */
+		/*********************************************************/
+		SYMBOL_TABLE.getInstance().required_return_type = returnType.typeName;
 
 		/*******************/
 		/* [6] Semant Body */
@@ -155,11 +154,13 @@ public class AST_FUNC_DEC extends AST_Node {
 
 	public TEMP IRme() { 
 		// add function label
-		System.out.format("function %s num %d\n" ,id, varNum);
-		if(scope_type.equals("local_class"))
+		System.out.format("function %s class %s num %d\n" ,id, class_name, varNum);
+		if(scope_type.equals("local_class")) {
 			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(id, class_name, varNum));
-		else
+		}
+		else {
 			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(id, null, varNum));
+		}
 		// process statements
 		if(stmtList != null) {
 			stmtList.IRme();
