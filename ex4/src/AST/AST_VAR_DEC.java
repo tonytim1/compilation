@@ -128,52 +128,53 @@ public class AST_VAR_DEC extends AST_Node {
 	}
 
 	public TEMP IRme() {
-		if (exp == null) {
-		    if (newExp == null) {
-		        // System.out.format("====================== varDec -> type:%s ID( %s ) SEMICOLON\n", type.id, id);
-                if (scope.equals("global")) {
-                      if (type instanceof AST_TYPE_STRING) {
-                        IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(id, "aaa"));
-                      } else if (type instanceof AST_TYPE_INT) {
-                        IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id, 0));
-                      } else { // AST_TYPE_ID
-                        IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id));
-                      }
-                }
-                // local
-                else {
-                  if (!inFunc && inclass != null) {
-                    String namec = inclass + "_" + id;
-                    IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(namec));
-                  }
-                  // no need to do anything for regular types
-                  // maybe allocate space for arrays or classes?
-                }
-                // ret value doesn't matter for a declaration
-                return null;
-		    } else {
-		            // System.out.format("====================== varDec -> type:%s ID( %s ) ASSIGN new_exp SEMICOLON\n", type.id, id);
-                    TEMP t = exp.IRme();
-
-                    if (scope.equals("global")) {
-                      // can only use "new" on local context or inside class dec
-                      printError(666);
-                    }
-                    else {
-                      // class case?
-
-                      // local case
-                      IRcommand command = new IRcommand_Store_Local(id, t);
-
-                      command.offset = GetOffset(id);
-
-                      IR.getInstance().Add_IRcommand(command);
-                    }
-                    return null;
-		    }
-		}
-		else {
-			// System.out.format("====================== varDec -> type:%s ID( %s ) ASSIGN exp SEMICOLON\n", type.id, id);
+		if (exp == null && newExp == null) {
+			if (this.scope_type.equals("global")) {
+				if (type.typeName == "string") {
+					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(id, "aaa"));
+				} else if (type.typeName == "int") {
+					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id, 0));
+				} else { // Gal - case 4? I'm not sure
+					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id));
+				}
+			}
+			else {
+				if (this.scope_type.equals("local_class") {
+					String namec = var_class.name + "_" + id; // Gal - maybe we need the class name
+					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(namec));
+				}
+			}
+		} else if (exp != null && newExp == null) {
+			String TrueId = id;
+			if (this.scope_type.equals("global") || this.scope_type.equals("local_class")) { // global or class field
+				if (!this.scope_type.equals("local_func") && var_class.name != "")
+					TrueId = var_class.name + "_" + id;
+				if (type.typeName == "string") {
+					String value = ((AST_EXP_STRING) exp).value;
+					System.out.format("AST_VAR_DEC allocate string: %s", value);
+					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(TrueId, value));
+					if (var_class.name != "")
+						defaultFields.put(var_class.name + "_" + id, value);
+				} else if (type.typeName == "int") {
+					int value = ((AST_EXP_INT) exp).value;
+					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(TrueId, value));
+					if (var_class.name != "")
+						defaultFields.put(var_class.name+"_"+id, String.valueOf(value));
+				} else {
+					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(TrueId));
+				}
+			}
+			else { //local
+				TEMP t = exp.IRme();
+				IRcommand command = new IRcommand_Store_Local(id, t);
+				command.offset = GetOffset(id);
+				IR.getInstance().Add_IRcommand(command);
+			}
+		} else if (exp == null && newExp != null) {
+			TEMP t = newExp.IRme();
+			IRcommand command = new IRcommand_Store_Local(id, t);
+			command.offset = GetOffset(id);
+			IR.getInstance().Add_IRcommand(command);
 		}
 	}
 }
