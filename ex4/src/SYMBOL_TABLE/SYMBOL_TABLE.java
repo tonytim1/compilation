@@ -165,13 +165,39 @@ public class SYMBOL_TABLE
 	public TYPE find(String name)
 	{
 		SYMBOL_TABLE_ENTRY e;
-				
+		TYPE result;
+
+		System.out.format("SYMBOL TABLE FIND looking for %s\n", name);
 		for (e = table[hash(name)]; e != null; e = e.next)
 		{
+			System.out.format("   ENTRY name=%s type={name=%s typeName=%s}\n", e.name, e.type.name, e.type.typeName);
+		}
+
+		for (e = table[hash(name)]; e != null; e = e.next)
+		{
+			//System.out.format("   ENTRY name:%s type: name:%s typeName:%s\n", e.name, e.type.name, e.type.typeName);
+
 			if (name.equals(e.name))
 			{
+				if ((curr_class != null) && (e.depth == 0)){
+					break;
+				}
 				return e.type;
 			}
+		}
+		
+		if (curr_class != null)
+		{
+			result = curr_class.findinClass(name);
+			if (result != null)
+			{
+				return result;
+			}
+		}
+
+		if (e != null)
+		{
+			return e.type;
 		}
 		
 		return null;
@@ -246,6 +272,11 @@ public class SYMBOL_TABLE
 	public boolean isGlobalScope()
 	{
 		return curr_depth == 0;
+	}
+
+	public boolean isClassDecleration()
+	{
+		return curr_class != null && curr_depth == 1;
 	}
 	
 	public static int n=0;
@@ -369,6 +400,28 @@ public class SYMBOL_TABLE
 					new TYPE_LIST(
 						TYPE_INT.getInstance(),
 						null)));
+
+			/***************************************/
+			/* [3] Enter library function PrintString */
+			/***************************************/
+			instance.enter(
+					"PrintString",
+					new TYPE_FUNCTION(
+							TYPE_VOID.getInstance(),
+							"PrintString",
+							new TYPE_LIST(
+								TYPE_STRING.getInstance(),
+								null)));
+
+			/***************************************/
+			/* [3] Enter library function PrintTrace */
+			/***************************************/
+			instance.enter(
+					"PrintTrace",
+					new TYPE_FUNCTION(
+							TYPE_VOID.getInstance(),
+							"PrintTrace",
+							null));
 			
 		}
 		return instance;

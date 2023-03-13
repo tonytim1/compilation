@@ -29,13 +29,13 @@ public class IRcommand_Allocate extends IRcommand
 	}
 	public IRcommand_Allocate(String scope_type,String var_name,int var_value)
 	{
-		this(scope_type);
+		this.scope_type = scope_type;
 		this.var_name = var_name;
 		this.var_value_word = var_value;
 	}
 	public IRcommand_Allocate(String scope_type,String var_name,String var_value)
 	{
-		this(scope_type);
+		this.scope_type = scope_type;
 		this.var_name = var_name;
 		this.var_value_string = var_value;
 	}

@@ -76,11 +76,13 @@ public class TYPE_CLASS extends TYPE
 	public String getClassNameOfFunc(String func_name)
 	{	
 		for (TYPE_LIST member=data_members; member!=null; member=member.tail){
-			System.out.format("getClassNameOfFunc in class ###### data member %s %s\n", member.head.typeName, member.head.name);
 			if (member.head != null && member.head.typeName == "function" && member.head.name.equals(func_name))
+			{
+				System.out.format("getClassNameOfFunc in class ###### found function <%s> in class <%s>. data member %s %s\n", func_name, this.name, member.head.typeName, member.head.name);
 				return this.name;
+			}
 		}
-		System.out.format("getClassNameOfFunc in class %s ###### func %s\n", name,func_name);
+		//System.out.format("getClassNameOfFunc in class %s ###### func %s\n", name,func_name);
 		return this.father.getClassNameOfFunc(func_name);
 	}
 
@@ -155,5 +157,15 @@ public class TYPE_CLASS extends TYPE
 				return fatherClass.father.existInFatherScope(name);
 		}
 		return false;
+	}
+
+	public TYPE findinClass(String id)
+	{
+		TYPE result = findClassFunc(id);
+		if (result != null)
+		{
+			return result;
+		}
+		return findClassVar(id);
 	}
 }

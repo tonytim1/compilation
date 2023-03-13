@@ -36,6 +36,7 @@ public class IRcommand_Allocate_Class extends IRcommand
 			for(String func : funcList)
             {
 				String class_name_of_func = my_class.getClassNameOfFunc(func);
+				System.out.format("MIPSME IRcommand_Allocate_Class ----- class name %s, func name %s, func class name %s\n", my_class.name, func, class_name_of_func);
 				m.allocate_func(String.format("%s_%s", class_name_of_func, func));
 			}
 		}
