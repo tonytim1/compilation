@@ -255,11 +255,11 @@ public class CFG {
 							.remove(("Temp_" + (Integer.toString(((IRcommand_Load_Local) curr.line).dst.getSerialNumber()))));
 				}
 			}
-			if (curr.line.getClass().toString().equals("class IR.IRcommand_store_field")) {
-				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_store_field) curr.line).val.getSerialNumber()))));
+			if (curr.line.getClass().toString().equals("class IR.IRcommand_Store_Field")) {
+				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Store_Field) curr.line).val.getSerialNumber()))));
 				if (curr.inFunc)
 					curr.FuncScope
-							.remove(("Temp_" + (Integer.toString(((IRcommand_store_field) curr.line).val.getSerialNumber()))));
+							.remove(("Temp_" + (Integer.toString(((IRcommand_Store_Field) curr.line).val.getSerialNumber()))));
 			}
 			if (curr.line.getClass().toString().equals("class IR.IRcommand_Field_Access")) {
 				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Field_Access) curr.line).dst.getSerialNumber()))));
@@ -616,15 +616,15 @@ public class CFG {
 					((IRcommand_field_set) h).val.changed = true;
 				}
 			}
-			if (h.getClass().toString().equals("class IR.IRcommand_store_field")) {
-				if (((IRcommand_store_field) h).val.changed == false) {
+			if (h.getClass().toString().equals("class IR.IRcommand_Store_Field")) {
+				if (((IRcommand_Store_Field) h).val.changed == false) {
 					String theNum = IRtoMIPS
-							.get(("Temp_" + (Integer.toString(((IRcommand_store_field) h).val.getSerialNumber()))));
+							.get(("Temp_" + (Integer.toString(((IRcommand_Store_Field) h).val.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_store_field) h).val.serial = Integer.parseInt(theNum);
-					((IRcommand_store_field) h).val.changed = true;
+					((IRcommand_Store_Field) h).val.serial = Integer.parseInt(theNum);
+					((IRcommand_Store_Field) h).val.changed = true;
 				}
 			}
 			if (h.getClass().toString().equals("class IR.IRcommand_Return")) {

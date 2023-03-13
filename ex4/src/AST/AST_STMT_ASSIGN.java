@@ -59,34 +59,48 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		if(var instanceof AST_VAR_SIMPLE)
 		{
 			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_SIMPLE\n");
-
-		    //IR.getInstance().Add_IRcommand(new IRcommand_Store(var.name, exp_temp ,var.scope_type ,var.index));
+		    // old: IR.getInstance().Add_IRcommand(new IRcommand_Store(var.name, exp_temp ,var.scope_type ,var.index));
 			
 			if (var.scope_type == "global") {
 				IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(exp_temp, var.name));
 			}
 			else if (var.scope_type == "local_class") {
 				String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
-				IRcommand c = new IRcommand_store_field(inclass, varName, value);
-				c.offset = GetOffset(varName);
-				IR.getInstance().Add_IRcommand(c);
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Field(inclass, varName, value), GetOffset(varName));
+			}
+			else if (var.scope_type == "local_func") {
+				String varName = ((AST_VAR_SIMPLE) var).name;
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(varName, value), GetOffset(varName));
+			}
+			else {
+				System.out.format("BAD!!! AST_STMT_ASSIGN IRME AST_VAR_SIMPLE with unhandeled scope: %s\n", var.scope_type);
 			}
 
 	    }
 	    else if(var instanceof AST_VAR_FIELD)
 		{
 			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_FIELD\n");
+			AST_VAR_FIELD fieldVar = (AST_VAR_FIELD) var;
 
-		    dst = ((AST_VAR_FIELD) var).var.IRme(); // class pointer
-		    IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst, var.name, exp_temp, var.index));
+		    //old: dst = ((AST_VAR_FIELD) var).var.IRme(); // class pointer
+		    //old: IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst, var.name, exp_temp, var.index));
+
+			TEMP dst = fieldVar.var.IRme();
+			String f_name = fieldVar.fieldName;
+			String c_name = fieldVar.classN;
+			IRcommand r = IR.getInstance().Add_IRcommand(new IRcommand_field_set(dst, f_name, exp_temp, GetOffset(c_name + "_" + f_name)));
+			if (fieldVar.var instanceof AST_VAR_SIMPLE) {
+				((AST_VAR_SIMPLE) fieldVar.var).cfgVar = true;
+			}
 	    } 
 	    else
 	    {
 			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_SUBSCRIPT\n");
 
-		    dst = ((AST_VAR_SUBSCRIPT) var).var.IRme(); 
-		    TEMP index = ((AST_VAR_SUBSCRIPT) var).subscript.IRme();
-		    IR.getInstance().Add_IRcommand(new IRcommand_ArraySet(dst, index, exp_temp));
+			AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
+			TEMP array = subVar.var.IRme();
+			TEMP index = subVar.subscript.IRme();
+			IR.getInstance().Add_IRcommand(new IRcommand_array_set(array, index, exp_temp));
 	    }
 	    return null;
 	}

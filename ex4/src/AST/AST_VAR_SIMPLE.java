@@ -12,6 +12,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	// For IRME
 	Boolean is_string = false;
 	TYPE varType;
+	public boolean cfgVar = false;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -72,7 +73,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 
-		if(this.scope_type.equals("global") {
+		if(this.scope_type.equals("global")) {
 			IR.getInstance().Add_IRcommand(new IRcommand_Load_Global(t, name));
 		}
 		else {

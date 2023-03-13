@@ -18,9 +18,10 @@ public class IRcommand_Store_Local extends IRcommand{
 	public String var;
 
 	// x = t4
-	public IRcommand_Store_Local(String var, TEMP src) {
+	public IRcommand_Store_Local(String var, TEMP src, int offset) {
 		this.src = src;
 		this.var = var;
+		this.offset = offset;
 	}
 
 	/***************/

@@ -166,15 +166,11 @@ public class AST_VAR_DEC extends AST_Node {
 			}
 			else { //local
 				TEMP t = exp.IRme();
-				IRcommand command = new IRcommand_Store_Local(id, t);
-				command.offset = GetOffset(id);
-				IR.getInstance().Add_IRcommand(command);
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(id, t, GetOffset(id)));
 			}
 		} else if (exp == null && newExp != null) {
 			TEMP t = newExp.IRme();
-			IRcommand command = new IRcommand_Store_Local(id, t);
-			command.offset = GetOffset(id);
-			IR.getInstance().Add_IRcommand(command);
+			IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(id, t, GetOffset(id)));
 		}
 	}
 }
