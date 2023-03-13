@@ -130,26 +130,25 @@ public class AST_FUNC_DEC extends AST_Node {
 		/****************/
 		this.varNum = s.func_local_index;
 
+		/*****************/
+		/* [8] reset return type */
+		/*****************/
+		SYMBOL_TABLE.getInstance().required_return_type = "";
+
 		/***************************************************/
-		/* [8] Enter the Function Type to the Symbol Table */
+		/* [9] Enter the Function Type to the Symbol Table */
 		/***************************************************/
 		TYPE function = new TYPE_FUNCTION(returnType,id,type_list);
 		SYMBOL_TABLE.getInstance().enter(id,function);
 
 		/****************/
-		/* [8.5] For IR part
+		/* [10] For IR part
 		/****************/
 		this.scope_type = s.getVarScope(id);
 		if (this.scope_type.equals("local_class"))
 		{
 			this.class_name = s.curr_class.name;
 		}
-
-		/*****************/
-		/* [9] reset return type */
-		/*****************/
-		//System.out.format(">> INFO[%d] reset required_return_type - class AST_FUNC_DEC\n",lineNumber);
-		SYMBOL_TABLE.getInstance().required_return_type = "";
 
 		return function;
 	}
