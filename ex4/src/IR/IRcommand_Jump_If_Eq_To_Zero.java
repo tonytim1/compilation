@@ -31,6 +31,7 @@ public class IRcommand_Jump_If_Eq_To_Zero extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
+		System.out.format("IRcommand_Jump_If_Eq_To_Zero -------- %s\n", label_name);
 		MIPSGenerator.getInstance().beqz(t.toString() ,label_name);
 	}
 	public TEMP_LIST getLiveTemp(TEMP_LIST input){

@@ -23,6 +23,7 @@ public class IRcommand_Binop_LT_Integers extends IRcommand
 
 	public IRcommand_Binop_LT_Integers(TEMP dst,TEMP t1,TEMP t2)
 	{
+		System.out.format("IRcommand_Binop_LT_Integers t1 %s , t2 %s , dst %s\n", t1,t2, dst);
 		this.dst = dst;
 		this.t1 = t1;
 		this.t2 = t2;
@@ -44,6 +45,7 @@ public class IRcommand_Binop_LT_Integers extends IRcommand
 		/* [2] if (t1< t2) goto label_AssignOne;  */
 		/*     if (t1>=t2) goto label_AssignZero; */
 		/******************************************/
+		System.out.format("t1 %s , t2 %s \n", t1,t2);
 		MIPSGenerator.getInstance().blt(t1.toString(),t2.toString(),label_AssignOne);
 		MIPSGenerator.getInstance().bge(t1.toString(),t2.toString(),label_AssignZero);
 

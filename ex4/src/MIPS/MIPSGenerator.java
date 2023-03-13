@@ -34,6 +34,7 @@ public class MIPSGenerator
 	}
 	public void print_int(String t)
 	{
+		System.out.println("************MIPS PRINTING******");
 		fileWriter.format("\tmove $a0,%s\n",t);
 		fileWriter.format("\tli $v0,1\n");
 		fileWriter.format("\tsyscall\n");
@@ -302,10 +303,20 @@ public class MIPSGenerator
 			/*****************************************************/
 			/* [3] Print data section with error message strings */
 			/*****************************************************/
-			instance.fileWriter.print(".data\n");
+						instance.fileWriter.print(".data\n");
 			instance.fileWriter.print("string_access_violation: .asciiz \"Access Violation\"\n");
-			instance.fileWriter.print("string_illegal_div_by_0: .asciiz \"Illegal Division By Zero\"\n");
+			instance.fileWriter.print("string_illegal_div_by_0: .asciiz \"Division By Zero\"\n");
 			instance.fileWriter.print("string_invalid_ptr_dref: .asciiz \"Invalid Pointer Dereference\"\n");
+			instance.fileWriter.format("max: .word %d\n",32767);
+			instance.fileWriter.format("min: .word %d\n",-32768);
+			instance.label_text("abort_pointer");
+			instance.la("$a0","string_invalid_ptr_dref");
+			instance.print_string();
+			instance.exit();
+			instance.label_text("abort_array");
+			instance.la("$a0","string_access_violation");
+			instance.print_string();
+			instance.exit();
 		}
 		return instance;
 	}

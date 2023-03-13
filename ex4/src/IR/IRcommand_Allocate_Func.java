@@ -31,18 +31,21 @@ public class IRcommand_Allocate_Func extends IRcommand
 	public void MIPSme()
 	{
         MIPSGenerator m = MIPSGenerator.getInstance();
-
+        System.out.format("MIPSME ----------- IRcommand_Allocate_Func ----------class name %s, func name %s \n", class_name, func_name);
         if(class_name != null)
         {
             m.label_text(String.format("%s_%s", class_name, func_name));
+            System.out.println("1");
         }
         else if(func_name.equals("main"))
         {
 			m.label_text("main");
+             System.out.println("2");
 		} 
         else
         {
             m.label_text(String.format("func_%s",func_name));
+             System.out.println("3");
         }
 
         m.push_to_stack("$ra");

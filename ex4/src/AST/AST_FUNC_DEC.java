@@ -158,9 +158,9 @@ public class AST_FUNC_DEC extends AST_Node {
 		// add function label
 		System.out.format("function %s num %d\n" ,id, varNum);
 		if(scope_type.equals("local_class"))
-			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(class_name, id, varNum));
+			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(id, class_name, varNum));
 		else
-			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(null, id, varNum));
+			IR.getInstance().Add_IRcommand(new IRcommand_Allocate_Func(id, null, varNum));
 		// process statements
 		if(stmtList != null) {
 			stmtList.IRme();

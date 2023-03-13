@@ -65,7 +65,7 @@ public class Vertex {
 
     public void buildDependancyGraph() {
         if (!this.isVisited) {
-            System.out.format("command: %s\n", this.command.getClass());
+            //System.out.format("command: %s\n", this.command.getClass());
             this.input.printList();
             System.out.println();
 
@@ -73,11 +73,13 @@ public class Vertex {
                 for (TEMP_LIST f = e.next; f.value != null; f = f.next) {
                     f.value.addNeighbor(e.value);
                     e.value.addNeighbor(f.value);
+                    //System.out.format("f, e: %s %s\n", f.value.toString(), e.value.toString());
                 }
             }
             this.isVisited = true;
             // go to every neighbor and add his TEMPS
             for (VertexList j = this.next; j != null; j = j.tail) {
+                //System.out.format("j: %s %s\n", j.head.input.toString(), j.head.output.toString());
                 if (j.head != null)
                     j.head.buildDependancyGraph();
             }

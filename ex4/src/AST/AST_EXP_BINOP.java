@@ -120,6 +120,8 @@ public class AST_EXP_BINOP extends AST_EXP
 
 	    t1 = left.IRme();
 	    t2 = right.IRme();
+		System.out.format("AST_EXP_BINOP IR --------------- left type %s, right type %s \n", left.getClass().getName(), right.getClass().getName());
+		System.out.format("AST_EXP_BINOP IR --------------- t1  %s, t2 type %s \n", t1, t2);
 	    switch(OP.OP) {
 			case 1: {
 				// case: addition

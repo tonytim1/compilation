@@ -69,6 +69,7 @@ public class AST_STMT_IF extends AST_STMT
 	public TEMP IRme()
 	{
 	    TEMP t1 = cond.IRme();
+		System.out.format("AST_STMT_WHILE ---------- %s ,%s\n", cond.getClass().getName(), t1);
 	    String end_label = IRcommand.getFreshLabel("end_label");
 	    IR.getInstance().Add_IRcommand(new IRcommand_Jump_If_Eq_To_Zero(t1,end_label));
 		if(body != null) body.IRme();

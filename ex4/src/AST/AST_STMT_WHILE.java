@@ -75,6 +75,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		String loop_end = IRcommand.getFreshLabel("loop_end");
 		IR.getInstance().Add_IRcommand(new IRcommand_Label(loop_start));
 		TEMP t = cond.IRme();
+		System.out.format("AST_STMT_WHILE ---------- %s, %s\n", cond.getClass().getName(), t);
 		IR.getInstance().Add_IRcommand(new IRcommand_Jump_If_Eq_To_Zero(t, loop_end));
 		if(body != null) body.IRme();
 		IR.getInstance().Add_IRcommand(new IRcommand_Jump_Label(loop_start));
