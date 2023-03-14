@@ -89,8 +89,8 @@ public abstract class AST_Node
 		// array case
 		if (t1.isArray() && t2.isArray()) {
 			// todo: should check if t2 is son of t1 instead of equality
-			return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).entryType.name + "[]")
-					|| type_equals(((TYPE_ARRAY) t1).entryType, ((TYPE_ARRAY) t2).entryType);
+			return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).type.name + "[]")
+					|| type_equals(((TYPE_ARRAY) t1).type, ((TYPE_ARRAY) t2).type);
 		}
 
 		// class case ...

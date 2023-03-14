@@ -44,7 +44,9 @@ public abstract class TYPE
 	{
 		return (canAssign(t) || t.canAssign(this));
 	}
-
+    public boolean isClass(){
+        return false;
+    }
 	public boolean isArray(){
 	    return false;
 	}

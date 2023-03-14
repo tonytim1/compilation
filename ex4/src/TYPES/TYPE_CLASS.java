@@ -168,4 +168,7 @@ public class TYPE_CLASS extends TYPE
 		}
 		return findClassVar(id);
 	}
+    public boolean isClass(){
+        return true;
+    }
 }
