@@ -99,7 +99,7 @@ public class AST_STMT_IF extends AST_STMT
 		/* [5] body.IRme() */
 		/*******************/
 	
-		if (infunc)
+		if (inFunc)
 		  ifScope(body);
 	
 		else
