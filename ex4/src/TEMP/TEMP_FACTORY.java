@@ -2,7 +2,6 @@
 /* PACKAGE */
 /***********/
 package TEMP;
-import CFG.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -16,11 +15,9 @@ public class TEMP_FACTORY
 {
 	private int counter=0;
 	
-	public TEMP getFreshTemp()
+	public TEMP getFreshTEMP()
 	{
-		TEMP fresh = new TEMP(counter++);
-		REG_ALLOC.getInstance().addTemp(fresh);
-		return fresh;
+		return new TEMP(counter++);
 	}
 	
 	/**************************************/
