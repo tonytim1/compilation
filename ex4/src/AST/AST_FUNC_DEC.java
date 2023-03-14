@@ -15,6 +15,7 @@ public class AST_FUNC_DEC extends AST_Node {
     // New type for IR part
     String scope_type;
     String class_name; //The nearest class in the tree that contains the function name
+	public TYPE_FUNCTION func;
     int varNum;
 
 	public AST_FUNC_DEC(int lineNumber, AST_TYPE type, String id, AST_TYPE_ID_LIST tid, AST_STMT_LIST stmtList)
@@ -149,6 +150,7 @@ public class AST_FUNC_DEC extends AST_Node {
 			this.class_name = s.curr_class.name;
 		}
 
+		this.func = (TYPE_FUNCTION) function;
 		return function;
 	}
 
@@ -194,7 +196,7 @@ public class AST_FUNC_DEC extends AST_Node {
 			}
 		}
 
-		this.func.startLabel = labelStart;
+		//this.func.startLabel = labelStart; // not sure if we need it
 
 		IR.getInstance().Add_IRcommand(new IRcommand_Label(labelStart));
 		IR.getInstance().Add_IRcommand(new IRcommand_Prologue(varCnt));
