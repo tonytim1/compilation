@@ -3,7 +3,7 @@ import TYPES.*;
 import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
-
+import java.util.*;
 
 public class AST_CLASS_DEC extends AST_Node {
 
@@ -130,8 +130,8 @@ public class AST_CLASS_DEC extends AST_Node {
 			int fieldCnt = 0;
 			int funcCnt = 0;
 
-			for (AST_C_FIELD_LIST it = cFieldList; it != null; it = it.tail) {
-				AST_C_FIELD field = (AST_C_FIELD) (it.head);
+			for (AST_C_FIELD_LIST it = cFieldList; it != null; it = it.cFieldList) {
+				AST_C_FIELD field = (AST_C_FIELD) (it.cField);
 				if (field instanceof AST_C_FIELD_VAR) { // field
 					fieldCnt += 1;
 					continue;
@@ -159,8 +159,8 @@ public class AST_CLASS_DEC extends AST_Node {
 
 			fieldCnt = 0;
 			ArrayList<String> fieldslist = new ArrayList<>();
-			for (AST_C_FEILD_LIST it = cFieldList; it != null; it = it.tail) {
-				AST_C_FIELD field = (AST_C_FIELD) (it.head);
+			for (AST_C_FIELD_LIST it = cFieldList; it != null; it = it.cFieldList) {
+				AST_C_FIELD field = (AST_C_FIELD) (it.cField);
 
 				if (field instanceof AST_C_FIELD_VAR) { // field
 					// fieldCnt += 1;
@@ -185,16 +185,16 @@ public class AST_CLASS_DEC extends AST_Node {
 					fields.add(fieldandclass);
 				}
 			}
-			for (AST_C_FEILD_LIST it = cFieldList; it != null; it = it.tail) {
-				if (it.head instanceof AST_C_FEILD_FUNC) {
-					it.head.IRme();
+			for (AST_C_FIELD_LIST it = cFieldList; it != null; it = it.cFieldList) {
+				if (it.cField instanceof AST_C_FEILD_FUNC) {
+					it.cField.IRme();
 				}
 			}
 			classSize.put(id, fields.size() * 4 + 4);
 			IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist, fields));
-			for (AST_C_FEILD_LIST it = cFieldList; it != null; it = it.tail) {
-				if (it.head instanceof AST_C_FEILD_VAR)
-					it.head.IRme();
+			for (AST_C_FIELD_LIST it = cFieldList; it != null; it = it.cFieldList) {
+				if (it.cField instanceof AST_C_FEILD_VAR)
+					it.cField.IRme();
 			}
 			classfields.put(id, fieldslist);
 //		} //else {
