@@ -219,7 +219,7 @@ public abstract class AST_Node
 
 	public int localsInIfOrWhile(AST_STMT scope) {
 		// return how many variable declarations we have in an if or while scope
-		// (vardec)
+		// (var_dec)
 		AST_STMT_LIST body = null;
 		if (scope instanceof AST_STMT_IF)
 			body = ((AST_STMT_IF) scope).body;
@@ -227,7 +227,7 @@ public abstract class AST_Node
 			body = ((AST_STMT_WHILE) scope).body;
 		int result = 0;
 		for (AST_STMT_LIST it = body; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VARDEC)
+			if (it.head instanceof AST_STMT_VAR_DEC)
 				result += 1;
 
 			if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
@@ -242,10 +242,10 @@ public abstract class AST_Node
 		Map<String, String> temps = new HashMap<>();
 		int varCnt = varsInFunc;
 		for (AST_STMT_LIST it = body; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VARDEC) {
+			if (it.head instanceof AST_STMT_VAR_DEC) {
 				varCnt += 1;
-				AST_STMT_VARDEC a = (AST_STMT_VARDEC) (it.head);
-				AST_VARDEC b = (AST_VARDEC) (a.v);
+				AST_STMT_VAR_DEC a = (AST_STMT_VAR_DEC) (it.head);
+				AST_VAR_DEC b = (AST_VAR_DEC) (a.v);
 				if (offsets.get(b.id) != null)
 					temps.put(b.id, offsets.get(b.id));
 				offsets.put(b.id, String.valueOf(varCnt * (-4) + -40));
