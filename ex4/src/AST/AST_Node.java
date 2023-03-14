@@ -52,159 +52,158 @@ public abstract class AST_Node
 		System.out.print("AST NODE\n");
 	}
 
-	public void getFile(String file) {
-		this.file = file;
-	}
+	// public void getFile(String file) {
+	// 	this.file = file;
+	// }
 
-	public void printError(int line) {
-		try {
-			PrintWriter file_writer;
-			file_writer = new PrintWriter(this.file);
-			file_writer.print("ERROR");
-			file_writer.print("(");
-			file_writer.print(line);
-			file_writer.print(")");
-			file_writer.close();
-			System.exit(0);
-		} catch (Exception e) {
-		}
-	}
+	// public void printError(int line) {
+	// 	try {
+	// 		PrintWriter file_writer;
+	// 		file_writer = new PrintWriter(this.file);
+	// 		file_writer.print("ERROR");
+	// 		file_writer.print("(");
+	// 		file_writer.print(line);
+	// 		file_writer.print(")");
+	// 		file_writer.close();
+	// 		System.exit(0);
+	// 	} catch (Exception e) {
+	// 	}
+	// }
 
-	public boolean type_equals(TYPE t1, TYPE t2) {
-		// primitive case
-		if (t1 == t2) {
-			return true;
-		}
+	// public boolean type_equals(TYPE t1, TYPE t2) {
+	// 	// primitive case
+	// 	if (t1.typeName == t2.typeName) {
+	// 		return true;
+	// 	}
 
-		if (t1 == TYPE_INT.getInstance() || t1 == TYPE_STRING.getInstance() || t1 == TYPE_VOID.getInstance() ||
-				t2 == TYPE_INT.getInstance() || t2 == TYPE_STRING.getInstance() || t2 == TYPE_VOID.getInstance()) {
-			return false;
-		}
+	// 	if (t1.typeName == "int" || t1.typeName == "string" || t1.typeName == "void" || t2.typeName == "int" || t2.typeName == "string" || t2.typeName == "void") {
+	// 		return false;
+	// 	}
 
-		// non primitive
-		if ((t1 instanceof TYPE_NIL) || (t2 instanceof TYPE_NIL)) {
-			return true;
-		}
+	// 	// non primitive
+	// 	if ((t1.typeName == "nil") || (t2.typeName == "nil")) {
+	// 		return true;
+	// 	}
 
-		// array case
-		if (t1.isArray() && t2.isArray()) {
-			// todo: should check if t2 is son of t1 instead of equality
-			return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).type.name + "[]")
-					|| type_equals(((TYPE_ARRAY) t1).type, ((TYPE_ARRAY) t2).type);
-		}
+	// 	// array case
+	// 	if (t1.isArray() && t2.isArray()) {
+	// 		// todo: should check if t2 is son of t1 instead of equality
+	// 		return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).type.name + "[]")
+	// 				|| type_equals(((TYPE_ARRAY) t1).type, ((TYPE_ARRAY) t2).type);
+	// 	}
 
-		// class case ...
-		if (t1.isClass() && t2.isClass() && t1.name.equals(t2.name))
-			return true;
+	// 	// class case ...
+	// 	if (t1.isClass() && t2.isClass() && t1.name.equals(t2.name))
+	// 		return true;
 
-		// inheritance
-		if (t2.isClass() && t1.isClass()) {
-			TYPE_CLASS father = ((TYPE_CLASS) t2).father;
-			while (father != null) {
-				if (father.name.equals(t1.name))
-					return true;
-				father = father.father;
-			}
+	// 	// inheritance
+	// 	if (t2.isClass() && t1.isClass()) {
+	// 		TYPE_CLASS father = ((TYPE_CLASS) t2).father;
+	// 		while (father != null) {
+	// 			if (father.name.equals(t1.name))
+	// 				return true;
+	// 			father = father.father;
+	// 		}
 
-			// class wasnt declared yet
-			String cllass = SYMBOL_TABLE.getInstance().inClassScope();
-			if (cllass != null && cllass.equals(t2.name) && t1.isClass()) {
-				String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(t2.name);
-				if (fatherName.equals(t1.name))
-					return true;
-				TYPE_CLASS fatherC = ((TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName)).father;
-				while (fatherC != null) {
-					if (fatherC.name.equals(t1.name))
-						return true;
-					fatherC = fatherC.father;
-				}
-			}
-		}
+	// 		// class wasnt declared yet
+	// 		TYPE_CLASS curr_class = SYMBOL_TABLE.getInstance().curr_class;
+	// 		if (curr_class != null && curr_class.name.equals(t2.name) && t1.isClass()) {
+	// 			String fatherName = curr_class.father.name;
+	// 			if (fatherName.equals(t1.name))
+	// 				return true;
+	// 			TYPE_CLASS fatherC = curr_class.father;
+	// 			while (fatherC != null) {
+	// 				if (fatherC.name.equals(t1.name))
+	// 					return true;
+	// 				fatherC = fatherC.father;
+	// 			}
+	// 		}
+	// 	}
 
-		// function case(?) ...
+	// 	// function case(?) ...
 
-		return false;
-	}
+	// 	return false;
+	// }
 
-	public TYPE funcSig(String id, AST_EXP_LIST list, int line) {
-		TYPE type = SYMBOL_TABLE.getInstance().isRealFunc(id, list);
+	// public TYPE funcSig(String id, AST_EXP_LIST list, int line) {
+	// 	TYPE type = SYMBOL_TABLE.getInstance().isRealFunc(id, list);
 
-		if (type == null) {
-			System.out.format(">> ERROR [%d] " + id + " is not a function or the parameters given are wrong!", line);
-			printError(line);
-		}
-		return type;
-	}
+	// 	if (type == null) {
+	// 		System.out.format(">> ERROR [%d] " + id + " is not a function or the parameters given are wrong!", line);
+	// 		printError(line);
+	// 	}
+	// 	return type;
+	// }
 
-	// find only for types!!!
-	public TYPE findType(String name) {
-		TYPE t = SYMBOL_TABLE.getInstance().find(name);
+	// // find only for types!!!
+	// public TYPE findType(String name) {
+	// 	TYPE t = SYMBOL_TABLE.getInstance().find(name);
 
-		// if class was already declared then t!=null
-		if (t == null) {
-			// check if its equal class boundary before class was declared
-			String cl = SYMBOL_TABLE.getInstance().inClassScope();
-			if (cl != null && cl.equals(name)) {
-				// only comes here BEFORE we declare the class!
-				t = new TYPE_CLASS(null, name, null, null);
-			}
-		}
-		return t;
-	}
+	// 	// if class was already declared then t!=null
+	// 	if (t == null) {
+	// 		// check if its equal class boundary before class was declared
+	// 		TYPE_CLASS curr_class = SYMBOL_TABLE.getInstance().curr_class;
+	// 		if (curr_class != null && curr_class.name.equals(name)) {
+	// 			// only comes here BEFORE we declare the class!
+	// 			t = new TYPE_CLASS(null, name, null, null);
+	// 		}
+	// 	}
+	// 	return t;
+	// }
 
-	public TYPE isFuncOfClass(String className, String funcName, AST_EXP_LIST funcArgs, int line) {
+	// public TYPE isFuncOfClass(String className, String funcName, AST_EXP_LIST funcArgs, int line) {
 
-		if (SYMBOL_TABLE.getInstance().inClassScope() != null &&
-				SYMBOL_TABLE.getInstance().inClassScope().equals(className)) { // should find func in current class scope (going
-			// up till class and search for func)
-			TYPE f = SYMBOL_TABLE.getInstance().findInClassScope(funcName);
-			if (f instanceof TYPE_FUNCTION)
-				return funcSig(funcName, funcArgs, line);
-			// inheritance case
-			String extendClass = SYMBOL_TABLE.getInstance().findExtendsClass(className);
-			if (extendClass != null) {
-				TYPE_CLASS father = (TYPE_CLASS) (SYMBOL_TABLE.getInstance().find(className));
-				while (father != null) {
-					AST_TYPE_NAME_LIST funcs = father.functions;
-					for (AST_TYPE_NAME_LIST it = funcs; it != null; it = it.tail) {
-						if (it.head.name.equals(funcName))
-							return SYMBOL_TABLE.getInstance().compareFuncs((TYPE_FUNCTION) it.head.type, funcArgs, line);
-					}
-					father = father.father;
-				}
-			}
-			return null;
-		}
+	// 	if (SYMBOL_TABLE.getInstance().curr_class != null &&
+	// 			SYMBOL_TABLE.getInstance().curr_class.name.equals(className)) { // should find func in current class scope (going
+	// 		// up till class and search for func)
+	// 		TYPE f = SYMBOL_TABLE.getInstance().curr_class.findClassFunc(funcName);
+	// 		if (f instanceof TYPE_FUNCTION)
+	// 			return funcSig(funcName, funcArgs, line);
+	// 		// inheritance case
+	// 		String extendClass = SYMBOL_TABLE.getInstance().findExtendsClass(className);
+	// 		if (extendClass != null) {
+	// 			TYPE_CLASS father = (TYPE_CLASS) (SYMBOL_TABLE.getInstance().find(className));
+	// 			while (father != null) {
+	// 				AST_TYPE_NAME_LIST funcs = father.functions;
+	// 				for (AST_TYPE_NAME_LIST it = funcs; it != null; it = it.tail) {
+	// 					if (it.head.name.equals(funcName))
+	// 						return SYMBOL_TABLE.getInstance().compareFuncs((TYPE_FUNCTION) it.head.type, funcArgs, line);
+	// 				}
+	// 				father = father.father;
+	// 			}
+	// 		}
+	// 		return null;
+	// 	}
 
-		// class was already declared
-		TYPE cl = SYMBOL_TABLE.getInstance().find(className);
-		if (cl == null || !(cl.isClass())) // there isnt such a class
-		{
-			System.out.println(">> ERROR [" + line + "] there isnt such a class!");
-			printError(line);
-		}
+	// 	// class was already declared
+	// 	TYPE cl = SYMBOL_TABLE.getInstance().find(className);
+	// 	if (cl == null || !(cl.isClass())) // there isnt such a class
+	// 	{
+	// 		System.out.println(">> ERROR [" + line + "] there isnt such a class!");
+	// 		printError(line);
+	// 	}
 
-		TYPE_CLASS currClass = (TYPE_CLASS) cl;
-		TYPE_FUNCTION a = null;
-		while (currClass != null) {
-			for (AST_TYPE_NAME_LIST it = currClass.functions; it != null; it = it.tail) {
-				if (it.head.name.equals(funcName)) {
-					a = (TYPE_FUNCTION) it.head.type;
-					break;
-				}
-			}
-			currClass = currClass.father;
-		}
+	// 	TYPE_CLASS currClass = (TYPE_CLASS) cl;
+	// 	TYPE_FUNCTION a = null;
+	// 	while (currClass != null) {
+	// 		for (AST_TYPE_NAME_LIST it = currClass.functions; it != null; it = it.tail) {
+	// 			if (it.head.name.equals(funcName)) {
+	// 				a = (TYPE_FUNCTION) it.head.type;
+	// 				break;
+	// 			}
+	// 		}
+	// 		currClass = currClass.father;
+	// 	}
 
-		if (a == null) // no such func
-		{
-			System.out.println(">> ERROR [" + line + "] there isnt such a func!");
-			printError(line);
-		}
-		// should compare a params to func args - getting func args type by semant me
-		return SYMBOL_TABLE.getInstance().compareFuncs(a, funcArgs, line);
+	// 	if (a == null) // no such func
+	// 	{
+	// 		System.out.println(">> ERROR [" + line + "] there isnt such a func!");
+	// 		printError(line);
+	// 	}
+	// 	// should compare a params to func args - getting func args type by semant me
+	// 	return SYMBOL_TABLE.getInstance().compareFuncs(a, funcArgs, line);
 
-	}
+	// }
 
 	// ##################### IRme funcs #####################################
 
