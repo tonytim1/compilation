@@ -150,6 +150,7 @@ non terminal AST_ARG arg;
 
 precedence nonassoc ASSIGN;
 precedence left EQ;
+precedence left NE;
 precedence left LT, GT;
 precedence left PLUS, MINUS;
 precedence left COMMA, TIMES, DIVIDE;
