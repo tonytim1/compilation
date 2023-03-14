@@ -5,6 +5,7 @@ import java_cup.runtime.Symbol;
 import AST.*;
 import IR.*;
 import MIPS.*;
+import CFG.*;
 
 public class Main
 {
@@ -64,7 +65,9 @@ public class Main
 			/************************/
 			/* [8.5] OPT the IR ... */
 			/************************/
-			IR.getInstance().OPTme();
+			CFG g=new CFG();
+			g.liveness();
+			g.K_color();
 
 			/***********************/
 			/* [9] MIPS the IR ... */
