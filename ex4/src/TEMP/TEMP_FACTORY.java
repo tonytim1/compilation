@@ -2,7 +2,7 @@
 /* PACKAGE */
 /***********/
 package TEMP;
-import REGALLOC.*;
+import CFG.*;
 
 /*******************/
 /* GENERAL IMPORTS */
