@@ -244,7 +244,7 @@ public abstract class AST_Node
 			if (it.head instanceof AST_STMT_VAR_DEC) {
 				varCnt += 1;
 				AST_STMT_VAR_DEC a = (AST_STMT_VAR_DEC) (it.head);
-				AST_VAR_DEC b = (AST_VAR_DEC) (a.v);
+				AST_VAR_DEC b = (AST_VAR_DEC) (a.varDec);
 				if (offsets.get(b.id) != null)
 					temps.put(b.id, offsets.get(b.id));
 				offsets.put(b.id, String.valueOf(varCnt * (-4) + -40));
@@ -261,7 +261,7 @@ public abstract class AST_Node
 		}
 	}
 
-	public TEMP vardotIR(AST_VAR var, IST list, TYPE_CLASS tl, String id) {
+	public TEMP vardotIR(AST_VAR var, AST_EXP_LIST list, TYPE_CLASS tl, String id) {
 		TEMP varAddress = var.IRme();
 		TEMP_LIST resTempsList = null;
 
