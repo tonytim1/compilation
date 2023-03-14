@@ -42,8 +42,8 @@ public class IRcommand_Binop_EQ_Contents extends IRcommand_Binop {
 		/* [2] if (t1==t2) goto label_AssignOne; */
 		/* if (t1!=t2) goto label_AssignZero; */
 		/******************************************/
-		MIPSGenerator.getInstance().beq(t1, t2, label_AssignOne);
-		MIPSGenerator.getInstance().bne(t1, t2, label_AssignZero);
+		MIPSGenerator.getInstance().bne(t1, t2, label_AssignOne);
+		MIPSGenerator.getInstance().beq(t1, t2, label_AssignZero);
 
 		/************************/
 		/* [3] label_AssignOne: */
