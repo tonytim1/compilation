@@ -4,7 +4,7 @@ import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 import java.util.*;
-import java.io.PrintWriter
+import java.io.PrintWriter;
 public abstract class AST_Node
 {
 	/*******************************************/
