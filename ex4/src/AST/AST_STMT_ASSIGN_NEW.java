@@ -52,31 +52,34 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 
 	public TEMP IRme(){
 		TEMP exp_temp = exp.IRme();
-		TEMP dst;
+
 		if(var instanceof AST_VAR_SIMPLE)
 		{
-			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_SIMPLE\n");
+			System.out.print("AST_STMT_ASSIGN_NEW IRME --- CASE:  AST_VAR_SIMPLE\n");
 		    // old: IR.getInstance().Add_IRcommand(new IRcommand_Store(var.name, exp_temp ,var.scope_type ,var.index));
 			
 			if (var.scope_type == "global") {
 				IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(exp_temp, var.name));
 			}
-			else if (var.scope_type == "local_class") {
-				String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
-				IR.getInstance().Add_IRcommand(new IRcommand_Store_Field(inclass, varName, value), GetOffset(varName));
+			else if (inclass != null) {
+				if (var.scope_type != "local_class") {
+					System.out.format("WEIRD!! AST_STMT_ASSIGN_NEW IRME AST_VAR_SIMPLE is in class but scope type isnt local_class, but: %s\n", var.scope_type);
+				}
+				String varName = inclass.name + "_" + ((AST_VAR_SIMPLE) var).name;
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Field(inclass.name, varName, exp_temp, GetOffset(varName)));
 			}
 			else if (var.scope_type == "local_func") {
 				String varName = ((AST_VAR_SIMPLE) var).name;
-				IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(varName, value), GetOffset(varName));
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(varName, exp_temp, GetOffset(varName)));
 			}
 			else {
-				System.out.format("BAD!!! AST_STMT_ASSIGN IRME AST_VAR_SIMPLE with unhandeled scope: %s\n", var.scope_type);
+				System.out.format("BAD!!! AST_STMT_ASSIGN_NEW IRME AST_VAR_SIMPLE with unhandeled scope: %s\n", var.scope_type);
 			}
 
 	    }
 	    else if(var instanceof AST_VAR_FIELD)
 		{
-			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_FIELD\n");
+			System.out.print("AST_STMT_ASSIGN_NEW IRME --- CASE:  AST_VAR_FIELD\n");
 			AST_VAR_FIELD fieldVar = (AST_VAR_FIELD) var;
 
 		    //old: dst = ((AST_VAR_FIELD) var).var.IRme(); // class pointer
@@ -92,7 +95,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 	    } 
 	    else
 	    {
-			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_SUBSCRIPT\n");
+			System.out.print("AST_STMT_ASSIGN_NEW IRME --- CASE:  AST_VAR_SUBSCRIPT\n");
 
 			AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
 			TEMP array = subVar.var.IRme();
