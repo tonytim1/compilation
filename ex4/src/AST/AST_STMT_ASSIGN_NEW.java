@@ -86,9 +86,9 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 		    //old: IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst, var.name, exp_temp, var.index));
 
 			TEMP dst = fieldVar.var.IRme();
-			String f_name = fieldVar.fieldName;
+			String f_name = fieldVar.name;
 			String c_name = fieldVar.classN;
-			IRcommand r = IR.getInstance().Add_IRcommand(new IRcommand_field_set(dst, f_name, exp_temp, GetOffset(c_name + "_" + f_name)));
+			IR.getInstance().Add_IRcommand(new IRcommand_field_set(dst, f_name, exp_temp, GetOffset(c_name + "_" + f_name)));
 			if (fieldVar.var instanceof AST_VAR_SIMPLE) {
 				((AST_VAR_SIMPLE) fieldVar.var).cfgVar = true;
 			}
