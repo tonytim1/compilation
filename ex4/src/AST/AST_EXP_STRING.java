@@ -9,6 +9,7 @@ import TEMP.*;
 public class AST_EXP_STRING extends AST_EXP {
 	
 	public String value;
+	public String label; // holds the label of this string, for IRme
 
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -40,7 +41,7 @@ public class AST_EXP_STRING extends AST_EXP {
 	{
 	    TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 		this.label = IRcommand.getFreshLabel("const_string");
-		IR.getInstance().Add_IRcommand(new IRcommand_Const_String(t, label, s));
+		IR.getInstance().Add_IRcommand(new IRcommand_Const_String(t, label, value));
 		return t;
 	}
 }

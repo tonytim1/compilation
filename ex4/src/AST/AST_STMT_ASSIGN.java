@@ -10,6 +10,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	/***************/
 	public AST_VAR var;
 	public AST_EXP exp;
+	public TYPE_CLASS inclass;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
@@ -50,12 +51,13 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			System.out.format(">> ERROR [%d] type mismatch for var %s %s, exp %s %s - class AST_STMT_ASSIGN\n",lineNumber, t1.typeName, t1.name, t2.typeName, t2.name);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
+		inclass = SYMBOL_TABLE.getInstance().curr_class;
 		return null;
 	}
 
 	public TEMP IRme(){
 		TEMP exp_temp = exp.IRme();
-		TEMP dst;
+
 		if(var instanceof AST_VAR_SIMPLE)
 		{
 			System.out.print("AST_STMT_ASSIGN IRME --- CASE:  AST_VAR_SIMPLE\n");
@@ -64,13 +66,16 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			if (var.scope_type == "global") {
 				IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(exp_temp, var.name));
 			}
-			else if (var.scope_type == "local_class") {
-				String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
-				IR.getInstance().Add_IRcommand(new IRcommand_Store_Field(inclass, varName, value), GetOffset(varName));
+			else if (inclass != null) {
+				if (var.scope_type != "local_class") {
+					System.out.format("WEIRD!! AST_STMT_ASSIGN IRME AST_VAR_SIMPLE is in class but scope type isnt local_class, but: %s\n", var.scope_type);
+				}
+				String varName = inclass.name + "_" + ((AST_VAR_SIMPLE) var).name;
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Field(inclass.name, varName, exp_temp, GetOffset(varName)));
 			}
 			else if (var.scope_type == "local_func") {
 				String varName = ((AST_VAR_SIMPLE) var).name;
-				IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(varName, value), GetOffset(varName));
+				IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(varName, exp_temp, GetOffset(varName)));
 			}
 			else {
 				System.out.format("BAD!!! AST_STMT_ASSIGN IRME AST_VAR_SIMPLE with unhandeled scope: %s\n", var.scope_type);
@@ -86,9 +91,9 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		    //old: IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst, var.name, exp_temp, var.index));
 
 			TEMP dst = fieldVar.var.IRme();
-			String f_name = fieldVar.fieldName;
+			String f_name = fieldVar.name;
 			String c_name = fieldVar.classN;
-			IRcommand r = IR.getInstance().Add_IRcommand(new IRcommand_field_set(dst, f_name, exp_temp, GetOffset(c_name + "_" + f_name)));
+			IR.getInstance().Add_IRcommand(new IRcommand_field_set(dst, f_name, exp_temp, GetOffset(c_name + "_" + f_name)));
 			if (fieldVar.var instanceof AST_VAR_SIMPLE) {
 				((AST_VAR_SIMPLE) fieldVar.var).cfgVar = true;
 			}
