@@ -140,8 +140,8 @@ non terminal AST_EXP_BINOP expBinop;
 non terminal AST_C_FIELD_LIST cFieldList;
 non terminal AST_BINOP BINOP;
 non terminal AST_EXP_LIST expList;
-non terminal AST_TYPE_ID_LIST typeIdList;
-non terminal AST_TYPE_ID typeId;
+non terminal AST_ARG_LIST argList;
+non terminal AST_ARG arg;
 
 
 /***********************/
@@ -184,7 +184,7 @@ varDec ::=		type:t ID:name SEMICOLON									{: RESULT = new AST_VAR_DEC_SIMPLE(
 				;
 
 funcDec ::=		type:t ID:name LPAREN RPAREN LBRACE stmtList:sl RBRACE 				{: RESULT = new AST_FUNC_DEC(t, name, null, sl, tleft + 1 ); :}
-				| type:t ID:name LPAREN typeIdList:a RPAREN LBRACE stmtList:sl RBRACE	{: RESULT = new AST_FUNC_DEC(t, name, a, sl, tleft + 1); :}
+				| type:t ID:name LPAREN argList:a RPAREN LBRACE stmtList:sl RBRACE	{: RESULT = new AST_FUNC_DEC(t, name, a, sl, tleft + 1); :}
 				;
 							
 classDec ::=	CLASS ID:name LBRACE cFieldList:cl RBRACE 		  			{: RESULT = new AST_CLASS_DEC_SIMPLE(name, cl, idleft + 1); :}
@@ -199,11 +199,11 @@ type ::=		TYPE_INT:t 													{: RESULT = new AST_TYPE_INT(tleft + 1); :}
 				| ID:name													{: RESULT = new AST_TYPE_ID(name, idleft + 1); :}
 				;	
 
-typeId ::= 		type:t ID:name  											{: RESULT = new AST_TYPE_ID(t, name); :}
+arg ::= 		type:t ID:name  											{: RESULT = new AST_ARG(t, name); :}
 				;				
 
-typeIdList ::=	typeId:t													{: RESULT = new AST_TYPE_ID_LIST(t, null); :}
-				| typeId:t COMMA typeIdList:l 								{: RESULT = new AST_TYPE_ID_LIST(t, l); :}
+argList ::=		arg:a														{: RESULT = new AST_ARG_LIST(t, null); :}
+				| arg:a COMMA argList:l 									{: RESULT = new AST_ARG_LIST(t, l); :}
 				;
 
 cField ::=		varDec:v 													{: RESULT = new AST_C_FIELD_VAR_DEC(v); :}

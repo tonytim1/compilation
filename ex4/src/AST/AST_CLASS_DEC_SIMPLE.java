@@ -82,7 +82,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASSDEC {
     /***************************/
     /* [2] Semant Data Members */
     /***************************/
-    AST_TYPE_ID_LIST fields = null;
+    AST_ARG_LIST fields = null;
     AST_TYPE_NAME_LIST funcs = null;
     TYPE t = null;
 
@@ -109,8 +109,8 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASSDEC {
             break;
           }
         }
-        AST_TYPE_ID curr = new AST_TYPE_ID(currType, ((AST_C_FIELD_VAR_DEC) it.head).vd.id);
-        fields = new AST_TYPE_ID_LIST(curr, fields);
+        AST_ARG curr = new AST_ARG(currType, ((AST_C_FIELD_VAR_DEC) it.head).vd.id);
+        fields = new AST_ARG_LIST(curr, fields);
       }
 
       if (it.head instanceof AST_C_FIELD_FUNC_DEC) {

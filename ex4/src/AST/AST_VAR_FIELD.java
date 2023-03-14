@@ -83,7 +83,7 @@ public class AST_VAR_FIELD extends AST_VAR {
 			if (fatherName != null) {
 				TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName);
 				while (fatherClass != null) {
-					for (AST_TYPE_ID_LIST it = fatherClass.data_members; it != null; it = it.tail) {
+					for (AST_ARG_LIST it = fatherClass.data_members; it != null; it = it.tail) {
 						if (it.head.id.equals(fieldName)) {
 							String resName = it.head.t.typeName;
 							return res = SYMBOL_TABLE.getInstance().find(resName);
@@ -98,8 +98,8 @@ public class AST_VAR_FIELD extends AST_VAR {
 
 		// class was declared
 		while (t1 != null) {
-			AST_TYPE_ID_LIST t1_data_members = ((TYPE_CLASS) t1).data_members;
-			for (AST_TYPE_ID_LIST it = t1_data_members; it != null; it = it.tail) {
+			AST_ARG_LIST t1_data_members = ((TYPE_CLASS) t1).data_members;
+			for (AST_ARG_LIST it = t1_data_members; it != null; it = it.tail) {
 				if (it.head.id.equals(fieldName)) {
 					String resName = it.head.t.typeName;
 					return res = SYMBOL_TABLE.getInstance().find(resName);

@@ -1,11 +1,11 @@
 package AST;
 
-public class AST_TYPE_ID extends AST_Node {
+public class AST_ARG extends AST_Node {
   public AST_TYPE t;
   public String id;
   public String val; // for IRme
 
-  public AST_TYPE_ID(AST_TYPE t, String id) {
+  public AST_ARG(AST_TYPE t, String id) {
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/

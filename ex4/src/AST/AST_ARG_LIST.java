@@ -1,16 +1,16 @@
 package AST;
 
-public class AST_TYPE_ID_LIST extends AST_Node {
+public class AST_ARG_LIST extends AST_Node {
   /****************/
   /* DATA MEMBERS */
   /****************/
-  public AST_TYPE_ID head;
-  public AST_TYPE_ID_LIST tail;
+  public AST_ARG head;
+  public AST_ARG_LIST tail;
 
   /******************/
   /* CONSTRUCTOR(S) */
   /******************/
-  public AST_TYPE_ID_LIST(AST_TYPE_ID head, AST_TYPE_ID_LIST tail) {
+  public AST_ARG_LIST(AST_ARG head, AST_ARG_LIST tail) {
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
@@ -63,8 +63,8 @@ public class AST_TYPE_ID_LIST extends AST_Node {
   }
 
   public void printArgList() {
-    AST_TYPE_ID_LIST data_members = this;
-    for (AST_TYPE_ID_LIST it = data_members; it != null; it = it.tail) {
+    AST_ARG_LIST data_members = this;
+    for (AST_ARG_LIST it = data_members; it != null; it = it.tail) {
       System.out.print(it.head.t.typeName + ", " + it.head.id + " ");
     }
   }

@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class AST_FUNC_DEC extends AST_Node {
   public AST_TYPE returnType;
   public String id;
-  public AST_TYPE_ID_LIST arglist;
+  public AST_ARG_LIST arglist;
   public AST_STMT_LIST list;
   public String className; // nedded for IRme
   public TYPE_FUNCTION func; // needed for IRme
@@ -19,7 +19,7 @@ public class AST_FUNC_DEC extends AST_Node {
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_FUNC_DEC(AST_TYPE returnType, String id, AST_TYPE_ID_LIST arglist, AST_STMT_LIST list, int line) {
+  public AST_FUNC_DEC(AST_TYPE returnType, String id, AST_ARG_LIST arglist, AST_STMT_LIST list, int line) {
     this.returnType = returnType;
     this.id = id;
     this.arglist = arglist;
@@ -102,7 +102,7 @@ public class AST_FUNC_DEC extends AST_Node {
     /***************************/
     /* [2] Semant Input Params */
     /***************************/
-    for (AST_TYPE_ID_LIST it = arglist; it != null; it = it.tail) {
+    for (AST_ARG_LIST it = arglist; it != null; it = it.tail) {
       t = findType(it.head.t.typeName);
 
       if (t == null) {
@@ -114,7 +114,7 @@ public class AST_FUNC_DEC extends AST_Node {
         System.out.format(">> ERROR [%d] cant decalre function with nil/void");
         printError(line);
       }
-      for (AST_TYPE_ID_LIST it2 = arglist; it2 != null && it2 != it; it2 = it2.tail) {
+      for (AST_ARG_LIST it2 = arglist; it2 != null && it2 != it; it2 = it2.tail) {
         if (it.head.id.equals(it2.head.id)) {
           System.out.format(">> ERROR  2 args with the same name");
           printError(line);
@@ -180,7 +180,7 @@ public class AST_FUNC_DEC extends AST_Node {
     SYMBOL_TABLE.getInstance().beginScope("func-" + id + "-" + returnTypeType.name);
 
     /********************** */
-    for (AST_TYPE_ID_LIST it = arglist; it != null; it = it.tail) {
+    for (AST_ARG_LIST it = arglist; it != null; it = it.tail) {
       t = findType(it.head.t.typeName);
       SYMBOL_TABLE.getInstance().enter(it.head.id, t);
     }
@@ -216,7 +216,7 @@ public class AST_FUNC_DEC extends AST_Node {
     if (className != null)
       argCnt += 1; // this
 
-    for (AST_TYPE_ID_LIST it = arglist; it != null; it = it.tail) {
+    for (AST_ARG_LIST it = arglist; it != null; it = it.tail) {
       String off = String.valueOf(8 + 4 * argCnt);
       offsets.put(it.head.id, off);
       argCnt += 1;

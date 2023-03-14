@@ -84,7 +84,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASSDEC {
 		/***************************/
 		/* [2] Semant Data Members */
 		/***************************/
-		AST_TYPE_ID_LIST fields = null;
+		AST_ARG_LIST fields = null;
 		AST_TYPE_NAME_LIST funcs = null;
 		TYPE t = null;
 		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
@@ -112,8 +112,8 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASSDEC {
 						break;
 					}
 				}
-				AST_TYPE_ID curr = new AST_TYPE_ID(currType, ((AST_C_FIELD_VAR_DEC) it.head).vd.id);
-				fields = new AST_TYPE_ID_LIST(curr, fields);
+				AST_ARG curr = new AST_ARG(currType, ((AST_C_FIELD_VAR_DEC) it.head).vd.id);
+				fields = new AST_ARG_LIST(curr, fields);
 			}
 
 			if (it.head instanceof AST_C_FIELD_FUNC_DEC) {
@@ -175,7 +175,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASSDEC {
 				}
 			}
 
-			for (AST_TYPE_ID_LIST it = fatherclass.data_members; it != null; it = it.tail) {
+			for (AST_ARG_LIST it = fatherclass.data_members; it != null; it = it.tail) {
 				f = false;
 				int n = fieldlist.size();
 				for (int i = 0; i < n; i++) {

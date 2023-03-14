@@ -13,13 +13,13 @@ public class TYPE_CLASS extends TYPE {
 	/* Note that data members coming from the AST are */
 	/* packed together with the class methods */
 	/**************************************************/
-	public AST_TYPE_ID_LIST data_members;
+	public AST_ARG_LIST data_members;
 	public AST_TYPE_NAME_LIST functions;
 
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(TYPE_CLASS father, String name, AST_TYPE_ID_LIST data_members, AST_TYPE_NAME_LIST funcs) {
+	public TYPE_CLASS(TYPE_CLASS father, String name, AST_ARG_LIST data_members, AST_TYPE_NAME_LIST funcs) {
 		this.name = name;
 		this.father = father;
 		this.data_members = data_members;
