@@ -47,8 +47,7 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		return new TYPE_LIST(t1, (TYPE_LIST) t2);
 	}
 
-	public TEMP IRme(int ignore) {
-		System.out.format("IRME AST_C_FIELD_LIST --------- %s %s \n", irFunction, cField.typeCField);
+	public TEMP_LIST IRme(int ignore) {
 	    if ((cField == null) && (cFieldList == null)) {
 			return null;
 		}
