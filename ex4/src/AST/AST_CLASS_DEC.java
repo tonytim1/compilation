@@ -369,5 +369,7 @@ public class AST_CLASS_DEC extends AST_Node {
 			classSize.put(id1, fieldlist.size() * 4 + 4);
 			classfields.put(id1, fields);
 		}
+
+		return null;
 	}
 }
