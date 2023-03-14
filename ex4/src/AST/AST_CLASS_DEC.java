@@ -144,7 +144,7 @@ public class AST_CLASS_DEC extends AST_Node {
 				}
 
 				AST_C_FIELD_FUNC a = (AST_C_FIELD_FUNC) field;
-				AST_FUNCDEC b = (AST_FUNCDEC) (a.func);
+				AST_FUNC_DEC b = (AST_FUNCDEC) (a.func);
 
 				ArrayList<String> function = new ArrayList<String>();
 				function.add(b.id);
