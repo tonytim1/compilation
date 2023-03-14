@@ -7,6 +7,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 {
 	public AST_VAR var;
 	public AST_NEW_EXP exp;
+	public TYPE_CLASS inclass;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
@@ -47,6 +48,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT
 			System.out.format(">> ERROR [%d] type mismatch for var %s %s, exp %s %s - class AST_STMT_ASSIGN_NEW\n",lineNumber, t1.typeName, t1.name, t2.typeName, t2.name);
 			throw new SEMANTIC_EXCEPTION(lineNumber);
 		}
+		inclass = SYMBOL_TABLE.getInstance().curr_class;
 		return null;
 	}
 
