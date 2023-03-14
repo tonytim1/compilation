@@ -171,7 +171,7 @@ public class AST_FUNC_DEC extends AST_Node {
 		/////////// local variables///////////////////////
 		int varCnt = 0; // number of local variables
 		for (AST_STMT_LIST it = stmtList; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VARDEC) {
+			if (it.head instanceof AST_STMT_VAR_DEC) {
 				varCnt += 1;
 				continue;
 			}
@@ -202,10 +202,10 @@ public class AST_FUNC_DEC extends AST_Node {
 		// body
 		varCnt = 0;
 		for (AST_STMT_LIST it = list; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VARDEC) {
+			if (it.head instanceof AST_STMT_VAR_DEC) {
 				varCnt += 1;
-				AST_STMT_VARDEC a = (AST_STMT_VARDEC) (it.head);
-				AST_VARDEC b = (AST_VARDEC) (a.v);
+				AST_STMT_VAR_DEC a = (AST_STMT_VAR_DEC) (it.head);
+				AST_VAR_DEC b = (AST_VAR_DEC) (a.v);
 				String off = String.valueOf(varCnt * (-4) + -40);
 				offsets.put(b.id, off);
 			}
