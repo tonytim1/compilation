@@ -172,5 +172,7 @@ public class AST_VAR_DEC extends AST_Node {
 			TEMP t = newExp.IRme();
 			IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(id, t, GetOffset(id)));
 		}
+
+		return null;
 	}
 }
