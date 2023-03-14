@@ -26,4 +26,8 @@ public class TYPE_ARRAY extends TYPE
 		newType.type = type;
 		return newType;
 	}
+
+	public boolean isArray(){
+	    return true;
+	}
 }
