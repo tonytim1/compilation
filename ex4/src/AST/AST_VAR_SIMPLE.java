@@ -10,6 +10,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	/************************/
 	public String name;
 	// For IRME
+	public String className;
 	Boolean is_string = false;
 	TYPE varType;
 	public boolean cfgVar = false;
@@ -54,6 +55,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		if (this.scope_type.equals("local_class"))
 		{
 			this.index = s.getFieldIndex(name);
+			this.className = s.curr_class.name;
 		}
 		else
 		{
