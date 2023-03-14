@@ -165,7 +165,7 @@ public class AST_CLASS_DEC extends AST_Node {
 				if (field instanceof AST_C_FIELD_VAR) { // field
 					// fieldCnt += 1;
 					AST_C_FIELD_VAR var = (AST_C_FIELD_VAR) field;
-					AST_VAR_DEC b = (AST_VAR_DEC) (var.vd);
+					AST_VAR_DEC b = (AST_VAR_DEC) (var.varDec);
 					String off = String.valueOf(fieldCnt * 4 + 4);
 					offsets.put(id + "_" + b.id, off);
 					fieldslist.add(b.id);
@@ -186,14 +186,14 @@ public class AST_CLASS_DEC extends AST_Node {
 				}
 			}
 			for (AST_C_FIELD_LIST it = cFieldList; it != null; it = it.cFieldList) {
-				if (it.cField instanceof AST_C_FEILD_FUNC) {
+				if (it.cField instanceof AST_C_FIELD_FUNC) {
 					it.cField.IRme();
 				}
 			}
 			classSize.put(id, fields.size() * 4 + 4);
 			IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist, fields));
 			for (AST_C_FIELD_LIST it = cFieldList; it != null; it = it.cFieldList) {
-				if (it.cField instanceof AST_C_FEILD_VAR)
+				if (it.cField instanceof AST_C_FIELD_VAR)
 					it.cField.IRme();
 			}
 			classfields.put(id, fieldslist);

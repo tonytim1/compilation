@@ -186,8 +186,8 @@ public class AST_FUNC_DEC extends AST_Node {
 		if (id.equals("user_main")) {
 			labelStart = id;
 		} else {
-			if (className != null)
-				labelStart = className + "_" + id;
+			if (class_name != null)
+				labelStart = class_name + "_" + id;
 			else {
 				labelStart = IRcommand.getFreshLabel("start_" + id);
 				offsets.put(id, labelStart);
