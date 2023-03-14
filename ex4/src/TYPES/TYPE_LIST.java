@@ -1,56 +1,39 @@
 package TYPES;
 
-public class TYPE_LIST extends TYPE
-{
+public class TYPE_LIST {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
 	public TYPE head;
 	public TYPE_LIST tail;
 
+	public String name; // ???
+
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public TYPE_LIST(TYPE head,TYPE_LIST tail)
-	{
-	    this.typeName = "list";
+	public TYPE_LIST(TYPE head, TYPE_LIST tail) {
 		this.head = head;
 		this.tail = tail;
-	}
 
-	public TYPE clone() {
-		TYPE_LIST newType = new TYPE_LIST(this.head, this.tail);
-		newType.name = name;
-		newType.typeName = typeName;
-		newType.varName = varName;
-		return newType;
-	}
+		String headName = head.name;
+		this.name = "TYPE_LIST(" + headName;
 
-	public void printList() {
-		System.out.format("print list %s\n", this.varName);
-		TYPE_LIST currList = this;
-		while (currList.head != null) {
-			System.out.format(" - %s, %s: %s\n", currList.head.varName, currList.head.typeName, currList.head);
-			if (currList.tail == null) {
-				break;
-			}
-			currList = currList.tail;
+		for (TYPE_LIST it = tail; it != null; it = it.tail) {
+			String currName = it.head.name;
+			this.name += ", " + currName;
 		}
+		this.name += ")";
 	}
 
-	public boolean canAssignList(TYPE_LIST other){
-		TYPE_LIST p1 = this;
-		TYPE_LIST p2 = other;
-		System.out.format("comparing params of 2 lists \n");
-		while(p1 != null && p2 != null){
-			System.out.format("    comparing params: %s, %s\n", p1.head.typeName, p2.head.typeName);
-			if(!(p1.head.canAssign(p2.head)))
-				return false;
+	public TYPE_LIST reverseList() {
 
-			p1 = p1.tail;
-			p2 = p2.tail;
-			
+		TYPE_LIST res = null;
+
+		for (TYPE_LIST it = this; it != null; it = it.tail) {
+			res = new TYPE_LIST(it.head, res);
 		}
-		return (p1 == null && p2 == null);
+
+		return res;
 	}
 }

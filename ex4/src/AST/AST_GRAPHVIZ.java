@@ -1,8 +1,5 @@
 package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
-import IR.*;
-import TEMP.*;
+
 import java.io.*;
 import java.io.PrintWriter;
 

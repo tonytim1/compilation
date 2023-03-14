@@ -1,45 +1,64 @@
 package AST;
+
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import IR.*;
 import TEMP.*;
-
 
 public class AST_PROGRAM extends AST_Node {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public AST_DEC_LIST decList;
+	public AST_DEC_LIST list;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_PROGRAM(int lineNumber, AST_DEC_LIST decList)
-	{
-		super(lineNumber);
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
+	public AST_PROGRAM(AST_DEC_LIST list, String file) {
+		this.list = list;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+
+		getFile(file);
 
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.print("====================== Program -> decList\n");
-
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.decList = decList;
+		System.out.print("====================== program -> decs \n");
 	}
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		decList.SemantMe();		
+
+	@Override
+	public void PrintMe() {
+		System.out.print("AST PROGRAM NODE\n");
+		list.PrintMe();
+
+		/***************************************/
+		/* PRINT Node to AST GRAPHVIZ DOT file */
+		/***************************************/
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("PROGRAM"));
+
+		/****************************************/
+		/* PRINT Edges to AST GRAPHVIZ DOT file */
+		/****************************************/
+		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, list.SerialNumber);
+
+		SYMBOL_TABLE.getInstance().PrintMe();
+	}
+
+	public TYPE SemantMe() {
+		System.out.println("\nPROGRAM" + "- semantme");
+
+		list.SemantMe();
+
+		/*********************************************************/
+		/* [1] Return value is irrelevant for the program itself */
+		/*********************************************************/
 		return null;
 	}
 
-	public TYPE IRme(){
-        decList.IRme();
-        return null;
+	public TEMP IRme() {
+		System.out.println("\nPROGRAM" + "- IRme");
+
+		list.IRme();
+
+		return null;
 	}
 }

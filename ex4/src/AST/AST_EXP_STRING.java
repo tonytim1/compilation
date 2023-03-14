@@ -1,47 +1,61 @@
 package AST;
+
 import TYPES.*;
-import SYMBOL_TABLE.*;
-import IR.*;
 import TEMP.*;
-
-
+import IR.*;
+import SYMBOL_TABLE.*;
 
 public class AST_EXP_STRING extends AST_EXP {
-	
-	public String value;
+	public String s;
+	public String scope;
 	public String label; // holds the label of this string, for IRme
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_STRING(int lineNumber, String value) 
-	{
-		super(lineNumber);	
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
+	public AST_EXP_STRING(Object s) {
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		this.s = ((String) s).split("\"")[1];
 
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== exp -> STRING( %s )\n", value);
-		
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.value = value;
+		System.out.print("====================== exp -> STRING\n");
 	}
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		return new TYPE_STRING();
+	/*************************************************/
+	/* The printing message for a XXX node */
+	/*************************************************/
+	public void PrintMe() {
+
+		/*************************************/
+		/* AST NODE TYPE- change XXX with this class name */
+		/*************************************/
+		System.out.print(String.format("AST %s NODE\n", "EXP_STRING"));
+
+		/***************************************/
+		/* PRINT Node to AST GRAPHVIZ DOT file */
+		/* print node name and optional string (maybe only needed in binop nodes) */
+		/***************************************/
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("%s", s));
 	}
-	public TEMP IRme()
-	{
-	    TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+
+	public TYPE SemantMe() {
+		System.out.println("EXP STRING (recoginzed string)- semant me");
+		scope = SYMBOL_TABLE.getInstance().getScope();
+		return TYPE_STRING.getInstance();
+	}
+
+	public TEMP IRme() {
+		System.out.println("EXP STRING (recoginzed string)- IRme");
+
+		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+
 		this.label = IRcommand.getFreshLabel("const_string");
-		IR.getInstance().Add_IRcommand(new IRcommand_Const_String(t, label, value));
+
+		IR.getInstance().Add_IRcommand(new IRcommand_Const_String(t, label, s));
+
 		return t;
 	}
+
 }

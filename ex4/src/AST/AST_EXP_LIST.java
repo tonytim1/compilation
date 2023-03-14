@@ -1,64 +1,89 @@
 package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
-import IR.*;
-import TEMP.*;
 
+import TEMP.TEMP_LIST;
+import TYPES.TYPE_LIST;
 
-public class AST_EXP_LIST extends AST_Node 
-{
-	/****************/
-	/* DATA MEMBERS */
-	/****************/
-	public AST_EXP head;
-	public AST_EXP_LIST tail;
-	
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
-	public AST_EXP_LIST(int lineNumber, AST_EXP head, AST_EXP_LIST tail)
-	{
-		super(lineNumber);
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
-		SerialNumber = AST_Node_Serial_Number.getFresh();
+public class AST_EXP_LIST extends AST_Node {
+  /****************/
+  /* DATA MEMBERS */
+  /****************/
+  public AST_EXP head;
+  public AST_EXP_LIST tail;
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
-		if (tail != null) System.out.print("====================== multiExp	-> exp COMMA multiExp\n");
-		if (tail == null) System.out.print("====================== multiExp -> exp      \n");
+  /******************/
+  /* CONSTRUCTOR(S) */
+  /******************/
+  public AST_EXP_LIST(AST_EXP head, AST_EXP_LIST tail, int line) {
+    /******************************/
+    /* SET A UNIQUE SERIAL NUMBER */
+    /******************************/
+    SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.head = head;
-		this.tail = tail;
-	}
+    /***************************************/
+    /* PRINT CORRESPONDING DERIVATION RULE */
+    /***************************************/
+    if (tail != null)
+      System.out.print("====================== explis -> exp, exps\n");
+    if (tail == null)
+      System.out.print("====================== explist -> exp      \n");
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		TYPE t1 = null;
-		TYPE t2 = null;
+    /*******************************/
+    /* COPY INPUT DATA NENBERS ... */
+    /*******************************/
+    this.head = head;
+    this.tail = tail;
+    this.line = line;
+  }
 
-		if (head != null) t1 = head.SemantMe();
-		if (tail != null) t2 = tail.SemantMe();
+  /******************************************************/
+  /* The printing message for a statement list AST node */
+  /******************************************************/
+  public void PrintMe() {
+    /**************************************/
+    /* AST NODE TYPE = AST STATEMENT LIST */
+    /**************************************/
+    System.out.print("AST EXPLIST NODE\n");
 
-		return new TYPE_LIST(t1, (TYPE_LIST) t2);
-	}
+    /*************************************/
+    /* RECURSIVELY PRINT HEAD + TAIL ... */
+    /*************************************/
+    if (head != null)
+      head.PrintMe();
+    if (tail != null)
+      tail.PrintMe();
 
-	public TEMP_LIST IRme(int ignore) {
-		// Returns a linked list of IR expressions according to each element on list.
-		System.out.println("EXPLIST - IRme");
-        if ((head == null) && (tail == null)) {
-           return null;
-       }
-       else if (tail == null) {
-        return new TEMP_LIST(head.IRme(), null);
-       }
-       else {
-         return new TEMP_LIST(head.IRme(), tail.IRme(0));
-       }
-	}
+    /**********************************/
+    /* PRINT to AST GRAPHVIZ DOT file */
+    /**********************************/
+    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, "EXPLIST");
+
+    /****************************************/
+    /* PRINT Edges to AST GRAPHVIZ DOT file */
+    /****************************************/
+    if (head != null)
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, head.SerialNumber);
+    if (tail != null)
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, tail.SerialNumber);
+  }
+
+  public TYPE_LIST SemantMe(int ignore) {
+    System.out.println("EXPLIST - semant me");
+
+    if (tail == null) {
+      return new TYPE_LIST(head.SemantMe(), null);
+    } else {
+      return new TYPE_LIST(head.SemantMe(), tail.SemantMe(0));
+    }
+  }
+
+  public TEMP_LIST IRme(int ignore) {
+    System.out.println("EXPLIST - IRme");
+    if ((head == null) && (tail == null)) {
+      return null;
+    } else if (tail == null) {
+      return new TEMP_LIST(head.IRme(), null);
+    } else {
+      return new TEMP_LIST(head.IRme(), tail.IRme(0));
+    }
+  }
 }

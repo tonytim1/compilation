@@ -1,61 +1,63 @@
 package AST;
-import TYPES.*;
+
 import SYMBOL_TABLE.*;
-import IR.*;
-import TEMP.*;
-public class AST_TYPE_ID extends AST_Node {
+import TYPES.*;
 
-	public AST_TYPE type;
-	public String id;
+public class AST_TYPE_ID extends AST_TYPE {
 
-	public AST_TYPE_ID(int lineNumber, AST_TYPE type, String id)
-	{
-		super(lineNumber);
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
-		SerialNumber = AST_Node_Serial_Number.getFresh();
-		
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
-        System.out.format("====================== type:%s id:%s \n", type.id, id);
+  /*******************/
+  /* CONSTRUCTOR(S) */
+  /*******************/
+  public AST_TYPE_ID(String id, int line) {
+    this.typeName = id;
+    this.line = line;
 
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.type = type;
-		this.id = id;
-	}
+    /******************************/
+    /* SET A UNIQUE SERIAL NUMBER */
+    /******************************/
+    SerialNumber = AST_Node_Serial_Number.getFresh();
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
-		
-		//TYPE t = SYMBOL_TABLE.getInstance().find(type.id);
-		TYPE t = type.SemantMe();
-		
-		// check if type is undeclared or void (void isnt allowed for ids) or name exists in scope
-		if (t == null || t.typeName == "void" || s.findInScope(id) != null)
-		{
-		    System.out.format(">> ERROR [%d] type of t is null or void or not exists in the scope - class AST_TYPE_ID\n" ,lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
-		else
-		{
-			/*******************************************************/
-			/* Enter var with name=name and type=t to symbol table */
-			/*******************************************************/
-			SYMBOL_TABLE.getInstance().enter(id, t, "param");
-		}
+    /***************************************/
+    /* PRINT CORRESPONDING DERIVATION RULE */
+    /***************************************/
+    System.out.print("====================== type -> ID \n");
+  }
 
-		/****************************/
-		/* return (existing) type t */
-		/****************************/
-		return t;
-	}	
-		
-	public TEMP IRme(){
-		return null;
-	}
+  /****************** outside CONSTRUCTOR code *******************/
+
+  /*************************************************/
+  /* The printing message for a XXX node */
+  /*************************************************/
+  public void PrintMe() {
+
+    /*************************************/
+    /* AST NODE TYPE- change XXX with this class name */
+    /*************************************/
+    System.out.print(String.format("AST %s NODE\n", "TYPE_ID"));
+
+    /***************************************/
+    /* PRINT Node to AST GRAPHVIZ DOT file */
+    /* print node name and optional string (maybe only needed in binop nodes) */
+    /***************************************/
+    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("%s", typeName));
+
+  }
+
+  public TYPE SemantMe() {
+    System.out.println("TYPE ID - semant me");
+    TYPE res = findType(typeName);
+    if (res == null) {
+      System.out.format(">> ERROR(%d) non existing type %s (type_id)\n", line, res);
+      printError(this.line);
+    }
+
+    // if this happens its a bug in the compiler, not in the input
+    if (!res.name.equals(typeName)) {
+      System.out.format(">> ERROR [%d]- type name isn't declared correctly! %s %s", line, res.name, typeName);
+      printError(this.line);
+    }
+
+    return res;
+  }
+
 }

@@ -1,19 +1,20 @@
 package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
-import IR.*;
-import TEMP.*;
 
+import TYPES.*;
+import TEMP.*;
+import IR.*;
 
 public class AST_C_FIELD_LIST extends AST_Node {
+	/****************/
+	/* DATA MEMBERS */
+	/****************/
+	public AST_C_FIELD head;
+	public AST_C_FIELD_LIST tail;
 
-	public AST_C_FIELD cField;
-	public AST_C_FIELD_LIST cFieldList;
-	
-	
-	public AST_C_FIELD_LIST(int lineNumber, AST_C_FIELD cField, AST_C_FIELD_LIST cFieldList)
-	{
-		super(lineNumber);
+	/******************/
+	/* CONSTRUCTOR(S) */
+	/******************/
+	public AST_C_FIELD_LIST(AST_C_FIELD head, AST_C_FIELD_LIST tail) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -22,40 +23,72 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		if (cFieldList != null) {
-			System.out.format("====================== cFieldList -> cField cFieldList\n");
-		}
-		else {
-			System.out.format("====================== cFieldList -> cField\n");
-		}
+		if (tail != null)
+			System.out.print("====================== cfeilds -> cfeild cfeilds\n");
+		if (tail == null)
+			System.out.print("====================== cfeilds -> cfeild      \n");
+
 		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
+		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.cField = cField;
-		this.cFieldList = cFieldList;
+		this.head = head;
+		this.tail = tail;
 	}
-	
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		TYPE t1 = null;
-		TYPE t2 = null;
-		System.out.format("[%d] semanting cFieldList\n", lineNumber);
 
-		if (cField != null) t1 = cField.SemantMe();
-		if (cFieldList != null) t2 = cFieldList.SemantMe();
+	/*************************************************/
+	/* The printing message for a binop exp AST node */
+	/*************************************************/
+	public void PrintMe() {
+		/*************************************/
+		/* AST NODE TYPE- change XXX with this class name */
+		/*************************************/
+		System.out.print(String.format("AST %s NODE\n", "CFEILD_LIST"));
 
-		return new TYPE_LIST(t1, (TYPE_LIST) t2);
+		/**************************************/
+		/* RECURSIVELY PRINT non-null(!) sons (list, left and right...) */
+		/**************************************/
+		if (head != null)
+			head.PrintMe();
+		if (tail != null)
+			tail.PrintMe();
+		/***************************************/
+		/* PRINT Node to AST GRAPHVIZ DOT file */
+		/* print node name and optional string (maybe only needed in binop nodes) */
+		/***************************************/
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("CFEILD_LIST"));
+
+		/****************************************/
+		/* PRINT Edges to AST GRAPHVIZ DOT file */
+		/*
+		 * Print Edges to every son!
+		 */
+		/****************************************/
+		if (head != null)
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, head.SerialNumber);
+		if (tail != null)
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, tail.SerialNumber);
+
+	}
+
+	public TYPE_LIST SemantMe(int ignore) {
+		System.out.println("CFEILD LIST - semant me");
+
+		if (tail == null) {
+			return new TYPE_LIST(head.SemantMe(), null);
+		} else {
+			return new TYPE_LIST(head.SemantMe(), tail.SemantMe(0));
+		}
 	}
 
 	public TEMP_LIST IRme(int ignore) {
-	    if ((cField == null) && (cFieldList == null)) {
+		System.out.println("CFEILD_LIST - IRme");
+
+		if ((head == null) && (tail == null)) {
 			return null;
-		}
-		else if ((cField != null) && (cFieldList == null)) {
-			return new TEMP_LIST(cField.IRme(), null);
-		}
-		else {
-			return new TEMP_LIST(cField.IRme(), cFieldList.IRme(0));
+		} else if ((head != null) && (tail == null)) {
+			return new TEMP_LIST(head.IRme(), null);
+		} else {
+			return new TEMP_LIST(head.IRme(), tail.IRme(0));
 		}
 	}
 }

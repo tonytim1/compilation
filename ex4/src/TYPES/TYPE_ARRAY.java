@@ -1,33 +1,14 @@
 package TYPES;
 
-public class TYPE_ARRAY extends TYPE
-{
-	/****************/
-	/* DATA MEMBERS */
-	/****************/
-	public TYPE type;
-	//public int size;
+public class TYPE_ARRAY extends TYPE {
+  public TYPE entryType;
 
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
-	public TYPE_ARRAY(TYPE type)
-	{
-		this.type = type;
-		this.typeName = "array";
-		//this.size = size;
-	}
-
-	public TYPE clone() {
-		TYPE_ARRAY newType = new TYPE_ARRAY(this.type);
-		newType.name = name;
-		newType.typeName = typeName;
-		newType.varName = varName;
-		newType.type = type;
-		return newType;
-	}
-
-	public boolean isArray(){
-	    return true;
-	}
+  /****************/
+  /* CTROR(S) ... */
+  /****************/
+  public TYPE_ARRAY(TYPE entryType, String name) {
+    this.entryType = entryType;
+    this.name = name;
+  }
+  public boolean isArray(){ return true;}
 }

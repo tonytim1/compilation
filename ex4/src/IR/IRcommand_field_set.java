@@ -11,11 +11,10 @@ public class IRcommand_field_set extends IRcommand {
 
   // t1.varName = val;
   // 
-  public IRcommand_field_set(TEMP t1, String varName, TEMP val, int offset) {
+  public IRcommand_field_set(TEMP t1, String varName, TEMP val) {
     this.dst = t1;
     this.val = val;
     this.varn = varName;
-    this.offset = offset;
   }
 
   public void MIPSme() {

@@ -1,19 +1,17 @@
 package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
+
 import IR.*;
 import TEMP.*;
-public class AST_VAR_SUBSCRIPT extends AST_VAR
-{
+import TYPES.*;
+
+public class AST_VAR_SUBSCRIPT extends AST_VAR {
 	public AST_VAR var;
 	public AST_EXP subscript;
-	
+
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_SUBSCRIPT(int lineNumber, AST_VAR var,AST_EXP subscript)
-	{
-		super(lineNumber);
+	public AST_VAR_SUBSCRIPT(AST_VAR var, AST_EXP subscript, int line) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -29,37 +27,66 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR
 		/*******************************/
 		this.var = var;
 		this.subscript = subscript;
-	}
-	public void PrintMe()
-	{
-		System.out.format("AST VAR SUBSCRIPT\n");
+		this.line = line;
 	}
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-	    if (var == null) {
-	        return null;
-	    }
+	/*****************************************************/
+	/* The printing message for a subscript var AST node */
+	/*****************************************************/
+	public void PrintMe() {
+		/*************************************/
+		/* AST NODE TYPE = AST SUBSCRIPT VAR */
+		/*************************************/
+		System.out.print("AST VAR_SUBSCRIPT NODE\n");
 
-	    TYPE varType = var.SemantMe();
-	    if (varType.typeName != "array") {
-	        //var is not an array
-	        System.out.format(">> ERROR [%d] var is from type %s instead of array - class AST_VAR_SUBSCRIPT\n",lineNumber, varType.typeName);
-	        throw new SEMANTIC_EXCEPTION(lineNumber);
-	    }
-	    if (subscript != null)
-	    {
-	        TYPE varSubscript = subscript.SemantMe();
-	        if (varSubscript.typeName != "int") {
-	            //subscript is not integer
-	            System.out.format(">> ERROR [%d] subscript is from type %s instead of array - class AST_VAR_SUBSCRIPT\n",lineNumber, varSubscript.typeName);
-	            throw new SEMANTIC_EXCEPTION(lineNumber);
-	        }
-	    }
-	    return ((TYPE_ARRAY) varType).type;
+		/****************************************/
+		/* RECURSIVELY PRINT VAR + SUBSRIPT ... */
+		/****************************************/
+		if (var != null)
+			var.PrintMe();
+		if (subscript != null)
+			subscript.PrintMe();
+
+		/***************************************/
+		/* PRINT Node to AST GRAPHVIZ DOT file */
+		/***************************************/
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, "VAR_SUBSCRIPT\n...[...]");
+
+		/****************************************/
+		/* PRINT Edges to AST GRAPHVIZ DOT file */
+		/****************************************/
+		if (var != null)
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, var.SerialNumber);
+		if (subscript != null)
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, subscript.SerialNumber);
 	}
-	
-	public TEMP IRme(){
+
+	public TYPE SemantMe() {
+		System.out.println("VAR SUBSCRIPT - semant me");
+		TYPE t1 = var.SemantMe();
+
+		if (t1 == null) {
+			System.out.format(">> ERROR [%d] var is not declared. (var_subscript)\n", line);
+			printError(line);
+		}
+
+		if (!(t1.isArray())) {
+			System.out.println(">> ERROR [" + line + "] var is not an array");
+			printError(line);
+		}
+
+		TYPE t2 = subscript.SemantMe();
+		if (!(t2.name.equals("int"))) {
+			System.out.println(">> ERROR [" + line + "] array index is not int");
+			printError(line);
+		}
+
+		return ((TYPE_ARRAY) t1).entryType;
+	}
+
+	public TEMP IRme() {
+		System.out.println("VAR SUBSCRIPT- IRme");
+
 		TEMP t1 = var.IRme();
 		TEMP t2 = subscript.IRme();
 		TEMP t3 = TEMP_FACTORY.getInstance().getFreshTEMP();

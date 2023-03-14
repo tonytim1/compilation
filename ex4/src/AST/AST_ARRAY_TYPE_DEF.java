@@ -1,79 +1,96 @@
 package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
-import IR.*;
-import TEMP.*;
 
+import SYMBOL_TABLE.SYMBOL_TABLE;
+import TEMP.TEMP;
+import TYPES.*;
 
 public class AST_ARRAY_TYPE_DEF extends AST_Node {
-	public String id;
 	public AST_TYPE type;
-	
-	
-	public AST_ARRAY_TYPE_DEF(int lineNumber, String id, AST_TYPE type) {
-		super(lineNumber);
+	public String id;
+
+	/*******************/
+	/* CONSTRUCTOR(S) */
+	/*******************/
+	public AST_ARRAY_TYPE_DEF(String id, AST_TYPE type, int line) {
+		this.type = type;
+		this.id = id;
+		this.line = line;
+
+		/***************************************/
+		/* PRINT CORRESPONDING DERIVATION RULE */
+		/***************************************/
+		System.out.print("====================== 		arrayTypedef ::= 	array ID = type[]; \n");
+
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
-		System.out.format("====================== arrayTypedef -> ARRAY ID( %s ) EQ type(%s) LBRACK RBRACK SEMICOLON\n", id, type.id);
-
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.id = id;
-		this.type = type;
 	}
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
-		TYPE t;
-		
-		// check if if in global scope
-		if (!(s.isGlobalScope()))
-		{
-			System.out.format(">> ERROR [%d] Array defined not in global scope - class AST_ARRAY_TYPE_DEF\n",lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
-		// check if array name already declared
-		if (s.find(id) != null)
-		{
-			System.out.format(">> ERROR [%d] Array defined with name %s that already exists - class AST_ARRAY_TYPE_DEF\n",lineNumber,id);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+	/*************************************************/
+	/* The printing message ------------------------ */
+	/*************************************************/
+	public void PrintMe() {
+		/*************************************/
+		/* AST NODE TYPE- change XXX with this class name */
+		/*************************************/
+		System.out.print(String.format("AST %s NODE\n", "ATD"));
+
+		/**************************************/
+		/* RECURSIVELY PRINT non-null(!) sons (list, left and right...) */
+		/**************************************/
+		if (type != null)
+			type.PrintMe();
+		/***************************************/
+		/* PRINT Node to AST GRAPHVIZ DOT file */
+		/* print node name and optional string (maybe only needed in binop nodes) */
+		/***************************************/
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("ATD(%s)", id));
+
+		/****************************************/
+		/* PRINT Edges to AST GRAPHVIZ DOT file */
+		/*
+		 * Print Edges to every son!
+		 */
+		/****************************************/
+		if (type != null)
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, type.SerialNumber);
+
+	}
+
+	public TYPE SemantMe() {
+
+		System.out.println("ATD" + "- semantme");
+
+		TYPE typeType = type.SemantMe();
+
+		// arrays declared in global scope- actually always true thanks to parsing
+		if (!(SYMBOL_TABLE.getInstance().getScope().equals("global"))) {
+			System.out.format(">> ERROR [%d] array dec in wrong scope\n", line);
+			printError(line);
 		}
 
-		t = type.SemantMe();
-
-		// Check that Type exists
-		if (t == null)
-		{
-			System.out.format(">> ERROR [%d] non existing type - class AST_ARRAY_TYPE_DEF\n",lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
-		// check that type is not void
-		if (t.typeName == "void") {
-		    System.out.format(">> ERROR [%d] type %s is void - class AST_ARRAY_TYPE_DEF\n",lineNumber,t.typeName);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+		// array's type must be predefined
+		if (typeType == null || typeType instanceof TYPE_VOID || typeType instanceof TYPE_NIL) {
+			System.out.format(">> ERROR [%d] non existing type\n", line);
+			printError(line);
 		}
 
-		/***************************************************/
-		/* [3] Enter the Function Type to the Symbol Table */
-		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(id, new TYPE_ARRAY(t));
+		// id must be new
+		if (SYMBOL_TABLE.getInstance().find(id) != null) {
+			System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
+			printError(line);
+		}
 
-		/*********************************************************/
-		/* [4] Return value is irrelevant for class declarations */
-		/*********************************************************/
-		return new TYPE_ARRAY(t);
+		// if all passed, add to symbol table
+		SYMBOL_TABLE.getInstance().enter(id, new TYPE_ARRAY(typeType, id));
+
+		// return val is irrelevent
+		return null;
 	}
 
 	public TEMP IRme() {
-	    return null;
+		System.out.println("ATD- IRme");
+		return null;
 	}
-
 }

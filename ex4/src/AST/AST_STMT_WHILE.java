@@ -1,79 +1,86 @@
 package AST;
+
 import TYPES.*;
 import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
 
-
-
-public class AST_STMT_WHILE extends AST_STMT
-{
+public class AST_STMT_WHILE extends AST_STMT {
 	public AST_EXP cond;
 	public AST_STMT_LIST body;
 	public boolean inFunc;
 
 	/*******************/
-	/*  CONSTRUCTOR(S) */
+	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_WHILE(int lineNumber, AST_EXP cond,AST_STMT_LIST body)
-	{
-		super(lineNumber);
+	public AST_STMT_WHILE(AST_EXP cond, AST_STMT_LIST body, int line) {
+		this.cond = cond;
+		this.body = body;
+		this.line = line;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
-		
-		System.out.format("====================== stmt -> WHILE LPAREN exp RPAREN LBRACE multiStmt RBRACE\n");
 
-		
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.cond = cond;
-		this.body = body;
 	}
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		/****************************/
-		/* [0] Semant the Condition */
-		/****************************/
-		TYPE condType = cond.SemantMe();
-		if (condType.typeName != "int")
-		{
-			System.out.format(">> ERROR [%d] condition inside WHILE is not integral - class AST_STMT_WHILE\n",lineNumber);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
+	/****************** outside CONSTRUCTOR code *******************/
+
+	/*************************************************/
+	/* The printing message for a XXX node */
+	/*************************************************/
+	public void PrintMe() {
+
+		/*************************************/
+		/* AST NODE TYPE- change XXX with this class name */
+		/*************************************/
+		System.out.print(String.format("AST %s NODE\n", "STMT_WHILE"));
+
+		/**************************************/
+		/* RECURSIVELY PRINT non-null(!) sons (list, cond and right...) */
+		/**************************************/
+		if (cond != null)
+			cond.PrintMe();
+		if (body != null)
+			body.PrintMe();
+		/***************************************/
+		/* PRINT Node to AST GRAPHVIZ DOT file */
+		/* print node name and optional string (maybe only needed in binop nodes) */
+		/***************************************/
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("STMT_WHILE"));
+
+		/****************************************/
+		/* PRINT Edges to AST GRAPHVIZ DOT file */
+		/*
+		 * Print Edges to every son!
+		 */
+		/****************************************/
+		if (cond != null)
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, cond.SerialNumber);
+		if (body != null)
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, body.SerialNumber);
+	}
+
+	public TYPE SemantMe() {
+		System.out.format("AST_STMT_WHILE" + "- semant me\n");
+
+		if (cond.SemantMe() != TYPE_INT.getInstance()) {
+			System.out.format(">> ERROR [%d:%d] condition inside WHILE is not integral\n", 2, 2);
+			printError(this.line);
 		}
 
-		/*************************/
-		/* [1] Begin Class Scope */
-		/*************************/
-		SYMBOL_TABLE.getInstance().beginScope();
+		SYMBOL_TABLE.getInstance().beginScope("while");
 
-		/***************************/
-		/* [2] Semant Data Members */
-		/***************************/
 		body.SemantMe();
 
-		/*****************/
-		/* [3] End Scope */
-		/*****************/
 		SYMBOL_TABLE.getInstance().endScope();
 
 		inFunc = SYMBOL_TABLE.getInstance().inFuncScope();
-		
-		/*********************************************************/
-		/* [4] Return value is irrelevant for class declarations */
-		/*********************************************************/
-		return null;
+
+		return TYPE_INT.getInstance();
 	}
 
-	public TEMP IRme()
-	{
+	public TEMP IRme() {
 		System.out.format("AST_STMT_WHILE" + "- IRme\n");
 
 		/*******************************/
@@ -121,4 +128,5 @@ public class AST_STMT_WHILE extends AST_STMT
 		/*******************/
 		return null;
 	}
+
 }

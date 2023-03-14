@@ -1,50 +1,56 @@
 package AST;
+
 import TYPES.*;
-import SYMBOL_TABLE.*;
-import IR.*;
 import TEMP.*;
+import IR.*;
+import SYMBOL_TABLE.*;
 
-
-
-public class AST_EXP_INT extends AST_EXP
-{
+public class AST_EXP_INT extends AST_EXP {
 	public int value;
-	public int isPositive;
-	
+
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_INT(int lineNumber, int value, int isPositive)
-	{
-		super(lineNumber);
+	public AST_EXP_INT(int value) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
+		/*******************************/
+		/* COPY INPUT DATA NENBERS ... */
+		/******************************/
+		this.value = value;
+
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== exp -> INT( %d )\n", value);
-
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.value = value;
-		this.isPositive = isPositive;
+		System.out.format("====================== exp -> INT(%d)\n", value);
 	}
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-	    if (this.value == 0) {
-	        return new TYPE_INT(true);
-	    }
-		return new TYPE_INT();
+	/************************************************/
+	/* The printing message for an INT EXP AST node */
+	/************************************************/
+	public void PrintMe() {
+		/*******************************/
+		/* AST NODE TYPE = AST INT EXP */
+		/*******************************/
+		System.out.format("AST EXP_INT( %d )\n", value);
+
+		/*********************************/
+		/* Print to AST GRAPHIZ DOT file */
+		/*********************************/
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("%d", value));
 	}
 
+	public TYPE SemantMe() {
+		System.out.println("EXP INT (recoginzed int)- semant me");
+		return TYPE_INT.getInstance();
+	}
 
-	public TEMP IRme()
-	{
+	public TEMP IRme() {
+		System.out.println("EXP INT- IRme");
+
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 		IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, value));
 		return t;

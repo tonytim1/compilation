@@ -1,109 +1,152 @@
 package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
+
 import IR.*;
+import SYMBOL_TABLE.SYMBOL_TABLE;
 import TEMP.*;
-public class AST_STMT_ASSIGN_NEW extends AST_STMT 
-{
-	public AST_VAR var;
-	public AST_NEW_EXP exp;
-	public TYPE_CLASS inclass;
+import TYPES.*;
 
-	/*******************/
-	/*  CONSTRUCTOR(S) */
-	/*******************/
-	public AST_STMT_ASSIGN_NEW(int lineNumber, AST_VAR var, AST_NEW_EXP exp)
-	{
-		super(lineNumber);
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
-		SerialNumber = AST_Node_Serial_Number.getFresh();
+public class AST_STMT_ASSIGN_NEW extends AST_STMT {
+  public AST_VAR var;
+  public AST_NEW_EXP exp;
+  public TYPE scope; // for irme
+  public String inclass; // for irme
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
-		System.out.print("====================== stmt -> var ASSIGN newExp SEMICOLON\n");
+  /*******************/
+  /* CONSTRUCTOR(S) */
+  /*******************/
+  public AST_STMT_ASSIGN_NEW(AST_VAR var, AST_NEW_EXP exp, int line) {
+    this.var = var;
+    this.exp = exp;
+    this.line = line;
 
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		this.var = var;
-		this.exp = exp;
-	}
+    /******************************/
+    /* SET A UNIQUE SERIAL NUMBER */
+    /******************************/
+    SerialNumber = AST_Node_Serial_Number.getFresh();
+    /***************************************/
+    /* PRINT CORRESPONDING DERIVATION RULE */
+    /***************************************/
+    System.out.print("====================== stmt -> var:v ASSIGN newExp:ne SEMICOLON \n");
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		TYPE t1 = var.SemantMe();
-		TYPE t2 = exp.SemantMe();
+  }
 
-		if (t1 == null || t2 == null)
-		{
-			System.out.format(">> ERROR [%d] -> at least one of the expressions type does not exist - class AST_STMT_ASSIGN_NEW", lineNumber);
-            throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
+  /****************** outside CONSTRUCTOR code *******************/
 
-		if (!(t1.canAssign(t2)))
-		{
-			System.out.format(">> ERROR [%d] type mismatch for var %s %s, exp %s %s - class AST_STMT_ASSIGN_NEW\n",lineNumber, t1.typeName, t1.name, t2.typeName, t2.name);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
-		inclass = SYMBOL_TABLE.getInstance().curr_class;
-		return null;
-	}
+  /*************************************************/
+  /* The printing message for a XXX node */
+  /*************************************************/
+  public void PrintMe() {
 
-	public TEMP IRme(){
-		TEMP exp_temp = exp.IRme();
+    /*************************************/
+    /* AST NODE TYPE- change XXX with this class name */
+    /*************************************/
+    System.out.print(String.format("AST %s NODE\n", "STMT_NEWEXP "));
 
-		if(var instanceof AST_VAR_SIMPLE)
-		{
-			System.out.print("AST_STMT_ASSIGN_NEW IRME --- CASE:  AST_VAR_SIMPLE\n");
-		    // old: IR.getInstance().Add_IRcommand(new IRcommand_Store(var.name, exp_temp ,var.scope_type ,var.index));
-			
-			if (var.scope_type == "global") {
-				IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(exp_temp, var.name));
-			}
-			else if (inclass != null) {
-				if (var.scope_type != "local_class") {
-					System.out.format("WEIRD!! AST_STMT_ASSIGN_NEW IRME AST_VAR_SIMPLE is in class but scope type isnt local_class, but: %s\n", var.scope_type);
-				}
-				String varName = inclass.name + "_" + ((AST_VAR_SIMPLE) var).name;
-				IR.getInstance().Add_IRcommand(new IRcommand_Store_Field(inclass.name, varName, exp_temp, GetOffset(varName)));
-			}
-			else if (var.scope_type == "local_func") {
-				String varName = ((AST_VAR_SIMPLE) var).name;
-				IR.getInstance().Add_IRcommand(new IRcommand_Store_Local(varName, exp_temp, GetOffset(varName)));
-			}
-			else {
-				System.out.format("BAD!!! AST_STMT_ASSIGN_NEW IRME AST_VAR_SIMPLE with unhandeled scope: %s\n", var.scope_type);
-			}
+    /**************************************/
+    /* RECURSIVELY PRINT non-null(!) sons (list, var and right...) */
+    /**************************************/
+    if (var != null)
+      var.PrintMe();
+    if (exp != null)
+      exp.PrintMe();
+    /***************************************/
+    /* PRINT Node to AST GRAPHVIZ DOT file */
+    /* print node name and optional string (maybe only needed in binop nodes) */
+    /***************************************/
+    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("STMT_NEWEXP"));
 
-	    }
-	    else if(var instanceof AST_VAR_FIELD)
-		{
-			System.out.print("AST_STMT_ASSIGN_NEW IRME --- CASE:  AST_VAR_FIELD\n");
-			AST_VAR_FIELD fieldVar = (AST_VAR_FIELD) var;
+    /****************************************/
+    /* PRINT Edges to AST GRAPHVIZ DOT file */
+    /*
+     * Print Edges to every son!
+     */
+    /****************************************/
+    if (var != null)
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, var.SerialNumber);
+    if (exp != null)
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, exp.SerialNumber);
+  }
 
-		    //old: dst = ((AST_VAR_FIELD) var).var.IRme(); // class pointer
-		    //old: IR.getInstance().Add_IRcommand(new IRcommand_ClassFieldAssign(dst, var.name, exp_temp, var.index));
+  public TYPE SemantMe() {
+    System.out.println("STMT_NEWEXP - semant me");
 
-			TEMP dst = fieldVar.var.IRme();
-			String f_name = fieldVar.name;
-			String c_name = fieldVar.classN;
-			IR.getInstance().Add_IRcommand(new IRcommand_field_set(dst, f_name, exp_temp, GetOffset(c_name + "_" + f_name)));
-			if (fieldVar.var instanceof AST_VAR_SIMPLE) {
-				((AST_VAR_SIMPLE) fieldVar.var).cfgVar = true;
-			}
-	    } 
-	    else
-	    {
-			System.out.print("AST_STMT_ASSIGN_NEW IRME --- CASE:  AST_VAR_SUBSCRIPT\n");
+    TYPE t1 = null;
+    TYPE t2 = null;
 
-			AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
-			TEMP array = subVar.var.IRme();
-			TEMP index = subVar.subscript.IRme();
-			IR.getInstance().Add_IRcommand(new IRcommand_array_set(array, index, exp_temp));
-	    }
-	    return null;
-	}
+    if (var == null || exp == null) {
+      printError(this.line);
+    }
+
+    t1 = var.SemantMe();
+    t2 = exp.SemantMe();
+
+    if (t1 == null || t2 == null) {
+      System.out.format(">> ERROR [%d] non existing type %s %s (stmt_newexp)\n", line, t1, t2);
+      printError(line);
+    }
+
+    if (!(type_equals(t1, t2))) {
+      System.out.format(">> ERROR [%d] type mismatch for type id = newExp; --- %s %s (stmt_newexp)\n", line, t1.name,
+          t2.name);
+      printError(this.line);
+    }
+
+    if (var instanceof AST_VAR_SIMPLE && SYMBOL_TABLE.getInstance().inFuncScope()) {
+      scope = SYMBOL_TABLE.getInstance().findInFuncScope(((AST_VAR_SIMPLE) var).name);
+    }
+    inclass = SYMBOL_TABLE.getInstance().inClassScope();
+
+    return null;
+  }
+
+  public TEMP IRme() {
+    System.out.println("STMT_NEWEXP - IRme");
+
+    TEMP value = exp.IRme();
+
+    if (var instanceof AST_VAR_SIMPLE) {
+      String name = ((AST_VAR_SIMPLE) var).name;
+      // global
+      if (((AST_VAR_SIMPLE) var).inGlobal == 1)
+        IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(value, name));
+      // local
+      else {
+        if (scope != null) // inside func scope and local of func
+        {
+          String varName = ((AST_VAR_SIMPLE) var).name;
+          IRcommand cRcommand = new IRcommand_Store_Local(varName, value);
+          IR.getInstance().Add_IRcommand(cRcommand);
+          cRcommand.offset = GetOffset(varName);
+        } else if (inclass != null) { // can be field in func
+          String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
+          IRcommand c = new IRcommand_store_field(inclass, varName, value);
+          c.offset = GetOffset(varName);
+          IR.getInstance().Add_IRcommand(c);
+
+          // String varName = inclass + "&" + ((AST_VAR_SIMPLE) var).name;
+          // using the store global to store inside a label even tho its local!
+          // IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(value, varName));
+        } else {
+          System.out.println(":((((");
+        }
+      }
+
+    } else if (var instanceof AST_VAR_FIELD) {
+      TEMP t1 = ((AST_VAR_FIELD) var).var.IRme();
+      String f_name = ((AST_VAR_FIELD) var).fieldName;
+      String c = ((AST_VAR_FIELD) var).classN;
+      IRcommand r = new IRcommand_field_set(t1, f_name, value);
+      r.offset = GetOffset(c + "_" + f_name);
+      IR.getInstance().Add_IRcommand(r);
+
+    } else { // var instanceof AST_VAR_SUBSCRIPT [Working]
+
+      AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
+      TEMP array = subVar.var.IRme();
+      TEMP index = subVar.subscript.IRme();
+      IR.getInstance().Add_IRcommand(new IRcommand_array_set(array, index, value));
+    }
+
+    return null;
+  }
 }

@@ -1,227 +1,279 @@
 package AST;
-import TYPES.*;
-import SYMBOL_TABLE.*;
-import IR.*;
-import TEMP.*;
 
+import SYMBOL_TABLE.SYMBOL_TABLE;
+import TEMP.TEMP;
+import TYPES.*;
+import IR.*;
+
+import java.util.Map;
+import java.util.HashMap;
 
 public class AST_FUNC_DEC extends AST_Node {
+  public AST_TYPE returnType;
+  public String id;
+  public AST_TYPE_ID_LIST arglist;
+  public AST_STMT_LIST list;
+  public String className; // nedded for IRme
+  public TYPE_FUNCTION func; // needed for IRme
 
-	public AST_TYPE type;
-	public String id;
-	public AST_TYPE_ID_LIST tid;
-	public AST_STMT_LIST stmtList;
+  /*******************/
+  /* CONSTRUCTOR(S) */
+  /*******************/
+  public AST_FUNC_DEC(AST_TYPE returnType, String id, AST_TYPE_ID_LIST arglist, AST_STMT_LIST list, int line) {
+    this.returnType = returnType;
+    this.id = id;
+    this.arglist = arglist;
+    this.list = list;
+    this.line = line;
 
-    // New type for IR part
-    String scope_type;
-    String class_name; //The nearest class in the tree that contains the function name
-	public TYPE_FUNCTION func;
-    int varNum;
+    /******************************/
+    /* SET A UNIQUE SERIAL NUMBER */
+    /******************************/
+    SerialNumber = AST_Node_Serial_Number.getFresh();
 
-	public AST_FUNC_DEC(int lineNumber, AST_TYPE type, String id, AST_TYPE_ID_LIST tid, AST_STMT_LIST stmtList)
-	{
-		super(lineNumber);
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
-		SerialNumber = AST_Node_Serial_Number.getFresh();
+  }
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
-	     System.out.format("====================== funcDec -> type ID( %s ) LPAREN RPAREN LBRACE multiStmt RBRACE\n", id);
-	     System.out.format("====================== funcDec -> type ID( %s ) LPAREN multiVar RPAREN LBRACE multiStmt RBRACE\n", id);
+  /****************** outside CONSTRUCTOR code *******************/
 
-		/*******************************/
-		/* COPY INPUT DATA MEMBERS ... */
-		/*******************************/
-		
-		this.type = type;
-		this.id = id;
-		this.tid = tid;
-		this.stmtList = stmtList;
-	}
+  /*************************************************/
+  /* The printing message for a XXX node */
+  /*************************************************/
+  public void PrintMe() {
 
-	public TYPE SemantMe() throws SEMANTIC_EXCEPTION
-	{
-		SYMBOL_TABLE s = SYMBOL_TABLE.getInstance();
+    /*************************************/
+    /* AST NODE TYPE- change XXX with this class name */
+    /*************************************/
+    System.out.print(String.format("AST %s NODE\n", "AST_FUNC_DEC"));
 
-		TYPE t;
-		TYPE returnType = null;
-		TYPE_LIST type_list = null;
+    /**************************************/
+    /* RECURSIVELY PRINT non-null(!) sons (list, t and right...) */
+    /**************************************/
+    if (returnType != null) {
+      returnType.PrintMe();
+    }
+    if (arglist != null) {
+      arglist.PrintMe();
+    }
+    if (list != null) {
+      list.PrintMe();
+    }
+    /***************************************/
+    /* PRINT Node to AST GRAPHVIZ DOT file */
+    /* print node name and optional string (maybe only needed in binop nodes) */
+    /***************************************/
+    AST_GRAPHVIZ.getInstance().logNode(SerialNumber,
+        String.format("FUNCDEC(%s)\n return type, func_name", id));
 
-		// check if function is defined in scope
-		if (s.findInScope(id) != null) {
-			System.out.format(">> ERROR [%d] function - %s already exists in scope - class AST_FUNC_DEC\n", lineNumber, id);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
+    /****************************************/
+    /* PRINT Edges to AST GRAPHVIZ DOT file */
+    /*
+     * Print Edges to every son!
+     */
+    /****************************************/
+    if (returnType != null) {
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, returnType.SerialNumber);
+    }
+    if (arglist != null) {
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, arglist.SerialNumber);
+    }
+    if (list != null) {
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, list.SerialNumber);
+    }
+  }
 
-		/*******************/
-		/* [0] return type */
-		/*******************/
-		returnType = type.SemantMe();
-		if (returnType == null)
-		{
-			System.out.format(">> ERROR [%d] non existing return type %s - class AST_FUNC_DEC\n",lineNumber,returnType);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
+  public TYPE SemantMe() {
 
-		// check if in not in global scope and not in a class
-		if (!(s.isGlobalScope()) && (s.curr_class == null))
-		{
-			System.out.format(">> ERROR [%d] function declared not in global scope and not under class %s - class AST_FUNC_DEC\n",lineNumber,id);
-			throw new SEMANTIC_EXCEPTION(lineNumber);
-		}
+    System.out.println("FUNCDEC- semantme(" + id + ")");
 
-		/****************************/
-		/* [1] Begin Function Scope */
-		/****************************/
-		s.beginScope();
+    TYPE returnTypeType = null;
+    TYPE_LIST argListTypes = null;
+    TYPE t;
 
-		/***************************/
-		/* [3] Semant Input Params */
-		/***************************/
-		if (tid != null) {
-			type_list = (TYPE_LIST) tid.SemantMe();
-		}
+    /*******************/
+    /* [0] return type */
+    /*******************/
+    returnTypeType = findType(returnType.typeName);
 
-		TYPE_FUNCTION type_function = new TYPE_FUNCTION(returnType,id,type_list);
+    if (returnTypeType == null || returnTypeType instanceof TYPE_NIL) {
+      System.out.format(">> ERROR [%d] non existing return type %s\n", line, returnType.typeName);
+      printError(line);
+    }
 
-		/**********************************************/
-		/* [4] Check for overloading / overriding */
-		/**********************************************/
-		if (s.curr_class != null)
-		{
-			if (s.curr_class.findClassVar(id) != null)
-			{
-				System.out.format(">> ERROR [%d] function %s overrides a variable instead of a method - class AST_FUNC_DEC\n",lineNumber,id);
-				throw new SEMANTIC_EXCEPTION(lineNumber);
-			}
-			TYPE overriden = s.curr_class.findClassFunc(id);
-			if (overriden != null && !(type_function).isSignatureEqual((TYPE_FUNCTION) overriden)) 
-			{
-				System.out.format(">> ERROR [%d] function %s overrloads a method which in not legal - class AST_FUNC_DEC\n",lineNumber,id);
-				throw new SEMANTIC_EXCEPTION(lineNumber);
-			}
-		}
+    /***************************/
+    /* [2] Semant Input Params */
+    /***************************/
+    for (AST_TYPE_ID_LIST it = arglist; it != null; it = it.tail) {
+      t = findType(it.head.t.typeName);
 
-		/***************************************************/
-		/* [5] Enter the Function Type to the Symbol Table (inside the function scope in case of a recursive function) */
-		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(id,new TYPE_FUNCTION(returnType,id,type_list));
+      if (t == null) {
+        System.out.format(">> ERROR [%d] non existing type %s\n", line, it.head.t.typeName);
+        printError(line);
+      }
 
-		/*********************************************************/
-		/* [2] Update required return type */
-		/*********************************************************/
-		SYMBOL_TABLE.getInstance().required_return_type = returnType.typeName;
+      if (t instanceof TYPE_NIL || t instanceof TYPE_VOID) {
+        System.out.format(">> ERROR [%d] cant decalre function with nil/void");
+        printError(line);
+      }
+      for (AST_TYPE_ID_LIST it2 = arglist; it2 != null && it2 != it; it2 = it2.tail) {
+        if (it.head.id.equals(it2.head.id)) {
+          System.out.format(">> ERROR  2 args with the same name");
+          printError(line);
+        }
+      }
 
-		/*******************/
-		/* [6] Semant Body */
-		/*******************/
-		stmtList.SemantMe();
+      argListTypes = new TYPE_LIST(t, argListTypes);
+    }
 
-		/*****************/
-		/* [7] End Scope */
-		/*****************/
-		SYMBOL_TABLE.getInstance().endScope();
+    // reverse list
+    if (argListTypes != null) {
+      argListTypes = argListTypes.reverseList();
+    }
 
-		/****************/
-		/* [7.5] For IR part
-		/****************/
-		this.varNum = s.func_local_index;
+    /***************************************************/
+    /* [5] Enter the Function Type to the Symbol Table */
+    /***************************************************/
 
-		/*****************/
-		/* [8] reset return type */
-		/*****************/
-		SYMBOL_TABLE.getInstance().required_return_type = "";
+    // check you dont overwrite class func
+    boolean flag = true;
+    className = SYMBOL_TABLE.getInstance().inClassScope();
+    if (className != null) {
+      String father = SYMBOL_TABLE.getInstance().findExtendsClass(className);
+      if (father != null) {
+        TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(father);
+        while (fatherClass != null && flag) {
+          AST_TYPE_NAME_LIST funcs = fatherClass.functions;
+          for (AST_TYPE_NAME_LIST it = funcs; it != null; it = it.tail) {
+            TYPE_FUNCTION currF = (TYPE_FUNCTION) it.head.type;
+            if (currF.name.equals(id)) {
+              if (!(currF.returnType.name.equals(returnTypeType.name))) {
+                System.out.println(">> ERROR [" + line + "] cant overwrite the function!");
+                printError(line);
+              }
+              TYPE_LIST params = currF.params;
+              for (TYPE_LIST it2 = argListTypes; it2 != null; it2 = it2.tail) {
+                if (params == null || params.head == null
+                    || !(it2.head.name.equals(params.head.name))) {
+                  System.out.println(">> ERROR [" + line + "] cant overwrite the function!");
+                  printError(line);
+                }
+                params = params.tail;
+              }
+              if (params != null) {
+                System.out.println(">> ERROR [" + line + "] cant overwrite the function!");
+                printError(line);
+              }
+              flag = false;
+              break;
+            }
+          }
+          fatherClass = fatherClass.father;
+        }
+      }
+    }
 
-		/***************************************************/
-		/* [9] Enter the Function Type to the Symbol Table */
-		/***************************************************/
-		TYPE function = new TYPE_FUNCTION(returnType,id,type_list);
-		SYMBOL_TABLE.getInstance().enter(id,function);
+    this.func = new TYPE_FUNCTION(returnTypeType, id, argListTypes);
+    SYMBOL_TABLE.getInstance().enter(id, func);
 
-		/****************/
-		/* [10] For IR part
-		/****************/
-		this.scope_type = s.getVarScope(id);
-		if (this.scope_type.equals("local_class"))
-		{
-			this.class_name = s.curr_class.name;
-		}
+    /****************************/
+    /* [1] Begin Function Scope */
+    /****************************/
+    SYMBOL_TABLE.getInstance().beginScope("func-" + id + "-" + returnTypeType.name);
 
-		this.func = (TYPE_FUNCTION) function;
-		return function;
-	}
+    /********************** */
+    for (AST_TYPE_ID_LIST it = arglist; it != null; it = it.tail) {
+      t = findType(it.head.t.typeName);
+      SYMBOL_TABLE.getInstance().enter(it.head.id, t);
+    }
+    /************************* */
 
-	public TEMP IRme() {
-		if (id.equals("main")) {
-			this.id = "user_main";
-		}
+    /*******************/
+    /* [3] Semant Body */
+    /*******************/
+    list.SemantMe();
 
-		int argCnt = 0; // number of arguments
-		if (class_name != "")
-			argCnt += 1; // this
+    /*****************/
+    /* [4] End Scope */
+    /*****************/
+    SYMBOL_TABLE.getInstance().endScope();
 
-		/////////// arguments ///////////////////////
-		for (AST_TYPE_ID_LIST it = tid; it != null; it = it.tail) {
-			String off = String.valueOf(8 + 4 * argCnt);
-			offsets.put(it.head.id, off);
-			argCnt += 1;
-		}
+    return func;
+  }
 
-		/////////// local variables///////////////////////
-		int varCnt = 0; // number of local variables
-		for (AST_STMT_LIST it = stmtList; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VAR_DEC) {
-				varCnt += 1;
-				continue;
-			}
-			if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
-				varCnt += localsInIfOrWhile(it.head);
-			}
-		}
+  public TEMP IRme() {
+    System.out.println("FUNCDEC" + "- IRme(" + id + ")");
 
-		///////////////////////////////////////////////////////////////////////////////////////
-		// prologue
-		String labelStart = null;
-		if (id.equals("user_main")) {
-			labelStart = id;
-		} else {
-			if (class_name != null)
-				labelStart = class_name + "_" + id;
-			else {
-				labelStart = IRcommand.getFreshLabel("start_" + id);
-				offsets.put(id, labelStart);
-			}
-		}
+    if (id.equals("main")) {
+      this.id = "user_main";
+    }
 
-		//this.func.startLabel = labelStart; // not sure if we need it
+    // signature IRme ...
 
-		IR.getInstance().Add_IRcommand(new IRcommand_Label(labelStart));
-		IR.getInstance().Add_IRcommand(new IRcommand_Prologue(varCnt));
+    //////////////////////// calculate the var
+    //////////////////////// list//////////////////////////////////////////
 
-		// body
-		varCnt = 0;
-		for (AST_STMT_LIST it = stmtList; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VAR_DEC) {
-				varCnt += 1;
-				AST_STMT_VAR_DEC a = (AST_STMT_VAR_DEC) (it.head);
-				AST_VAR_DEC b = (AST_VAR_DEC) (a.varDec);
-				String off = String.valueOf(varCnt * (-4) + -40);
-				offsets.put(b.id, off);
-			}
-			if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
-				varsInFunc = varCnt;
-				varCnt += localsInIfOrWhile(it.head);
-			}
-			it.head.IRme();
-		}
+    ///////////// arguments/////////////////////////
+    int argCnt = 0; // number of arguments
+    if (className != null)
+      argCnt += 1; // this
 
-		// epilogue
-		IR.getInstance().Add_IRcommand(new IRcommand_Epilogue());
+    for (AST_TYPE_ID_LIST it = arglist; it != null; it = it.tail) {
+      String off = String.valueOf(8 + 4 * argCnt);
+      offsets.put(it.head.id, off);
+      argCnt += 1;
+    }
 
-		System.out.println(offsets);
-		return null;
-	}
+    /////////// local variables///////////////////////
+    int varCnt = 0; // number of local variables
+    for (AST_STMT_LIST it = list; it != null; it = it.tail) {
+      if (it.head instanceof AST_STMT_VAR_DEC) {
+        varCnt += 1;
+        continue;
+      }
+      if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
+        varCnt += localsInIfOrWhile(it.head);
+      }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    // prologue
+    String labelStart = null;
+    if (id.equals("user_main")) {
+      labelStart = id;
+    } else {
+      if (className != null)
+        labelStart = className + "_" + id;
+      else {
+        labelStart = IRcommand.getFreshLabel("start_" + id);
+        offsets.put(id, labelStart);
+      }
+    }
+
+    this.func.startLabel = labelStart;
+
+    IR.getInstance().Add_IRcommand(new IRcommand_Label(labelStart));
+    IR.getInstance().Add_IRcommand(new IRcommand_Prologue(varCnt));
+
+    // body
+    varCnt = 0;
+    for (AST_STMT_LIST it = list; it != null; it = it.tail) {
+      if (it.head instanceof AST_STMT_VAR_DEC) {
+        varCnt += 1;
+        AST_STMT_VAR_DEC a = (AST_STMT_VAR_DEC) (it.head);
+        AST_VAR_DEC b = (AST_VAR_DEC) (a.v);
+        String off = String.valueOf(varCnt * (-4) + -40);
+        offsets.put(b.id, off);
+      }
+      if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
+        varsInFunc = varCnt;
+        varCnt += localsInIfOrWhile(it.head);
+      }
+      it.head.IRme();
+    }
+
+    // epilogue
+    IR.getInstance().Add_IRcommand(new IRcommand_Epilogue());
+
+    System.out.println(offsets);
+    return null;
+  }
 }

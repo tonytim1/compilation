@@ -10,18 +10,7 @@ public class TYPE_STRING extends TYPE
 	/*****************************/
 	/* PREVENT INSTANTIATION ... */
 	/*****************************/
-	public TYPE_STRING() {
-		this.name = "string";
-		this.typeName = "string";
-	}
-
-	public TYPE clone() {
-		TYPE_STRING newType = new TYPE_STRING();
-		newType.name = name;
-		newType.typeName = typeName;
-		newType.varName = varName;
-		return newType;
-	}
+	protected TYPE_STRING() {}
 
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
@@ -32,7 +21,6 @@ public class TYPE_STRING extends TYPE
 		{
 			instance = new TYPE_STRING();
 			instance.name = "string";
-			instance.typeName = "string";
 		}
 		return instance;
 	}

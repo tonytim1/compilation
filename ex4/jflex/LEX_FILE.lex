@@ -6,7 +6,6 @@
 /* USER CODE */
 /*************/
 import java_cup.runtime.*;
-import java.lang.Math;
 
 /******************************/
 /* DOLAR DOLAR - DON'T TOUCH! */
@@ -65,46 +64,36 @@ import java.lang.Math;
 	/**********************************************/
 	/* Enable token position extraction from main */
 	/**********************************************/
-	public int getTokenStartPosition() { return yycolumn + 1; } 
-
-	public boolean isValidInteger(String num_str){
-		try {
-			Integer num_int = new Integer(num_str);
-			return (num_int < Math.pow(2,15));
-		}
-		catch (Exception e) {
-			return false;
-		}
-	}
-
-	public String yytextStr(){
-		String tmp =new String(yytext());
-		int len = tmp.length();
-		String val_return = tmp.substring(1,len-1);
-		return val_return;
-
-	}
+	public int getTokenStartPosition() { return yycolumn + 1; }
+	public int getCharPos() { return yycolumn; } 
+ 
 %}
 
 /***********************/
 /* MACRO DECALARATIONS */
 /***********************/
 LineTerminator	= \r|\n|\r\n
-WhiteSpace		= {LineTerminator} | [ \t]
-VALID_NO_STAR = [\t\n\r a-zA-Z0-9\+\-\(\)\]\[{}\.;\?\!\/]
-VALID_NO_SLASH    = [\t\n\r a-zA-Z0-9\+\-\(\)\]\[{}\.;\?\!\*]
+WhiteSpace		= {LineTerminator} | [ \t\f]
+NOT_A_NUMBER    = 0[0-9]+ | 3276[8-9] | [0-9][0-9][0-9][0-9][0-9][0-9]+
+INTEGER			= 0 | [1-9][0-9]?[0-9]?[0-9]? | [1-2][0-9][0-9][0-9][0-9] | 3[0-1][0-9][0-9][0-9] | 32[0-6][0-9][0-9] | 327[0-5][0-9] | 3276[0-7]
+LETTER          = [A-Za-z]
+ID				= {LETTER} ({LETTER} | [0-9])*
+CLASS       	= class
+STRING			= \"{LETTER}*\"
+/***COMMENTS****/ 
+REGULAR_CHARS = \( | \) | \{ | \} | \[ | \] | \? | \! | \+ | \- | \. | \; | {LETTER} | [0-9] | {WhiteSpace}
+REGULAR_CHARS_2 = \( | \) | \{ | \} | \[ | \] | \? | \! | \+ | \- | \. | \; | {LETTER} | [0-9]
+TIMES_CHARS = \* ({REGULAR_CHARS}  | \* )* ({REGULAR_CHARS})+
+END = [\*]+ \/
+COMMENT_1 = \/\* ({REGULAR_CHARS} | \/ | {TIMES_CHARS})* {END}
+COMMENT_2 = \/\/ ({REGULAR_CHARS_2} | \* | \/ | [ \t\f])* {LineTerminator}
+COMMENT = {COMMENT_1} | {COMMENT_2}
+/***ERRORS*****/
+ILLEGAL_CHARS = \" | \, | \= | \, | \> | \: | \<
+NOT_A_COMMENT = \/\/ ({REGULAR_CHARS_2} | \/ | \* | [ \t\f] | {ILLEGAL_CHARS})* {ILLEGAL_CHARS}+ ({REGULAR_CHARS_2} | \/ | \* | [ \t\f] | {ILLEGAL_CHARS})* {LineTerminator}
+NOT_A_COMMENT_2 = \/\* ({REGULAR_CHARS} | \/ | {TIMES_CHARS})* {ILLEGAL_CHARS}+ ({REGULAR_CHARS} | \/ | {TIMES_CHARS})* {END}
+ERROR = \n|.
 
-COMMENT_1			= \/\/[\t a-zA-Z0-9/*\(\)\]\[{}\.;\?\!\+\-]*
-COMMENT_2 = \/\*(({VALID_NO_STAR}*([] | \*+{VALID_NO_SLASH}))*{VALID_NO_STAR}*\*\/)
-COMMENT					= {COMMENT_2} | {COMMENT_1}
-BAD_COMMENT = \/\*
-INTEGER			= 0 | [1-9][0-9]*
-BAD_INTEGER		= (0)([0-9]+)
-ID				= ([a-zA-Z]+)([a-zA-Z0-9]*)
-BAD_ID 			= ([0-9]+){ID}
-STRING 			= \"[a-zA-Z]*\"
-
-ERROR 			= .
 /******************************/
 /* DOLAR DOLAR - DON'T TOUCH! */
 /******************************/
@@ -122,49 +111,44 @@ ERROR 			= .
 /**************************************************************/
 
 <YYINITIAL> {
-
-"if"				{ return symbol(TokenNames.IF);}
-"nil"				{ return symbol(TokenNames.NIL);}
-"new"				{ return symbol(TokenNames.NEW);}
-"array"				{ return symbol(TokenNames.ARRAY);}
-"while"				{ return symbol(TokenNames.WHILE);}
-"extends"			{ return symbol(TokenNames.EXTENDS);}
-"class"				{ return symbol(TokenNames.CLASS);}
-"return"			{ return symbol(TokenNames.RETURN);}
-"int"				{ return symbol(TokenNames.TYPE_INT);}
-"string"			{ return symbol(TokenNames.TYPE_STRING);}
-"void"				{ return symbol(TokenNames.TYPE_VOID);}
-"="					{ return symbol(TokenNames.EQ);}
-"!="				{ return symbol(TokenNames.NE);}
-"."					{ return symbol(TokenNames.DOT);}
+"void"					{ return symbol(TokenNames.TYPE_VOID);}
 "+"					{ return symbol(TokenNames.PLUS);}
 "-"					{ return symbol(TokenNames.MINUS);}
-"*"					{ return symbol(TokenNames.TIMES);}
-"/"					{ return symbol(TokenNames.DIVIDE);}
-":="				{ return symbol(TokenNames.ASSIGN);}
+{COMMENT}			{ /* just skip what was found, do nothing */ }
+{NOT_A_COMMENT}     { return symbol(TokenNames.ERROR);} 
+{NOT_A_COMMENT_2}   { return symbol(TokenNames.ERROR);} 
+"/*"  				{ return symbol(TokenNames.ERROR);} //unclosed comment or bad chars
+"*"  				{ return symbol(TokenNames.TIMES);}
+"/" 				{ return symbol(TokenNames.DIVIDE);}
 "("					{ return symbol(TokenNames.LPAREN);}
 ")"					{ return symbol(TokenNames.RPAREN);}
-"["					{ return symbol(TokenNames.LBRACK);}
-"]"					{ return symbol(TokenNames.RBRACK);}
-"{"					{ return symbol(TokenNames.LBRACE);}
-"}"					{ return symbol(TokenNames.RBRACE);}
-"<"					{ return symbol(TokenNames.LT);}
-">"					{ return symbol(TokenNames.GT);}
-","					{ return symbol(TokenNames.COMMA);}
-";"					{ return symbol(TokenNames.SEMICOLON);}
-{INTEGER}			{
-						if (isValidInteger(yytext()))
-							return symbol(TokenNames.INT, new Integer(yytext()));
-						else 
-							return symbol(TokenNames.ERROR);
-					}
-{ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
-{STRING}			{ return symbol(TokenNames.STRING, yytextStr());}   
-{WhiteSpace}		{ }
-{COMMENT}			{ }
-{BAD_COMMENT}	{ return symbol(TokenNames.ERROR);}
-{BAD_ID}			{ return symbol(TokenNames.ERROR);}
-{BAD_INTEGER}		{ return symbol(TokenNames.ERROR);}
-{ERROR}				{ return symbol(TokenNames.ERROR);}
+"int"               {return symbol(TokenNames.TYPE_INT);}
+"<"                 { return symbol(TokenNames.LT);}
+">"                 { return symbol(TokenNames.GT);}
+";"                { return symbol(TokenNames.SEMICOLON);}
+":="                { return symbol(TokenNames.ASSIGN);}
+"="                 { return symbol(TokenNames.EQ);}
+"!="                 { return symbol(TokenNames.NE);}
+"."                 { return symbol(TokenNames.DOT);}
+","                 { return symbol(TokenNames.COMMA);}
+"}"                 { return symbol(TokenNames.RBRACE);}
+"{"                 { return symbol(TokenNames.LBRACE);}
+"]"                 { return symbol(TokenNames.RBRACK);}
+"["                 { return symbol(TokenNames.LBRACK);}
+"array"             { return symbol(TokenNames.ARRAY);}
+"extends"           { return symbol(TokenNames.EXTENDS);}
+"return"            { return symbol(TokenNames.RETURN);}
+"while"             { return symbol(TokenNames.WHILE);}
+"if"                { return symbol(TokenNames.IF);}
+"new"               { return symbol(TokenNames.NEW);}
+"nil"               { return symbol(TokenNames.NIL);}
+"string"            { return symbol(TokenNames.TYPE_STRING);}
+"class" 	        { return symbol(TokenNames.CLASS);}
+{NOT_A_NUMBER}      { return symbol(TokenNames.ERROR);}
+{INTEGER}			{ return symbol(TokenNames.INT,  new Integer(yytext()));}
+{ID}				{ return symbol(TokenNames.ID,  new String( yytext()));}
+{STRING}			{ return symbol(TokenNames.STRING,  new String( yytext()));}
+{WhiteSpace}		{ /* just skip what was found, do nothing */ }
+{ERROR}	    	    { return symbol(TokenNames.ERROR);}
 <<EOF>>				{ return symbol(TokenNames.EOF);}
 }
