@@ -3,6 +3,7 @@ import TYPES.*;
 import SYMBOL_TABLE.*;
 import IR.*;
 import TEMP.*;
+import java.util.*;
 public abstract class AST_Node
 {
 	/*******************************************/
@@ -124,7 +125,7 @@ public abstract class AST_Node
 		return false;
 	}
 
-	public TYPE funcSig(String id, AST_EXPLIST list, int line) {
+	public TYPE funcSig(String id, AST_EXP_LIST list, int line) {
 		TYPE type = SYMBOL_TABLE.getInstance().isRealFunc(id, list);
 
 		if (type == null) {
@@ -150,7 +151,7 @@ public abstract class AST_Node
 		return t;
 	}
 
-	public TYPE isFuncOfClass(String className, String funcName, AST_EXPLIST funcArgs, int line) {
+	public TYPE isFuncOfClass(String className, String funcName, AST_EXP_LIST funcArgs, int line) {
 
 		if (SYMBOL_TABLE.getInstance().inClassScope() != null &&
 				SYMBOL_TABLE.getInstance().inClassScope().equals(className)) { // should find func in current class scope (going
@@ -260,12 +261,12 @@ public abstract class AST_Node
 		}
 	}
 
-	public TEMP vardotIR(AST_VAR var, AST_EXPLIST list, TYPE_CLASS tl, String id) {
+	public TEMP vardotIR(AST_VAR var, IST list, TYPE_CLASS tl, String id) {
 		TEMP varAddress = var.IRme();
 		TEMP_LIST resTempsList = null;
 
 		// set resTempList
-		for (AST_EXPLIST it = list; it != null; it = it.tail) {
+		for (AST_EXP_LIST it = list; it != null; it = it.tail) {
 			TEMP curr = it.head.IRme();
 			resTempsList = new TEMP_LIST(curr, resTempsList);
 		}

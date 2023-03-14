@@ -127,7 +127,7 @@ public class AST_VAR_EXP_LIST_STMT extends AST_STMT
 			TEMP_LIST resTempsList = null;
 
 			// set resTempList
-			for (AST_EXPLIST it = expList; it != null; it = it.tail) {
+			for (AST_EXP_LIST it = expList; it != null; it = it.tail) {
 			  TEMP curr = it.head.IRme();
 			  resTempsList = new TEMP_LIST(curr, resTempsList);
 			}
