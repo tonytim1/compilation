@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class AST_CLASS_DEC_EXTENDS extends AST_CLASSDEC {
+public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 	String fatherName;
 
 	/*******************/

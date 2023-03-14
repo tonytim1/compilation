@@ -2,12 +2,12 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 public class AST_DEC_CLASS_DEC extends AST_DEC {
-  public AST_CLASSDEC cd;
+  public AST_CLASS_DEC cd;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_DEC_CLASS_DEC(AST_CLASSDEC cd) {
+  public AST_DEC_CLASS_DEC(AST_CLASS_DEC cd) {
     this.cd = cd;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
