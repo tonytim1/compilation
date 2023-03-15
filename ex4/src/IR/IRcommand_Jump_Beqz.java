@@ -14,9 +14,6 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Jump_Beqz extends IRcommand_Conditional_Jump {
-	//TEMP oprnd1;
-	//String label;
-
 	public IRcommand_Jump_Beqz(TEMP t, String label) {
 		this.oprnd1 = t;
 		this.label = label;

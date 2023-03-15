@@ -14,7 +14,6 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Load_Global extends IRcommand_Assign {
-	//TEMP dst;
 	String label;
 
 	public IRcommand_Load_Global(TEMP dst, String name) {
