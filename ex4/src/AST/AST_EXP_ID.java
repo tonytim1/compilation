@@ -1,7 +1,7 @@
 package AST;
 
 import IR.IR;
-import IR.IRcommandConstInt;
+import IR.IRcommand_Const_Int;
 import IR.IRcommand_Call_Func;
 import SYMBOL_TABLE.SYMBOL_TABLE;
 import TEMP.*;
