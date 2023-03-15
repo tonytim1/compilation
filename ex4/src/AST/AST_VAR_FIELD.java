@@ -72,18 +72,18 @@ public class AST_VAR_FIELD extends AST_VAR {
 		}
 
 		// if class wasnt declared yet
-		String className = SYMBOL_TABLE.getInstance().getClassScope();
+		String className = SYMBOL_TABLE.getInstance().inClassScope();
 		TYPE fieldType = SYMBOL_TABLE.getInstance().findInClassScope(fieldName);
 		if (className != null && className.equals(t1.name) && fieldType != null)
 			return fieldType;
 
 		// inheritance case
 		else if (className != null && className.equals(t1.name)) {
-			String fatherName = SYMBOL_TABLE.getInstance().getFatherClassName(className);
+			String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(className);
 			if (fatherName != null) {
 				TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName);
 				while (fatherClass != null) {
-					for (AST_ARG_LIST it = fatherClass.fields; it != null; it = it.tail) {
+					for (AST_ARG_LIST it = fatherClass.data_members; it != null; it = it.tail) {
 						if (it.head.id.equals(fieldName)) {
 							String resName = it.head.t.typeName;
 							return res = SYMBOL_TABLE.getInstance().find(resName);
@@ -98,7 +98,7 @@ public class AST_VAR_FIELD extends AST_VAR {
 
 		// class was declared
 		while (t1 != null) {
-			AST_ARG_LIST t1_data_members = ((TYPE_CLASS) t1).fields;
+			AST_ARG_LIST t1_data_members = ((TYPE_CLASS) t1).data_members;
 			for (AST_ARG_LIST it = t1_data_members; it != null; it = it.tail) {
 				if (it.head.id.equals(fieldName)) {
 					String resName = it.head.t.typeName;

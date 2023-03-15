@@ -42,21 +42,21 @@ public class AST_BINOP extends AST_Node {
         /***************************************/
         String s = "";
         switch (number) {
-            case 1:
+            case 0:
                 s = "+";
-            case 2:
+            case 1:
                 s = "-";
-            case 3:
+            case 2:
                 s = "*";
-            case 4:
+            case 3:
                 s = "/";
-            case 5:
+            case 4:
                 s = ">";
-            case 6:
+            case 5:
                 s = "<";
-            case 7:
+            case 6:
                 s = "=";
-            case 8:
+            case 7:
                 s = "!=";
         }
         if (left != null)
@@ -87,7 +87,7 @@ public class AST_BINOP extends AST_Node {
         }
         this.leftType = t1; //// needed in IRme
 
-        if (number == 7 || number == 8) // case =
+        if (number >= 6 ) // case = or !=
         {
             if (type_equals(t1, t2) || type_equals(t2, t1)) // legal
                 return TYPE_INT.getInstance();
@@ -107,7 +107,7 @@ public class AST_BINOP extends AST_Node {
             return TYPE_INT.getInstance(); // legal
         }
 
-        if (number == 1) // case +
+        if (number == 0) // case +
         {
             if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance())) // legal (plus)
                 return TYPE_INT.getInstance();
@@ -174,7 +174,7 @@ public class AST_BINOP extends AST_Node {
             if (leftType == TYPE_STRING.getInstance()) {// strings
                 IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Strings(dst, t1, t2));
             } else
-            IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Contents(dst, t1, t2));
+                IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Contents(dst, t1, t2));
 
         }
 

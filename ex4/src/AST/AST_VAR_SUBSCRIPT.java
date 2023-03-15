@@ -81,7 +81,7 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 			printError(line);
 		}
 
-		return ((TYPE_ARRAY) t1).type;
+		return ((TYPE_ARRAY) t1).entryType;
 	}
 
 	public TEMP IRme() {

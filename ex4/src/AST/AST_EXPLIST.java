@@ -1,16 +1,19 @@
 package AST;
 
-public class AST_ARG_LIST extends AST_Node {
+import TEMP.TEMP_LIST;
+import TYPES.TYPE_LIST;
+
+public class AST_EXPLIST extends AST_Node {
   /****************/
   /* DATA MEMBERS */
   /****************/
-  public AST_ARG head;
-  public AST_ARG_LIST tail;
+  public AST_EXP head;
+  public AST_EXPLIST tail;
 
   /******************/
   /* CONSTRUCTOR(S) */
   /******************/
-  public AST_ARG_LIST(AST_ARG head, AST_ARG_LIST tail) {
+  public AST_EXPLIST(AST_EXP head, AST_EXPLIST tail, int line) {
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
@@ -20,15 +23,16 @@ public class AST_ARG_LIST extends AST_Node {
     /* PRINT CORRESPONDING DERIVATION RULE */
     /***************************************/
     if (tail != null)
-      System.out.print("====================== args -> arg, args\n");
+      System.out.print("====================== explis -> exp, exps\n");
     if (tail == null)
-      System.out.print("====================== args -> arg      \n");
+      System.out.print("====================== explist -> exp      \n");
 
     /*******************************/
     /* COPY INPUT DATA NENBERS ... */
     /*******************************/
     this.head = head;
     this.tail = tail;
+    this.line = line;
   }
 
   /******************************************************/
@@ -38,7 +42,7 @@ public class AST_ARG_LIST extends AST_Node {
     /**************************************/
     /* AST NODE TYPE = AST STATEMENT LIST */
     /**************************************/
-    System.out.print("AST ARG_LIST NODE\n");
+    System.out.print("AST EXPLIST NODE\n");
 
     /*************************************/
     /* RECURSIVELY PRINT HEAD + TAIL ... */
@@ -51,7 +55,7 @@ public class AST_ARG_LIST extends AST_Node {
     /**********************************/
     /* PRINT to AST GRAPHVIZ DOT file */
     /**********************************/
-    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, "ARG_LIST");
+    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, "EXPLIST");
 
     /****************************************/
     /* PRINT Edges to AST GRAPHVIZ DOT file */
@@ -62,10 +66,24 @@ public class AST_ARG_LIST extends AST_Node {
       AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, tail.SerialNumber);
   }
 
-  public void printArgList() {
-    AST_ARG_LIST data_members = this;
-    for (AST_ARG_LIST it = data_members; it != null; it = it.tail) {
-      System.out.print(it.head.t.typeName + ", " + it.head.id + " ");
+  public TYPE_LIST SemantMe(int ignore) {
+    System.out.println("EXPLIST - semant me");
+
+    if (tail == null) {
+      return new TYPE_LIST(head.SemantMe(), null);
+    } else {
+      return new TYPE_LIST(head.SemantMe(), tail.SemantMe(0));
+    }
+  }
+
+  public TEMP_LIST IRme(int ignore) {
+    System.out.println("EXPLIST - IRme");
+    if ((head == null) && (tail == null)) {
+      return null;
+    } else if (tail == null) {
+      return new TEMP_LIST(head.IRme(), null);
+    } else {
+      return new TEMP_LIST(head.IRme(), tail.IRme(0));
     }
   }
 }

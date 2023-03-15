@@ -13,17 +13,17 @@ public class TYPE_CLASS extends TYPE {
 	/* Note that data members coming from the AST are */
 	/* packed together with the class methods */
 	/**************************************************/
-	public AST_ARG_LIST fields;
-	public AST_FUNC_LIST functions;
+	public AST_ARG_LIST data_members;
+	public AST_TYPE_NAME_LIST functions;
 
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(TYPE_CLASS father, String name, AST_ARG_LIST fields, AST_FUNC_LIST functions) {
+	public TYPE_CLASS(TYPE_CLASS father, String name, AST_ARG_LIST data_members, AST_TYPE_NAME_LIST funcs) {
 		this.name = name;
 		this.father = father;
-		this.fields = fields;
-		this.functions = functions;
+		this.data_members = data_members;
+		this.functions = funcs;
 		printClass();
 	}
 
@@ -37,10 +37,10 @@ public class TYPE_CLASS extends TYPE {
 		}
 
 		System.out.println("> class feilds are: ");
-		if (fields != null)
-			fields.printArgList();
+		if (data_members != null)
+			data_members.printArgList();
 		System.out.println("> class functions are: ");
-		for (AST_FUNC_LIST it = functions; it != null; it = it.tail) {
+		for (AST_TYPE_NAME_LIST it = functions; it != null; it = it.tail) {
 			System.out.print(it.head.name + " ");
 		}
 		System.out.println("---------------------------");

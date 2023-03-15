@@ -112,8 +112,8 @@ public abstract class AST_Node {
 		// array case
 		if (t1.isArray() && t2.isArray()) {
 			// todo: should check if t2 is son of t1 instead of equality
-			return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).type.name + "[]")
-					|| type_equals(((TYPE_ARRAY) t1).type, ((TYPE_ARRAY) t2).type);
+			return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).entryType.name + "[]")
+					|| type_equals(((TYPE_ARRAY) t1).entryType, ((TYPE_ARRAY) t2).entryType);
 		}
 
 		// class case ...
@@ -130,9 +130,9 @@ public abstract class AST_Node {
 			}
 
 			// class wasnt declared yet
-			String cllass = SYMBOL_TABLE.getInstance().getClassScope();
+			String cllass = SYMBOL_TABLE.getInstance().inClassScope();
 			if (cllass != null && cllass.equals(t2.name) && t1.isClass()) {
-				String fatherName = SYMBOL_TABLE.getInstance().getFatherClassName(t2.name);
+				String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(t2.name);
 				if (fatherName.equals(t1.name))
 					return true;
 				TYPE_CLASS fatherC = ((TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName)).father;
@@ -149,8 +149,8 @@ public abstract class AST_Node {
 		return false;
 	}
 
-	public TYPE funcSig(String id, AST_EXP_LIST list, int line) {
-		TYPE type = SYMBOL_TABLE.getInstance().getFuncIfParamsMatch(id, list);
+	public TYPE funcSig(String id, AST_EXPLIST list, int line) {
+		TYPE type = SYMBOL_TABLE.getInstance().isRealFunc(id, list);
 
 		if (type == null) {
 			System.out.format(">> ERROR [%d] " + id + " is not a function or the parameters given are wrong!", line);
@@ -166,7 +166,7 @@ public abstract class AST_Node {
 		// if class was already declared then t!=null
 		if (t == null) {
 			// check if its equal class boundary before class was declared
-			String cl = SYMBOL_TABLE.getInstance().getClassScope();
+			String cl = SYMBOL_TABLE.getInstance().inClassScope();
 			if (cl != null && cl.equals(name)) {
 				// only comes here BEFORE we declare the class!
 				t = new TYPE_CLASS(null, name, null, null);
@@ -175,23 +175,23 @@ public abstract class AST_Node {
 		return t;
 	}
 
-	public TYPE isFuncOfClass(String className, String funcName, AST_EXP_LIST funcArgs, int line) {
+	public TYPE isFuncOfClass(String className, String funcName, AST_EXPLIST funcArgs, int line) {
 
-		if (SYMBOL_TABLE.getInstance().getClassScope() != null &&
-				SYMBOL_TABLE.getInstance().getClassScope().equals(className)) { // should find func in current class scope (going
+		if (SYMBOL_TABLE.getInstance().inClassScope() != null &&
+				SYMBOL_TABLE.getInstance().inClassScope().equals(className)) { // should find func in current class scope (going
 																																				// up till class and search for func)
 			TYPE f = SYMBOL_TABLE.getInstance().findInClassScope(funcName);
 			if (f instanceof TYPE_FUNCTION)
 				return funcSig(funcName, funcArgs, line);
 			// inheritance case
-			String extendClass = SYMBOL_TABLE.getInstance().getFatherClassName(className);
+			String extendClass = SYMBOL_TABLE.getInstance().findExtendsClass(className);
 			if (extendClass != null) {
 				TYPE_CLASS father = (TYPE_CLASS) (SYMBOL_TABLE.getInstance().find(className));
 				while (father != null) {
-					AST_FUNC_LIST funcs = father.functions;
-					for (AST_FUNC_LIST it = funcs; it != null; it = it.tail) {
+					AST_TYPE_NAME_LIST funcs = father.functions;
+					for (AST_TYPE_NAME_LIST it = funcs; it != null; it = it.tail) {
 						if (it.head.name.equals(funcName))
-							return SYMBOL_TABLE.getInstance().checkFuncParams((TYPE_FUNCTION) it.head.type, funcArgs, line);
+							return SYMBOL_TABLE.getInstance().compareFuncs((TYPE_FUNCTION) it.head.type, funcArgs, line);
 					}
 					father = father.father;
 				}
@@ -210,7 +210,7 @@ public abstract class AST_Node {
 		TYPE_CLASS currClass = (TYPE_CLASS) cl;
 		TYPE_FUNCTION a = null;
 		while (currClass != null) {
-			for (AST_FUNC_LIST it = currClass.functions; it != null; it = it.tail) {
+			for (AST_TYPE_NAME_LIST it = currClass.functions; it != null; it = it.tail) {
 				if (it.head.name.equals(funcName)) {
 					a = (TYPE_FUNCTION) it.head.type;
 					break;
@@ -225,7 +225,7 @@ public abstract class AST_Node {
 			printError(line);
 		}
 		// should compare a params to func args - getting func args type by semant me
-		return SYMBOL_TABLE.getInstance().checkFuncParams(a, funcArgs, line);
+		return SYMBOL_TABLE.getInstance().compareFuncs(a, funcArgs, line);
 
 	}
 
@@ -250,7 +250,7 @@ public abstract class AST_Node {
 			body = ((AST_STMT_WHILE) scope).body;
 		int result = 0;
 		for (AST_STMT_LIST it = body; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VAR_DEC)
+			if (it.head instanceof AST_STMT_VARDEC)
 				result += 1;
 
 			if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
@@ -265,10 +265,10 @@ public abstract class AST_Node {
 		Map<String, String> temps = new HashMap<>();
 		int varCnt = varsInFunc;
 		for (AST_STMT_LIST it = body; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VAR_DEC) {
+			if (it.head instanceof AST_STMT_VARDEC) {
 				varCnt += 1;
-				AST_STMT_VAR_DEC a = (AST_STMT_VAR_DEC) (it.head);
-				AST_VAR_DEC b = (AST_VAR_DEC) (a.v);
+				AST_STMT_VARDEC a = (AST_STMT_VARDEC) (it.head);
+				AST_VARDEC b = (AST_VARDEC) (a.v);
 				if (offsets.get(b.id) != null)
 					temps.put(b.id, offsets.get(b.id));
 				offsets.put(b.id, String.valueOf(varCnt * (-4) + -40));
@@ -285,12 +285,12 @@ public abstract class AST_Node {
 		}
 	}
 
-	public TEMP vardotIR(AST_VAR var, AST_EXP_LIST list, TYPE_CLASS tl, String id) {
+	public TEMP vardotIR(AST_VAR var, AST_EXPLIST list, TYPE_CLASS tl, String id) {
 		TEMP varAddress = var.IRme();
 		TEMP_LIST resTempsList = null;
 
 		// set resTempList
-		for (AST_EXP_LIST it = list; it != null; it = it.tail) {
+		for (AST_EXPLIST it = list; it != null; it = it.tail) {
 			TEMP curr = it.head.IRme();
 			resTempsList = new TEMP_LIST(curr, resTempsList);
 		}

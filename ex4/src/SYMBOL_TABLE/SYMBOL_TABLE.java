@@ -31,8 +31,31 @@ public class SYMBOL_TABLE {
 	/* A very primitive hash function for exposition purposes ... */
 	/**************************************************************/
 	private int hash(String s) {
-		if (s == null) {return 0;}
-		return Math.abs(s.hashCode()) % hashArraySize;
+		if (s.charAt(0) == 'l') {
+			return 1;
+		}
+		if (s.charAt(0) == 'm') {
+			return 1;
+		}
+		if (s.charAt(0) == 'r') {
+			return 3;
+		}
+		if (s.charAt(0) == 'i') {
+			return 6;
+		}
+		if (s.charAt(0) == 'd') {
+			return 6;
+		}
+		if (s.charAt(0) == 'k') {
+			return 6;
+		}
+		if (s.charAt(0) == 'f') {
+			return 6;
+		}
+		if (s.charAt(0) == 'S') {
+			return 6;
+		}
+		return 12;
 	}
 
 	/****************************************************************************/
@@ -85,34 +108,21 @@ public class SYMBOL_TABLE {
 
 		return null;
 	}
-	
-	public TYPE findInScope(String name) {
-		SYMBOL_TABLE_ENTRY e = top;
-		TYPE res = null;
-
-		while (e != null && !e.name.startsWith("SCOPE")) {
-			if (e.name.equals(name)) {
-				res = e.type;
-			}
-			e = e.prevtop;
-		}
-		return res;
-	}
 
 	/***************************************************************************/
-	/* begine scope = Enter the <SCOPE> element to the data structure */
+	/* begine scope = Enter the <SCOPE-BOUNDARY> element to the data structure */
 	/***************************************************************************/
 	public void beginScope(String name) {
 		/************************************************************************/
-		/* Though <SCOPE> entries are present inside the symbol table, */
+		/* Though <SCOPE-BOUNDARY> entries are present inside the symbol table, */
 		/* they are not really types. In order to be ablt to debug print them, */
-		/* a special TYPE_SCOPE was developed for them. This */
+		/* a special TYPE_FOR_SCOPE_BOUNDARIES was developed for them. This */
 		/* class only contain their type name which is the bottom sign: _|_ */
 		/************************************************************************/
-		String boundary = "SCOPE-" + name;
+		String boundary = "SCOPE-BOUNDARY-" + name;
 		enter(
 				boundary,
-				new TYPE_SCOPE("NONE"));
+				new TYPE_FOR_SCOPE_BOUNDARIES("NONE"));
 
 		/*********************************************/
 		/* Print the symbol table after every change */
@@ -128,15 +138,15 @@ public class SYMBOL_TABLE {
 	/********************************************************************************/
 	public void endScope() {
 		/**************************************************************************/
-		/* Pop elements from the symbol table stack until a SCOPE is hit */
+		/* Pop elements from the symbol table stack until a SCOPE-BOUNDARY is hit */
 		/**************************************************************************/
-		while (!(top.name.startsWith("SCOPE"))) {
+		while (!(top.name.startsWith("SCOPE-BOUNDARY"))) {
 			table[top.index] = top.next;
 			top_index = top_index - 1;
 			top = top.prevtop;
 		}
 		/**************************************/
-		/* Pop the SCOPE sign itself */
+		/* Pop the SCOPE-BOUNDARY sign itself */
 		/**************************************/
 		table[top.index] = top.next;
 		top_index = top_index - 1;
@@ -276,100 +286,100 @@ public class SYMBOL_TABLE {
 	}
 
 	public String getScope() {
-		SYMBOL_TABLE_ENTRY e = top;
+		SYMBOL_TABLE_ENTRY curr = top;
 
-		while (e != null) {
-			if (e.name.startsWith("SCOPE")) {
-				return e.name.split("-")[1];
+		while (curr != null) {
+			if (curr.name.startsWith("SCOPE-BOUNDARY")) {
+				return curr.name.split("-")[2];
 			}
-			e = e.prevtop;
+			curr = curr.prevtop;
 		}
 		return "global";
 	}
 
-	// if not, returns null. if yes, returns class' name
-	public String getClassScope() {
-		SYMBOL_TABLE_ENTRY e = top;
-
-		while (e != null) {
-			if (e.name.startsWith("SCOPE-class"))
-				return e.name.split("-")[2];
-
-			e = e.prevtop;
+	public String findExtendsClass(String className) {
+		SYMBOL_TABLE_ENTRY curr = top;
+		while (curr != null) {
+			if (curr.name.startsWith("SCOPE-BOUNDARY-class")) {
+				String[] splited = curr.name.split("-");
+				if (splited.length > 5 && splited[3].equals(className))
+					return curr.name.split("-")[5];
+				return null;
+			}
+			curr = curr.prevtop;
 		}
 		return null;
 	}
 
-	public boolean getFuncScope() {
-		SYMBOL_TABLE_ENTRY e = top;
+	// if not, returns null. if yes, returns class' name
+	public String inClassScope() {
+		SYMBOL_TABLE_ENTRY curr = top;
 
-		while (e != null) {
-			if (e.name.startsWith("SCOPE-func"))
+		while (curr != null) {
+			if (curr.name.startsWith("SCOPE-BOUNDARY-class"))
+				return curr.name.split("-")[3];
+
+			curr = curr.prevtop;
+		}
+		return null;
+	}
+
+	public boolean inFuncScope() {
+		SYMBOL_TABLE_ENTRY curr = top;
+
+		while (curr != null) {
+			if (curr.name.startsWith("SCOPE-BOUNDARY-func"))
 				return true;
 
-			e = e.prevtop;
+			curr = curr.prevtop;
 		}
 		return false;
 	}
 
+	public TYPE findInFuncScope(String name) {
+		SYMBOL_TABLE_ENTRY curr = top;
+		// TYPE res = null;
+		while (curr != null && !curr.name.startsWith("SCOPE-BOUNDARY-func")) {
+			if (curr.name.equals(name)) {
+				return curr.type;
+			}
+			curr = curr.prevtop;
+		}
+		return null;
+	}
+
 	// assumes stack is currently inside a class
 	public TYPE findInClassScope(String name) {
-		SYMBOL_TABLE_ENTRY e = top;
+		SYMBOL_TABLE_ENTRY curr = top;
 		TYPE res = null;
 
-		while (e != null && !e.name.startsWith("SCOPE-class")) {
-			if (e.name.equals(name)) {
-				res = e.type;
+		while (curr != null && !curr.name.startsWith("SCOPE-BOUNDARY-class")) {
+			if (curr.name.equals(name)) {
+				res = curr.type;
 			}
-			e = e.prevtop;
+			curr = curr.prevtop;
 		}
 		return res;
 	}
 
-	public TYPE findInFuncScope(String name) {
-		SYMBOL_TABLE_ENTRY e = top;
-		// TYPE res = null;
-		while (e != null && !e.name.startsWith("SCOPE-func")) {
-			if (e.name.equals(name)) {
-				return e.type;
-			}
-			e = e.prevtop;
-		}
-		return null;
-	}
-	
-	public String getFatherClassName(String className) {
-		SYMBOL_TABLE_ENTRY e = top;
-		while (e != null) {
-			if (e.name.startsWith("SCOPE-class")) {
-				String[] splited = e.name.split("-");
-				if (splited.length > 4 && splited[2].equals(className))
-					return e.name.split("-")[4];
-				return null;
-			}
-			e = e.prevtop;
-		}
-		return null;
-	}
+	public TYPE findInCurrScope(String name) {
+		SYMBOL_TABLE_ENTRY curr = top;
+		TYPE res = null;
 
-	public TYPE findClass(String name) {
-		SYMBOL_TABLE_ENTRY a = top;
-		while (a.name != null) {
-			if (a.name.equals(name))
-				return a.type;
-			if (a.name.startsWith("SCOPE-class"))
-				if (a.name.split("-")[3].equals(name))
-					return new TYPE_CLASS(null, name, null, null);
-			a = a.prevtop;
+		while (curr != null && !curr.name.startsWith("SCOPE-BOUNDARY")) {
+			if (curr.name.equals(name)) {
+				res = curr.type;
+			}
+			curr = curr.prevtop;
 		}
-		return null;
+		return res;
 	}
 
 	public int findFunc(String returnType) {
 		SYMBOL_TABLE_ENTRY a = top;
 		AST_TYPE_VOID af = new AST_TYPE_VOID(-1);
 		while (a != null) {
-			if (a.name.startsWith("SCOPE-func")) {
+			if (a.name.startsWith("SCOPE-BOUNDARY-func")) {
 				String[] splited = a.name.split("-");
 				if (splited[splited.length - 1].equals(returnType))
 					return 1;
@@ -387,7 +397,7 @@ public class SYMBOL_TABLE {
 					// wasnot declare
 
 					{
-						String f = getFatherClassName(name.name);
+						String f = findExtendsClass(name.name);
 						TYPE_CLASS ex = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(f);
 						fa = ex.father;
 						while (fa != null) {
@@ -401,7 +411,7 @@ public class SYMBOL_TABLE {
 				}
 
 			}
-			if (a.name.startsWith("SCOPE-class"))
+			if (a.name.startsWith("SCOPE-BOUNDARY-class"))
 				return 0;
 
 			a = a.prevtop;
@@ -409,7 +419,7 @@ public class SYMBOL_TABLE {
 		return 0;
 	}
 
-	public TYPE getFuncIfParamsMatch(String name, AST_EXP_LIST params) {
+	public TYPE isRealFunc(String name, AST_EXPLIST params) {
 		SYMBOL_TABLE_ENTRY a = top;
 		while (a != null && a.name != null) {
 			if (a.type.isFunc()) {
@@ -425,7 +435,7 @@ public class SYMBOL_TABLE {
 				 * check if the parameters match
 				 */
 				TYPE_LIST l = ((TYPE_FUNCTION) a.type).params;
-				for (AST_EXP_LIST it = params; it != null; it = it.tail) {
+				for (AST_EXPLIST it = params; it != null; it = it.tail) {
 					if (l == null)
 						return null;
 
@@ -456,9 +466,9 @@ public class SYMBOL_TABLE {
 		return null;
 	}
 
-	public TYPE checkFuncParams(TYPE_FUNCTION realFunc, AST_EXP_LIST params, int line) {
+	public TYPE compareFuncs(TYPE_FUNCTION realFunc, AST_EXPLIST params, int line) {
 		TYPE_LIST args = realFunc.params;
-		for (AST_EXP_LIST it = params; it != null; it = it.tail) {
+		for (AST_EXPLIST it = params; it != null; it = it.tail) {
 			if (args == null)
 				return null;
 
@@ -479,23 +489,35 @@ public class SYMBOL_TABLE {
 		return null;
 	}
 
-	public void removeNonClassScopeEntries() {
+	public void cleanGarbage() {
 		/**************************************************************************/
 		/*
-		 * Pop elements from the symbol table stack until a SCOPE-class is hit
+		 * Pop elements from the symbol table stack until a SCOPE-BOUNDARY-class is hit
 		 */
 		/**************************************************************************/
-		while (!(top.name.startsWith("SCOPE-class"))) {
+		while (!(top.name.startsWith("SCOPE-BOUNDARY-class"))) {
 			table[top.index] = top.next;
 			top_index = top_index - 1;
 			top = top.prevtop;
 		}
 		/**************************************/
-		/* Pop the SCOPE sign itself */
+		/* Pop the SCOPE-BOUNDARY sign itself */
 		/**************************************/
 		table[top.index] = top.next;
 		top_index = top_index - 1;
 		top = top.prevtop;
 	}
 
+	public TYPE findClass(String name) {
+		SYMBOL_TABLE_ENTRY a = top;
+		while (a.name != null) {
+			if (a.name.equals(name))
+				return a.type;
+			if (a.name.startsWith("SCOPE-BOUNDARY-class"))
+				if (a.name.split("-")[3].equals(name))
+					return new TYPE_CLASS(null, name, null, null);
+			a = a.prevtop;
+		}
+		return null;
+	}
 }

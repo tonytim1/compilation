@@ -75,7 +75,7 @@ public class AST_STMT_WHILE extends AST_STMT {
 
 		SYMBOL_TABLE.getInstance().endScope();
 
-		inFunc = SYMBOL_TABLE.getInstance().getFuncScope();
+		inFunc = SYMBOL_TABLE.getInstance().inFuncScope();
 
 		return TYPE_INT.getInstance();
 	}

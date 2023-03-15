@@ -1,13 +1,13 @@
 package TYPES;
 
 public class TYPE_ARRAY extends TYPE {
-  public TYPE type;
+  public TYPE entryType;
 
   /****************/
   /* CTROR(S) ... */
   /****************/
-  public TYPE_ARRAY(TYPE type, String name) {
-    this.type = type;
+  public TYPE_ARRAY(TYPE entryType, String name) {
+    this.entryType = entryType;
     this.name = name;
   }
   public boolean isArray(){ return true;}
