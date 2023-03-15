@@ -38,7 +38,7 @@ public class AST_BINOP extends AST_Node {
         }
         this.leftType = t1; 
         if (number >= 6 )         {
-            if (type_equals(t1, t2) || type_equals(t2, t1))                 return TYPE_INT.getInstance();
+            if (areTypesAssinable(t1, t2) || areTypesAssinable(t2, t1))                 return TYPE_INT.getInstance();
 
             if ((t1 == TYPE_INT.getInstance()) || (t2 == TYPE_STRING.getInstance()) ||
                     (t1 == TYPE_STRING.getInstance()) || (t2 == TYPE_INT.getInstance()))             {

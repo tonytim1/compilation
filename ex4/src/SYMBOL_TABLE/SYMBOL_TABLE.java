@@ -358,7 +358,7 @@ public class SYMBOL_TABLE {
                 return null;
 
             TYPE paramType = it.head.SemantMe();
-            if (!(params.type_equals(argType, paramType)))
+            if (!(params.areTypesAssinable(argType, paramType)))
                 return null;
 
             args = args.tail;

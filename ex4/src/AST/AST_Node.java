@@ -37,11 +37,11 @@ public abstract class AST_Node {
 		return null;
 	}
 
-	public TEMP_LIST IRme(int ignore) {
+	public TEMP IRme() {
 		return null;
 	}
 
-	public TEMP IRme() {
+	public TEMP_LIST IRme(int ignore) {
 		return null;
 	}
 
@@ -63,7 +63,7 @@ public abstract class AST_Node {
 		}
 	}
 
-	public boolean type_equals(TYPE t1, TYPE t2) {
+	public boolean areTypesAssinable(TYPE t1, TYPE t2) {
 				if (t1 == t2) {
 			return true;
 		}
@@ -79,7 +79,7 @@ public abstract class AST_Node {
 
 				if (t1.isArray() && t2.isArray()) {
 						return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).entryType.name + "[]")
-					|| type_equals(((TYPE_ARRAY) t1).entryType, ((TYPE_ARRAY) t2).entryType);
+					|| areTypesAssinable(((TYPE_ARRAY) t1).entryType, ((TYPE_ARRAY) t2).entryType);
 		}
 
 				if (t1.isClass() && t2.isClass() && t1.name.equals(t2.name))
@@ -111,7 +111,7 @@ public abstract class AST_Node {
 		return false;
 	}
 
-	public TYPE funcSig(String id, AST_EXP_LIST list, int line) {
+	public TYPE funcType(String id, AST_EXP_LIST list, int line) {
 		TYPE type = SYMBOL_TABLE.getInstance().isRealFunc(id, list);
 
 		if (type == null) {
@@ -137,7 +137,7 @@ public abstract class AST_Node {
 		if (SYMBOL_TABLE.getInstance().inClassScope() != null &&
 				SYMBOL_TABLE.getInstance().inClassScope().equals(className)) { 																																							TYPE f = SYMBOL_TABLE.getInstance().findInClassScope(funcName);
 			if (f instanceof TYPE_FUNCTION)
-				return funcSig(funcName, funcArgs, line);
+				return funcType(funcName, funcArgs, line);
 						String extendClass = SYMBOL_TABLE.getInstance().findExtendsClass(className);
 			if (extendClass != null) {
 				TYPE_CLASS father = (TYPE_CLASS) (SYMBOL_TABLE.getInstance().find(className));
@@ -229,7 +229,7 @@ public abstract class AST_Node {
 		}
 	}
 
-	public TEMP vardotIR(AST_VAR var, AST_EXP_LIST list, TYPE_CLASS tl, String id) {
+	public TEMP varIdExpIRme(AST_VAR var, AST_EXP_LIST list, TYPE_CLASS tl, String id) {
 		TEMP varAddress = var.IRme();
 		TEMP_LIST resTempsList = null;
 

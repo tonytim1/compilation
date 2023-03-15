@@ -38,7 +38,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
             printError(line);
     }
 
-    if (!(type_equals(t1, t2))) {
+    if (!(areTypesAssinable(t1, t2))) {
       System.out.format(">> ERROR [%d] type mismatch for type id = newExp; --- %s %s (stmt_newexp)\n", line, t1.name,
           t2.name);
       printError(this.line);

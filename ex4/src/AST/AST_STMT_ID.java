@@ -20,7 +20,7 @@ public class AST_STMT_ID extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    TYPE t = funcSig(id, null, this.line);
+    TYPE t = funcType(id, null, this.line);
 
     this.func = (TYPE_FUNCTION) (SYMBOL_TABLE.getInstance().find(id));
 

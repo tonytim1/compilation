@@ -36,7 +36,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 		t1 = findType(type.typeName);
 		t2 = exp.SemantMe();
 
-		if (t1 == null || !(type_equals(t1, t2)) || t1 instanceof TYPE_VOID || t1 instanceof TYPE_NIL) {
+		if (t1 == null || !(areTypesAssinable(t1, t2)) || t1 instanceof TYPE_VOID || t1 instanceof TYPE_NIL) {
 			String tname = "non-existing";
 			if (t1 != null)
 				tname = t1.name;

@@ -49,6 +49,6 @@ public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
 
 	public TEMP IRme()
 	{
-		return vardotIR(var, list, tl, id);
+		return varIdExpIRme(var, list, tl, id);
 	}
 }

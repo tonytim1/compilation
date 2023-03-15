@@ -22,7 +22,7 @@ public class AST_EXP_ID extends AST_EXP {
   
 
   public TYPE SemantMe() {
-    TYPE t = funcSig(id, null, this.line);
+    TYPE t = funcType(id, null, this.line);
 
     this.func = (TYPE_FUNCTION) (SYMBOL_TABLE.getInstance().find(id));
 

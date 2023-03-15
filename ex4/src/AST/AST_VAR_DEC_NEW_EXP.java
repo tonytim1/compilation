@@ -37,7 +37,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
             printError(this.line);
     }
 
-    if (!(type_equals(t1, t2))) {
+    if (!(areTypesAssinable(t1, t2))) {
       System.out.format(">> ERROR [%d] type mismatch for type id = newExp;  --- %s %s  (vardec_newexp)\n", line,
           t1.name, t2.name);
       printError(this.line);

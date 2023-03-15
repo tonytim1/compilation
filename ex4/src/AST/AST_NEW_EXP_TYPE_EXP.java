@@ -35,7 +35,7 @@ public class AST_NEW_EXP_TYPE_EXP extends AST_NEW_EXP {
             printError(line);
     }
 
-    if (!type_equals(t2, TYPE_INT.getInstance())) {
+    if (!areTypesAssinable(t2, TYPE_INT.getInstance())) {
             printError(this.line);
     }
 

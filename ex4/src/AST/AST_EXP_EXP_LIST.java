@@ -25,7 +25,7 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
 
   public TYPE SemantMe() {
 
-    TYPE t = funcSig(id, list, this.line);
+    TYPE t = funcType(id, list, this.line);
 
     this.func = (TYPE_FUNCTION) (SYMBOL_TABLE.getInstance().find(id));
 

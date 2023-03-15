@@ -35,6 +35,6 @@ public class AST_STMT_VAR_ID extends AST_STMT {
 
   public TEMP IRme()
   {
-    return vardotIR(var, null, tl, id);
+    return varIdExpIRme(var, null, tl, id);
   }
 }

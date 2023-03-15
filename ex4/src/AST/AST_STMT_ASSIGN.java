@@ -40,7 +40,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 						printError(line);
 		}
 
-		if (!(type_equals(t1, t2))) {
+		if (!(areTypesAssinable(t1, t2))) {
 						printError(this.line);
 		}
 
