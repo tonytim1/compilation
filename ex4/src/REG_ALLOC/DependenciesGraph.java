@@ -10,9 +10,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
-
-import TEMP.*;
-import MIPS.*;
 /*******************/
 /* PROJECT IMPORTS */
 
@@ -31,6 +28,7 @@ public class DependenciesGraph {
             this.register = null;
         }
     }
+
     HashSet<node> graphNodes = new HashSet<node>();
     HashSet<node> allNodes = new HashSet<node>();
 
@@ -56,7 +54,7 @@ public class DependenciesGraph {
                 }
                 res.neighborsCount = res.neighbors.size();
             }
-            curr = curr.direct;
+            curr = curr.direction;
         }
     }
 
@@ -69,9 +67,5 @@ public class DependenciesGraph {
             }
         }
         return null;
-    }
-
-    public Boolean isEmpty() {
-        return this.graphNodes.isEmpty();
     }
 }
