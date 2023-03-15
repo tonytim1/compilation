@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class AST_CLASSDEC_SIMPLE extends AST_CLASSDEC {
+public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_CLASSDEC_SIMPLE(String id, AST_CFEILD_LIST data_members, int line) {
+  public AST_CLASS_DEC_SIMPLE(String id, AST_CFEILD_LIST data_members, int line) {
     this.data_members = data_members;
     this.id = id;
     this.line = line;

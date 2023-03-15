@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class AST_CLASSDEC_EXTENDS extends AST_CLASSDEC {
+public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 	String fatherName;
 
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_CLASSDEC_EXTENDS(String id1, String id2, AST_CFEILD_LIST l, int line) {
+	public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_CFEILD_LIST l, int line) {
 		this.id = id1;
 		this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(id2);
 		this.fatherName = id2;

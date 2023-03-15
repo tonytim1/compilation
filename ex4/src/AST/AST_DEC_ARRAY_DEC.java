@@ -3,13 +3,13 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_DEC_ATD extends AST_DEC {
+public class AST_DEC_ARRAY_DEC extends AST_DEC {
   public AST_ATD array;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_DEC_ATD(AST_ATD array) {
+  public AST_DEC_ARRAY_DEC(AST_ATD array) {
     this.array = array;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */

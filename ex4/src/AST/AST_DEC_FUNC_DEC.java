@@ -3,13 +3,13 @@ package AST;
 import TEMP.TEMP;
 import TYPES.*;
 
-public class AST_DEC_FUNCDEC extends AST_DEC {
+public class AST_DEC_FUNC_DEC extends AST_DEC {
   public AST_FUNCDEC func;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_DEC_FUNCDEC(AST_FUNCDEC func) {
+  public AST_DEC_FUNC_DEC(AST_FUNCDEC func) {
     this.func = func;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
