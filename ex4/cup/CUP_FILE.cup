@@ -133,7 +133,7 @@ non terminal AST_TYPE type;
 non terminal AST_ATD arrayTypedef;
 non terminal AST_VARDEC varDec;
 non terminal AST_FUNCDEC funcDec;
-non terminal AST_CLASSDEC classDec;
+non terminal AST_CLASS_DEC classDec;
 non terminal AST_CFIELD cField;
 non terminal AST_NEWEXP newExp;
 non terminal AST_DEC_LIST decList;
@@ -167,13 +167,21 @@ start with Program;
 /* DERIVATION RULES */
 /********************/
 
+Program ::=		decList:p													{: RESULT = new AST_PROGRAM(p, parser.file); :};
+
+decList ::=		dec:d decList:l												{: RESULT = new AST_DEC_LIST(d, l); :}
+				| dec:d														{: RESULT = new AST_DEC_LIST(d, null); :}
+				;
+
+dec ::=			varDec:v 													{: RESULT = new AST_DEC_VAR_DEC(v); :}
+				| funcDec:f 												{: RESULT = new AST_DEC_FUNC_DEC(f); :}
+				| classDec:c 												{: RESULT = new AST_DEC_CLASS_DEC(c); :}
+				| arrayTypedef:a											{: RESULT = new AST_DEC_ARRAY_DEC(a); :}
+				;
+
 stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
 					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
 					;
-
-decList	::=		dec:d	decList:l			{: RESULT = new AST_DEC_LIST(d,l);    :}
-				| dec:d						{: RESULT = new AST_DEC_LIST(d,null); :}
-				;
 
 cFieldList	::=		cField:c cFieldList:l {: RESULT = new AST_CFEILD_LIST(c,l);    :}
 						| cField:c  {: RESULT = new AST_CFEILD_LIST(c,null);    :}
@@ -183,12 +191,10 @@ cField 		::= 	varDec:vd 				{: RESULT = new AST_CFEILD_VARDEC(vd);  :}
 					| funcDec:fd			{: RESULT = new AST_CFEILD_FUNCDEC(fd); :}
 					;
 
-Program	::= decList:p					{: RESULT= new AST_PROGRAM(p, parser.file) ;:};
-
-dec ::= varDec:v 				{: RESULT= new AST_DEC_VARDEC(v);	:}
-		| funcDec:f 			{: RESULT=  new AST_DEC_FUNCDEC(f); :}
-		| classDec:c 			{: RESULT=new AST_DEC_CLASSDEC(c)  ;:}
-		| arrayTypedef:a		{: RESULT=new AST_DEC_ATD(a)  ;     :}
+dec ::= varDec:v 				{: RESULT= new AST_DEC_VAR_DEC(v);	:}
+		| funcDec:f 			{: RESULT=  new AST_DEC_FUNC_DEC(f); :}
+		| classDec:c 			{: RESULT=new AST_DEC_CLASS_DEC(c)  ;:}
+		| arrayTypedef:a		{: RESULT=new AST_ARRAY_TYPE_DEF(a)  ;     :}
 		;
 
 type  ::= 	TYPE_INT:t 				{: RESULT= new AST_TYPE_INT(tleft + 1)  ;:}
@@ -214,8 +220,8 @@ argList ::= arg:a										{: RESULT = new AST_ARG_LIST(a,null); :}
 				| arg:a COMMA argList:l 		{: RESULT = new AST_ARG_LIST(a,l); :}
 				;
 							
-classDec 	::= 	CLASS ID:id LBRACE cFieldList:cl RBRACE 		  {: RESULT= new AST_CLASSDEC_SIMPLE(id, cl,idleft +1); :}
-					| CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE {: RESULT= new AST_CLASSDEC_EXTENDS(id1, id2, cl,id1left +1);  :}
+classDec 	::= 	CLASS ID:id LBRACE cFieldList:cl RBRACE 		  {: RESULT= new AST_CLASS_DEC_SIMPLE(id, cl,idleft +1); :}
+					| CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE {: RESULT= new AST_CLASS_DEC_EXTENDS(id1, id2, cl,id1left +1);  :}
 					; 
 
 exp			::=		var:v									 		 {: RESULT = new AST_EXP_VAR(v);          			   :}

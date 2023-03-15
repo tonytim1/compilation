@@ -3,7 +3,7 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_DEC_VARDEC extends AST_DEC {
+public class AST_DEC_VAR_DEC extends AST_DEC {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
@@ -12,7 +12,7 @@ public class AST_DEC_VARDEC extends AST_DEC {
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_DEC_VARDEC(AST_VARDEC v) {
+	public AST_DEC_VAR_DEC(AST_VARDEC v) {
 		this.v = v;
 
 		/******************************/
