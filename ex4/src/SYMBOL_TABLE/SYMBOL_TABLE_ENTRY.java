@@ -1,16 +1,7 @@
-/***********/
-/* PACKAGE */
-/***********/
 package SYMBOL_TABLE;
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TYPES.*;
 
-/**********************/
-/* SYMBOL TABLE ENTRY */
-/**********************/
 public class SYMBOL_TABLE_ENTRY
 {
 	/*********/

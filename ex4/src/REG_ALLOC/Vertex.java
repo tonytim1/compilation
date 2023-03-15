@@ -1,18 +1,9 @@
-/***********/
-/* PACKAGE */
-/***********/
 package REG_ALLOC;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
 import java.util.HashSet;
 
 import IR.*;
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 public class Vertex {
     Vertex father;     Vertex direction;     Vertex vertex2;
     int time;    IRcommand line;

@@ -1,6 +1,3 @@
-/***********/
-/* PACKAGE */
-/***********/
 package AST;
 import TYPES.*;
 

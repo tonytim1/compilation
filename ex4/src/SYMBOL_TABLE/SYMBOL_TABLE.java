@@ -1,17 +1,8 @@
-/***********/
-/* PACKAGE */
-/***********/
 package SYMBOL_TABLE;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
 import java.io.PrintWriter;
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TYPES.*;
 import AST.*;
 

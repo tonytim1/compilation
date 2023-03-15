@@ -1,17 +1,8 @@
-/***********/
-/* PACKAGE */
-/***********/
 package MIPS;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import IR.*;
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 import IR.*;
 
