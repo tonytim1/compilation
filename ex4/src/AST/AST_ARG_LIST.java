@@ -19,12 +19,4 @@ public class AST_ARG_LIST extends AST_Node {
 
   }
 
-  
-
-  public void printArgList() {
-    AST_ARG_LIST data_members = this;
-    for (AST_ARG_LIST it = data_members; it != null; it = it.tail) {
-      System.out.print(it.head.t.typeName + ", " + it.head.id + " ");
-    }
-  }
 }
