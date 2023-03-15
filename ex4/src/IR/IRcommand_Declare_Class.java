@@ -21,6 +21,6 @@ public class IRcommand_Declare_Class extends IRcommand {
 
 	public void MIPSme() {
 		System.out.println("IRcommand_Declare_Class" + "- MIPSme");
-		MIPSGenerator.getInstance().declare_class(class_name, funcs, fs);
+		MIPSGenerator.getInstance().create_new_class(class_name, funcs, fs);
 	}
 }
