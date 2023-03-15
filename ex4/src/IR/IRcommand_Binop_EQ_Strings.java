@@ -14,9 +14,6 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop {
-	//public TEMP t1;
-	//public TEMP t2;
-	//public TEMP dst;
 
 	public IRcommand_Binop_EQ_Strings(TEMP dst, TEMP t1, TEMP t2) {
 		this.dst = dst;
@@ -30,10 +27,10 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop {
 	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Binop_EQ_Strings" + "- MIPSme");
-		String l0 = IRcommand.getFreshLabel("eq_string_loop");
-		String l1 = IRcommand.getFreshLabel("eq_string_no");
-		String l2 = IRcommand.getFreshLabel("eq_string_end");
-		String[] labels = { l0, l1, l2 };
+		String label0 = IRcommand.getFreshLabel("loop");
+		String label1 = IRcommand.getFreshLabel("no");
+		String label2 = IRcommand.getFreshLabel("end");
+		String[] labels = { label0, label1, label2 };
 
 		MIPSGenerator.getInstance().eq_strings(dst, t1, t2, labels);
 	}
