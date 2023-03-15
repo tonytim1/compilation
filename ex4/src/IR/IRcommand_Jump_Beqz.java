@@ -17,7 +17,7 @@ public class IRcommand_Jump_Beqz extends IRcommand_Conditional_Jump {
 	public IRcommand_Jump_Beqz(TEMP t, String label) {
 		this.op1 = t;
 		this.label = label;
-		changeName("IRcommand_Conditional_Jump");
+		UpdateIRName("IRcommand_Conditional_Jump");
 	}
 
 	/***************/

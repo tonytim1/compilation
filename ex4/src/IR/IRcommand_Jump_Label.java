@@ -18,7 +18,7 @@ public class IRcommand_Jump_Label extends IRcommand_Conditional_Jump {
 
 	public IRcommand_Jump_Label(String label) {
 		this.label = label;
-		changeName("IRcommand_Conditional_Jump");
+		UpdateIRName("IRcommand_Conditional_Jump");
 	}
 
 	/***************/

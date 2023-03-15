@@ -22,7 +22,7 @@ public class IRcommand_Const_String extends IRcommand_Assign {
 		this.dst = dst;
 		this.label = label;
 		this.val = value;
-		changeName("IRcommand_Assign");
+		UpdateIRName("IRcommand_Assign");
 	}
 
 	/***************/

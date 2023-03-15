@@ -23,7 +23,7 @@ public class IRcommand_Binop_Concat_Strings extends IRcommand_Binop {
     this.dst = dst;
     this.t1 = t1;
     this.t2 = t2;
-    changeName("IRcommand_Binop");
+    UpdateIRName("IRcommand_Binop");
   }
 
   /***************/

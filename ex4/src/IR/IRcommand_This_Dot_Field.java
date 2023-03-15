@@ -15,11 +15,12 @@ import MIPS.*;
 
 public class IRcommand_This_Dot_Field extends IRcommand {
 	public TEMP dst;
+	public boolean regalloc;
 	String name;
-	public boolean cfg = false;
 
 	// this.field
 	public IRcommand_This_Dot_Field(String Fname, TEMP dst) {
+	    this.regalloc = false;
 		this.dst = dst;
 		this.name = Fname;
 

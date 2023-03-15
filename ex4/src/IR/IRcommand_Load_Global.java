@@ -19,7 +19,7 @@ public class IRcommand_Load_Global extends IRcommand_Assign {
 	public IRcommand_Load_Global(TEMP dst, String name) {
 		this.dst = dst;
 		this.label = name;
-		changeName("IRcommand_Assign");
+		UpdateIRName("IRcommand_Assign");
 	}
 
 	/***************/

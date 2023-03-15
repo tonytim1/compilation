@@ -20,7 +20,7 @@ public class IRcommand_Const_Int extends IRcommand_Assign {
 	public IRcommand_Const_Int(TEMP t, int value) {
 		this.dst = t;
 		this.val = value;
-		changeName("IRcommand_Assign");
+		UpdateIRName("IRcommand_Assign");
 	}
 
 	/***************/
