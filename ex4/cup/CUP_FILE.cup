@@ -260,12 +260,12 @@ newExp ::=		NEW type:t 							 						{: RESULT = new AST_NEW_EXP_TYPE(t, tleft +
 				| NEW type:t LBRACK exp:e RBRACK 	 						{: RESULT = new AST_NEW_EXP_TYPE_EXP(t, e, tleft + 1); :}
 				;
 
-BINOP ::=		exp:e1 PLUS exp:e2 											{: RESULT = new AST_BINOP(1, e1, e2, e1left + 1); :}	
-				| exp:e1 MINUS exp:e2										{: RESULT = new AST_BINOP(2, e1, e2, e1left + 1); :}
-				| exp:e1 TIMES exp:e2 										{: RESULT = new AST_BINOP(3, e1, e2, e1left + 1); :}
-				| exp:e1 DIVIDE exp:e2										{: RESULT = new AST_BINOP(4, e1, e2, e1left + 1); :}
-				| exp:e1 GT exp:e2											{: RESULT = new AST_BINOP(5, e1, e2, e1left + 1); :}
-				| exp:e1 LT exp:e2											{: RESULT = new AST_BINOP(6, e1, e2, e1left + 1); :}
-				| exp:e1 EQ exp:e2											{: RESULT = new AST_BINOP(7, e1, e2, e1left + 1); :}
-				| exp:e1 NE exp:e2             								{: RESULT = new AST_BINOP(8, e1, e2, e1left + 1); :}
+BINOP ::=		exp:e1 PLUS exp:e2 											{: RESULT = new AST_BINOP(0, e1, e2, e1left + 1); :}	
+				| exp:e1 MINUS exp:e2										{: RESULT = new AST_BINOP(1, e1, e2, e1left + 1); :}
+				| exp:e1 TIMES exp:e2 										{: RESULT = new AST_BINOP(2, e1, e2, e1left + 1); :}
+				| exp:e1 DIVIDE exp:e2										{: RESULT = new AST_BINOP(3, e1, e2, e1left + 1); :}
+				| exp:e1 GT exp:e2											{: RESULT = new AST_BINOP(4, e1, e2, e1left + 1); :}
+				| exp:e1 LT exp:e2											{: RESULT = new AST_BINOP(5, e1, e2, e1left + 1); :}
+				| exp:e1 EQ exp:e2											{: RESULT = new AST_BINOP(6, e1, e2, e1left + 1); :}
+				| exp:e1 NE exp:e2             								{: RESULT = new AST_BINOP(7, e1, e2, e1left + 1); :}
 				;
