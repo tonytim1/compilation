@@ -79,7 +79,7 @@ public class AST_STMT_IF extends AST_STMT {
 
     SYMBOL_TABLE.getInstance().endScope();
 
-    infunc = SYMBOL_TABLE.getInstance().inFuncScope();
+    infunc = SYMBOL_TABLE.getInstance().getFuncScope();
 
     return TYPE_INT.getInstance();
   }

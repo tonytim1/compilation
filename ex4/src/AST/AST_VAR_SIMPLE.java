@@ -49,10 +49,10 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 	}
 
 	public TYPE SemantMe() {
-		TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(name);
+		TYPE res = SYMBOL_TABLE.getInstance().findInScope(name);
 		if (res != null && SYMBOL_TABLE.getInstance().getScope().equals("global"))
 			inGlobal = 1;
-		className = SYMBOL_TABLE.getInstance().inClassScope();
+		className = SYMBOL_TABLE.getInstance().getClassScope();
 		if (res == null) {
 			// if class wasnt declared yet
 			TYPE fieldType = SYMBOL_TABLE.getInstance().findInClassScope(name);
@@ -61,11 +61,11 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 
 			// inheritance case
 			else if (className != null) {
-				String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(className);
+				String fatherName = SYMBOL_TABLE.getInstance().getFatherClassName(className);
 				if (fatherName != null) {
 					TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName);
 					while (fatherClass != null) {
-						for (AST_ARG_LIST it = fatherClass.data_members; it != null; it = it.tail) {
+						for (AST_ARG_LIST it = fatherClass.fields; it != null; it = it.tail) {
 							if (it.head.id.equals(name)) {
 								String resName = it.head.t.typeName;
 								return res = SYMBOL_TABLE.getInstance().find(resName);
@@ -80,7 +80,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 		}
 
 		if (res == null) {
-			boolean s = SYMBOL_TABLE.getInstance().inFuncScope();
+			boolean s = SYMBOL_TABLE.getInstance().getFuncScope();
 			if (s)
 				res = SYMBOL_TABLE.getInstance().findInFuncScope(name);
 

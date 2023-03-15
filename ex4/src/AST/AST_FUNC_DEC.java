@@ -135,14 +135,14 @@ public class AST_FUNC_DEC extends AST_Node {
 
     // check you dont overwrite class func
     boolean flag = true;
-    className = SYMBOL_TABLE.getInstance().inClassScope();
+    className = SYMBOL_TABLE.getInstance().getClassScope();
     if (className != null) {
-      String father = SYMBOL_TABLE.getInstance().findExtendsClass(className);
+      String father = SYMBOL_TABLE.getInstance().getFatherClassName(className);
       if (father != null) {
         TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(father);
         while (fatherClass != null && flag) {
-          AST_TYPE_NAME_LIST funcs = fatherClass.functions;
-          for (AST_TYPE_NAME_LIST it = funcs; it != null; it = it.tail) {
+          AST_FUNC_LIST funcs = fatherClass.functions;
+          for (AST_FUNC_LIST it = funcs; it != null; it = it.tail) {
             TYPE_FUNCTION currF = (TYPE_FUNCTION) it.head.type;
             if (currF.name.equals(id)) {
               if (!(currF.returnType.name.equals(returnTypeType.name))) {

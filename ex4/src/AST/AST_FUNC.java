@@ -8,7 +8,7 @@ package AST;
 /*******************/
 import TYPES.*;
 
-public class AST_TYPE_NAME extends AST_Node {
+public class AST_FUNC extends AST_Node {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
@@ -18,7 +18,7 @@ public class AST_TYPE_NAME extends AST_Node {
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_TYPE_NAME(TYPE type, String name) {
+	public AST_FUNC(TYPE type, String name) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

@@ -101,7 +101,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
       printError(this.line);
     }
 
-    TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(id);
+    TYPE res = SYMBOL_TABLE.getInstance().findInScope(id);
     if (res != null) {
       System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
       printError(this.line);

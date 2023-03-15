@@ -71,7 +71,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     /*************************/
     /* [1] Begin Class Scope */
     /*************************/
-    TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
+    TYPE isExist = SYMBOL_TABLE.getInstance().findInScope(id);
     if (isExist != null) { // already has a varible with the same name
       System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
           line);
@@ -83,7 +83,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     /* [2] Semant Data Members */
     /***************************/
     AST_ARG_LIST fields = null;
-    AST_TYPE_NAME_LIST funcs = null;
+    AST_FUNC_LIST funcs = null;
     TYPE t = null;
 
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
@@ -114,15 +114,15 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
       }
 
       if (it.head instanceof AST_C_FIELD_FUNC_DEC) {
-        AST_TYPE_NAME curr = new AST_TYPE_NAME(t, ((AST_C_FIELD_FUNC_DEC) it.head).func.id);
-        funcs = new AST_TYPE_NAME_LIST(curr, funcs);
+        AST_FUNC curr = new AST_FUNC(t, ((AST_C_FIELD_FUNC_DEC) it.head).func.id);
+        funcs = new AST_FUNC_LIST(curr, funcs);
       }
     }
 
     /*****************/
     /* [3] End Scope */
     /*****************/
-    SYMBOL_TABLE.getInstance().cleanGarbage();
+    SYMBOL_TABLE.getInstance().removeNonClassScopeEntries();
     TYPE_CLASS classType = new TYPE_CLASS(father, id, fields, funcs);
     SYMBOL_TABLE.getInstance().enter(id, classType);
     SYMBOL_TABLE.getInstance().beginScope("class-" + id);

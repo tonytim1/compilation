@@ -16,8 +16,7 @@ public class TYPE_LIST {
 		this.head = head;
 		this.tail = tail;
 
-		String headName = head.name;
-		this.name = "TYPE_LIST(" + headName;
+		this.name = "TYPE_LIST(" + head.name;
 
 		for (TYPE_LIST it = tail; it != null; it = it.tail) {
 			String currName = it.head.name;

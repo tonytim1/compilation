@@ -91,10 +91,10 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
       printError(this.line);
     }
 
-    if (var instanceof AST_VAR_SIMPLE && SYMBOL_TABLE.getInstance().inFuncScope()) {
+    if (var instanceof AST_VAR_SIMPLE && SYMBOL_TABLE.getInstance().getFuncScope()) {
       scope = SYMBOL_TABLE.getInstance().findInFuncScope(((AST_VAR_SIMPLE) var).name);
     }
-    inclass = SYMBOL_TABLE.getInstance().inClassScope();
+    inclass = SYMBOL_TABLE.getInstance().getClassScope();
 
     return null;
   }

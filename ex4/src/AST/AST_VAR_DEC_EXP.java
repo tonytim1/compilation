@@ -94,15 +94,15 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 		/******************************************************/
 		/* [1] check if variable is already declared in scope */
 		/******************************************************/
-		TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(id);
+		TYPE res = SYMBOL_TABLE.getInstance().findInScope(id);
 		if (res != null) {
 			System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
 			printError(this.line);
 		}
 
-		class_name = SYMBOL_TABLE.getInstance().inClassScope();
+		class_name = SYMBOL_TABLE.getInstance().getClassScope();
 		scope = SYMBOL_TABLE.getInstance().getScope();
-		inFunc = SYMBOL_TABLE.getInstance().inFuncScope();
+		inFunc = SYMBOL_TABLE.getInstance().getFuncScope();
 		if (scope.equals("class") && !(exp instanceof AST_EXP_INT ||
 				exp instanceof AST_EXP_NIL ||
 				exp instanceof AST_EXP_STRING ||

@@ -74,7 +74,7 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
       printError(line);
     }
 
-    TYPE t2 = SYMBOL_TABLE.getInstance().findInCurrScope(id);
+    TYPE t2 = SYMBOL_TABLE.getInstance().findInScope(id);
     if (t2 != null) {
       System.out.format(">> [%d] ERROR variable " + id + " already exist exist", line);
       printError(line);
@@ -87,8 +87,8 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
 
     SYMBOL_TABLE.getInstance().enter(id, t1);
     scope = SYMBOL_TABLE.getInstance().getScope();
-    inclass = SYMBOL_TABLE.getInstance().inClassScope();
-    inFunc = SYMBOL_TABLE.getInstance().inFuncScope();
+    inclass = SYMBOL_TABLE.getInstance().getClassScope();
+    inFunc = SYMBOL_TABLE.getInstance().getFuncScope();
     return t1;
   }
 
