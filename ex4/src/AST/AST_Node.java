@@ -12,11 +12,6 @@ import java.util.HashMap;
 import java.io.PrintWriter;
 
 public abstract class AST_Node {
-	/*******************************************/
-	/* The serial number is for debug purposes */
-	/* In particular, it can help in creating */
-	/* a graphviz dot format of the AST ... */
-	/*******************************************/
 	public String typeName;
 	public int SerialNumber;
 	public int line;
@@ -31,10 +26,7 @@ public abstract class AST_Node {
 	public static Map<String, Map<String, Integer>> classFuncsOff = new HashMap<>();
 
 
-	/***********************************************/
 
-	/* The default message for an unknown AST node */
-	/***********************************************/
 	
 
 	public TYPE SemantMe() {

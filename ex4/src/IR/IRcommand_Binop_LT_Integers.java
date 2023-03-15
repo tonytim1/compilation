@@ -13,22 +13,24 @@ public class IRcommand_Binop_LT_Integers extends IRcommand_Binop {
 		UpdateIRName("IRcommand_Binop");
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Binop_LT_Integers" + "- MIPSme");
+
 		String label_end = getFreshLabel("end");
 		String label_AssignOne = getFreshLabel("AssignOne");
 		String label_AssignZero = getFreshLabel("AssignZero");
+
 		MIPSGenerator.getInstance().blt(t1, t2, label_AssignOne);
 		MIPSGenerator.getInstance().bge(t1, t2, label_AssignZero);
+
 		MIPSGenerator.getInstance().label(label_AssignOne);
 		MIPSGenerator.getInstance().li(dst, 1);
 		MIPSGenerator.getInstance().jump(label_end);
+
 		MIPSGenerator.getInstance().label(label_AssignZero);
 		MIPSGenerator.getInstance().li(dst, 0);
 		MIPSGenerator.getInstance().jump(label_end);
+
 		MIPSGenerator.getInstance().label(label_end);
 	}
 }

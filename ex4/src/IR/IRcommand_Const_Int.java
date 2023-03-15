@@ -13,9 +13,6 @@ public class IRcommand_Const_Int extends IRcommand_Assign {
 		UpdateIRName("IRcommand_Assign");
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Const_Int" + "- MIPSme");
 		MIPSGenerator.getInstance().li(dst, val);

@@ -6,39 +6,21 @@ import IR.*;
 import SYMBOL_TABLE.*;
 
 public class AST_STMT_ASSIGN extends AST_STMT {
-	/***************/
-	/* var := exp */
-	/***************/
 	public AST_VAR var;
 	public AST_EXP exp;
 	public TYPE scope; 	public String inclass; 	public String ty;
 
-	/*******************/
-	/* CONSTRUCTOR(S) */
-	/*******************/
 	public AST_STMT_ASSIGN(AST_VAR var, AST_EXP exp, int line) {		
 		this.var = var;
 		this.exp = exp;
 		this.line = line;
 
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.print("====================== stmt -> var ASSIGN exp SEMICOLON\n");
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/*******************************/
 	}
 
-	/*********************************************************/
-	/* The printing message for an assign statement AST node */
-	/*********************************************************/
 	
 
 	public TYPE SemantMe() {
@@ -88,7 +70,9 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 					IRcommand cRcommand = new IRcommand_Store_Local(varName, value);
 					IR.getInstance().Add_IRcommand(cRcommand);
 					cRcommand.offset = GetOffset(varName);
-				} else if (inclass != null) { 					String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
+				}
+				else if (inclass != null)
+				{ 					String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
 					IRcommand c = new IRcommand_Store_Field(inclass, varName, value);
 					c.offset = GetOffset(varName);
 					IR.getInstance().Add_IRcommand(c);
@@ -96,7 +80,9 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 																			}
 
 			}
-		} else if (var instanceof AST_VAR_FIELD) {
+		}
+		else if (var instanceof AST_VAR_FIELD)
+		{
 			TEMP t1 = ((AST_VAR_FIELD) var).var.IRme();
 			String f_name = ((AST_VAR_FIELD) var).fieldName;
 			String c = ((AST_VAR_FIELD) var).classN;
@@ -107,7 +93,9 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 			if (((AST_VAR_FIELD) var).var instanceof AST_VAR_SIMPLE)
 				((AST_VAR_SIMPLE) ((AST_VAR_FIELD) var).var).cfgVar = true;
 
-		} else { 
+		}
+		else
+		{ 
 			AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
 			TEMP array = subVar.var.IRme();
 			TEMP index = subVar.subscript.IRme();

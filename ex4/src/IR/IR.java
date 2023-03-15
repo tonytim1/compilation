@@ -8,15 +8,16 @@ public class IR {
 
 	private IRcommand initialization = null;
 	private IRcommand_List initializationTail = null;
-	/******************/
-	/* Add IR command */
-	/******************/
 	public void Add_IRcommand(IRcommand cmd) {
 		if ((head == null) && (tail == null)) {
 			this.head = cmd;
-		} else if ((head != null) && (tail == null)) {
+		}
+		else if ((head != null) && (tail == null))
+		{
 			this.tail = new IRcommand_List(cmd, null);
-		} else {
+		}
+		else
+		{
 			IRcommand_List it = tail;
 			while ((it != null) && (it.tail != null)) {
 				it = it.tail;
@@ -28,9 +29,13 @@ public class IR {
 	public void Add_IRcommand_initialization(IRcommand cmd) {
 		if ((initialization == null) && (initializationTail == null)) {
 			this.initialization = cmd;
-		} else if ((initialization != null) && (initializationTail == null)) {
+		}
+		else if ((initialization != null) && (initializationTail == null))
+		{
 			this.initializationTail = new IRcommand_List(cmd, null);
-		} else {
+		}
+		else
+		{
 			IRcommand_List it = initializationTail;
 			while ((it != null) && (it.tail != null)) {
 				it = it.tail;
@@ -39,9 +44,6 @@ public class IR {
 		}
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		if (head != null)
 			head.MIPSme();
@@ -55,25 +57,13 @@ public class IR {
 			initializationTail.MIPSme();
 	}
 
-	/**************************************/
-	/* USUAL SINGLETON IMPLEMENTATION ... */
-	/**************************************/
 	private static IR instance = null;
 
-	/*****************************/
-	/* PREVENT INSTANTIATION ... */
-	/*****************************/
 	protected IR() {
 	}
 
-	/******************************/
-	/* GET SINGLETON INSTANCE ... */
-	/******************************/
 	public static IR getInstance() {
 		if (instance == null) {
-			/*******************************/
-			/* [0] The instance itself ... */
-			/*******************************/
 			instance = new IR();
 		}
 		return instance;

@@ -16,9 +16,6 @@ public class IRcommand_This_Dot_Field extends IRcommand {
 
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_This_Dot_Field" + "- MIPSme");
 		MIPSGenerator.getInstance().load_field_in_func(dst, offset);

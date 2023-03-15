@@ -11,9 +11,6 @@ public class IRcommand_Jump_Label extends IRcommand_Conditional_Jump {
 		UpdateIRName("IRcommand_Conditional_Jump");
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Jump_Label" + "- MIPSme");
 		MIPSGenerator.getInstance().jump(label);

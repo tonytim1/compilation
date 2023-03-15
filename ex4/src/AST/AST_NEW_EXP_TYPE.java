@@ -8,27 +8,14 @@ import TEMP.*;
 public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
   public AST_TYPE t;
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_NEW_EXP_TYPE(AST_TYPE t, int line) {
     this.t = t;
     this.line = line;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.print("====================== newExp -> NEW type:t \n");
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {

@@ -1,15 +1,6 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 import MIPS.*;
 
@@ -24,9 +15,6 @@ public class IRcommand_Store_Field extends IRcommand {
 		this.val = value;
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 				MIPSGenerator.getInstance().store_field(offset, val);
 	}

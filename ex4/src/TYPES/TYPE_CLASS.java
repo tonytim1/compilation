@@ -3,22 +3,11 @@ package TYPES;
 import AST.*;
 
 public class TYPE_CLASS extends TYPE {
-	/*********************************************************************/
-	/* If this class does not extend a father class this should be null */
-	/*********************************************************************/
 	public TYPE_CLASS father;
 
-	/**************************************************/
-	/* Gather up all data members in one place */
-	/* Note that data members coming from the AST are */
-	/* packed together with the class methods */
-	/**************************************************/
 	public AST_ARG_LIST data_members;
 	public AST_TYPE_NAME_LIST functions;
 
-	/****************/
-	/* CTROR(S) ... */
-	/****************/
 	public TYPE_CLASS(TYPE_CLASS father, String name, AST_ARG_LIST data_members, AST_TYPE_NAME_LIST funcs) {
 		this.name = name;
 		this.father = father;
@@ -32,7 +21,9 @@ public class TYPE_CLASS extends TYPE {
 		System.out.println("Class name is " + name);
 		if (father != null) {
 			System.out.println("extends class " + father.name);
-		} else {
+		}
+		else
+		{
 			System.out.println("extends no other class");
 		}
 

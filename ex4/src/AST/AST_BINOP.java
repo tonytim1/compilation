@@ -18,17 +18,10 @@ public class AST_BINOP extends AST_Node {
         this.right = right;
         this.line = line;
 
-        /******************************/
-        /* SET A UNIQUE SERIAL NUMBER */
-        /******************************/
         SerialNumber = AST_Node_Serial_Number.getFresh();
     }
 
-    /****************** outside CONSTRUCTOR code *******************/
 
-    /*************************************************/
-    /* The printing message for a XXX node */
-    /*************************************************/
 
     public TYPE SemantMe() {
         System.out.format("BINOP - semant me\n", line);

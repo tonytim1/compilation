@@ -10,9 +10,6 @@ import MIPS.*;
 public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 	public AST_EXP exp;
 	String scope; 	String class_name; 	boolean inFunc; 
-	/*******************/
-	/* CONSTRUCTOR(S) */
-	/*******************/
 	public AST_VAR_DEC_EXP(AST_TYPE type, String id, AST_EXP exp, int line) {
 		this.type = type;
 		this.id = id;
@@ -21,16 +18,10 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		if (type != null && exp != null)
 			System.out.print("====================== varDec -> type ID ASSIGN exp SEMICOLON \n");
 	}
 
-	/*************************************************/
-	/* The printing message for a XXX node */
-	/*************************************************/
 	
 
 	public TYPE SemantMe() {
@@ -38,9 +29,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 		TYPE t1 = null;
 		TYPE t2 = null;
 
-		/******************************************************/
-		/* [0] check if the two types are the same */
-		/******************************************************/
 
 		if (type == null || exp == null) {
 			System.out.println(">>>ERROR type or name are null");
@@ -56,9 +44,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 			System.out.format(">> ERROR [%d] type mismatch for var := exp. %s vs %s\n", line, tname, t2.name);
 			printError(this.line);
 		}
-		/******************************************************/
-		/* [1] check if variable is already declared in scope */
-		/******************************************************/
 		TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(id);
 		if (res != null) {
 			System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
@@ -78,9 +63,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 		isOverride();
 		SYMBOL_TABLE.getInstance().enter(id, t1);
 
-		/******************************************************/
-		/* [2] return type doesn't matter ------------------- */
-		/******************************************************/
 		return t1;
 	}
 
@@ -95,12 +77,16 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(RealId, value));
 				if (class_name!=null)
 					defaultFields.put(class_name+"_"+id, value);
-			} else if (type instanceof AST_TYPE_INT) {
+			}
+			else if (type instanceof AST_TYPE_INT)
+			{
 				int value = ((AST_EXP_INT) exp).value;
 				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(RealId, value));
 				if (class_name!=null)
 					defaultFields.put(class_name+"_"+id, String.valueOf(value));
-			} else {
+			}
+			else
+			{
 				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(RealId));
 			}
 		}

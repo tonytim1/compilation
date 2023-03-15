@@ -8,25 +8,15 @@ import IR.*;
 public class AST_STMT_ID extends AST_STMT {
   public String id;
   public TYPE_FUNCTION func; 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_STMT_ID(String id, int line) {
     this.id = id;
     this.line = line;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     System.out.print("====================== stmt -> ID();\n");
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {
@@ -46,9 +36,13 @@ public class AST_STMT_ID extends AST_STMT {
     String startLabel = null;
     if (id.equals("PrintInt")) {
       startLabel = "PrintInt";
-    } else if (id.equals("PrintString")) {
+    }
+    else if (id.equals("PrintString"))
+    {
       startLabel = "PrintString";
-    } else {
+    }
+    else
+    {
       startLabel = this.func.startLabel;
     }
 

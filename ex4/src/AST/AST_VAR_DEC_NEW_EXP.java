@@ -8,9 +8,6 @@ import IR.*;
 public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
   public AST_NEW_EXP exp;
   public TYPE t; 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
 
   public AST_VAR_DEC_NEW_EXP(AST_TYPE type, String id, AST_NEW_EXP exp, int line) {
     this.type = type;
@@ -18,24 +15,14 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
     this.exp = exp;
     this.line = line;
 
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     if (type != null && exp != null)
       System.out.print("====================== varDec -> type ID ASSIGN newExp SEMICOLON \n");
 
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {
@@ -45,9 +32,6 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
 
     TYPE t2 = exp.SemantMe();
 
-    /******************************************************/
-    /* [0] check if the two types are the same */
-    /******************************************************/
 
     if (t1 == null || t2 == null || t1 instanceof TYPE_NIL || t1 instanceof TYPE_VOID) {
       System.out.format(">> ERROR [%d] non existing type %s %s (vardec_newexp)\n", line, t1, t2);
@@ -60,9 +44,6 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
       printError(this.line);
     }
 
-    /******************************************************/
-    /* [1] check if variable is already declared in scope */
-    /******************************************************/
     String scope = SYMBOL_TABLE.getInstance().getScope();
 
     if (scope.equals("class")) {
@@ -74,14 +55,13 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
     if (res != null) {
       System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
       printError(this.line);
-    } else {
+    }
+    else
+    {
       isOverride();
       SYMBOL_TABLE.getInstance().enter(id, t1);
     }
 
-    /******************************************************/
-    /* [2] return type doesn't matter */
-    /******************************************************/
     t = t1;
 
         this.scope = scope;
@@ -96,7 +76,9 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
 
     if (scope.equals("global")) {
             printError(666);
-    } else {
+    }
+    else
+    {
       
             IRcommand command = new IRcommand_Store_Local(id, t);
 

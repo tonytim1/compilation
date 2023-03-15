@@ -14,9 +14,6 @@ public class AST_FUNC_DEC extends AST_Node {
   public AST_ARG_LIST arglist;
   public AST_STMT_LIST list;
   public TYPE_FUNCTION func;   public String className; 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_FUNC_DEC(AST_TYPE returnType, String id, AST_ARG_LIST arglist, AST_STMT_LIST list, int line) {
     this.returnType = returnType;
     this.id = id;
@@ -24,18 +21,11 @@ public class AST_FUNC_DEC extends AST_Node {
     this.list = list;
     this.line = line;
 
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {
@@ -46,9 +36,6 @@ public class AST_FUNC_DEC extends AST_Node {
     TYPE returnTypeType = null;
     TYPE t;
 
-    /*******************/
-    /* [0] return type */
-    /*******************/
     returnTypeType = findType(returnType.typeName);
 
     if (returnTypeType == null || returnTypeType instanceof TYPE_NIL) {
@@ -56,9 +43,6 @@ public class AST_FUNC_DEC extends AST_Node {
       printError(line);
     }
 
-    /***************************/
-    /* [2] Semant Input Params */
-    /***************************/
     for (AST_ARG_LIST it = arglist; it != null; it = it.tail) {
       t = findType(it.head.t.typeName);
 
@@ -85,9 +69,6 @@ public class AST_FUNC_DEC extends AST_Node {
       argListTypes = argListTypes.reverseList();
     }
 
-    /***************************************************/
-    /* [5] Enter the Function Type to the Symbol Table */
-    /***************************************************/
 
         boolean flag = true;
     className = SYMBOL_TABLE.getInstance().inClassScope();
@@ -129,26 +110,15 @@ public class AST_FUNC_DEC extends AST_Node {
     this.func = new TYPE_FUNCTION(returnTypeType, id, argListTypes);
     SYMBOL_TABLE.getInstance().enter(id, func);
 
-    /****************************/
-    /* [1] Begin Function Scope */
-    /****************************/
     SYMBOL_TABLE.getInstance().beginScope("func-" + id + "-" + returnTypeType.name);
 
-    /********************** */
     for (AST_ARG_LIST it = arglist; it != null; it = it.tail) {
       t = findType(it.head.t.typeName);
       SYMBOL_TABLE.getInstance().enter(it.head.id, t);
     }
-    /************************* */
 
-    /*******************/
-    /* [3] Semant Body */
-    /*******************/
     list.SemantMe();
 
-    /*****************/
-    /* [4] End Scope */
-    /*****************/
     SYMBOL_TABLE.getInstance().endScope();
 
     return func;
@@ -184,7 +154,9 @@ public class AST_FUNC_DEC extends AST_Node {
             String labelStart = null;
     if (id.equals("user_main")) {
       labelStart = id;
-    } else {
+    }
+    else
+    {
       if (className != null)
         labelStart = className + "_" + id;
       else {

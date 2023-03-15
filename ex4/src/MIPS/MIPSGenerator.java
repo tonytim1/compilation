@@ -8,14 +8,8 @@ import IR.*;
 
 public class MIPSGenerator {
 	private int WORD_SIZE = 4;
-	/***********************/
-	/* The file writer ... */
-	/***********************/
 	private PrintWriter fileWriter;
 
-	/***********************/
-	/* The file writer ... */
-	/***********************/
 	public void finalizeFile() {
 		fileWriter.print("\t\n");
 		fileWriter.print("main:\n");
@@ -391,47 +385,24 @@ public class MIPSGenerator {
 				fileWriter.format("\tmove $t%d, $v0\n", idxdst);
 	}
 
-	/**************************************/
-	/* USUAL SINGLETON IMPLEMENTATION ... */
-	/**************************************/
 	private static MIPSGenerator instance = null;
 
-	/*****************************/
-	/* PREVENT INSTANTIATION ... */
-	/*****************************/
 	protected MIPSGenerator() {
 	}
 
-	/******************************/
-	/* GET SINGLETON INSTANCE ... */
-	/******************************/
 	public static MIPSGenerator getInstance() {
 		if (instance == null) {
-			/*******************************/
-			/* [0] The instance itself ... */
-			/*******************************/
 			instance = new MIPSGenerator();
 
 			try {
-				/*********************************************************************************/
-				/*
-				 * [1] Open the MIPS text file and write data section with error message strings
-				 */
-				/*********************************************************************************/
 				String dirname = "./output/";
 				String filename = String.format("MIPS.txt");
 
-				/***************************************/
-				/* [2] Open MIPS text file for writing */
-				/***************************************/
 				instance.fileWriter = new PrintWriter(dirname + filename);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			/*****************************************************/
-			/* [3] Print data section with error message strings */
-			/*****************************************************/
 			instance.fileWriter.print(".data\n");
 			instance.fileWriter.print("string_access_violation: .asciiz \"Access Violation\"\n");
 			instance.fileWriter.print("string_invalid_ptr_dref: .asciiz \"Invalid Pointer Dereference\"\n");

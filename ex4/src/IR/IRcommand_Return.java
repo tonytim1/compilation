@@ -10,9 +10,6 @@ public class IRcommand_Return extends IRcommand {
 		this.RetVal = retVal;
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Return" + "- MIPSme");
 		MIPSGenerator.getInstance().ret(RetVal);

@@ -9,30 +9,15 @@ import TYPES.*;
 public class AST_EXP_MINUS_INT extends AST_EXP {
   public int value;
 
-  /******************/
-  /* CONSTRUCTOR(S) */
-  /******************/
   public AST_EXP_MINUS_INT(int value) {
     this.value = -value;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    /*******************************/
-    /* COPY INPUT DATA NENBERS ... */
-    /*******************************/
 
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.format("====================== exp -> -INT(%d)\n", value);
 
   }
 
-  /************************************************/
-  /* The printing message for an INT EXP AST node */
-  /************************************************/
   
 
   public TYPE SemantMe() {

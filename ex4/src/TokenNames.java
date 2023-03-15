@@ -1,8 +1,6 @@
 
 
-/** CUP generated class containing symbol constants. */
 public class TokenNames {
-  /* terminals */
   public static final int TIMES = 8;
   public static final int RBRACK = 14;
   public static final int LT = 20;

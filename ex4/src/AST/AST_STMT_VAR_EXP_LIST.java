@@ -9,31 +9,18 @@ public class AST_STMT_VAR_EXP_LIST extends AST_STMT {
   public AST_EXP_LIST list;
   public TYPE_CLASS tl;
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_STMT_VAR_EXP_LIST(AST_VAR var, String id, AST_EXP_LIST list) {
     this.var = var;
     this.id = id;
     this.list = list;
 
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.print("====================== stmt -> var.ID(expList);\n");
 
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {

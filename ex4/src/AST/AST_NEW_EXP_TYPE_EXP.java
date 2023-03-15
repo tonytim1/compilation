@@ -8,28 +8,15 @@ public class AST_NEW_EXP_TYPE_EXP extends AST_NEW_EXP {
   public AST_TYPE t;
   public AST_EXP e;
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_NEW_EXP_TYPE_EXP(AST_TYPE t, AST_EXP e, int line) {
     this.t = t;
     this.e = e;
     this.line = line;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.print("====================== newExp -> NEW type:t LBRACK exp:e RBRACK \n");
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {

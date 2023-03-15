@@ -13,9 +13,6 @@ public class IRcommand_Store_Global extends IRcommand {
 		this.label = label;
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Store_Global" + "- MIPSme");
 		MIPSGenerator.getInstance().store_label(dst, label);

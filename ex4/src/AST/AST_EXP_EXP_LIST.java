@@ -9,33 +9,18 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
   public String id;
   public AST_EXP_LIST list;
   public TYPE_FUNCTION func; 
-  /******************/
-  /* CONSTRUCTOR(S) */
-  /******************/
   public AST_EXP_EXP_LIST(String id, AST_EXP_LIST list, int line) {
     this.id = id;
     this.list = list;
     this.line = line;
 
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.print("====================== exp -> ID (expList)\n");
 
-    /*******************************/
-    /* COPY INPUT DATA NENBERS ... */
-    /*******************************/
 
   }
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {
@@ -66,9 +51,13 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
     String startLabel = null;
     if (id.equals("PrintInt")) {
       startLabel = "PrintInt";
-    } else if (id.equals("PrintString")) {
+    }
+    else if (id.equals("PrintString"))
+    {
       startLabel = "PrintString";
-    } else {
+    }
+    else
+    {
       startLabel = this.func.startLabel;
     }
     IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(t, startLabel, resTempsList));
