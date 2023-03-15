@@ -7,7 +7,6 @@ public class IRcommand_New_Array extends IRcommand {
   public TEMP src;
   public TEMP dst;
 
-  // t2= new_array t1 (dst, src)
   public IRcommand_New_Array(TEMP dst, TEMP src) {
     this.src = src;
     this.dst = dst;

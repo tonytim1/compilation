@@ -17,7 +17,7 @@ public class IRcommand_Declare_Global_Object extends IRcommand_Assign_Non_Temp {
 
 	public IRcommand_Declare_Global_Object(String id) {
 		this.id = id;
-		changeName("IRcommand_Assign_Non_Temp");
+		UpdateIRName("IRcommand_Assign_Non_Temp");
 	}
 
 	/***************/

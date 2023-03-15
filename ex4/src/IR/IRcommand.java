@@ -8,7 +8,7 @@ package IR;
 /*******************/
 
 public abstract class IRcommand {
-	public String IRname="";
+	public String name="";
 
 	/*****************/
 	/* Label Factory */
@@ -27,8 +27,8 @@ public abstract class IRcommand {
 	public void MIPSme() {
 		System.out.println("DEFAULT MIPSme!!!");
 	}
-	public void changeName(String name) {
-		this.IRname=name;
+	public void UpdateIRName(String name) {
+		this.name=name;
 	}
 
 }

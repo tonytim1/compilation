@@ -18,7 +18,7 @@ public class IRcommand_Jump_Beq extends IRcommand_Conditional_Jump {
 		this.label = label;
 		this.op1 = op1;
 		this.op2 = op2;
-		changeName("IRcommand_Conditional_Jump");
+		UpdateIRName("IRcommand_Conditional_Jump");
 	}
 
 	/***************/

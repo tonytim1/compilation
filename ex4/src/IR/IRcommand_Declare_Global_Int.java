@@ -21,7 +21,7 @@ public class IRcommand_Declare_Global_Int extends IRcommand_Assign_Non_Temp {
 	public IRcommand_Declare_Global_Int(String id, int value) {
 		this.id = id;
 		this.value = value;
-		changeName("IRcommand_Assign_Non_Temp");
+		UpdateIRName("IRcommand_Assign_Non_Temp");
 	}
 
 	/***************/
