@@ -10,8 +10,9 @@ public class AST_DEC_ARRAY_DEC extends AST_DEC {
     this.array = array;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (array != null)
+    if (array != null) {
       System.out.print("====================== dec -> ATD\n");
+      }
   }
 
 

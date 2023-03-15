@@ -18,8 +18,9 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		if (type != null && exp != null)
+		if (type != null && exp != null) {
 			System.out.print("====================== varDec -> type ID ASSIGN exp SEMICOLON \n");
+			}
 	}
 
 	

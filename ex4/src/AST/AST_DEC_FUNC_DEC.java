@@ -10,8 +10,9 @@ public class AST_DEC_FUNC_DEC extends AST_DEC {
     this.func = func;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (func != null)
+    if (func != null) {
       System.out.print("====================== dec -> funcDec\n");
+      }
   }
 
 

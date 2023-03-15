@@ -18,8 +18,9 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (type != null)
+    if (type != null) {
       System.out.print("====================== varDec -> type ID SEMICOLON \n");
+      }
   }
 
 

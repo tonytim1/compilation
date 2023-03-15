@@ -19,8 +19,9 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (data_members != null)
+    if (data_members != null) {
       System.out.print("====================== classDec -> CLASS ID: LBRACE cFieldList RBRACE\n");
+      }
   }
 
 
