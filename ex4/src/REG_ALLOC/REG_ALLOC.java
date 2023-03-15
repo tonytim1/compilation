@@ -194,22 +194,22 @@ public class REG_ALLOC {
 				if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_bnez"))
 						|| (curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Beqz"))) {
 					curr.inSet
-							.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).oprnd1.getSerialNumber()))));
+							.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
 					if (curr.inFunc) {
 						curr.FuncScope
-								.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).oprnd1.getSerialNumber()))));
+								.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
 					}
 				} else if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Label"))) {
 				} else {
 					curr.inSet
-							.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).oprnd1.getSerialNumber()))));
+							.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
 					curr.inSet
-							.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).oprnd2.getSerialNumber()))));
+							.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op2.getSerialNumber()))));
 					if (curr.inFunc) {
 						curr.FuncScope
-								.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).oprnd1.getSerialNumber()))));
+								.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
 						curr.FuncScope
-								.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).oprnd2.getSerialNumber()))));
+								.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op2.getSerialNumber()))));
 					}
 				}
 			}
@@ -475,35 +475,35 @@ public class REG_ALLOC {
 			if (h.IRname.equals("class IR.IRcommand_Conditional_Jump")) {
 				if ((h.getClass().toString().equals("class IR.IRcommand_Jump_bnez"))
 						|| (h.getClass().toString().equals("class IR.IRcommand_Jump_Beqz"))) {
-					if (((IRcommand_Conditional_Jump) h).oprnd1.changed == false) {
+					if (((IRcommand_Conditional_Jump) h).op1.changed == false) {
 						String theNum = IRtoMIPS
-								.get(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) h).oprnd1.getSerialNumber()))));
+								.get(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) h).op1.getSerialNumber()))));
 						if (theNum == null) {
 							theNum = IRtoMIPS.get("dead");
 						}
-						((IRcommand_Conditional_Jump) h).oprnd1.serial = Integer.parseInt(theNum);
-						((IRcommand_Conditional_Jump) h).oprnd1.changed = true;
+						((IRcommand_Conditional_Jump) h).op1.serial = Integer.parseInt(theNum);
+						((IRcommand_Conditional_Jump) h).op1.changed = true;
 					}
 				} else if ((h.getClass().toString().equals("class IR.IRcommand_Jump_Label"))) {
 				} else {
 					String theNum;
-					if (((IRcommand_Conditional_Jump) h).oprnd1.changed == false) {
+					if (((IRcommand_Conditional_Jump) h).op1.changed == false) {
 						theNum = IRtoMIPS
-								.get(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) h).oprnd1.getSerialNumber()))));
+								.get(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) h).op1.getSerialNumber()))));
 						if (theNum == null) {
 							theNum = IRtoMIPS.get("dead");
 						}
-						((IRcommand_Conditional_Jump) h).oprnd1.serial = Integer.parseInt(theNum);
-						((IRcommand_Conditional_Jump) h).oprnd1.changed = true;
+						((IRcommand_Conditional_Jump) h).op1.serial = Integer.parseInt(theNum);
+						((IRcommand_Conditional_Jump) h).op1.changed = true;
 					}
-					if (((IRcommand_Conditional_Jump) h).oprnd2.changed == false) {
+					if (((IRcommand_Conditional_Jump) h).op2.changed == false) {
 						theNum = IRtoMIPS
-								.get(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) h).oprnd2.getSerialNumber()))));
+								.get(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) h).op2.getSerialNumber()))));
 						if (theNum == null) {
 							theNum = IRtoMIPS.get("dead");
 						}
-						((IRcommand_Conditional_Jump) h).oprnd2.serial = Integer.parseInt(theNum);
-						((IRcommand_Conditional_Jump) h).oprnd2.changed = true;
+						((IRcommand_Conditional_Jump) h).op2.serial = Integer.parseInt(theNum);
+						((IRcommand_Conditional_Jump) h).op2.changed = true;
 
 					}
 

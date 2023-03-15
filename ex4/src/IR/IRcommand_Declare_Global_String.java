@@ -13,7 +13,6 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-// string id = value (global scope)
 public class IRcommand_Declare_Global_String extends IRcommand_Assign_Non_Temp {
 	//String id;
 	//String var;

@@ -16,6 +16,6 @@ import MIPS.*;
 public class IRcommand_Conditional_Jump extends IRcommand
 {
 	public String label;
-	public TEMP oprnd1;
-	public TEMP oprnd2;
+	public TEMP op1;
+	public TEMP op2;
 }

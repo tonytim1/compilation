@@ -228,27 +228,27 @@ public class MIPSGenerator {
 		fileWriter.format("%s:\n", label);
 	}
 
-	public void add(TEMP dst, TEMP oprnd1, TEMP oprnd2) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void add(TEMP dst, TEMP op1, TEMP op2) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 		int dstidx = dst.getSerialNumber();
 		fileWriter.format("\tadd $t%d,$t%d,$t%d\n", dstidx, i1, i2);
 		checkOverflow(dst);
 		checkUnderflow(dst);
 	}
 
-	public void sub(TEMP dst, TEMP oprnd1, TEMP oprnd2) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void sub(TEMP dst, TEMP op1, TEMP op2) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 		int dstidx = dst.getSerialNumber();
 		fileWriter.format("\tsub $t%d,$t%d,$t%d\n", dstidx, i1, i2);
 		checkUnderflow(dst);
 		checkOverflow(dst);
 	}
 
-	public void mul(TEMP dst, TEMP oprnd1, TEMP oprnd2) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void mul(TEMP dst, TEMP op1, TEMP op2) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 		int dstidx = dst.getSerialNumber();
 
 		fileWriter.format("\tmul $t%d,$t%d,$t%d\n", dstidx, i1, i2);
@@ -256,11 +256,11 @@ public class MIPSGenerator {
 		checkUnderflow(dst);
 	}
 
-	public void div(TEMP dst, TEMP oprnd1, TEMP oprnd2) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void div(TEMP dst, TEMP op1, TEMP op2) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 		int dstidx = dst.getSerialNumber();
-		beqz(oprnd2, "division_by_zero");
+		beqz(op2, "division_by_zero");
 		fileWriter.format("\tdiv $t%d,$t%d,$t%d\n", dstidx, i1, i2);
 		checkUnderflow(dst);
 		checkOverflow(dst);
@@ -281,68 +281,68 @@ public class MIPSGenerator {
 		fileWriter.format("\tj %s\n", inlabel);
 	}
 
-	public void blt(TEMP oprnd1, TEMP oprnd2, String label) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void blt(TEMP op1, TEMP op2, String label) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 
 		fileWriter.format("\tblt $t%d,$t%d,%s\n", i1, i2, label);
 	}
 
-	public void bgt(TEMP oprnd1, TEMP oprnd2, String label) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void bgt(TEMP op1, TEMP op2, String label) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 
 		fileWriter.format("\tbgt $t%d,$t%d,%s\n", i1, i2, label);
 	}
 
-	public void bge(TEMP oprnd1, TEMP oprnd2, String label) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void bge(TEMP op1, TEMP op2, String label) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 
 		fileWriter.format("\tbge $t%d,$t%d,%s\n", i1, i2, label);
 	}
 
-	public void ble(TEMP oprnd1, TEMP oprnd2, String label) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void ble(TEMP op1, TEMP op2, String label) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 
 		fileWriter.format("\tble $t%d,$t%d,%s\n", i1, i2, label);
 	}
 
-	public void bne(TEMP oprnd1, TEMP oprnd2, String label) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void bne(TEMP op1, TEMP op2, String label) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 
 		fileWriter.format("\tbne $t%d,$t%d,%s\n", i1, i2, label);
 	}
 
-	public void beq(TEMP oprnd1, TEMP oprnd2, String label) {
-		int i1 = oprnd1.getSerialNumber();
-		int i2 = oprnd2.getSerialNumber();
+	public void beq(TEMP op1, TEMP op2, String label) {
+		int i1 = op1.getSerialNumber();
+		int i2 = op2.getSerialNumber();
 
 		fileWriter.format("\tbeq $t%d,$t%d,%s\n", i1, i2, label);
 	}
 
-	public void beqz(TEMP oprnd1, String label) {
-		int i1 = oprnd1.getSerialNumber();
+	public void beqz(TEMP op1, String label) {
+		int i1 = op1.getSerialNumber();
 
 		fileWriter.format("\tbeq $t%d,$zero,%s\n", i1, label);
 	}
 
-	public void bnez(TEMP oprnd1, String label) {
-		int i1 = oprnd1.getSerialNumber();
+	public void bnez(TEMP op1, String label) {
+		int i1 = op1.getSerialNumber();
 
 		fileWriter.format("\tbne $t%d,$zero,%s\n", i1, label);
 	}
 
-	public void load(TEMP oprnd1, TEMP op2, int off) {
-		int i1 = oprnd1.getSerialNumber();
+	public void load(TEMP op1, TEMP op2, int off) {
+		int i1 = op1.getSerialNumber();
 		int i2 = op2.getSerialNumber();
 		fileWriter.format("\tlw $t%d, %d($t%d)\n", i1, i2, off);
 	}
 
-	public void store(TEMP oprnd1, TEMP op2, int off) {
-		int i1 = oprnd1.getSerialNumber();
+	public void store(TEMP op1, TEMP op2, int off) {
+		int i1 = op1.getSerialNumber();
 		int i2 = op2.getSerialNumber();
 		fileWriter.format("\tsw $t%d, %d($t%d)\n", i1, i2, off);
 	}
