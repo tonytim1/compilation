@@ -13,13 +13,13 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-public class IRcommand_ThisDotField extends IRcommand {
+public class IRcommand_This_Dot_Field extends IRcommand {
 	public TEMP dst;
 	String name;
 	public boolean cfg = false;
 
 	// this.field
-	public IRcommand_ThisDotField(String Fname, TEMP dst) {
+	public IRcommand_This_Dot_Field(String Fname, TEMP dst) {
 		this.dst = dst;
 		this.name = Fname;
 
@@ -29,7 +29,7 @@ public class IRcommand_ThisDotField extends IRcommand {
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme() {
-		System.out.println("IRcommand_ThisDotField" + "- MIPSme");
+		System.out.println("IRcommand_This_Dot_Field" + "- MIPSme");
 		MIPSGenerator.getInstance().load_field_in_func(dst, offset);
 	}
 }
