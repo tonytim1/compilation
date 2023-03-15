@@ -1,17 +1,17 @@
 /***********/
 /* PACKAGE */
 /***********/
-package CFG;
+package REG_ALLOC;
 
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
-import CFG.*;
+import REG_ALLOC.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
-import CFG.ColorGraph.node;
+import REG_ALLOC.ColorGraph.node;
 import TEMP.*;
 import MIPS.*;
 import IR.*;
@@ -20,12 +20,12 @@ import IR.*;
 /* PROJECT IMPORTS */
 /*******************/
 
-public class CFG {
+public class REG_ALLOC {
 	BasicBlock head; // for build
 	BasicBlock tail;// for liveness
 	HashMap<String, String> IRtoMIPS = new HashMap<String, String>();
 
-	public CFG() {
+	public REG_ALLOC() {
 		IRcommand h = IR.getInstance().head;
 		IRcommand_List t = IR.getInstance().tail;
 		int lineCounter = 0;
@@ -45,7 +45,7 @@ public class CFG {
 		}
 		this.tail = curr;
 		// at this point we have the direct line of things, lets take care of the jumps
-		// go over the CFG graph this time
+		// go over the REG_ALLOC graph this time
 		curr = this.head;
 		while (curr != null) {
 			Boolean isBranch = (curr.line.IRname.equals("IRcommand_Conditional_Jump"));

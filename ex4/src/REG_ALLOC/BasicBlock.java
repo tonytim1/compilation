@@ -1,7 +1,7 @@
 /***********/
 /* PACKAGE */
 /***********/
-package CFG;
+package REG_ALLOC;
 
 /*******************/
 /* GENERAL IMPORTS */
