@@ -59,8 +59,8 @@ public class Main {
 			/* [8.5] alocate temps for IR ... */
 			/**********************************/
 			REG_ALLOC g=new REG_ALLOC();
-			g.liveness();
-			g.K_color();
+			g.liveOpt();
+			g.allocationRegisters();
 			/***********************/
 			/* [9] MIPS the IR ... */
 			/***********************/
