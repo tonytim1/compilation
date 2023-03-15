@@ -15,9 +15,7 @@ public class IRcommand_Virtual_Call extends IRcommand {
   String funcName;
   public TEMP_LIST args;
 
-  // dst = virtual_call classTemp, funcName, args
-  // dst = classTemp.funcName(args)
-  public IRcommand_Virtual_Call(TEMP dst, TEMP classTemp, String funcName, TEMP_LIST tempList) {
+public IRcommand_Virtual_Call(TEMP dst, TEMP classTemp, String funcName, TEMP_LIST tempList) {
     this.dst = dst;
     this.classTemp = classTemp;
     this.funcName = funcName;

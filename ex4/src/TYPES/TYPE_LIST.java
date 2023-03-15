@@ -28,12 +28,10 @@ public class TYPE_LIST {
 
 	public TYPE_LIST reverseList() {
 
-		TYPE_LIST res = null;
-
+		TYPE_LIST reversed_list = null;
 		for (TYPE_LIST it = this; it != null; it = it.tail) {
-			res = new TYPE_LIST(it.head, res);
+			reversed_list = new TYPE_LIST(it.head, reversed_list);
 		}
-
-		return res;
+		return reversed_list;
 	}
 }
