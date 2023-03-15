@@ -15,7 +15,6 @@ public class IRcommand_Array_Access extends IRcommand {
   }
 
   public void MIPSme() {
-    System.out.println("IRcommand_Array_Access" + "- MIPSme");
     MIPSGenerator.getInstance().array_access(dst, t1, t2);
   }
 }

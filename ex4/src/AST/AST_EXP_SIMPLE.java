@@ -17,12 +17,10 @@ public class AST_EXP_SIMPLE extends AST_EXP {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("EXP SIMPLE - semant me");
 		return exp.SemantMe();
 	}
 
 	public TEMP IRme() {
-		System.out.println("EXP SIMPLE - IRme");
 
 		return exp.IRme();
 	}

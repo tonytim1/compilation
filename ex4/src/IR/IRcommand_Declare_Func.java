@@ -14,7 +14,6 @@ public class IRcommand_Declare_Func extends IRcommand {
 	    }
 
 	    public void MIPSme() {
-	        System.out.println("IRcommand_Declare_Func" + "- MIPSme");
 	        String labelStart;
 	        if (className != null)
 	            labelStart = className + "_" + name;

@@ -70,7 +70,6 @@ public class AST_BINOP extends AST_Node {
     }
 
     public TEMP IRme() {
-        System.out.println("BINOP IRme");
         TEMP t1 = null;
         TEMP t2 = null;
 

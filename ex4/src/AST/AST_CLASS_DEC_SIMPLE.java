@@ -53,7 +53,6 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
             break;
           }
           case "void": {
-            System.out.println(">> ERROR [" + line + "] void variable is illegal");
             printError(line);
           }
           default: {
@@ -82,7 +81,6 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     SYMBOL_TABLE.getInstance().endScope();
 
 
-            System.out.println("------");
     
     return null;
   }

@@ -32,7 +32,6 @@ public class Main {
 			AST.SemantMe();
 
 			AST.IRme();
-			System.out.println("\n");
 
 			REG_ALLOC g=new REG_ALLOC();
 			g.liveOpt();

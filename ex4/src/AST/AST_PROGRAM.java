@@ -20,7 +20,6 @@ public class AST_PROGRAM extends AST_Node {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("\nPROGRAM" + "- semantme");
 
 		list.SemantMe();
 
@@ -28,7 +27,6 @@ public class AST_PROGRAM extends AST_Node {
 	}
 
 	public TEMP IRme() {
-		System.out.println("\nPROGRAM" + "- IRme");
 
 		list.IRme();
 

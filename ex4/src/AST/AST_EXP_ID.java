@@ -22,7 +22,6 @@ public class AST_EXP_ID extends AST_EXP {
   
 
   public TYPE SemantMe() {
-    System.out.println("EXP ID - semant me");
     TYPE t = funcSig(id, null, this.line);
 
     this.func = (TYPE_FUNCTION) (SYMBOL_TABLE.getInstance().find(id));
@@ -31,7 +30,6 @@ public class AST_EXP_ID extends AST_EXP {
   }
 
   public TEMP IRme() {
-    System.out.println("EXP ID - IRme");
 
     TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 

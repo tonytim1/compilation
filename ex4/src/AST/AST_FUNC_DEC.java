@@ -30,7 +30,6 @@ public class AST_FUNC_DEC extends AST_Node {
 
   public TYPE SemantMe() {
 
-    System.out.println("FUNCDEC- semantme(" + id + ")");
 
     TYPE_LIST argListTypes = null;
     TYPE returnTypeType = null;
@@ -78,20 +77,17 @@ public class AST_FUNC_DEC extends AST_Node {
             TYPE_FUNCTION currF = (TYPE_FUNCTION) it.head.type;
             if (currF.name.equals(id)) {
               if (!(currF.returnType.name.equals(returnTypeType.name))) {
-                System.out.println(">> ERROR [" + line + "] cant overwrite the function!");
                 printError(line);
               }
               TYPE_LIST params = currF.params;
               for (TYPE_LIST it2 = argListTypes; it2 != null; it2 = it2.tail) {
                 if (params == null || params.head == null
                     || !(it2.head.name.equals(params.head.name))) {
-                  System.out.println(">> ERROR [" + line + "] cant overwrite the function!");
                   printError(line);
                 }
                 params = params.tail;
               }
               if (params != null) {
-                System.out.println(">> ERROR [" + line + "] cant overwrite the function!");
                 printError(line);
               }
               flag = false;
@@ -121,7 +117,6 @@ public class AST_FUNC_DEC extends AST_Node {
   }
 
   public TEMP IRme() {
-    System.out.println("FUNCDEC" + "- IRme(" + id + ")");
 
     if (id.equals("main")) {
       this.id = "user_main";

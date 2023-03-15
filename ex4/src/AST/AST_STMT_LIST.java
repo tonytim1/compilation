@@ -24,7 +24,6 @@ public class AST_STMT_LIST extends AST_Node {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("STMT LIST - semant me");
 		if (head != null)
 			head.SemantMe();
 		if (tail != null)

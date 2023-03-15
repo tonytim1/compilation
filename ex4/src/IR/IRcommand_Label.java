@@ -12,7 +12,6 @@ public class IRcommand_Label extends IRcommand {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Label" + "- MIPSme");
 		MIPSGenerator.getInstance().label(label_name);
 	}
 }

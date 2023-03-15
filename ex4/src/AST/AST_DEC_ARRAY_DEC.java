@@ -20,14 +20,12 @@ public class AST_DEC_ARRAY_DEC extends AST_DEC {
 
   public TYPE SemantMe() {
 
-    System.out.println("DEC_ATD" + "- semantme");
 
     array.SemantMe();
     return null;
   }
 
   public TEMP IRme() {
-    System.out.println("DEC_ATD" + "- IRme");
 
     array.IRme();
     return null;

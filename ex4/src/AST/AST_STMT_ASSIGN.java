@@ -24,7 +24,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("STMT_ASSIGN - semant me");
 
 		TYPE t1 = null;
 		TYPE t2 = null;
@@ -54,7 +53,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 	}
 
 	public TEMP IRme() {
-		System.out.println("STMT_ASSIGN - IRme");
 
 		if (var instanceof AST_VAR_SIMPLE) {
 			TEMP value = exp.IRme();

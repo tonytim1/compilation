@@ -27,7 +27,6 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
   
 
   public TYPE SemantMe() {
-    System.out.println("VARDEC SIMPLE - semant me");
 
     TYPE t1 = findType(type.typeName);
     t = t1;
@@ -50,7 +49,6 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
   }
 
   public TEMP IRme() {
-    System.out.println("VARDEC SIMPLE IRme");
 
         if (scope.equals("global")) {
       if (type instanceof AST_TYPE_STRING) {

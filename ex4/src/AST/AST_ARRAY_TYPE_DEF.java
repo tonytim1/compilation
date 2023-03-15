@@ -22,7 +22,6 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 
 	public TYPE SemantMe() {
 
-		System.out.println("ATD" + "- semantme");
 
 		TYPE typeType = type.SemantMe();
 
@@ -44,7 +43,6 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 	}
 
 	public TEMP IRme() {
-		System.out.println("ATD- IRme");
 		return null;
 	}
 }

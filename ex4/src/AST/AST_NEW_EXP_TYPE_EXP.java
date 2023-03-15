@@ -20,13 +20,11 @@ public class AST_NEW_EXP_TYPE_EXP extends AST_NEW_EXP {
   
 
   public TYPE SemantMe() {
-    System.out.println("VARDEC NEWEXP - semant me");
 
     TYPE t1 = null;
     TYPE t2 = null;
 
     if (t == null || e == null || t.typeName.equals("nil") || t.typeName.equals("void")) {
-      System.out.println(">> ERROR [" + line + "] cant declate type void/nil");
       printError(this.line);
     }
 

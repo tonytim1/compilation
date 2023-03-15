@@ -18,7 +18,6 @@ public class AST_TYPE_ID extends AST_TYPE {
   
 
   public TYPE SemantMe() {
-    System.out.println("TYPE ID - semant me");
     TYPE res = findType(typeName);
     if (res == null) {
             printError(this.line);

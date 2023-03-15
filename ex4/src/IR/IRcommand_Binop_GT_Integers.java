@@ -14,7 +14,6 @@ public class IRcommand_Binop_GT_Integers extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Binop_GT_Integers" + "- MIPSme");
 
 		String label_end = getFreshLabel("end");
 		String label_AssignOne = getFreshLabel("AssignOne");

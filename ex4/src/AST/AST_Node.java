@@ -30,22 +30,18 @@ public abstract class AST_Node {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("DEFAULT SEMANTME!!!");
 		return null;
 	}
 
 	public TYPE_LIST SemantMe(int ignore) {
-		System.out.println("DEFAULT SEMANTME!!!");
 		return null;
 	}
 
 	public TEMP_LIST IRme(int ignore) {
-		System.out.println("DEFAULT SEMANTME!!!");
 		return null;
 	}
 
 	public TEMP IRme() {
-		System.out.println("DEFAULT IRme!!!");
 		return null;
 	}
 
@@ -159,7 +155,6 @@ public abstract class AST_Node {
 
 				TYPE cl = SYMBOL_TABLE.getInstance().find(className);
 		if (cl == null || !(cl.isClass())) 		{
-			System.out.println(">> ERROR [" + line + "] there isnt such a class!");
 			printError(line);
 		}
 
@@ -176,7 +171,6 @@ public abstract class AST_Node {
 		}
 
 		if (a == null) 		{
-			System.out.println(">> ERROR [" + line + "] there isnt such a func!");
 			printError(line);
 		}
 				return SYMBOL_TABLE.getInstance().compare(a, funcArgs);

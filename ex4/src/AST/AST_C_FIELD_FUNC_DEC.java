@@ -15,12 +15,10 @@ public class AST_C_FIELD_FUNC_DEC extends AST_C_FIELD {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("CFEILD FUNCDEC semant me");
 		return func.SemantMe();
 	}
 
 	public TEMP IRme() {
-		System.out.println("CFEILD_FUNCDEC - IRme");
 		func.IRme();
 		return null;
 	}

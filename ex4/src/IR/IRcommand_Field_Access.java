@@ -16,7 +16,6 @@ public class IRcommand_Field_Access extends IRcommand{
 	  }
 
 	  public void MIPSme() {
-	    System.out.println("IRcommand_Field_Access" + "- MIPSme");
 	    MIPSGenerator.getInstance().field_Access(dst, offset, src);
 	  }
 

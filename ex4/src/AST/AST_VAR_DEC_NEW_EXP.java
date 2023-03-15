@@ -27,7 +27,6 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
   
 
   public TYPE SemantMe() {
-    System.out.println("VARDEC NEWEXP - semant me");
 
     TYPE t1 = type.SemantMe();
 
@@ -68,7 +67,6 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
   }
 
   public TEMP IRme() {
-    System.out.println("VARDEC NEWEXP - IRme");
 
     TEMP t = exp.IRme();
 

@@ -25,7 +25,6 @@ public class AST_EXP_LIST extends AST_Node {
   
 
   public TYPE_LIST SemantMe(int ignore) {
-    System.out.println("EXPLIST - semant me");
 
     if (tail == null) {
       return new TYPE_LIST(head.SemantMe(), null);
@@ -37,7 +36,6 @@ public class AST_EXP_LIST extends AST_Node {
   }
 
   public TEMP_LIST IRme(int ignore) {
-    System.out.println("EXPLIST - IRme");
     if ((head == null) && (tail == null)) {
       return null;
     }

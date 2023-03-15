@@ -13,7 +13,6 @@ public class IRcommand_New_Array extends IRcommand {
   }
 
   public void MIPSme() {
-    System.out.println("IRcommand_New_Array" + "- MIPSme");
     MIPSGenerator.getInstance().new_array(dst, src);
   }
 }

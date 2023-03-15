@@ -16,7 +16,6 @@ public class IRcommand_New_Class_Object extends IRcommand_Assign {
 	public void MIPSme() {
 	    int curr_offset, size;
 	    String currName;
-		System.out.println("IRcommand_New_Class_Object" + "- MIPSme");
 
 		size = AST_Node.getClassSize(className);
 		MIPSGenerator.getInstance().new_class(dst, className, size);

@@ -14,7 +14,6 @@ public class IRcommand_Binop_SUB_Integers extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Binop_SUB_Integers" + "- MIPSme");
 		MIPSGenerator.getInstance().sub(dst, t1, t2);
 	}
 }

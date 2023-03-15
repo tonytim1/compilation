@@ -23,7 +23,6 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    System.out.println("STMT_NEWEXP - semant me");
 
     TYPE t1 = null;
     TYPE t2 = null;
@@ -54,7 +53,6 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
   }
 
   public TEMP IRme() {
-    System.out.println("STMT_NEWEXP - IRme");
 
     TEMP value = exp.IRme();
 
@@ -78,7 +76,6 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
                                       }
                                       else
                                       {
-          System.out.println(":((((");
         }
       }
 

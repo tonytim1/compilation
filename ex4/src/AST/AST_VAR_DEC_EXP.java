@@ -26,13 +26,11 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("VARDEC EXP semant me");
 		TYPE t1 = null;
 		TYPE t2 = null;
 
 
 		if (type == null || exp == null) {
-			System.out.println(">>>ERROR type or name are null");
 			printError(this.line);
 		}
 		t1 = findType(type.typeName);
@@ -56,7 +54,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 				exp instanceof AST_EXP_NIL ||
 				exp instanceof AST_EXP_STRING ||
 				exp instanceof AST_EXP_MINUS_INT)) {
-			System.out.println(">> ERROR[" + line + "] cant declare non primitive variable in class");
 			printError(line);
 		}
 		isOverride();
@@ -66,7 +63,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 	}
 
 	public TEMP IRme() {
-		System.out.println("VARDEC EXP IRme");
 		String RealId = id;
 
 				if (scope.equals("global") || (!inFunc && class_name != null)) { 			if (!inFunc && class_name != null)

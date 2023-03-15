@@ -18,12 +18,10 @@ public class AST_DEC_CLASS_DEC extends AST_DEC {
   
   
 	public TYPE SemantMe() {
-    System.out.println("DEC CLASSDEC - semant me");
     return c.SemantMe();
 	}
 
 	public TEMP IRme() {
-    System.out.println("DEC_CLASSDEC" + "- IRme");
     c.IRme();
     return null;
 }

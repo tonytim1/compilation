@@ -19,13 +19,11 @@ public class AST_DEC_FUNC_DEC extends AST_DEC {
   
 
   public TYPE SemantMe() {
-    System.out.println("DEC_FUNCDEC" + "- semantme");
     func.SemantMe();
     return null;
   }
 
   public TEMP IRme() {
-    System.out.println("DEC_FUNCDEC" + "- IRme");
 
     func.IRme();
 

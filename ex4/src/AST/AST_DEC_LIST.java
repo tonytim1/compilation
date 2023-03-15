@@ -24,7 +24,6 @@ public class AST_DEC_LIST extends AST_Node {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("DEC_LIST" + "- semantme");
 		if (head != null) {
 			head.SemantMe();
 		}
@@ -35,7 +34,6 @@ public class AST_DEC_LIST extends AST_Node {
 	}
 
 	public TEMP IRme() {
-		System.out.println("DEC_LIST" + "- IRme");
 
 		if (head != null)
 			head.IRme();

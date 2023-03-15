@@ -50,7 +50,6 @@ public class AST_VAR_FIELD extends AST_VAR {
 					fatherClass = fatherClass.father;
 				}
 			}
-			System.out.println(">> ERROR [" + line + "] no such class field");
 			printError(line);
 		}
 
@@ -65,7 +64,6 @@ public class AST_VAR_FIELD extends AST_VAR {
 			t1 = ((TYPE_CLASS) t1).father;
 		}
 
-		System.out.println(">> ERROR [" + line + "] no such class field");
 		printError(line);
 		return null;
 	}

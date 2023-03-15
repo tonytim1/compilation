@@ -43,9 +43,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		AST_TYPE_NAME_LIST funcs = null;
 		TYPE t = null;
 		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-			System.out.println("BEFORE");
-			t = it.head.SemantMe(); 			System.out.println("AFTER");
-			AST_TYPE currType = null;
+			t = it.head.SemantMe();			AST_TYPE currType = null;
 
 			if (it.head instanceof AST_C_FIELD_VAR_DEC) {
 				switch (t.name) {
@@ -58,7 +56,6 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 						break;
 					}
 					case "void": {
-						System.out.println(">> ERROR [" + line + "] void variable is illegal");
 						printError(line);
 					}
 					default: {

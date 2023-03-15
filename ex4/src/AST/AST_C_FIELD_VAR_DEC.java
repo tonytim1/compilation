@@ -19,12 +19,10 @@ public class AST_C_FIELD_VAR_DEC extends AST_C_FIELD {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("CFEILD VARDEC - semant me");
 		return vd.SemantMe();
 
 	}
 	public TEMP IRme(){
-		System.out.println("CFEILD_VARDEC" + "- IRme");
 		vd.IRme();
 		return null;
 	}

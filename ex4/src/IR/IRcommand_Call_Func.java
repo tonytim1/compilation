@@ -15,7 +15,6 @@ public class IRcommand_Call_Func extends IRcommand {
   }
 
   public void MIPSme() {
-    System.out.println("IRcommand_Call_Func" + " - MIPSme");
     TEMP_LIST reversed = null;
     if (tempList != null) {
       reversed = tempList.reverseList();
