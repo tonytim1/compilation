@@ -288,7 +288,7 @@ public class AST_CLASSDEC_EXTENDS extends AST_CLASSDEC {
 			if (it.head instanceof AST_CFEILD_FUNCDEC)
 				it.head.IRme();
 		}
-		IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist, fieldlist));
+		IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist, fieldlist));
 		// fields
 		AST_CFEILD_LIST temp = data_members;
 		for (int i = 0; i < fieldlist.size(); i++) {

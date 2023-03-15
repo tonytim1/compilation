@@ -17,7 +17,7 @@ import TYPES.*;
 
 import java.util.ArrayList;
 //not in liveness
-public class IRcommand_declareClass extends IRcommand {
+public class IRcommand_Declare_Class extends IRcommand {
 	String class_name;
 	ArrayList<ArrayList<String>> funcs;
 	ArrayList<ArrayList<ArrayList<String>>> fs;
@@ -26,7 +26,7 @@ public class IRcommand_declareClass extends IRcommand {
 		// fields are Fs
 		//funcs are funcs
 	//}
-	public IRcommand_declareClass(String name, ArrayList<ArrayList<String>> funcs,
+	public IRcommand_Declare_Class(String name, ArrayList<ArrayList<String>> funcs,
 			ArrayList<ArrayList<ArrayList<String>>> Fs) {
 		this.class_name = name;
 		this.funcs = funcs;
@@ -37,7 +37,7 @@ public class IRcommand_declareClass extends IRcommand {
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme() {
-		System.out.println("IRcommand_declareClass" + "- MIPSme");
+		System.out.println("IRcommand_Declare_Class" + "- MIPSme");
 
 		MIPSGenerator.getInstance().declare_class(class_name, funcs, fs);
 	}

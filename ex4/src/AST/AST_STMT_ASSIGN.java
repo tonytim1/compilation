@@ -120,7 +120,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 					cRcommand.offset = GetOffset(varName);
 				} else if (inclass != null) { // can be field in func
 					String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
-					IRcommand c = new IRcommand_store_field(inclass, varName, value);
+					IRcommand c = new IRcommand_Store_Field(inclass, varName, value);
 					c.offset = GetOffset(varName);
 					IR.getInstance().Add_IRcommand(c);
 
@@ -135,7 +135,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 			String f_name = ((AST_VAR_FIELD) var).fieldName;
 			String c = ((AST_VAR_FIELD) var).classN;
 			TEMP value = exp.IRme();
-			IRcommand r = new IRcommand_field_set(t1, f_name, value);
+			IRcommand r = new IRcommand_Field_Set(t1, f_name, value);
 			r.offset = GetOffset(c + "_" + f_name);
 			IR.getInstance().Add_IRcommand(r);
 			if (((AST_VAR_FIELD) var).var instanceof AST_VAR_SIMPLE)

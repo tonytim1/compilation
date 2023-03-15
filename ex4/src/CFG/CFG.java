@@ -166,12 +166,12 @@ public class CFG {
 					}
 				}
 			}
-			if (curr.line.getClass().toString().equals("class IR.IRcommand_virtual_call")) {
-				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_virtual_call) curr.line).dst.getSerialNumber()))));
+			if (curr.line.getClass().toString().equals("class IR.IRcommand_Virtual_Call")) {
+				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Virtual_Call) curr.line).dst.getSerialNumber()))));
 				curr.inSet
-						.add(("Temp_" + (Integer.toString(((IRcommand_virtual_call) curr.line).classTemp.getSerialNumber()))));
+						.add(("Temp_" + (Integer.toString(((IRcommand_Virtual_Call) curr.line).classTemp.getSerialNumber()))));
 				TEMP h;
-				TEMP_LIST t = ((IRcommand_virtual_call) curr.line).args;
+				TEMP_LIST t = ((IRcommand_Virtual_Call) curr.line).args;
 				while (t != null) {
 					h = t.head;
 					curr.inSet.add(("Temp_" + (Integer.toString(h.getSerialNumber()))));
@@ -179,10 +179,10 @@ public class CFG {
 				}
 				if (curr.inFunc) {
 					curr.FuncScope
-							.remove(("Temp_" + (Integer.toString(((IRcommand_virtual_call) curr.line).dst.getSerialNumber()))));
+							.remove(("Temp_" + (Integer.toString(((IRcommand_Virtual_Call) curr.line).dst.getSerialNumber()))));
 					curr.FuncScope
-							.add(("Temp_" + (Integer.toString(((IRcommand_virtual_call) curr.line).classTemp.getSerialNumber()))));
-					t = ((IRcommand_virtual_call) curr.line).args;
+							.add(("Temp_" + (Integer.toString(((IRcommand_Virtual_Call) curr.line).classTemp.getSerialNumber()))));
+					t = ((IRcommand_Virtual_Call) curr.line).args;
 					while (t != null) {
 						h = t.head;
 						curr.FuncScope.add(("Temp_" + (Integer.toString(h.getSerialNumber()))));
@@ -255,11 +255,11 @@ public class CFG {
 							.remove(("Temp_" + (Integer.toString(((IRcommand_Load_Local) curr.line).dst.getSerialNumber()))));
 				}
 			}
-			if (curr.line.getClass().toString().equals("class IR.IRcommand_store_field")) {
-				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_store_field) curr.line).val.getSerialNumber()))));
+			if (curr.line.getClass().toString().equals("class IR.IRcommand_Store_Field")) {
+				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Store_Field) curr.line).val.getSerialNumber()))));
 				if (curr.inFunc)
 					curr.FuncScope
-							.remove(("Temp_" + (Integer.toString(((IRcommand_store_field) curr.line).val.getSerialNumber()))));
+							.remove(("Temp_" + (Integer.toString(((IRcommand_Store_Field) curr.line).val.getSerialNumber()))));
 			}
 			if (curr.line.getClass().toString().equals("class IR.IRcommand_Field_Access")) {
 				curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Field_Access) curr.line).dst.getSerialNumber()))));
@@ -271,12 +271,12 @@ public class CFG {
 							.add(("Temp_" + (Integer.toString(((IRcommand_Field_Access) curr.line).src.getSerialNumber()))));
 				}
 			}
-			if (curr.line.getClass().toString().equals("class IR.IRcommand_field_set")) {
-				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_field_set) curr.line).dst.getSerialNumber()))));
-				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_field_set) curr.line).val.getSerialNumber()))));
+			if (curr.line.getClass().toString().equals("class IR.IRcommand_Field_Set")) {
+				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Field_Set) curr.line).dst.getSerialNumber()))));
+				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Field_Set) curr.line).val.getSerialNumber()))));
 				if (curr.inFunc) {
-					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_field_set) curr.line).dst.getSerialNumber()))));
-					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_field_set) curr.line).val.getSerialNumber()))));
+					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Field_Set) curr.line).dst.getSerialNumber()))));
+					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Field_Set) curr.line).val.getSerialNumber()))));
 				}
 			}
 			if (curr.line.getClass().toString().equals("class IR.IRcommand_Return")) {
@@ -597,34 +597,34 @@ public class CFG {
 				}
 			}
 
-			if (h.getClass().toString().equals("class IR.IRcommand_field_set")) {
+			if (h.getClass().toString().equals("class IR.IRcommand_Field_Set")) {
 				String theNum;
-				if (((IRcommand_field_set) h).dst.changed == false) {
-					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_field_set) h).dst.getSerialNumber()))));
+				if (((IRcommand_Field_Set) h).dst.changed == false) {
+					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Field_Set) h).dst.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_field_set) h).dst.serial = Integer.parseInt(theNum);
-					((IRcommand_field_set) h).dst.changed = true;
+					((IRcommand_Field_Set) h).dst.serial = Integer.parseInt(theNum);
+					((IRcommand_Field_Set) h).dst.changed = true;
 				}
-				if (((IRcommand_field_set) h).val.changed == false) {
-					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_field_set) h).val.getSerialNumber()))));
+				if (((IRcommand_Field_Set) h).val.changed == false) {
+					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Field_Set) h).val.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_field_set) h).val.serial = Integer.parseInt(theNum);
-					((IRcommand_field_set) h).val.changed = true;
+					((IRcommand_Field_Set) h).val.serial = Integer.parseInt(theNum);
+					((IRcommand_Field_Set) h).val.changed = true;
 				}
 			}
-			if (h.getClass().toString().equals("class IR.IRcommand_store_field")) {
-				if (((IRcommand_store_field) h).val.changed == false) {
+			if (h.getClass().toString().equals("class IR.IRcommand_Store_Field")) {
+				if (((IRcommand_Store_Field) h).val.changed == false) {
 					String theNum = IRtoMIPS
-							.get(("Temp_" + (Integer.toString(((IRcommand_store_field) h).val.getSerialNumber()))));
+							.get(("Temp_" + (Integer.toString(((IRcommand_Store_Field) h).val.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_store_field) h).val.serial = Integer.parseInt(theNum);
-					((IRcommand_store_field) h).val.changed = true;
+					((IRcommand_Store_Field) h).val.serial = Integer.parseInt(theNum);
+					((IRcommand_Store_Field) h).val.changed = true;
 				}
 			}
 			if (h.getClass().toString().equals("class IR.IRcommand_Return")) {
@@ -682,28 +682,28 @@ public class CFG {
 					((IRcommand_ThisDotField) h).dst.changed = true;
 				}
 			}
-			if (h.getClass().toString().equals("class IR.IRcommand_virtual_call")) {
+			if (h.getClass().toString().equals("class IR.IRcommand_Virtual_Call")) {
 				String theNum;
-				if (((IRcommand_virtual_call) h).dst.changed == false) {
+				if (((IRcommand_Virtual_Call) h).dst.changed == false) {
 					theNum = this.IRtoMIPS
-							.get(("Temp_" + (Integer.toString(((IRcommand_virtual_call) h).dst.getSerialNumber()))));
+							.get(("Temp_" + (Integer.toString(((IRcommand_Virtual_Call) h).dst.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = this.IRtoMIPS.get("dead");
 					}
-					((IRcommand_virtual_call) h).dst.serial = Integer.parseInt(theNum);
-					((IRcommand_virtual_call) h).dst.changed = true;
+					((IRcommand_Virtual_Call) h).dst.serial = Integer.parseInt(theNum);
+					((IRcommand_Virtual_Call) h).dst.changed = true;
 				}
-				if (((IRcommand_virtual_call) h).classTemp.changed == false) {
+				if (((IRcommand_Virtual_Call) h).classTemp.changed == false) {
 					theNum = this.IRtoMIPS
-							.get(("Temp_" + (Integer.toString(((IRcommand_virtual_call) h).classTemp.getSerialNumber()))));
+							.get(("Temp_" + (Integer.toString(((IRcommand_Virtual_Call) h).classTemp.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = this.IRtoMIPS.get("dead");
 					}
-					((IRcommand_virtual_call) h).classTemp.serial = Integer.parseInt(theNum);
-					((IRcommand_virtual_call) h).classTemp.changed = true;
+					((IRcommand_Virtual_Call) h).classTemp.serial = Integer.parseInt(theNum);
+					((IRcommand_Virtual_Call) h).classTemp.changed = true;
 				}
 				TEMP x;
-				TEMP_LIST y = ((IRcommand_virtual_call) h).args;
+				TEMP_LIST y = ((IRcommand_Virtual_Call) h).args;
 				while (y != null) {
 					x = y.head;
 					if (x.changed == false) {
