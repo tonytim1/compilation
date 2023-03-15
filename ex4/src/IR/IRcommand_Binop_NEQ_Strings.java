@@ -38,38 +38,17 @@ public class IRcommand_Binop_NEQ_Strings extends IRcommand_Binop {
 		String label_AssignOne = getFreshLabel("AssignOne");
 		String label_AssignZero = getFreshLabel("AssignZero");
 
-		/******************************************/
-		/* [2] if (t1==t2) goto label_AssignOne; */
-		/* if (t1!=t2) goto label_AssignZero; */
-		/******************************************/
 		MIPSGenerator.getInstance().bne(t1, t2, label_AssignOne);
 		MIPSGenerator.getInstance().beq(t1, t2, label_AssignZero);
 
-		/************************/
-		/* [3] label_AssignOne: */
-		/*                      */
-		/* t3 := 1 */
-		/* goto end; */
-		/*                      */
-		/************************/
 		MIPSGenerator.getInstance().label(label_AssignOne);
 		MIPSGenerator.getInstance().li(dst, 1);
 		MIPSGenerator.getInstance().jump(label_end);
 
-		/*************************/
-		/* [4] label_AssignZero: */
-		/*                       */
-		/* t3 := 1 */
-		/* goto end; */
-		/*                       */
-		/*************************/
 		MIPSGenerator.getInstance().label(label_AssignZero);
 		MIPSGenerator.getInstance().li(dst, 0);
 		MIPSGenerator.getInstance().jump(label_end);
 
-		/******************/
-		/* [5] label_end: */
-		/******************/
 		MIPSGenerator.getInstance().label(label_end);
 	}
 }

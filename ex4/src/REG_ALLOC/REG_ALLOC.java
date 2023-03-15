@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
-import REG_ALLOC.ColorGraph.node;
+import REG_ALLOC.DependenciesGraph.node;
 import TEMP.*;
 import MIPS.*;
 import IR.*;
@@ -316,19 +316,19 @@ public class REG_ALLOC {
 
 	public void K_color() {
 		Stack<node> stack = new Stack<node>();// here we put the nodes we delete
-		ColorGraph g = new ColorGraph(this.head);
+		DependenciesGraph g = new DependenciesGraph(this.head);
 		// simplify stage
-		Iterator<node> simplfy = g.overall.iterator();
+		Iterator<node> simplfy = g.allNodes.iterator();
 		while (simplfy.hasNext()) {
 			node curr = simplfy.next();
-			if (curr.activeNeig < 10) {
-				g.valid.remove(curr);
+			if (curr.neighborsCount < 10) {
+				g.graphNodes.remove(curr);
 				stack.push(curr);
-				Iterator<node> r = g.overall.iterator();
+				Iterator<node> r = g.allNodes.iterator();
 				while (r.hasNext()) {
 					node removing = r.next();
-					if (removing.neig.contains(curr.name)) {
-						removing.activeNeig--;
+					if (removing.neighbors.contains(curr.name)) {
+						removing.neighborsCount--;
 					}
 				}
 			}
@@ -339,7 +339,7 @@ public class REG_ALLOC {
 		// now the coloring:
 		while (!stack.isEmpty()) {
 			node toAdd = stack.pop();
-			g.valid.add(toAdd); // now he is back to graph
+			g.graphNodes.add(toAdd); // now he is back to graph
 			HashSet<String> col = new HashSet<String>();
 			col.add("0");
 			col.add("1");
@@ -350,22 +350,22 @@ public class REG_ALLOC {
 			col.add("6");
 			col.add("7");
 			col.add("8");
-			Iterator<String> n = toAdd.neig.iterator();
+			Iterator<String> n = toAdd.neighbors.iterator();
 			while (n.hasNext()) {
-				String neigName = n.next();
-				node actualNeig = g.find(neigName);
+				String neighborsName = n.next();
+				node actualNeig = g.findNode(neighborsName);
 				if (actualNeig != null) {
-					col.remove(actualNeig.paint); // becuase we can't choose that color anymore
+					col.remove(actualNeig.register); // becuase we can't choose that color anymore
 				}
 			}
-			toAdd.paint = col.iterator().next();
+			toAdd.register = col.iterator().next();
 		}
 		// if we reach here the stack is empty and everyhting has color now
-		// also, everyone are in the valid list
-		Iterator<node> lastOne = g.valid.iterator();
+		// also, everyone are in the graphNodes list
+		Iterator<node> lastOne = g.graphNodes.iterator();
 		while (lastOne.hasNext()) {
 			node curr = lastOne.next();
-			this.IRtoMIPS.put(curr.name, curr.paint);
+			this.IRtoMIPS.put(curr.name, curr.register);
 		}
 
 		this.IRtoMIPS.put("dead", "9");

@@ -4,7 +4,6 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Prologue extends IRcommand {
-//not in liveness
     int localVars;
 
     public IRcommand_Prologue(int localVars) {
