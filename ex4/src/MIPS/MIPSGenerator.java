@@ -13,14 +13,14 @@ public class MIPSGenerator {
 	public void finalizeFile() {
 		fileWriter.print("\t\n");
 		fileWriter.print("main:\n");
-				fileWriter.print("\tjal user_main\n");
+		fileWriter.print("\tjal user_main\n");
 		fileWriter.print("\tli $v0, 10\n");
 		fileWriter.print("\tsyscall\n");
 		fileWriter.close();
 	}
 
-	public void declare_class(String class_name, ArrayList<ArrayList<String>> funcs,
-			ArrayList<ArrayList<ArrayList<String>>> fs) {
+	public void create_new_class(String class_name, ArrayList<ArrayList<String>> funcs,
+		ArrayList<ArrayList<ArrayList<String>>> fs) {
 		fileWriter.format(".data\n");
 		fileWriter.format("vt_%s:\n", class_name);
 		if (funcs.size() == 0)
@@ -35,21 +35,21 @@ public class MIPSGenerator {
 	}
 
 	public void field_Access(TEMP t2, int offset, TEMP t1) {
-		int t1id = t1.getSerialNumber();
-		int t2id = t2.getSerialNumber();
+		int id1 = t1.getSerialNumber();
+		int id2 = t2.getSerialNumber();
 
-		fileWriter.format("\tbeq $t%d, 0, invalid_pointer_dereference\n", t1id);
-		fileWriter.format("\tlw $t%d, %d($t%d)\n", t2id, offset, t1id);
+		fileWriter.format("\tbeq $t%d, 0, invalid_pointer_dereference\n", id1);
+		fileWriter.format("\tlw $t%d, %d($t%d)\n", id2, offset, id1);
 
 	}
 
-	public void field_set(TEMP t1, int off, TEMP val) {
-		int t1id = t1.getSerialNumber();
-		int valid = val.getSerialNumber();
+	public void field_set(TEMP t1, int offset, TEMP val) {
+		int id1 = t1.getSerialNumber();
+		int isValid = val.getSerialNumber();
 
-		fileWriter.format("\tbeq $t%d, 0, invalid_pointer_dereference\n", t1id);
-		fileWriter.format("\tla $s0, %d($t%d)\n", off, t1id);
-		fileWriter.format("\tsw $t%d, 0($s0)\n", valid);
+		fileWriter.format("\tbeq $t%d, 0, invalid_pointer_dereference\n", id1);
+		fileWriter.format("\tla $s0, %d($t%d)\n", offset, id1);
+		fileWriter.format("\tsw $t%d, 0($s0)\n", isValid);
 				
 	}
 
