@@ -27,7 +27,7 @@ public class CFG {
 
 	public CFG() {
 		IRcommand h = IR.getInstance().head;
-		IRcommandList t = IR.getInstance().tail;
+		IRcommand_List t = IR.getInstance().tail;
 		int lineCounter = 0;
 		this.head = new basicBlock(lineCounter, h);
 		lineCounter++;
@@ -192,7 +192,7 @@ public class CFG {
 			}
 			if (curr.line.IRname.equals("IRcommand_Conditional_Jump")) {
 				if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_bnez"))
-						|| (curr.line.getClass().toString().equals("class IR.IRcommand_Jump_beqz"))) {
+						|| (curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Beqz"))) {
 					curr.inSet
 							.add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).oprnd1.getSerialNumber()))));
 					if (curr.inFunc) {
@@ -374,7 +374,7 @@ public class CFG {
 
 	public void changeIR() {
 		IRcommand h = IR.getInstance().head;
-		IRcommandList t = IR.getInstance().tail;
+		IRcommand_List t = IR.getInstance().tail;
 		while (t != null) {
 			if (h.IRname.equals("IRcommand_Binop")) {
 				String theNum;
@@ -474,7 +474,7 @@ public class CFG {
 
 			if (h.IRname.equals("class IR.IRcommand_Conditional_Jump")) {
 				if ((h.getClass().toString().equals("class IR.IRcommand_Jump_bnez"))
-						|| (h.getClass().toString().equals("class IR.IRcommand_Jump_beqz"))) {
+						|| (h.getClass().toString().equals("class IR.IRcommand_Jump_Beqz"))) {
 					if (((IRcommand_Conditional_Jump) h).oprnd1.changed == false) {
 						String theNum = IRtoMIPS
 								.get(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) h).oprnd1.getSerialNumber()))));
