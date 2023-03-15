@@ -5,13 +5,13 @@ import IR.*;
 import SYMBOL_TABLE.*;
 import TEMP.*;
 
-public class AST_NEWEXP_TYPE extends AST_NEWEXP {
+public class AST_NEW_EXP_TYPE extends AST_NEWEXP {
   public AST_TYPE t;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_NEWEXP_TYPE(AST_TYPE t, int line) {
+  public AST_NEW_EXP_TYPE(AST_TYPE t, int line) {
     this.t = t;
     this.line = line;
     /******************************/

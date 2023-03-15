@@ -221,6 +221,23 @@ var ::=			ID:name														{: RESULT = new AST_VAR_SIMPLE(name, nameleft + 1
 				| var:v DOT ID:name											{: RESULT = new AST_VAR_FIELD(v, name, vleft + 1); :} 
 				| var:v LBRACK exp:e RBRACK									{: RESULT = new AST_VAR_SUBSCRIPT(v, e, vleft + 1); :} 
 				;
+	
+stmt ::=		varDec:v													{: RESULT = new AST_STMT_VAR_DEC(v); :}
+				| var:v ASSIGN newExp:e SEMICOLON						    {: RESULT = new AST_STMT_ASSIGN_NEW(v, e, vleft + 1); :}
+				| var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v, e, vleft + 1); :}
+				| RETURN exp:e SEMICOLON									{: RESULT = new AST_STMT_EXP(e, eleft + 1); :}
+				| RETURN:r SEMICOLON										{: RESULT = new AST_STMT_RETURN(rleft + 1); :}
+				| IF LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE		{: RESULT = new AST_STMT_IF(cond, body, condleft + 1); :}
+				| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond, body, condleft + 1); :}
+				| ID:name LPAREN RPAREN SEMICOLON							{: RESULT = new AST_STMT_ID(name, nameleft + 1); :}
+				| ID:name LPAREN expList:el RPAREN SEMICOLON				{: RESULT = new AST_STMT_EXP_LIST(name, el, nameleft + 1); :}
+				| var:v DOT ID:name LPAREN RPAREN SEMICOLON					{: RESULT = new AST_STMT_VAR_ID(v, name); :}
+				| var:v DOT ID:name LPAREN expList:el RPAREN SEMICOLON		{: RESULT = new AST_STMT_VAR_EXP_LIST(v, name, el); :}
+				;
+								
+stmtList ::=	stmt:s	stmtList:l											{: RESULT = new AST_STMT_LIST(s, l); :}
+				| stmt:s													{: RESULT = new AST_STMT_LIST(s, null); :}
+				;
 
 exp ::=			var:v									 		 			{: RESULT = new AST_EXP_VAR(v); :}
 				| LPAREN exp:e1 RPAREN							 			{: RESULT = new AST_EXP_SIMPLE(e1); :}
@@ -238,33 +255,17 @@ exp ::=			var:v									 		 			{: RESULT = new AST_EXP_VAR(v); :}
 expList ::=    	exp:e COMMA expList:el		    							{: RESULT = new AST_EXP_LIST(e, el, eleft + 1); :} 
 				| exp:e     		  			    						{: RESULT = new AST_EXP_LIST(e, null, eleft + 1); :}
 				;
-					
-stmtList ::=	stmt:s	stmtList:l											{: RESULT = new AST_STMT_LIST(s, l); :}
-				| stmt:s													{: RESULT = new AST_STMT_LIST(s, null); :}
+
+newExp ::=		NEW type:t 							 						{: RESULT = new AST_NEW_EXP_TYPE(t, tleft + 1); :}
+				| NEW type:t LBRACK exp:e RBRACK 	 						{: RESULT = new AST_NEW_EXP_TYPE_EXP(t, e, tleft + 1); :}
 				;
 
-stmt		::=		var:v ASSIGN exp:e SEMICOLON									{: RESULT = new AST_STMT_ASSIGN(v,e,vleft + 1);		 :}
-					|varDec:vd													 	{: RESULT = new AST_STMT_VAR_DEC(vd); 		 :}
-					|var:v ASSIGN newExp:ne SEMICOLON						    	{: RESULT = new AST_STMT_ASSIGN_NEW(v,ne, vleft + 1);  	 :}
-					|RETURN exp:e SEMICOLON											{: RESULT = new AST_STMT_EXP(e, eleft + 1);  			 :}
-					|RETURN:r SEMICOLON												{: RESULT = new AST_STMT_RETURN(rleft + 1); 			 :}
-					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE		{: RESULT = new AST_STMT_IF(cond,body,condleft +1); 	 :}
-					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE		{: RESULT = new AST_STMT_WHILE(cond,body,condleft +1); 	 :}
-					| var:v DOT ID:name LPAREN expList:el RPAREN SEMICOLON			{: RESULT = new AST_STMT_VAR_EXP_LIST(v,name,el);  :}
-					| var:v DOT ID:name LPAREN RPAREN SEMICOLON						{: RESULT = new AST_STMT_VAR_ID(v,name);     :}
-					| ID:name LPAREN expList:el RPAREN SEMICOLON					{: RESULT = new AST_STMT_EXP_LIST(name,el, nameleft +1);   :}
-					| ID:name LPAREN RPAREN SEMICOLON								{: RESULT = new AST_STMT_ID(name, nameleft+1);           :}
-					;
-newExp 		::= 	NEW type:t 							 {: RESULT = new AST_NEWEXP_TYPE(t,tleft+1); :}
-					| NEW type:t LBRACK exp:e RBRACK 	 {: RESULT = new AST_NEWEXP_EXP(t,e, tleft + 1);:}
-					;
-
-BINOP 		::= 	exp:e1 PLUS  exp:e2 			{: RESULT = new AST_BINOP(0,e1,e2,e1left +1); :}	
-					| exp:e1 MINUS  exp:e2			{: RESULT = new AST_BINOP(1,e1,e2,e1left +1); :}
-					| exp:e1 TIMES  exp:e2 			{: RESULT = new AST_BINOP(2,e1,e2,e1left +1); :}
-					| exp:e1 DIVIDE  exp:e2			{: RESULT = new AST_BINOP(3,e1,e2,e1left +1); :}
-					| exp:e1 GT  exp:e2				{: RESULT = new AST_BINOP(4,e1,e2,e1left +1); :}
-					| exp:e1 LT  exp:e2				{: RESULT = new AST_BINOP(5,e1,e2,e1left +1); :}
-					| exp:e1 EQ  exp:e2				{: RESULT = new AST_BINOP(6,e1,e2,e1left +1); :}
-					| exp:e1 NE  exp:e2				{: RESULT = new AST_BINOP(7,e1,e2,e1left +1); :}
-					;
+BINOP ::=		exp:e1 PLUS exp:e2 											{: RESULT = new AST_BINOP(1, e1, e2, e1left + 1); :}	
+				| exp:e1 MINUS exp:e2										{: RESULT = new AST_BINOP(2, e1, e2, e1left + 1); :}
+				| exp:e1 TIMES exp:e2 										{: RESULT = new AST_BINOP(3, e1, e2, e1left + 1); :}
+				| exp:e1 DIVIDE exp:e2										{: RESULT = new AST_BINOP(4, e1, e2, e1left + 1); :}
+				| exp:e1 GT exp:e2											{: RESULT = new AST_BINOP(5, e1, e2, e1left + 1); :}
+				| exp:e1 LT exp:e2											{: RESULT = new AST_BINOP(6, e1, e2, e1left + 1); :}
+				| exp:e1 EQ exp:e2											{: RESULT = new AST_BINOP(7, e1, e2, e1left + 1); :}
+				| exp:e1 NE exp:e2             								{: RESULT = new AST_BINOP(8, e1, e2, e1left + 1); :}
+				;
