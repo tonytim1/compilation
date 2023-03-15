@@ -4,14 +4,14 @@ import SYMBOL_TABLE.SYMBOL_TABLE;
 import TEMP.TEMP;
 import TYPES.*;
 
-public class AST_ATD extends AST_Node {
+public class AST_ARRAY_TYPE_DEF extends AST_Node {
 	public AST_TYPE type;
 	public String id;
 
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_ATD(String id, AST_TYPE type, int line) {
+	public AST_ARRAY_TYPE_DEF(String id, AST_TYPE type, int line) {
 		this.type = type;
 		this.id = id;
 		this.line = line;

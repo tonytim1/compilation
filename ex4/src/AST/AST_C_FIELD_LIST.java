@@ -4,17 +4,17 @@ import TYPES.*;
 import TEMP.*;
 import IR.*;
 
-public class AST_CFEILD_LIST extends AST_Node {
+public class AST_C_FIELD_LIST extends AST_Node {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
 	public AST_CFIELD head;
-	public AST_CFEILD_LIST tail;
+	public AST_C_FIELD_LIST tail;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_CFEILD_LIST(AST_CFIELD head, AST_CFEILD_LIST tail) {
+	public AST_C_FIELD_LIST(AST_CFIELD head, AST_C_FIELD_LIST tail) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

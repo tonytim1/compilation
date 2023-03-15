@@ -5,7 +5,7 @@ import SYMBOL_TABLE.*;
 import TEMP.*;
 import IR.*;
 
-public class AST_VARDEC_SIMPLE extends AST_VARDEC {
+public class AST_VAR_DEC_SIMPLE extends AST_VARDEC {
 
   /*******************/
   /* CONSTRUCTOR(S) */
@@ -14,7 +14,7 @@ public class AST_VARDEC_SIMPLE extends AST_VARDEC {
   public TYPE t;
   public boolean inFunc;
 
-  public AST_VARDEC_SIMPLE(AST_TYPE type, String id, int line) {
+  public AST_VAR_DEC_SIMPLE(AST_TYPE type, String id, int line) {
     this.type = type;
     this.id = id;
     this.line = line;

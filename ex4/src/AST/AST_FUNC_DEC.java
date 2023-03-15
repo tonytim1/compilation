@@ -8,7 +8,7 @@ import IR.*;
 import java.util.Map;
 import java.util.HashMap;
 
-public class AST_FUNCDEC extends AST_Node {
+public class AST_FUNC_DEC extends AST_Node {
   public AST_TYPE returnType;
   public String id;
   public AST_ARG_LIST arglist;
@@ -19,7 +19,7 @@ public class AST_FUNCDEC extends AST_Node {
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_FUNCDEC(AST_TYPE returnType, String id, AST_ARG_LIST arglist, AST_STMT_LIST list, int line) {
+  public AST_FUNC_DEC(AST_TYPE returnType, String id, AST_ARG_LIST arglist, AST_STMT_LIST list, int line) {
     this.returnType = returnType;
     this.id = id;
     this.arglist = arglist;
@@ -43,7 +43,7 @@ public class AST_FUNCDEC extends AST_Node {
     /*************************************/
     /* AST NODE TYPE- change XXX with this class name */
     /*************************************/
-    System.out.print(String.format("AST %s NODE\n", "AST_FUNCDEC"));
+    System.out.print(String.format("AST %s NODE\n", "AST_FUNC_DEC"));
 
     /**************************************/
     /* RECURSIVELY PRINT non-null(!) sons (list, t and right...) */

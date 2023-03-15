@@ -3,27 +3,20 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_CFEILD_VARDEC extends AST_CFIELD {
-	public AST_VARDEC vd;
+public class AST_C_FIELD_FUNC_DEC extends AST_CFIELD {
+	public AST_FUNC_DEC func;
 
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_CFEILD_VARDEC(AST_VARDEC vd) {
-		this.vd = vd;
+	public AST_C_FIELD_FUNC_DEC(AST_FUNC_DEC func) {
+		this.func = func;
+
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
-		if (vd != null)
-			System.out.print("====================== cfield -> varDec\n");
 	}
-
-	/****************** outside CONSTRUCTOR code *******************/
 
 	/*************************************************/
 	/* The printing message for a XXX node */
@@ -33,18 +26,18 @@ public class AST_CFEILD_VARDEC extends AST_CFIELD {
 		/*************************************/
 		/* AST NODE TYPE- change XXX with this class name */
 		/*************************************/
-		System.out.print(String.format("AST %s NODE\n", "CFEILD_VARDEC"));
+		System.out.print(String.format("AST %s NODE\n", "CFEILD_FUNCDEC"));
 
 		/**************************************/
 		/* RECURSIVELY PRINT non-null(!) sons (list, left and right...) */
 		/**************************************/
-		if (vd != null)
-			vd.PrintMe();
+		if (func != null)
+			func.PrintMe();
 		/***************************************/
 		/* PRINT Node to AST GRAPHVIZ DOT file */
 		/* print node name and optional string (maybe only needed in binop nodes) */
 		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("CFEILD_VARDEC"));
+		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("CFEILD_FUNCDEC"));
 
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
@@ -52,20 +45,19 @@ public class AST_CFEILD_VARDEC extends AST_CFIELD {
 		 * Print Edges to every son!
 		 */
 		/****************************************/
-		if (vd != null) {
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, vd.SerialNumber);
+		if (func != null) {
+			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, func.SerialNumber);
 		}
 	}
 
 	public TYPE SemantMe() {
-		System.out.println("CFEILD VARDEC - semant me");
-		return vd.SemantMe();
-
+		System.out.println("CFEILD FUNCDEC semant me");
+		return func.SemantMe();
 	}
-	public TEMP IRme(){
-		System.out.println("CFEILD_VARDEC" + "- IRme");
-		vd.IRme();
+
+	public TEMP IRme() {
+		System.out.println("CFEILD_FUNCDEC - IRme");
+		func.IRme();
 		return null;
 	}
-
 }

@@ -7,7 +7,7 @@ import IR.*;
 import SYMBOL_TABLE.*;
 import MIPS.*;
 
-public class AST_VARDEC_EXP extends AST_VARDEC {
+public class AST_VAR_DEC_EXP extends AST_VARDEC {
 	public AST_EXP exp;
 	String scope; // for IRme
 	String class_name; // for IRme
@@ -16,7 +16,7 @@ public class AST_VARDEC_EXP extends AST_VARDEC {
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_VARDEC_EXP(AST_TYPE type, String id, AST_EXP exp, int line) {
+	public AST_VAR_DEC_EXP(AST_TYPE type, String id, AST_EXP exp, int line) {
 		this.type = type;
 		this.id = id;
 		this.exp = exp;

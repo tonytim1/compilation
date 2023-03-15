@@ -5,7 +5,7 @@ import TYPES.*;
 import TEMP.*;
 import IR.*;
 
-public class AST_VARDEC_NEWEXP extends AST_VARDEC {
+public class AST_VAR_DEC_NEW_EXP extends AST_VARDEC {
   public AST_NEWEXP exp;
   public TYPE t; // for IRme
 
@@ -13,7 +13,7 @@ public class AST_VARDEC_NEWEXP extends AST_VARDEC {
   /* CONSTRUCTOR(S) */
   /*******************/
 
-  public AST_VARDEC_NEWEXP(AST_TYPE type, String id, AST_NEWEXP exp, int line) {
+  public AST_VAR_DEC_NEW_EXP(AST_TYPE type, String id, AST_NEWEXP exp, int line) {
     this.type = type;
     this.id = id;
     this.exp = exp;

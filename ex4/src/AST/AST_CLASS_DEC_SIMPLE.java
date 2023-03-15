@@ -14,7 +14,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_CLASS_DEC_SIMPLE(String id, AST_CFEILD_LIST data_members, int line) {
+  public AST_CLASS_DEC_SIMPLE(String id, AST_C_FIELD_LIST data_members, int line) {
     this.data_members = data_members;
     this.id = id;
     this.line = line;
@@ -86,11 +86,11 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     AST_TYPE_NAME_LIST funcs = null;
     TYPE t = null;
 
-    for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       t = it.head.SemantMe(); // enter garbage to the stack
       AST_TYPE currType = null;
 
-      if (it.head instanceof AST_CFEILD_VARDEC) {
+      if (it.head instanceof AST_C_FIELD_VAR_DEC) {
         switch (t.name) {
           case "int": {
             currType = new AST_TYPE_INT(line);
@@ -109,12 +109,12 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
             break;
           }
         }
-        AST_ARG curr = new AST_ARG(currType, ((AST_CFEILD_VARDEC) it.head).vd.id);
+        AST_ARG curr = new AST_ARG(currType, ((AST_C_FIELD_VAR_DEC) it.head).vd.id);
         fields = new AST_ARG_LIST(curr, fields);
       }
 
-      if (it.head instanceof AST_CFEILD_FUNCDEC) {
-        AST_TYPE_NAME curr = new AST_TYPE_NAME(t, ((AST_CFEILD_FUNCDEC) it.head).func.id);
+      if (it.head instanceof AST_C_FIELD_FUNC_DEC) {
+        AST_TYPE_NAME curr = new AST_TYPE_NAME(t, ((AST_C_FIELD_FUNC_DEC) it.head).func.id);
         funcs = new AST_TYPE_NAME_LIST(curr, funcs);
       }
     }
@@ -127,7 +127,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     SYMBOL_TABLE.getInstance().enter(id, classType);
     SYMBOL_TABLE.getInstance().beginScope("class-" + id);
 
-    for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       t = it.head.SemantMe(); // enter real values to the stack
     }
 
@@ -153,21 +153,21 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     Map<String, Integer> funcOff = new HashMap<>();
     int fieldCnt = 0;
     int funcCnt = 0;
-    for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       AST_CFIELD field = (AST_CFIELD) (it.head);
-      if (field instanceof AST_CFEILD_VARDEC) { // field
+      if (field instanceof AST_C_FIELD_VAR_DEC) { // field
         fieldCnt += 1;
         continue;
       }
-      if (field instanceof AST_CFEILD_FUNCDEC) { // func
+      if (field instanceof AST_C_FIELD_FUNC_DEC) { // func
                                                  // funcCnt += 1;
-        AST_CFEILD_FUNCDEC a = (AST_CFEILD_FUNCDEC) field;
-        AST_FUNCDEC b = (AST_FUNCDEC) (a.func);
+        AST_C_FIELD_FUNC_DEC a = (AST_C_FIELD_FUNC_DEC) field;
+        AST_FUNC_DEC b = (AST_FUNC_DEC) (a.func);
         offsets.put(id + "_" + b.id, id + "_" + b.id);
       }
 
-      AST_CFEILD_FUNCDEC a = (AST_CFEILD_FUNCDEC) field;
-      AST_FUNCDEC b = (AST_FUNCDEC) (a.func);
+      AST_C_FIELD_FUNC_DEC a = (AST_C_FIELD_FUNC_DEC) field;
+      AST_FUNC_DEC b = (AST_FUNC_DEC) (a.func);
 
       ArrayList<String> function = new ArrayList<String>();
       function.add(b.id);
@@ -182,12 +182,12 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
 
     fieldCnt = 0;
     ArrayList<String> fieldslist = new ArrayList<>();
-    for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       AST_CFIELD field = (AST_CFIELD) (it.head);
 
-      if (field instanceof AST_CFEILD_VARDEC) { // field
+      if (field instanceof AST_C_FIELD_VAR_DEC) { // field
                                                 // fieldCnt += 1;
-        AST_CFEILD_VARDEC var = (AST_CFEILD_VARDEC) field;
+        AST_C_FIELD_VAR_DEC var = (AST_C_FIELD_VAR_DEC) field;
         AST_VARDEC b = (AST_VARDEC) (var.vd);
         String off = String.valueOf(fieldCnt * 4 + 4);
         offsets.put(id + "_" + b.id, off);
@@ -210,14 +210,14 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     }
     // IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist,
     // fields));
-    for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
-      if (it.head instanceof AST_CFEILD_FUNCDEC)
+    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+      if (it.head instanceof AST_C_FIELD_FUNC_DEC)
         it.head.IRme();
     }
     classSize.put(id, fields.size() * 4 + 4);
     IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist, fields));
-    for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
-      if (it.head instanceof AST_CFEILD_VARDEC)
+    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+      if (it.head instanceof AST_C_FIELD_VAR_DEC)
         it.head.IRme();
     }
     classfields.put(id, fieldslist);

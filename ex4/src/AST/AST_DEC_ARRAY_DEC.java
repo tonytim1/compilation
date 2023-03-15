@@ -4,12 +4,12 @@ import TYPES.*;
 import TEMP.*;
 
 public class AST_DEC_ARRAY_DEC extends AST_DEC {
-  public AST_ATD array;
+  public AST_ARRAY_TYPE_DEF array;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_DEC_ARRAY_DEC(AST_ATD array) {
+  public AST_DEC_ARRAY_DEC(AST_ARRAY_TYPE_DEF array) {
     this.array = array;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */

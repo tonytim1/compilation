@@ -15,7 +15,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_CFEILD_LIST l, int line) {
+	public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_C_FIELD_LIST l, int line) {
 		this.id = id1;
 		this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(id2);
 		this.fatherName = id2;
@@ -87,13 +87,13 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		AST_ARG_LIST fields = null;
 		AST_TYPE_NAME_LIST funcs = null;
 		TYPE t = null;
-		for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
+		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
 			System.out.println("BEFORE");
 			t = it.head.SemantMe(); // enter garbage to the stack
 			System.out.println("AFTER");
 			AST_TYPE currType = null;
 
-			if (it.head instanceof AST_CFEILD_VARDEC) {
+			if (it.head instanceof AST_C_FIELD_VAR_DEC) {
 				switch (t.name) {
 					case "int": {
 						currType = new AST_TYPE_INT(line);
@@ -112,12 +112,12 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 						break;
 					}
 				}
-				AST_ARG curr = new AST_ARG(currType, ((AST_CFEILD_VARDEC) it.head).vd.id);
+				AST_ARG curr = new AST_ARG(currType, ((AST_C_FIELD_VAR_DEC) it.head).vd.id);
 				fields = new AST_ARG_LIST(curr, fields);
 			}
 
-			if (it.head instanceof AST_CFEILD_FUNCDEC) {
-				AST_TYPE_NAME curr = new AST_TYPE_NAME(t, ((AST_CFEILD_FUNCDEC) it.head).func.id);
+			if (it.head instanceof AST_C_FIELD_FUNC_DEC) {
+				AST_TYPE_NAME curr = new AST_TYPE_NAME(t, ((AST_C_FIELD_FUNC_DEC) it.head).func.id);
 				funcs = new AST_TYPE_NAME_LIST(curr, funcs);
 			}
 		}
@@ -129,7 +129,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		TYPE_CLASS classType = new TYPE_CLASS(father, id, fields, funcs);
 		SYMBOL_TABLE.getInstance().enter(id, classType);
 		SYMBOL_TABLE.getInstance().beginScope("class-" + id + "-extends-" + this.father.name);
-		for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
+		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
 			t = it.head.SemantMe(); // enter real values to the stack
 		}
 		SYMBOL_TABLE.getInstance().endScope();
@@ -208,11 +208,11 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 
 		// #############################################################3
 		// #################second part - this class fields and funcs
-		for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
+		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
 			AST_CFIELD field = (AST_CFIELD) (it.head);
-			if (field instanceof AST_CFEILD_VARDEC) { // field
+			if (field instanceof AST_C_FIELD_VAR_DEC) { // field
 				f = false;
-				AST_CFEILD_VARDEC a = (AST_CFEILD_VARDEC) field;
+				AST_C_FIELD_VAR_DEC a = (AST_C_FIELD_VAR_DEC) field;
 				AST_VARDEC b = (AST_VARDEC) (a.vd);
 				int n = fieldlist.size();
 				for (int i = 0; i < n; i++) {
@@ -238,10 +238,10 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 				}
 				continue;
 			}
-			if (field instanceof AST_CFEILD_FUNCDEC) { // func
+			if (field instanceof AST_C_FIELD_FUNC_DEC) { // func
 				f = false;
-				AST_CFEILD_FUNCDEC a = (AST_CFEILD_FUNCDEC) field;
-				AST_FUNCDEC b = (AST_FUNCDEC) (a.func);
+				AST_C_FIELD_FUNC_DEC a = (AST_C_FIELD_FUNC_DEC) field;
+				AST_FUNC_DEC b = (AST_FUNC_DEC) (a.func);
 				int n = funclist.size();
 				for (int i = 0; i < n; i++) {
 					if (((funclist.get(i)).get(0)).equals(b.id)) {
@@ -284,13 +284,13 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		// #######################part 4 - mips function
 		// ################################
 		// son funcs
-		for (AST_CFEILD_LIST it = data_members; it != null; it = it.tail) {
-			if (it.head instanceof AST_CFEILD_FUNCDEC)
+		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+			if (it.head instanceof AST_C_FIELD_FUNC_DEC)
 				it.head.IRme();
 		}
 		IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist, fieldlist));
 		// fields
-		AST_CFEILD_LIST temp = data_members;
+		AST_C_FIELD_LIST temp = data_members;
 		for (int i = 0; i < fieldlist.size(); i++) {
 			String tf = fieldlist.get(i).get(1).get(0);
 			String n = fieldlist.get(i).get(0).get(0);
@@ -305,9 +305,9 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id + "_" + n, Integer.valueOf(v)));
 			} else // son feilds
 			{
-				for (AST_CFEILD_LIST it = temp; it != null; it = it.tail) {
-					if (it.head instanceof AST_CFEILD_VARDEC &&
-							((AST_CFEILD_VARDEC) it.head).vd.id.equals(n)) {
+				for (AST_C_FIELD_LIST it = temp; it != null; it = it.tail) {
+					if (it.head instanceof AST_C_FIELD_VAR_DEC &&
+							((AST_C_FIELD_VAR_DEC) it.head).vd.id.equals(n)) {
 						it.head.IRme();
 						temp = data_members;
 						break;

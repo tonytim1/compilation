@@ -130,15 +130,15 @@ non terminal AST_STMT_LIST stmtList;
 non terminal AST_PROGRAM Program;
 non terminal AST_DEC dec;
 non terminal AST_TYPE type;
-non terminal AST_ATD arrayTypedef;
+non terminal AST_ARRAY_TYPE_DEF arrayTypedef;
 non terminal AST_VARDEC varDec;
-non terminal AST_FUNCDEC funcDec;
+non terminal AST_FUNC_DEC funcDec;
 non terminal AST_CLASS_DEC classDec;
 non terminal AST_CFIELD cField;
 non terminal AST_NEWEXP newExp;
 non terminal AST_DEC_LIST decList;
 non terminal AST_EXP_BINOP expBinop;
-non terminal AST_CFEILD_LIST cFieldList;
+non terminal AST_C_FIELD_LIST cFieldList;
 non terminal AST_BINOP BINOP;
 non terminal AST_EXPLIST expList;
 non terminal AST_ARG_LIST argList;
@@ -183,13 +183,13 @@ stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
 					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
 					;
 
-cFieldList	::=		cField:c cFieldList:l {: RESULT = new AST_CFEILD_LIST(c,l);    :}
-						| cField:c  {: RESULT = new AST_CFEILD_LIST(c,null);    :}
-						;
-
-cField 		::= 	varDec:vd 				{: RESULT = new AST_CFEILD_VARDEC(vd);  :}
-					| funcDec:fd			{: RESULT = new AST_CFEILD_FUNCDEC(fd); :}
-					;
+cField ::=		varDec:v 													{: RESULT = new AST_C_FIELD_VAR_DEC(v); :}
+				| funcDec:f													{: RESULT = new AST_C_FIELD_FUNC_DEC(f); :}
+				;
+					
+cFieldList ::=	cField:c cFieldList:l 										{: RESULT = new AST_C_FIELD_LIST(c, l); :}
+				| cField:c 									 				{: RESULT = new AST_C_FIELD_LIST(c, null); :}
+				;						
 
 type  ::= 	TYPE_INT:t 				{: RESULT= new AST_TYPE_INT(tleft + 1)  ;:}
 			| TYPE_STRING:s			{: RESULT= new AST_TYPE_STRING(sleft + 1) ;:}
@@ -197,16 +197,17 @@ type  ::= 	TYPE_INT:t 				{: RESULT= new AST_TYPE_INT(tleft + 1)  ;:}
 			| ID:id					{: RESULT= new AST_TYPE_ID(id, idleft + 1) ;:}
 			;
 
-arrayTypedef ::= 	ARRAY ID:id EQ type:t LBRACK RBRACK SEMICOLON {: RESULT= new AST_ATD(id, t, idleft + 1) ;:};
+arrayTypedef ::=ARRAY ID:name EQ type:t LBRACK RBRACK SEMICOLON 			{: RESULT = new AST_ARRAY_TYPE_DEF(name, t, nameleft + 1); :};
 
-varDec	::= type:t ID:id SEMICOLON							{: RESULT= new AST_VARDEC_SIMPLE(t,id, tleft + 1) ;:}
-				| type:t ID:id ASSIGN exp:e SEMICOLON		{: RESULT= new AST_VARDEC_EXP(t,id,e, tleft + 1)  ;:}
-				| type:t ID:id ASSIGN newExp:e SEMICOLON	{: RESULT= new AST_VARDEC_NEWEXP(t,id,e,tleft + 1) ;:}
-				;
 
-funcDec	::= 	type:t ID:id LPAREN RPAREN LBRACE stmtList:s RBRACE 			{: RESULT= new AST_FUNCDEC(t,id, null,s, tleft + 1 );:}
-				| type:t ID:id LPAREN argList:a RPAREN LBRACE stmtList:s RBRACE	{: RESULT= new AST_FUNCDEC(t,id,a,s, tleft + 1) ;:}
-				;
+varDec ::=		type:t ID:name SEMICOLON									{: RESULT = new AST_VAR_DEC_SIMPLE(t, name, tleft + 1); :}
+				| type:t ID:name ASSIGN exp:e SEMICOLON						{: RESULT = new AST_VAR_DEC_EXP(t, name, e, tleft + 1); :}
+				| type:t ID:name ASSIGN newExp:e SEMICOLON					{: RESULT = new AST_VAR_DEC_NEW_EXP(t, name, e, tleft + 1); :}
+				;				
+
+funcDec ::=		type:t ID:name LPAREN RPAREN LBRACE stmtList:sl RBRACE 				{: RESULT = new AST_FUNC_DEC(t, name, null, sl, tleft + 1 ); :}
+				| type:t ID:name LPAREN argList:a RPAREN LBRACE stmtList:sl RBRACE	{: RESULT = new AST_FUNC_DEC(t, name, a, sl, tleft + 1); :}
+				;				
 
 arg ::=  type:t ID:id  					{: RESULT = new AST_ARG(t, id); :} ;
 
@@ -214,9 +215,9 @@ argList ::= arg:a										{: RESULT = new AST_ARG_LIST(a,null); :}
 				| arg:a COMMA argList:l 		{: RESULT = new AST_ARG_LIST(a,l); :}
 				;
 							
-classDec 	::= 	CLASS ID:id LBRACE cFieldList:cl RBRACE 		  {: RESULT= new AST_CLASS_DEC_SIMPLE(id, cl,idleft +1); :}
-					| CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE {: RESULT= new AST_CLASS_DEC_EXTENDS(id1, id2, cl,id1left +1);  :}
-					; 
+classDec ::=	CLASS ID:name LBRACE cFieldList:cl RBRACE 		  				{: RESULT = new AST_CLASS_DEC_SIMPLE(name, cl, nameleft + 1); :}
+				| CLASS ID:name1 EXTENDS ID:name2 LBRACE cFieldList:cl RBRACE 	{: RESULT = new AST_CLASS_DEC_EXTENDS(name1, name2, cl, name1left + 1); :}
+				;
 
 exp			::=		var:v									 		 {: RESULT = new AST_EXP_VAR(v);          			   :}
 					| LPAREN exp:e1 RPAREN							 {: RESULT = new AST_EXP_SIMPLE(e1);        			   :}
