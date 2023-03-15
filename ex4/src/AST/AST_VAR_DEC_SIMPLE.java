@@ -5,7 +5,7 @@ import SYMBOL_TABLE.*;
 import TEMP.*;
 import IR.*;
 
-public class AST_VAR_DEC_SIMPLE extends AST_VARDEC {
+public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
 
   /*******************/
   /* CONSTRUCTOR(S) */

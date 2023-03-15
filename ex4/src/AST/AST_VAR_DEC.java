@@ -3,7 +3,7 @@ package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
 
-public abstract class AST_VARDEC extends AST_Node {
+public abstract class AST_VAR_DEC extends AST_Node {
     public AST_TYPE type;
     public String id;
     public String scope; // for IRme

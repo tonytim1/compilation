@@ -4,12 +4,12 @@ import TYPES.*;
 import TEMP.*;
 
 public class AST_STMT_VAR_DEC extends AST_STMT {
-  public AST_VARDEC v;
+  public AST_VAR_DEC v;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_STMT_VAR_DEC(AST_VARDEC v) {
+  public AST_STMT_VAR_DEC(AST_VAR_DEC v) {
     this.v = v;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */

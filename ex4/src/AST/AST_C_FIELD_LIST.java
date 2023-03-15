@@ -8,13 +8,13 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public AST_CFIELD head;
+	public AST_C_FIELD head;
 	public AST_C_FIELD_LIST tail;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_C_FIELD_LIST(AST_CFIELD head, AST_C_FIELD_LIST tail) {
+	public AST_C_FIELD_LIST(AST_C_FIELD head, AST_C_FIELD_LIST tail) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
