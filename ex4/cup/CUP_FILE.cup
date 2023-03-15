@@ -193,7 +193,7 @@ classDec ::=	CLASS ID:name LBRACE cFieldList:cl RBRACE 		  				{: RESULT = new A
 				| CLASS ID:name1 EXTENDS ID:name2 LBRACE cFieldList:cl RBRACE 	{: RESULT = new AST_CLASS_DEC_EXTENDS(name1, name2, cl, name1left + 1); :}
 				;
 
-arrayTypedef ::=ARRAY ID:name EQ type:t LBRACK RBRACK SEMICOLON 			{: RESULT = new AST_ARRAY_TYPE_DEF(name, t, nameleft + 1); :}
+arrayTypedef ::= ARRAY ID:name EQ type:t LBRACK RBRACK SEMICOLON 			{: RESULT = new AST_ARRAY_TYPE_DEF(name, t, nameleft + 1); :}
 				;					
 
 type ::=		TYPE_INT:t 													{: RESULT = new AST_TYPE_INT(tleft + 1); :}
@@ -241,6 +241,7 @@ expList  ::=     exp:e1 COMMA expList:e2		    {: RESULT = new AST_EXPLIST(e1,e2,
 
 stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
 					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
+					;
 
 stmt		::=		var:v ASSIGN exp:e SEMICOLON									{: RESULT = new AST_STMT_ASSIGN(v,e,vleft + 1);		 :}
 					|varDec:vd													 	{: RESULT = new AST_STMT_VARDEC(vd); 		 :}
