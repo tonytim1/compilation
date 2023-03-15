@@ -32,15 +32,15 @@ public class IRcommand_Binop_Concat_Strings extends IRcommand_Binop {
   @Override
   public void MIPSme() {
 	    System.out.println("IRcommand_Binop_Concat_Strings" + "- MIPSme");
-	    String l0 = IRcommand.getFreshLabel("concat_count_start");
-	    String l1 = IRcommand.getFreshLabel("concat_count_str1");
-	    String l2 = IRcommand.getFreshLabel("concat_count_str2");
-	    String l3 = IRcommand.getFreshLabel("concat_copy_start");
-	    String l4 = IRcommand.getFreshLabel("concat_copy_str1");
-	    String l5 = IRcommand.getFreshLabel("concat_copy_str2");
-	    String l6 = IRcommand.getFreshLabel("concat_end");
+	    String labelabel0 = IRcommand.getFreshLabel("count_start");
+	    String labelabel1 = IRcommand.getFreshLabel("count_str1");
+	    String labelabel2 = IRcommand.getFreshLabel("count_str2");
+	    String label3 = IRcommand.getFreshLabel("copy_start");
+	    String label4 = IRcommand.getFreshLabel("copy_str1");
+	    String label5 = IRcommand.getFreshLabel("copy_str2");
+	    String label6 = IRcommand.getFreshLabel("end");
 
-	    String[] arr = { l0, l1, l2, l3, l4, l5, l6 };
+	    String[] arr = { labelabel0, labelabel1, labelabel2, label3, label4, label5, label6 };
 	    MIPSGenerator.getInstance().concat_string(dst, t1, t2, arr);
 	  }
 }
