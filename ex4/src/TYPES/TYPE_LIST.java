@@ -7,8 +7,7 @@ public class TYPE_LIST {
 	public TYPE head;
 	public TYPE_LIST tail;
 
-	public String name; // ???
-
+	public String name; 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/

@@ -9,8 +9,7 @@ import TYPES.*;
 
 public class AST_EXP_ID extends AST_EXP {
   public String id;
-  public TYPE_FUNCTION func; // for IRme
-
+  public TYPE_FUNCTION func; 
   /******************/
   /* CONSTRUCTOR(S) */
   /******************/

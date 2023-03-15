@@ -38,29 +38,24 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 
 		TYPE typeType = type.SemantMe();
 
-		// arrays declared in global scope- actually always true thanks to parsing
-		if (!(SYMBOL_TABLE.getInstance().getScope().equals("global"))) {
+				if (!(SYMBOL_TABLE.getInstance().getScope().equals("global"))) {
 			System.out.format(">> ERROR [%d] array dec in wrong scope\n", line);
 			printError(line);
 		}
 
-		// array's type must be predefined
-		if (typeType == null || typeType instanceof TYPE_VOID || typeType instanceof TYPE_NIL) {
+				if (typeType == null || typeType instanceof TYPE_VOID || typeType instanceof TYPE_NIL) {
 			System.out.format(">> ERROR [%d] non existing type\n", line);
 			printError(line);
 		}
 
-		// id must be new
-		if (SYMBOL_TABLE.getInstance().find(id) != null) {
+				if (SYMBOL_TABLE.getInstance().find(id) != null) {
 			System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
 			printError(line);
 		}
 
-		// if all passed, add to symbol table
-		SYMBOL_TABLE.getInstance().enter(id, new TYPE_ARRAY(typeType, id));
+				SYMBOL_TABLE.getInstance().enter(id, new TYPE_ARRAY(typeType, id));
 
-		// return val is irrelevent
-		return null;
+				return null;
 	}
 
 	public TEMP IRme() {

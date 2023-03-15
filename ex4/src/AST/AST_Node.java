@@ -76,8 +76,7 @@ public abstract class AST_Node {
 	}
 
 	public boolean type_equals(TYPE t1, TYPE t2) {
-		// primitive case
-		if (t1 == t2) {
+				if (t1 == t2) {
 			return true;
 		}
 
@@ -86,24 +85,19 @@ public abstract class AST_Node {
 			return false;
 		}
 
-		// non primitive
-		if ((t1 instanceof TYPE_NIL) || (t2 instanceof TYPE_NIL)) {
+				if ((t1 instanceof TYPE_NIL) || (t2 instanceof TYPE_NIL)) {
 			return true;
 		}
 
-		// array case
-		if (t1.isArray() && t2.isArray()) {
-			// todo: should check if t2 is son of t1 instead of equality
-			return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).entryType.name + "[]")
+				if (t1.isArray() && t2.isArray()) {
+						return t1.name.equals(t2.name) || t2.name.equals(((TYPE_ARRAY) t1).entryType.name + "[]")
 					|| type_equals(((TYPE_ARRAY) t1).entryType, ((TYPE_ARRAY) t2).entryType);
 		}
 
-		// class case ...
-		if (t1.isClass() && t2.isClass() && t1.name.equals(t2.name))
+				if (t1.isClass() && t2.isClass() && t1.name.equals(t2.name))
 			return true;
 
-		// inheritance
-		if (t2.isClass() && t1.isClass()) {
+				if (t2.isClass() && t1.isClass()) {
 			TYPE_CLASS father = ((TYPE_CLASS) t2).father;
 			while (father != null) {
 				if (father.name.equals(t1.name))
@@ -111,8 +105,7 @@ public abstract class AST_Node {
 				father = father.father;
 			}
 
-			// class wasnt declared yet
-			String cllass = SYMBOL_TABLE.getInstance().inClassScope();
+						String cllass = SYMBOL_TABLE.getInstance().inClassScope();
 			if (cllass != null && cllass.equals(t2.name) && t1.isClass()) {
 				String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(t2.name);
 				if (fatherName.equals(t1.name))
@@ -126,8 +119,7 @@ public abstract class AST_Node {
 			}
 		}
 
-		// function case(?) ...
-
+		
 		return false;
 	}
 
@@ -141,17 +133,13 @@ public abstract class AST_Node {
 		return type;
 	}
 
-	// find only for types!!!
-	public TYPE findType(String name) {
+		public TYPE findType(String name) {
 		TYPE t = SYMBOL_TABLE.getInstance().find(name);
 
-		// if class was already declared then t!=null
-		if (t == null) {
-			// check if its equal class boundary before class was declared
-			String cl = SYMBOL_TABLE.getInstance().inClassScope();
+				if (t == null) {
+						String cl = SYMBOL_TABLE.getInstance().inClassScope();
 			if (cl != null && cl.equals(name)) {
-				// only comes here BEFORE we declare the class!
-				t = new TYPE_CLASS(null, name, null, null);
+								t = new TYPE_CLASS(null, name, null, null);
 			}
 		}
 		return t;
@@ -160,20 +148,17 @@ public abstract class AST_Node {
 	public TYPE isFuncOfClass(String className, String funcName, AST_EXP_LIST funcArgs, int line) {
 
 		if (SYMBOL_TABLE.getInstance().inClassScope() != null &&
-				SYMBOL_TABLE.getInstance().inClassScope().equals(className)) { // should find func in current class scope (going
-																																				// up till class and search for func)
-			TYPE f = SYMBOL_TABLE.getInstance().findInClassScope(funcName);
+				SYMBOL_TABLE.getInstance().inClassScope().equals(className)) { 																																							TYPE f = SYMBOL_TABLE.getInstance().findInClassScope(funcName);
 			if (f instanceof TYPE_FUNCTION)
 				return funcSig(funcName, funcArgs, line);
-			// inheritance case
-			String extendClass = SYMBOL_TABLE.getInstance().findExtendsClass(className);
+						String extendClass = SYMBOL_TABLE.getInstance().findExtendsClass(className);
 			if (extendClass != null) {
 				TYPE_CLASS father = (TYPE_CLASS) (SYMBOL_TABLE.getInstance().find(className));
 				while (father != null) {
 					AST_TYPE_NAME_LIST funcs = father.functions;
 					for (AST_TYPE_NAME_LIST it = funcs; it != null; it = it.tail) {
 						if (it.head.name.equals(funcName))
-							return SYMBOL_TABLE.getInstance().compareFuncs((TYPE_FUNCTION) it.head.type, funcArgs, line);
+							return SYMBOL_TABLE.getInstance().compare((TYPE_FUNCTION) it.head.type, funcArgs);
 					}
 					father = father.father;
 				}
@@ -181,10 +166,8 @@ public abstract class AST_Node {
 			return null;
 		}
 
-		// class was already declared
-		TYPE cl = SYMBOL_TABLE.getInstance().find(className);
-		if (cl == null || !(cl.isClass())) // there isnt such a class
-		{
+				TYPE cl = SYMBOL_TABLE.getInstance().find(className);
+		if (cl == null || !(cl.isClass())) 		{
 			System.out.println(">> ERROR [" + line + "] there isnt such a class!");
 			printError(line);
 		}
@@ -201,20 +184,16 @@ public abstract class AST_Node {
 			currClass = currClass.father;
 		}
 
-		if (a == null) // no such func
-		{
+		if (a == null) 		{
 			System.out.println(">> ERROR [" + line + "] there isnt such a func!");
 			printError(line);
 		}
-		// should compare a params to func args - getting func args type by semant me
-		return SYMBOL_TABLE.getInstance().compareFuncs(a, funcArgs, line);
+				return SYMBOL_TABLE.getInstance().compare(a, funcArgs);
 
 	}
 
-	// ##################### IRme funcs #####################################
-
-	public static int GetOffset(String name) // for local vars only!
-	{
+	
+	public static int GetOffset(String name) 	{
 		return Integer.valueOf(offsets.get(name));
 	}
 
@@ -223,9 +202,7 @@ public abstract class AST_Node {
 	}
 
 	public int localsInIfOrWhile(AST_STMT scope) {
-		// return how many variable declarations we have in an if or while scope
-		// (vardec)
-		AST_STMT_LIST body = null;
+						AST_STMT_LIST body = null;
 		if (scope instanceof AST_STMT_IF)
 			body = ((AST_STMT_IF) scope).body;
 		else
@@ -271,14 +248,12 @@ public abstract class AST_Node {
 		TEMP varAddress = var.IRme();
 		TEMP_LIST resTempsList = null;
 
-		// set resTempList
-		for (AST_EXP_LIST it = list; it != null; it = it.tail) {
+				for (AST_EXP_LIST it = list; it != null; it = it.tail) {
 			TEMP curr = it.head.IRme();
 			resTempsList = new TEMP_LIST(curr, resTempsList);
 		}
 
-		// reverse list
-		if (resTempsList != null) {
+				if (resTempsList != null) {
 			resTempsList = resTempsList.reverseList();
 		}
 

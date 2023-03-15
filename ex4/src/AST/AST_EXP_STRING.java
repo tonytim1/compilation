@@ -8,8 +8,7 @@ import SYMBOL_TABLE.*;
 public class AST_EXP_STRING extends AST_EXP {
 	public String s;
 	public String scope;
-	public String label; // holds the label of this string, for IRme
-
+	public String label; 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/

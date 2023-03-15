@@ -38,8 +38,7 @@ public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
       System.out.println(">> ERROR [" + line + "] cant declare type void/nil");
       printError(line);
     }
-    // should return type and not ast type!!
-    if (t.typeName.equals("int")) {
+        if (t.typeName.equals("int")) {
       return TYPE_INT.getInstance();
     }
     if (t.typeName.equals("string")) {

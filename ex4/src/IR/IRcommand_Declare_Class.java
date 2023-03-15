@@ -1,22 +1,12 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 import MIPS.*;
 import AST.*;
 import TYPES.*;
 
 import java.util.ArrayList;
-//not in liveness
 public class IRcommand_Declare_Class extends IRcommand {
 	String class_name;
 	ArrayList<ArrayList<String>> funcs;

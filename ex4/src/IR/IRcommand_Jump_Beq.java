@@ -1,15 +1,6 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 import MIPS.*;
 
@@ -25,7 +16,6 @@ public class IRcommand_Jump_Beq extends IRcommand_Conditional_Jump {
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme() {
-		System.out.println("IRcommand_Jump_Beq" + "- MIPSme");
-		MIPSGenerator.getInstance().beq(op1, op2, label);
+				MIPSGenerator.getInstance().beq(op1, op2, label);
 	}
 }

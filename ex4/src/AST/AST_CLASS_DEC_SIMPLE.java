@@ -45,8 +45,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     /* [1] Begin Class Scope */
     /*************************/
     TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
-    if (isExist != null) { // already has a varible with the same name
-      System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
+    if (isExist != null) {       System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
           line);
       printError(line);
     }
@@ -60,8 +59,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     TYPE t = null;
 
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-      t = it.head.SemantMe(); // enter garbage to the stack
-      AST_TYPE currType = null;
+      t = it.head.SemantMe();       AST_TYPE currType = null;
 
       if (it.head instanceof AST_C_FIELD_VAR_DEC) {
         switch (t.name) {
@@ -95,14 +93,13 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     /*****************/
     /* [3] End Scope */
     /*****************/
-    SYMBOL_TABLE.getInstance().cleanGarbage();
+    SYMBOL_TABLE.getInstance().clearScope();
     TYPE_CLASS classType = new TYPE_CLASS(father, id, fields, funcs);
     SYMBOL_TABLE.getInstance().enter(id, classType);
     SYMBOL_TABLE.getInstance().beginScope("class-" + id);
 
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-      t = it.head.SemantMe(); // enter real values to the stack
-    }
+      t = it.head.SemantMe();     }
 
     SYMBOL_TABLE.getInstance().endScope();
 
@@ -110,11 +107,8 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     /* [4] Enter the Class Type to the Symbol Table */
     /************************************************/
 
-    // TYPE_CLASS classType = new TYPE_CLASS(null, id, fields, funcs);
-    // classType.data_members.printArgList();
-    System.out.println("------");
-    // SYMBOL_TABLE.getInstance().enter(id, classType);
-
+            System.out.println("------");
+    
     /*********************************************************/
     /* [5] Return value is irrelevant for class declarations */
     /*********************************************************/
@@ -128,13 +122,10 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     int funcCnt = 0;
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       AST_C_FIELD field = (AST_C_FIELD) (it.head);
-      if (field instanceof AST_C_FIELD_VAR_DEC) { // field
-        fieldCnt += 1;
+      if (field instanceof AST_C_FIELD_VAR_DEC) {         fieldCnt += 1;
         continue;
       }
-      if (field instanceof AST_C_FIELD_FUNC_DEC) { // func
-                                                 // funcCnt += 1;
-        AST_C_FIELD_FUNC_DEC a = (AST_C_FIELD_FUNC_DEC) field;
+      if (field instanceof AST_C_FIELD_FUNC_DEC) {                                                          AST_C_FIELD_FUNC_DEC a = (AST_C_FIELD_FUNC_DEC) field;
         AST_FUNC_DEC b = (AST_FUNC_DEC) (a.func);
         offsets.put(id + "_" + b.id, id + "_" + b.id);
       }
@@ -158,9 +149,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       AST_C_FIELD field = (AST_C_FIELD) (it.head);
 
-      if (field instanceof AST_C_FIELD_VAR_DEC) { // field
-                                                // fieldCnt += 1;
-        AST_C_FIELD_VAR_DEC var = (AST_C_FIELD_VAR_DEC) field;
+      if (field instanceof AST_C_FIELD_VAR_DEC) {                                                         AST_C_FIELD_VAR_DEC var = (AST_C_FIELD_VAR_DEC) field;
         AST_VAR_DEC b = (AST_VAR_DEC) (var.vd);
         String off = String.valueOf(fieldCnt * 4 + 4);
         offsets.put(id + "_" + b.id, off);
@@ -181,9 +170,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
         fields.add(fieldandclass);
       }
     }
-    // IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist,
-    // fields));
-    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+            for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       if (it.head instanceof AST_C_FIELD_FUNC_DEC)
         it.head.IRme();
     }

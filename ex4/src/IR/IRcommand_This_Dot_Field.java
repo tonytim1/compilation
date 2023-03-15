@@ -1,15 +1,6 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 import MIPS.*;
 
@@ -18,8 +9,7 @@ public class IRcommand_This_Dot_Field extends IRcommand {
 	public boolean regalloc;
 	String name;
 
-	// this.field
-	public IRcommand_This_Dot_Field(String Fname, TEMP dst) {
+		public IRcommand_This_Dot_Field(String Fname, TEMP dst) {
 	    this.regalloc = false;
 		this.dst = dst;
 		this.name = Fname;

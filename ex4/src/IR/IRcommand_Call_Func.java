@@ -1,12 +1,6 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
 import MIPS.*;
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 
 public class IRcommand_Call_Func extends IRcommand {

@@ -1,18 +1,8 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 import MIPS.*;
-//not in liveness
 public class IRcommand_Return extends IRcommand {
 	public TEMP RetVal;
 

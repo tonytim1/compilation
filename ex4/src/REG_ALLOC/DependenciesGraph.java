@@ -1,12 +1,6 @@
-/***********/
-/* PACKAGE */
-/***********/
 package REG_ALLOC;
 
 import java.util.HashMap;
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;

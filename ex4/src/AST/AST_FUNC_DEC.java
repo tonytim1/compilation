@@ -13,9 +13,7 @@ public class AST_FUNC_DEC extends AST_Node {
   public String id;
   public AST_ARG_LIST arglist;
   public AST_STMT_LIST list;
-  public TYPE_FUNCTION func; // needed for IRme
-  public String className; // nedded for IRme
-
+  public TYPE_FUNCTION func;   public String className; 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
@@ -83,8 +81,7 @@ public class AST_FUNC_DEC extends AST_Node {
       argListTypes = new TYPE_LIST(t, argListTypes);
     }
 
-    // reverse list
-    if (argListTypes != null) {
+        if (argListTypes != null) {
       argListTypes = argListTypes.reverseList();
     }
 
@@ -92,8 +89,7 @@ public class AST_FUNC_DEC extends AST_Node {
     /* [5] Enter the Function Type to the Symbol Table */
     /***************************************************/
 
-    // check you dont overwrite class func
-    boolean flag = true;
+        boolean flag = true;
     className = SYMBOL_TABLE.getInstance().inClassScope();
     if (className != null) {
       String father = SYMBOL_TABLE.getInstance().findExtendsClass(className);
@@ -165,25 +161,17 @@ public class AST_FUNC_DEC extends AST_Node {
       this.id = "user_main";
     }
 
-    // signature IRme ...
-
-    //////////////////////// calculate the var
-    //////////////////////// list//////////////////////////////////////////
-
-    ///////////// arguments/////////////////////////
-    int argCnt = 0; // number of arguments
-    if (className != null)
-      argCnt += 1; // this
-
+    
+        
+        int argCnt = 0;     if (className != null)
+      argCnt += 1; 
     for (AST_ARG_LIST it = arglist; it != null; it = it.tail) {
       String off = String.valueOf(8 + 4 * argCnt);
       offsets.put(it.head.id, off);
       argCnt += 1;
     }
 
-    /////////// local variables///////////////////////
-    int varCnt = 0; // number of local variables
-    for (AST_STMT_LIST it = list; it != null; it = it.tail) {
+        int varCnt = 0;     for (AST_STMT_LIST it = list; it != null; it = it.tail) {
       if (it.head instanceof AST_STMT_VAR_DEC) {
         varCnt += 1;
         continue;
@@ -193,9 +181,7 @@ public class AST_FUNC_DEC extends AST_Node {
       }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    // prologue
-    String labelStart = null;
+            String labelStart = null;
     if (id.equals("user_main")) {
       labelStart = id;
     } else {
@@ -212,8 +198,7 @@ public class AST_FUNC_DEC extends AST_Node {
     IR.getInstance().Add_IRcommand(new IRcommand_Label(labelStart));
     IR.getInstance().Add_IRcommand(new IRcommand_Prologue(varCnt));
 
-    // body
-    varCnt = 0;
+        varCnt = 0;
     for (AST_STMT_LIST it = list; it != null; it = it.tail) {
       if (it.head instanceof AST_STMT_VAR_DEC) {
         varCnt += 1;
@@ -229,8 +214,7 @@ public class AST_FUNC_DEC extends AST_Node {
       it.head.IRme();
     }
 
-    // epilogue
-    IR.getInstance().Add_IRcommand(new IRcommand_Epilogue());
+        IR.getInstance().Add_IRcommand(new IRcommand_Epilogue());
 
     System.out.println(offsets);
     return null;

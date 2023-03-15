@@ -1,22 +1,11 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
-/*******************/
-/* GENERAL IMPORTS */
-/*******************/
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TEMP.*;
 import MIPS.*;
 
-// int id = value (global scope)
 public class IRcommand_Declare_Global_Int extends IRcommand_Assign_Non_Temp {
-	//String id;
-	int value;
+		int value;
 
 	public IRcommand_Declare_Global_Int(String id, int value) {
 		this.id = id;

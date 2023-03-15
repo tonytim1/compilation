@@ -47,8 +47,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		/*************************/
 
 		TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
-		if (isExist != null) { // already has a varible with the same name
-			System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
+		if (isExist != null) { 			System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
 					line);
 			printError(line);
 		}
@@ -62,8 +61,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		TYPE t = null;
 		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
 			System.out.println("BEFORE");
-			t = it.head.SemantMe(); // enter garbage to the stack
-			System.out.println("AFTER");
+			t = it.head.SemantMe(); 			System.out.println("AFTER");
 			AST_TYPE currType = null;
 
 			if (it.head instanceof AST_C_FIELD_VAR_DEC) {
@@ -98,24 +96,19 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		/*****************/
 		/* [3] End Scope */
 		/*****************/
-		SYMBOL_TABLE.getInstance().cleanGarbage();
+		SYMBOL_TABLE.getInstance().clearScope();
 		TYPE_CLASS classType = new TYPE_CLASS(father, id, fields, funcs);
 		SYMBOL_TABLE.getInstance().enter(id, classType);
 		SYMBOL_TABLE.getInstance().beginScope("class-" + id + "-extends-" + this.father.name);
 		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-			t = it.head.SemantMe(); // enter real values to the stack
-		}
+			t = it.head.SemantMe(); 		}
 		SYMBOL_TABLE.getInstance().endScope();
 
 		/************************************************/
 		/* [4] Enter the Class Type to the Symbol Table */
 		/************************************************/
 
-		// TYPE_CLASS classType = new TYPE_CLASS(null, id, fields, funcs);
-		// classType.data_members.printArgList();
-		// System.out.println("------");
-		// SYMBOL_TABLE.getInstance().enter(id, classType);
-
+								
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */
 		/*********************************************************/
@@ -125,8 +118,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 	public TEMP IRme() {
 		TYPE_CLASS fatherclass = father;
 		boolean f = false;
-		// ############first part (taking father fields and funcs)#################
-		ArrayList<ArrayList<ArrayList<String>>> fieldlist = new ArrayList<ArrayList<ArrayList<String>>>();
+				ArrayList<ArrayList<ArrayList<String>>> fieldlist = new ArrayList<ArrayList<ArrayList<String>>>();
 		ArrayList<ArrayList<String>> funclist = new ArrayList<ArrayList<String>>();
 		while (fatherclass != null) {
 			for (AST_TYPE_NAME_LIST it = fatherclass.functions; it != null; it = it.tail) {
@@ -179,12 +171,9 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 			fatherclass = fatherclass.father;
 		}
 
-		// #############################################################3
-		// #################second part - this class fields and funcs
-		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+						for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
 			AST_C_FIELD field = (AST_C_FIELD) (it.head);
-			if (field instanceof AST_C_FIELD_VAR_DEC) { // field
-				f = false;
+			if (field instanceof AST_C_FIELD_VAR_DEC) { 				f = false;
 				AST_C_FIELD_VAR_DEC a = (AST_C_FIELD_VAR_DEC) field;
 				AST_VAR_DEC b = (AST_VAR_DEC) (a.vd);
 				int n = fieldlist.size();
@@ -211,8 +200,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 				}
 				continue;
 			}
-			if (field instanceof AST_C_FIELD_FUNC_DEC) { // func
-				f = false;
+			if (field instanceof AST_C_FIELD_FUNC_DEC) { 				f = false;
 				AST_C_FIELD_FUNC_DEC a = (AST_C_FIELD_FUNC_DEC) field;
 				AST_FUNC_DEC b = (AST_FUNC_DEC) (a.func);
 				int n = funclist.size();
@@ -233,14 +221,12 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 			}
 		}
 
-		// #######################part 3 - offsets ################################
-		int funcCnt = funclist.size();
+				int funcCnt = funclist.size();
 		int fieldCnt = 0;
 		Map<String, Integer> funcOff = new HashMap<>();
 		ArrayList<String> fields = new ArrayList<>();
 		for (int i = 0; i < fieldlist.size(); i++) {
-			// fieldCnt += 1;
-			String off = String.valueOf(fieldCnt * 4 + 4);
+						String off = String.valueOf(fieldCnt * 4 + 4);
 			offsets.put(id + "_" + (((fieldlist.get(i)).get(0)).get(0)), off);
 			fieldCnt += 1;
 			fields.add(((fieldlist.get(i)).get(0)).get(0));
@@ -252,32 +238,22 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 
 		classFuncsOff.put(id, funcOff);
 
-		// System.out.println(fieldlist);
-		// System.out.println(funclist);
-		// #######################part 4 - mips function
-		// ################################
-		// son funcs
-		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+												for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
 			if (it.head instanceof AST_C_FIELD_FUNC_DEC)
 				it.head.IRme();
 		}
 		IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist, fieldlist));
-		// fields
-		AST_C_FIELD_LIST temp = data_members;
+				AST_C_FIELD_LIST temp = data_members;
 		for (int i = 0; i < fieldlist.size(); i++) {
 			String tf = fieldlist.get(i).get(1).get(0);
 			String n = fieldlist.get(i).get(0).get(0);
-			if (!(tf.equals(id))) // father fields
-			{
+			if (!(tf.equals(id))) 			{
 				String v = defaultFields.get(tf + "_" + n);
 				if (v == null)
 					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id + "_" + n));
-				else if (fieldlist.get(i).get(0).get(1).equals("1")) // string
-					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(id + "_" + n, v));
-				else// int
-					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id + "_" + n, Integer.valueOf(v)));
-			} else // son feilds
-			{
+				else if (fieldlist.get(i).get(0).get(1).equals("1")) 					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(id + "_" + n, v));
+				else					IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id + "_" + n, Integer.valueOf(v)));
+			} else 			{
 				for (AST_C_FIELD_LIST it = temp; it != null; it = it.tail) {
 					if (it.head instanceof AST_C_FIELD_VAR_DEC &&
 							((AST_C_FIELD_VAR_DEC) it.head).vd.id.equals(n)) {
@@ -291,7 +267,6 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 
 		classSize.put(id, fieldlist.size() * 4 + 4);
 		classfields.put(id, fields);
-		// System.out.println(classfields);
-		return null;
+				return null;
 	}
 }

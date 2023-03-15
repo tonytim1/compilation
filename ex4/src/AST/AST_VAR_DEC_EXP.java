@@ -9,10 +9,7 @@ import MIPS.*;
 
 public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 	public AST_EXP exp;
-	String scope; // for IRme
-	String class_name; // for IRme
-	boolean inFunc; // for IRme
-
+	String scope; 	String class_name; 	boolean inFunc; 
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
@@ -91,9 +88,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 		System.out.println("VARDEC EXP IRme");
 		String RealId = id;
 
-		// global
-		if (scope.equals("global") || (!inFunc && class_name != null)) { // global or class field
-			if (!inFunc && class_name != null)
+				if (scope.equals("global") || (!inFunc && class_name != null)) { 			if (!inFunc && class_name != null)
 				RealId = class_name + "_" + id;
 			if (type instanceof AST_TYPE_STRING) {
 				String value = ((AST_EXP_STRING) exp).s;
@@ -110,8 +105,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 			}
 		}
 
-		// local
-		else {
+				else {
 			TEMP t = exp.IRme();
 
 			IRcommand command = new IRcommand_Store_Local(id, t);
@@ -120,7 +114,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 
 		}
 
-		// ret value doesn't matter for a declaration
-		return null;
+				return null;
 	}
 }

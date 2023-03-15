@@ -1,11 +1,5 @@
-/***********/
-/* PACKAGE */
-/***********/
 package IR;
 
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 
 public abstract class IRcommand {
 	public String name="";
