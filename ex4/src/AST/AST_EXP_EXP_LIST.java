@@ -7,13 +7,13 @@ import SYMBOL_TABLE.SYMBOL_TABLE;
 
 public class AST_EXP_EXP_LIST extends AST_EXP {
   public String id;
-  public AST_EXPLIST list;
+  public AST_EXP_LIST list;
   public TYPE_FUNCTION func; // for IRme
 
   /******************/
   /* CONSTRUCTOR(S) */
   /******************/
-  public AST_EXP_EXP_LIST(String id, AST_EXPLIST list, int line) {
+  public AST_EXP_EXP_LIST(String id, AST_EXP_LIST list, int line) {
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
@@ -82,7 +82,7 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
     TEMP_LIST resTempsList = null;
 
     // set resTempList
-    for (AST_EXPLIST it = list; it != null; it = it.tail) {
+    for (AST_EXP_LIST it = list; it != null; it = it.tail) {
       TEMP curr = it.head.IRme();
       resTempsList = new TEMP_LIST(curr, resTempsList);
     }

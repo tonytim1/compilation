@@ -7,13 +7,13 @@ import IR.*;
 public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
 	public AST_VAR var;
 	public String id;
-	public AST_EXPLIST list;
+	public AST_EXP_LIST list;
 	public TYPE_CLASS tl;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_VAR_EXP_LIST(AST_VAR var, String id, AST_EXPLIST list, int line) {
+	public AST_EXP_VAR_EXP_LIST(AST_VAR var, String id, AST_EXP_LIST list, int line) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/

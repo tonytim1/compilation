@@ -2,7 +2,7 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_STMT_VARDOT extends AST_STMT {
+public class AST_STMT_VAR_ID extends AST_STMT {
   public AST_VAR var;
   public String id;
   public TYPE_CLASS tl;
@@ -10,7 +10,7 @@ public class AST_STMT_VARDOT extends AST_STMT {
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_STMT_VARDOT(AST_VAR var, String id) {
+  public AST_STMT_VAR_ID(AST_VAR var, String id) {
     this.var = var;
     this.id = id;
     /******************************/

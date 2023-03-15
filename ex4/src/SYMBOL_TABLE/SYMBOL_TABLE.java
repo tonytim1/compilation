@@ -419,7 +419,7 @@ public class SYMBOL_TABLE {
 		return 0;
 	}
 
-	public TYPE isRealFunc(String name, AST_EXPLIST params) {
+	public TYPE isRealFunc(String name, AST_EXP_LIST params) {
 		SYMBOL_TABLE_ENTRY a = top;
 		while (a != null && a.name != null) {
 			if (a.type.isFunc()) {
@@ -435,7 +435,7 @@ public class SYMBOL_TABLE {
 				 * check if the parameters match
 				 */
 				TYPE_LIST l = ((TYPE_FUNCTION) a.type).params;
-				for (AST_EXPLIST it = params; it != null; it = it.tail) {
+				for (AST_EXP_LIST it = params; it != null; it = it.tail) {
 					if (l == null)
 						return null;
 
@@ -466,9 +466,9 @@ public class SYMBOL_TABLE {
 		return null;
 	}
 
-	public TYPE compareFuncs(TYPE_FUNCTION realFunc, AST_EXPLIST params, int line) {
+	public TYPE compareFuncs(TYPE_FUNCTION realFunc, AST_EXP_LIST params, int line) {
 		TYPE_LIST args = realFunc.params;
-		for (AST_EXPLIST it = params; it != null; it = it.tail) {
+		for (AST_EXP_LIST it = params; it != null; it = it.tail) {
 			if (args == null)
 				return null;
 

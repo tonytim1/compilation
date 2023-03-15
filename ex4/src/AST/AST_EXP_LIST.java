@@ -3,17 +3,17 @@ package AST;
 import TEMP.TEMP_LIST;
 import TYPES.TYPE_LIST;
 
-public class AST_EXPLIST extends AST_Node {
+public class AST_EXP_LIST extends AST_Node {
   /****************/
   /* DATA MEMBERS */
   /****************/
   public AST_EXP head;
-  public AST_EXPLIST tail;
+  public AST_EXP_LIST tail;
 
   /******************/
   /* CONSTRUCTOR(S) */
   /******************/
-  public AST_EXPLIST(AST_EXP head, AST_EXPLIST tail, int line) {
+  public AST_EXP_LIST(AST_EXP head, AST_EXP_LIST tail, int line) {
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
