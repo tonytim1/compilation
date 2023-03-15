@@ -222,18 +222,18 @@ var ::=			ID:name														{: RESULT = new AST_VAR_SIMPLE(name, nameleft + 1
 				| var:v LBRACK exp:e RBRACK									{: RESULT = new AST_VAR_SUBSCRIPT(v, e, vleft + 1); :} 
 				;
 
-exp			::=		var:v									 		 {: RESULT = new AST_EXP_VAR(v);          			   :}
-					| LPAREN exp:e1 RPAREN							 {: RESULT = new AST_EXP_SIMPLE(e1);        			   :}
-					| BINOP:b				 						 {: RESULT = new AST_EXP_BINOP(b); 			   :}
-					| var:v DOT ID:name LPAREN expList:el RPAREN	 {: RESULT = new AST_EXP_VARDOT_EXPLIST(v,name,el,vleft+1);   :}
-					| var:v DOT ID:name LPAREN RPAREN	 			 {: RESULT = new AST_EXP_VARDOT(v,name,vleft+1);   		   :}
-					| ID:name LPAREN expList:el RPAREN	 		 	 {: RESULT = new AST_EXP_EXPLIST(name,el,nameleft + 1);  		   :}
-					| ID:name LPAREN RPAREN	 		 				 {: RESULT = new AST_EXP_ID(name,nameleft+1);  				   :}
-					| INT:i 									     {: RESULT = new AST_EXP_INT(i);   			   	       :}
-					| MINUS INT:i 									 {: RESULT = new AST_EXP_MINUS_INT(i);   			   	       :}
-					| NIL 											 {: RESULT = new AST_EXP_NIL();   		   			   :}
-					| STRING:s										 {: RESULT = new AST_EXP_STRING(s);   				   :}
-					;	
+exp ::=			var:v									 		 			{: RESULT = new AST_EXP_VAR(v); :}
+				| LPAREN exp:e1 RPAREN							 			{: RESULT = new AST_EXP_SIMPLE(e1); :}
+				| BINOP:b				 						 			{: RESULT = new AST_EXP_BINOP(b); :}
+				| INT:i 									     			{: RESULT = new AST_EXP_INT(i); :}
+				| MINUS INT:i 									 			{: RESULT = new AST_EXP_MINUS_INT(i); :}
+				| NIL 											 			{: RESULT = new AST_EXP_NIL(); :}
+				| STRING:s										 			{: RESULT = new AST_EXP_STRING(s); :}
+				| ID:name LPAREN RPAREN	 		 				 			{: RESULT = new AST_EXP_ID(name, nameleft + 1); :}
+				| ID:name LPAREN expList:el RPAREN	 		 	 			{: RESULT = new AST_EXP_EXP_LIST(name, el, nameleft + 1); :}
+				| var:v DOT ID:name LPAREN RPAREN	 			 			{: RESULT = new AST_EXP_VAR_ID(v, name, vleft + 1); :}
+				| var:v DOT ID:name LPAREN expList:el RPAREN	 			{: RESULT = new AST_EXP_VAR_EXP_LIST(v, name, el, vleft + 1); :}
+				;	
 
 expList  ::=     exp:e1 COMMA expList:e2		    {: RESULT = new AST_EXPLIST(e1,e2,e1left + 1);   	     	:} 
 				| exp:e1     		  			    {: RESULT = new AST_EXPLIST(e1,null, e1left + 1);   	     	:}

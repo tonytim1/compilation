@@ -5,7 +5,7 @@ import TEMP.*;
 import IR.*;
 import SYMBOL_TABLE.SYMBOL_TABLE;
 
-public class AST_EXP_EXPLIST extends AST_EXP {
+public class AST_EXP_EXP_LIST extends AST_EXP {
   public String id;
   public AST_EXPLIST list;
   public TYPE_FUNCTION func; // for IRme
@@ -13,7 +13,7 @@ public class AST_EXP_EXPLIST extends AST_EXP {
   /******************/
   /* CONSTRUCTOR(S) */
   /******************/
-  public AST_EXP_EXPLIST(String id, AST_EXPLIST list, int line) {
+  public AST_EXP_EXP_LIST(String id, AST_EXPLIST list, int line) {
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
