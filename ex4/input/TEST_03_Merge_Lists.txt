@@ -4,28 +4,28 @@ class IntList
     IntList tail;
 }
 
-IntList MergeLists(IntList label1, IntList label2)
+IntList MergeLists(IntList l1, IntList l2)
 {
-    if (label1 = nil)
+    if (l1 = nil)
     {
-        return label2;
+        return l2;
     }
-    if (label2 = nil)
+    if (l2 = nil)
     {
-        return label1;
+        return l1;
     }
-    
-    if (label1.head < label2.head)
+
+    if (l1.head < l2.head)
     {
-        IntList l3 := label1;
-        l3.tail := MergeLists(label1.tail,label2);
+        IntList l3 := l1;
+        l3.tail := MergeLists(l1.tail,l2);
         return l3;
     }
-    
-    if (label2.head < label1.head)
+
+    if (l2.head < l1.head)
     {
-        IntList l3 := label2;
-        l3.tail := MergeLists(label1,label2.tail);
+        IntList l3 := l2;
+        l3.tail := MergeLists(l1,l2.tail);
         return l3;
     }
     
