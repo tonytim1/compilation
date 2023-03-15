@@ -14,7 +14,6 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Binop_EQ_Strings" + "- MIPSme");
 		String label0 = IRcommand.getFreshLabel("loop");
 		String label1 = IRcommand.getFreshLabel("no");
 		String label2 = IRcommand.getFreshLabel("end");

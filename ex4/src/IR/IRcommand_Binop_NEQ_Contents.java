@@ -13,7 +13,6 @@ public class IRcommand_Binop_NEQ_Contents extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Binop_NEQ_Contents" + "- MIPSme");
 
 		String label_end = getFreshLabel("end");
 		String label_AssignOne = getFreshLabel("AssignOne");

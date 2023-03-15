@@ -20,7 +20,6 @@ public class AST_STMT_ID extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    System.out.println("STMT_ID - semant me");
     TYPE t = funcSig(id, null, this.line);
 
     this.func = (TYPE_FUNCTION) (SYMBOL_TABLE.getInstance().find(id));
@@ -29,7 +28,6 @@ public class AST_STMT_ID extends AST_STMT {
   }
 
   public TEMP IRme() {
-    System.out.println("STMT_ID - IRme");
 
     TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 

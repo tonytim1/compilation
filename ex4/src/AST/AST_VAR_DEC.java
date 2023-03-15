@@ -19,7 +19,6 @@ public abstract class AST_VAR_DEC extends AST_Node {
             if (id.equals(it.head.id) && it.head.t.typeName.equals(type.typeName))
                 return;
             if (id.equals(it.head.id)) {
-                System.out.println(">> ERROR [" + line + "] cant override the field!");
                 printError(line);
             }
         }

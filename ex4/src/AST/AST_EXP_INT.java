@@ -19,12 +19,10 @@ public class AST_EXP_INT extends AST_EXP {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("EXP INT (recoginzed int)- semant me");
 		return TYPE_INT.getInstance();
 	}
 
 	public TEMP IRme() {
-		System.out.println("EXP INT- IRme");
 
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 		IR.getInstance().Add_IRcommand(new IRcommand_Const_Int(t, value));

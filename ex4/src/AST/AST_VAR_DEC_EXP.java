@@ -18,20 +18,19 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		if (type != null && exp != null)
+		if (type != null && exp != null) {
 			System.out.print("====================== varDec -> type ID ASSIGN exp SEMICOLON \n");
+			}
 	}
 
 	
 
 	public TYPE SemantMe() {
-		System.out.println("VARDEC EXP semant me");
 		TYPE t1 = null;
 		TYPE t2 = null;
 
 
 		if (type == null || exp == null) {
-			System.out.println(">>>ERROR type or name are null");
 			printError(this.line);
 		}
 		t1 = findType(type.typeName);
@@ -41,13 +40,11 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 			String tname = "non-existing";
 			if (t1 != null)
 				tname = t1.name;
-			System.out.format(">> ERROR [%d] type mismatch for var := exp. %s vs %s\n", line, tname, t2.name);
-			printError(this.line);
+						printError(this.line);
 		}
 		TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(id);
 		if (res != null) {
-			System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
-			printError(this.line);
+						printError(this.line);
 		}
 
 		class_name = SYMBOL_TABLE.getInstance().inClassScope();
@@ -57,7 +54,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 				exp instanceof AST_EXP_NIL ||
 				exp instanceof AST_EXP_STRING ||
 				exp instanceof AST_EXP_MINUS_INT)) {
-			System.out.println(">> ERROR[" + line + "] cant declare non primitive variable in class");
 			printError(line);
 		}
 		isOverride();
@@ -67,7 +63,6 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 	}
 
 	public TEMP IRme() {
-		System.out.println("VARDEC EXP IRme");
 		String RealId = id;
 
 				if (scope.equals("global") || (!inFunc && class_name != null)) { 			if (!inFunc && class_name != null)

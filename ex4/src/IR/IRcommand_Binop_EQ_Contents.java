@@ -14,7 +14,6 @@ public class IRcommand_Binop_EQ_Contents extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Binop_EQ_Contents" + "- MIPSme");
 
 		String label_end = getFreshLabel("end");
 		String label_AssignOne = getFreshLabel("AssignOne");

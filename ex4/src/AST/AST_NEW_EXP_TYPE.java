@@ -19,10 +19,8 @@ public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
   
 
   public TYPE SemantMe() {
-    System.out.println("NEWEXP TYPE - sament me");
 
     if (t.typeName.equals("void") || t.typeName.equals("nil")) {
-      System.out.println(">> ERROR [" + line + "] cant declare type void/nil");
       printError(line);
     }
         if (t.typeName.equals("int")) {
@@ -34,14 +32,12 @@ public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
 
     TYPE cl = SYMBOL_TABLE.getInstance().findClass(t.typeName);
     if (cl == null) {
-      System.out.println(">> ERROR [" + line + "] cant declate " + t.typeName + " type");
       printError(line);
     }
     return cl;
   }
 
   public TEMP IRme() {
-    System.out.println("NEWEXP TYPE- IRme");
 
     TEMP t1 = TEMP_FACTORY.getInstance().getFreshTEMP();
     IR.getInstance().Add_IRcommand(new IRcommand_New_Class_Object(t1, t.typeName));

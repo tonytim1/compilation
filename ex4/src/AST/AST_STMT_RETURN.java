@@ -19,7 +19,6 @@ public class AST_STMT_RETURN extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    System.out.println("STMT RETURN - semant me");
     int a = SYMBOL_TABLE.getInstance().findFunc("void");
     if (a == 0) {
       System.out.println("=======Error in return statement!");

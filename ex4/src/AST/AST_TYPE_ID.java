@@ -18,16 +18,13 @@ public class AST_TYPE_ID extends AST_TYPE {
   
 
   public TYPE SemantMe() {
-    System.out.println("TYPE ID - semant me");
     TYPE res = findType(typeName);
     if (res == null) {
-      System.out.format(">> ERROR(%d) non existing type %s (type_id)\n", line, res);
-      printError(this.line);
+            printError(this.line);
     }
 
         if (!res.name.equals(typeName)) {
-      System.out.format(">> ERROR [%d]- type name isn't declared correctly! %s %s", line, res.name, typeName);
-      printError(this.line);
+            printError(this.line);
     }
 
     return res;

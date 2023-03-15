@@ -20,7 +20,6 @@ public class AST_STMT_EXP extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    System.out.println("STMT EXP - semant me");
     TYPE ty = e.SemantMe();
     if (ty == null) {
       return null;

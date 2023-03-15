@@ -11,7 +11,6 @@ public class IRcommand_Prologue extends IRcommand {
     }
 
     public void MIPSme() {
-        System.out.println("IRcommand_Prologue" + "- MIPSme");
         MIPSGenerator.getInstance().prologue(localVars);
     }
 

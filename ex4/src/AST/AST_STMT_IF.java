@@ -26,11 +26,9 @@ public class AST_STMT_IF extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    System.out.format("AST_STMT_IF" + "- semant me\n");
-
+    
     if (cond.SemantMe() != TYPE_INT.getInstance()) {
-      System.out.format(">> ERROR [%d:%d] condition inside IF is not integral\n", 2, 2);
-      printError(this.line);
+            printError(this.line);
     }
 
     SYMBOL_TABLE.getInstance().beginScope("if");
@@ -45,8 +43,7 @@ public class AST_STMT_IF extends AST_STMT {
   }
 
   public TEMP IRme() {
-    System.out.format("AST_STMT_IF" + "- IRme\n");
-
+    
 
     String label_end = IRcommand.getFreshLabel("end");
     String label_start = IRcommand.getFreshLabel("start");

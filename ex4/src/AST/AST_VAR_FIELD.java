@@ -23,14 +23,12 @@ public class AST_VAR_FIELD extends AST_VAR {
 	
 
 	public TYPE SemantMe() {
-		System.out.format("VAR_FIELD- semantme\n");
-		TYPE res = null;
+				TYPE res = null;
 		TYPE t1 = var.SemantMe();
 		classN = t1.name;
 
 		if (t1 == null || !(t1 instanceof TYPE_CLASS)) {
-			System.out.format(">> ERROR [%d] %s is not declared.\n", line, var);
-			printError(line);
+						printError(line);
 		}
 
 				String className = SYMBOL_TABLE.getInstance().inClassScope();
@@ -52,7 +50,6 @@ public class AST_VAR_FIELD extends AST_VAR {
 					fatherClass = fatherClass.father;
 				}
 			}
-			System.out.println(">> ERROR [" + line + "] no such class field");
 			printError(line);
 		}
 
@@ -67,14 +64,12 @@ public class AST_VAR_FIELD extends AST_VAR {
 			t1 = ((TYPE_CLASS) t1).father;
 		}
 
-		System.out.println(">> ERROR [" + line + "] no such class field");
 		printError(line);
 		return null;
 	}
 
 	public TEMP IRme() {
-		System.out.format("VAR_FIELD- IRme\n");
-
+		
 		TEMP t1 = var.IRme();
 		TEMP t2 = TEMP_FACTORY.getInstance().getFreshTEMP();
 		IRcommand r = new IRcommand_Field_Access(t2, t1, fieldName);

@@ -17,13 +17,11 @@ public class AST_EXP_VAR extends AST_EXP {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("EXP VAR - semant me");
 
 		return var.SemantMe();
 	}
 
 	public TEMP IRme() {
-		System.out.println("EXP VAR - IRme");
 		return var.IRme();
 	}
 }

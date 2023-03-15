@@ -19,16 +19,16 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (data_members != null)
+    if (data_members != null) {
       System.out.print("====================== classDec -> CLASS ID: LBRACE cFieldList RBRACE\n");
+      }
   }
 
 
   
 
   public TYPE SemantMe() {
-    System.out.format("CLASSDEC SIMPLE(%s) - semant me\n", id);
-    TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
+        TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
     if (isExist != null) {       System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
           line);
       printError(line);
@@ -53,7 +53,6 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
             break;
           }
           case "void": {
-            System.out.println(">> ERROR [" + line + "] void variable is illegal");
             printError(line);
           }
           default: {
@@ -82,7 +81,6 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     SYMBOL_TABLE.getInstance().endScope();
 
 
-            System.out.println("------");
     
     return null;
   }

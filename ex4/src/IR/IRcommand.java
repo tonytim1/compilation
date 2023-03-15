@@ -13,7 +13,6 @@ public abstract class IRcommand {
 	}
 
 	public void MIPSme() {
-		System.out.println("DEFAULT MIPSme!!!");
 	}
 	public void UpdateIRName(String name) {
 		this.name=name;

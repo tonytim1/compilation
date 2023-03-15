@@ -11,10 +11,12 @@ public class AST_DEC_LIST extends AST_Node {
 		this.head = head;
 		this.tail = tail;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		if (tail != null)
+		if (tail != null) {
 			System.out.print("====================== decs -> dec decs\n");
-		if (tail == null)
+			}
+		if (tail == null) {
 			System.out.print("====================== decs -> dec      \n");
+			}
 
 
 	}
@@ -22,7 +24,6 @@ public class AST_DEC_LIST extends AST_Node {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("DEC_LIST" + "- semantme");
 		if (head != null) {
 			head.SemantMe();
 		}
@@ -33,7 +34,6 @@ public class AST_DEC_LIST extends AST_Node {
 	}
 
 	public TEMP IRme() {
-		System.out.println("DEC_LIST" + "- IRme");
 
 		if (head != null)
 			head.IRme();

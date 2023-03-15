@@ -14,12 +14,10 @@ public class AST_EXP_NIL extends AST_EXP {
   
 
   public TYPE SemantMe() {
-    System.out.println("EXP NIL - semant me");
     return TYPE_NIL.getInstance();
   }
 
   public TEMP IRme() {
-    System.out.println("EXP NIL - IRme");
 
     TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
     IR.getInstance().Add_IRcommand(new IRcommand_Set_Nil(t));

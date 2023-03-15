@@ -46,7 +46,6 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 						fatherClass = fatherClass.father;
 					}
 				}
-				System.out.println(">> ERROR [" + line + "] no such class field");
 				printError(line);
 			}
 		}
@@ -64,7 +63,6 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 		}
 
 		if (res == null) {
-			System.out.println(">> ERROR[" + line + "]");
 			printError(line);
 		}
 		thisT = res;
@@ -72,8 +70,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 	}
 
 	public TEMP IRme() {
-		System.out.format("VAR SIMPLE - IRme (%s)\n", name);
-
+		
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 
 		if (inGlobal == 1) {

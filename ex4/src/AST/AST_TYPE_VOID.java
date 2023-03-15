@@ -16,7 +16,6 @@ public class AST_TYPE_VOID extends AST_TYPE {
   
 
   public TYPE SemantMe() {
-    System.out.format("TYPE_VOID" + "- semant me\n");
-    return TYPE_VOID.getInstance();
+        return TYPE_VOID.getInstance();
   }
 }

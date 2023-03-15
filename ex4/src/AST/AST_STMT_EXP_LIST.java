@@ -23,7 +23,6 @@ public class AST_STMT_EXP_LIST extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    System.out.println("STMT EXPLIST - semant me");
 
     TYPE t = funcSig(id, list, this.line);
 
@@ -33,7 +32,6 @@ public class AST_STMT_EXP_LIST extends AST_STMT {
   }
 
   public TEMP IRme() {
-    System.out.println("STMT EXPLIST - IRme");
 
     TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
     TEMP_LIST resTempsList = null;

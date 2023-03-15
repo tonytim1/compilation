@@ -13,17 +13,18 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		this.tail = tail;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		if (tail != null)
+		if (tail != null) {
 			System.out.print("====================== cfeilds -> cfeild cfeilds\n");
-		if (tail == null)
+			}
+		if (tail == null) {
 			System.out.print("====================== cfeilds -> cfeild      \n");
+			}
 
 	}
 
 	
 
 	public TYPE_LIST SemantMe(int ignore) {
-		System.out.println("CFEILD LIST - semant me");
 
 		if (tail == null) {
 			return new TYPE_LIST(head.SemantMe(), null);
@@ -35,7 +36,6 @@ public class AST_C_FIELD_LIST extends AST_Node {
 	}
 
 	public TEMP_LIST IRme(int ignore) {
-		System.out.println("CFEILD_LIST - IRme");
 
 		if ((head == null) && (tail == null)) {
 			return null;

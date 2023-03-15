@@ -24,7 +24,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("STMT_ASSIGN - semant me");
 
 		TYPE t1 = null;
 		TYPE t2 = null;
@@ -38,13 +37,11 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 		ty = t2.name;
 
 		if (t1 == null || t2 == null) {
-			System.out.format(">> ERROR [%d] non existing type\n", line);
-			printError(line);
+						printError(line);
 		}
 
 		if (!(type_equals(t1, t2))) {
-			System.out.format(">> ERROR [%d] type mismatch for var := exp (stmt assgn)\n", line);
-			printError(this.line);
+						printError(this.line);
 		}
 
 		if (var instanceof AST_VAR_SIMPLE && SYMBOL_TABLE.getInstance().inFuncScope()) {
@@ -56,7 +53,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 	}
 
 	public TEMP IRme() {
-		System.out.println("STMT_ASSIGN - IRme");
 
 		if (var instanceof AST_VAR_SIMPLE) {
 			TEMP value = exp.IRme();

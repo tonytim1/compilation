@@ -17,7 +17,6 @@ public class AST_TYPE_STRING extends AST_TYPE {
 	
 
 	public TYPE SemantMe() {
-		System.out.format("TYPE_STRING" + "- semant me\n");
-		return TYPE_STRING.getInstance();
+				return TYPE_STRING.getInstance();
 	}
 }

@@ -17,8 +17,9 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (type != null && exp != null)
+    if (type != null && exp != null) {
       System.out.print("====================== varDec -> type ID ASSIGN newExp SEMICOLON \n");
+      }
 
   }
 
@@ -26,7 +27,6 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
   
 
   public TYPE SemantMe() {
-    System.out.println("VARDEC NEWEXP - semant me");
 
     TYPE t1 = type.SemantMe();
 
@@ -34,8 +34,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
 
 
     if (t1 == null || t2 == null || t1 instanceof TYPE_NIL || t1 instanceof TYPE_VOID) {
-      System.out.format(">> ERROR [%d] non existing type %s %s (vardec_newexp)\n", line, t1, t2);
-      printError(this.line);
+            printError(this.line);
     }
 
     if (!(type_equals(t1, t2))) {
@@ -47,14 +46,12 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
     String scope = SYMBOL_TABLE.getInstance().getScope();
 
     if (scope.equals("class")) {
-      System.out.format(">> ERROR [%d] cant declare non primitive variable\n", line);
-      printError(this.line);
+            printError(this.line);
     }
 
     TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(id);
     if (res != null) {
-      System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
-      printError(this.line);
+            printError(this.line);
     }
     else
     {
@@ -70,7 +67,6 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
   }
 
   public TEMP IRme() {
-    System.out.println("VARDEC NEWEXP - IRme");
 
     TEMP t = exp.IRme();
 

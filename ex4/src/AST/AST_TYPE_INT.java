@@ -16,7 +16,6 @@ public class AST_TYPE_INT extends AST_TYPE {
   
 
   public TYPE SemantMe() {
-    System.out.format("TYPE_INT" + "- semant me\n");
-    return TYPE_INT.getInstance();
+        return TYPE_INT.getInstance();
   }
 }

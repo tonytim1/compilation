@@ -22,10 +22,8 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 	
 
 	public TYPE SemantMe() {
-				System.out.println("EXP VARDOT - semant me");
 		TYPE t1 = var.SemantMe();
 		if (t1 == null || !(t1 instanceof TYPE_CLASS)) 		{
-			System.out.println(">> ERROR ["+line+"] var.dot is of wrong class");
 			printError(line);
 		}
 		tl = (TYPE_CLASS)t1;
@@ -33,7 +31,6 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 		TYPE t2 = isFuncOfClass(t1.name,id,null,this.line);
 		if (t2 == null)
 		{
-			System.out.println(">> ERROR ["+line+"] var.dot is wrong");
 			printError(line);
 		}
 		
@@ -42,7 +39,6 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 	}
 	public TEMP IRme()
 	{
-	System.out.println("EXP VARDOT - IRme");
 	return vardotIR(var, null, tl, id);
 	}
 }

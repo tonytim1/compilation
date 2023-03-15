@@ -19,13 +19,11 @@ public class AST_EXP_STRING extends AST_EXP {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("EXP STRING (recoginzed string)- semant me");
 		scope = SYMBOL_TABLE.getInstance().getScope();
 		return TYPE_STRING.getInstance();
 	}
 
 	public TEMP IRme() {
-		System.out.println("EXP STRING (recoginzed string)- IRme");
 
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 

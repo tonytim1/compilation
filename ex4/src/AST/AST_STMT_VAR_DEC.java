@@ -17,13 +17,11 @@ public class AST_STMT_VAR_DEC extends AST_STMT {
   
 
   public TYPE SemantMe() {
-    System.out.println("STMT VARDEC - semant me");
     v.SemantMe();
     return null;
   }
 
   public TEMP IRme() {
-    System.out.println("STMT VARDEC - ir me");
     v.IRme();
     return null;
   }

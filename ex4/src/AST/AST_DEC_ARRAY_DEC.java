@@ -10,8 +10,9 @@ public class AST_DEC_ARRAY_DEC extends AST_DEC {
     this.array = array;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (array != null)
+    if (array != null) {
       System.out.print("====================== dec -> ATD\n");
+      }
   }
 
 
@@ -19,14 +20,12 @@ public class AST_DEC_ARRAY_DEC extends AST_DEC {
 
   public TYPE SemantMe() {
 
-    System.out.println("DEC_ATD" + "- semantme");
 
     array.SemantMe();
     return null;
   }
 
   public TEMP IRme() {
-    System.out.println("DEC_ATD" + "- IRme");
 
     array.IRme();
     return null;

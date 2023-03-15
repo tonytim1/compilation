@@ -21,22 +21,18 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 	
 
 	public TYPE SemantMe() {
-		System.out.println("VAR SUBSCRIPT - semant me");
 		TYPE t1 = var.SemantMe();
 
 		if (t1 == null) {
-			System.out.format(">> ERROR [%d] var is not declared. (var_subscript)\n", line);
-			printError(line);
+						printError(line);
 		}
 
 		if (!(t1.isArray())) {
-			System.out.println(">> ERROR [" + line + "] var is not an array");
 			printError(line);
 		}
 
 		TYPE t2 = subscript.SemantMe();
 		if (!(t2.name.equals("int"))) {
-			System.out.println(">> ERROR [" + line + "] array index is not int");
 			printError(line);
 		}
 
@@ -44,7 +40,6 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 	}
 
 	public TEMP IRme() {
-		System.out.println("VAR SUBSCRIPT- IRme");
 
 		TEMP t1 = var.IRme();
 		TEMP t2 = subscript.IRme();

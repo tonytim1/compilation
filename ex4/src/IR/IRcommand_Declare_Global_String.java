@@ -13,7 +13,6 @@ public class IRcommand_Declare_Global_String extends IRcommand_Assign_Non_Temp {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Declare_Global_String" + " - MIPSme");
 		String label = IRcommand.getFreshLabel("const_string");
 		MIPSGenerator.getInstance().declare_global_string(label, id, var);
 

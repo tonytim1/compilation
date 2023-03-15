@@ -14,7 +14,6 @@ public class IRcommand_Load_Local extends IRcommand {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Load_Local" + "- MIPSme");
 		MIPSGenerator.getInstance().load_local(dst, offset);
 	}
 }

@@ -14,7 +14,6 @@ public class IRcommand_Binop_DIV_Integers extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-		System.out.println("IRcommand_Binop_DIV_Integers" + "- MIPSme");
 		MIPSGenerator.getInstance().div(dst, t1, t2);
 	}
 }
