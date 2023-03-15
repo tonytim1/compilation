@@ -22,11 +22,11 @@ public class IRcommand_Declare_Class extends IRcommand {
 	ArrayList<ArrayList<String>> funcs;
 	ArrayList<ArrayList<ArrayList<String>>> fs;
 
-	public IRcommand_Declare_Class(String name, ArrayList<ArrayList<String>> funcs,
-			ArrayList<ArrayList<ArrayList<String>>> Fs) {
+	public IRcommand_Declare_Class(String name, ArrayList<ArrayList<String>> functions,
+			ArrayList<ArrayList<ArrayList<String>>> fs) {
 		this.class_name = name;
-		this.funcs = funcs;
-		this.fs = Fs;
+		this.funcs = functions;
+		this.fs = fs;
 	}
 
 	/***************/

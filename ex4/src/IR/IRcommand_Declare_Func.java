@@ -7,7 +7,7 @@ import MIPS.*;
 public class IRcommand_Declare_Func extends IRcommand {
 	public String name;
 	public int localVars;
-	public String className; // is nessecary?
+	public String className;
 	public String labelEnd;
 
 	    public IRcommand_Declare_Func(String name) {
@@ -16,7 +16,6 @@ public class IRcommand_Declare_Func extends IRcommand {
 
 	    public void MIPSme() {
 	        System.out.println("IRcommand_Declare_Func" + "- MIPSme");
-	        // prologue
 	        String labelStart;
 	        if (className != null)
 	            labelStart = className + "_" + name;

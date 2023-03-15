@@ -18,10 +18,10 @@ public class IRcommand_Const_String extends IRcommand_Assign {
 	String val;
 
 	// assuming ba
-	public IRcommand_Const_String(TEMP dst, String label, String value) {
+	public IRcommand_Const_String(TEMP dst, String label, String val) {
 		this.dst = dst;
 		this.label = label;
-		this.val = value;
+		this.val = val;
 		UpdateIRName("IRcommand_Assign");
 	}
 

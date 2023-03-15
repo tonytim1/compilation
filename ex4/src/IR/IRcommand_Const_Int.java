@@ -14,12 +14,11 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Const_Int extends IRcommand_Assign {
-	//TEMP dst;
-	int val;
+	public int val;
 
-	public IRcommand_Const_Int(TEMP t, int value) {
+	public IRcommand_Const_Int(TEMP t, int val) {
 		this.dst = t;
-		this.val = value;
+		this.val = val;
 		UpdateIRName("IRcommand_Assign");
 	}
 
