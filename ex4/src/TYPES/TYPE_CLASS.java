@@ -21,7 +21,9 @@ public class TYPE_CLASS extends TYPE {
 		System.out.println("Class name is " + name);
 		if (father != null) {
 			System.out.println("extends class " + father.name);
-		} else {
+		}
+		else
+		{
 			System.out.println("extends no other class");
 		}
 

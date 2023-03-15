@@ -27,7 +27,9 @@ public class AST_EXP_LIST extends AST_Node {
 
     if (tail == null) {
       return new TYPE_LIST(head.SemantMe(), null);
-    } else {
+    }
+    else
+    {
       return new TYPE_LIST(head.SemantMe(), tail.SemantMe(0));
     }
   }
@@ -36,9 +38,13 @@ public class AST_EXP_LIST extends AST_Node {
     System.out.println("EXPLIST - IRme");
     if ((head == null) && (tail == null)) {
       return null;
-    } else if (tail == null) {
+    }
+    else if (tail == null)
+    {
       return new TEMP_LIST(head.IRme(), null);
-    } else {
+    }
+    else
+    {
       return new TEMP_LIST(head.IRme(), tail.IRme(0));
     }
   }

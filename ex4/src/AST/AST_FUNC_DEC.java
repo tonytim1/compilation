@@ -154,7 +154,9 @@ public class AST_FUNC_DEC extends AST_Node {
             String labelStart = null;
     if (id.equals("user_main")) {
       labelStart = id;
-    } else {
+    }
+    else
+    {
       if (className != null)
         labelStart = className + "_" + id;
       else {

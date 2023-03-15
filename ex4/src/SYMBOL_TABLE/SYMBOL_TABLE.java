@@ -327,7 +327,9 @@ public class SYMBOL_TABLE {
                     if (t.name == curr.name) {
                         parameters = parameters.tail;
                         continue;
-                    } else {
+                    }
+                    else
+                    {
                         if (t.name.equals("nil") &&
                                 (curr.name.equals("int") || curr.name.equals("string"))) {
                             return null;

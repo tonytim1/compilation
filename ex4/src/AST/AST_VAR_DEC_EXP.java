@@ -77,12 +77,16 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(RealId, value));
 				if (class_name!=null)
 					defaultFields.put(class_name+"_"+id, value);
-			} else if (type instanceof AST_TYPE_INT) {
+			}
+			else if (type instanceof AST_TYPE_INT)
+			{
 				int value = ((AST_EXP_INT) exp).value;
 				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(RealId, value));
 				if (class_name!=null)
 					defaultFields.put(class_name+"_"+id, String.valueOf(value));
-			} else {
+			}
+			else
+			{
 				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(RealId));
 			}
 		}

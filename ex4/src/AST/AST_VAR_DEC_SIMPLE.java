@@ -56,9 +56,13 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
         if (scope.equals("global")) {
       if (type instanceof AST_TYPE_STRING) {
         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(id, "aaa"));
-      } else if (type instanceof AST_TYPE_INT) {
+      }
+      else if (type instanceof AST_TYPE_INT)
+      {
         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id, 0));
-      } else {         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id));
+      }
+      else
+      {         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id));
       }
     }
 

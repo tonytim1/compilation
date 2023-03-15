@@ -55,7 +55,9 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
     if (res != null) {
       System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
       printError(this.line);
-    } else {
+    }
+    else
+    {
       isOverride();
       SYMBOL_TABLE.getInstance().enter(id, t1);
     }
@@ -74,7 +76,9 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
 
     if (scope.equals("global")) {
             printError(666);
-    } else {
+    }
+    else
+    {
       
             IRcommand command = new IRcommand_Store_Local(id, t);
 

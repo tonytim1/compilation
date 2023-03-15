@@ -36,9 +36,13 @@ public class AST_STMT_ID extends AST_STMT {
     String startLabel = null;
     if (id.equals("PrintInt")) {
       startLabel = "PrintInt";
-    } else if (id.equals("PrintString")) {
+    }
+    else if (id.equals("PrintString"))
+    {
       startLabel = "PrintString";
-    } else {
+    }
+    else
+    {
       startLabel = this.func.startLabel;
     }
 

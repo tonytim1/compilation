@@ -38,9 +38,13 @@ public class AST_EXP_ID extends AST_EXP {
     String startLabel = null;
     if (id.equals("PrintInt")) {
       startLabel = "PrintInt";
-    } else if (id.equals("PrintString")) {
+    }
+    else if (id.equals("PrintString"))
+    {
       startLabel = "PrintString";
-    } else {
+    }
+    else
+    {
       startLabel = this.func.startLabel;
     }
 

@@ -142,7 +142,9 @@ public class REG_ALLOC {
                         curr.FuncScope
                                 .add(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
                     }
-                } else {
+                }
+                else
+                {
                     curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
                     if (curr.inFunc) {
                         curr.FuncScope
@@ -183,8 +185,12 @@ public class REG_ALLOC {
                         curr.FuncScope
                                 .add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
                     }
-                } else if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Label"))) {
-                } else {
+                }
+                else if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Label")))
+                {
+                }
+                else
+                {
                     curr.inSet
                             .add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
                     curr.inSet
@@ -449,8 +455,12 @@ public class REG_ALLOC {
                         ((IRcommand_Conditional_Jump) h).op1.serial = Integer.parseInt(theNum);
                         ((IRcommand_Conditional_Jump) h).op1.changed = true;
                     }
-                } else if ((h.getClass().toString().equals("class IR.IRcommand_Jump_Label"))) {
-                } else {
+                }
+                else if ((h.getClass().toString().equals("class IR.IRcommand_Jump_Label")))
+                {
+                }
+                else
+                {
                     String theNum;
                     if (((IRcommand_Conditional_Jump) h).op1.changed == false) {
                         theNum = IRtoMIPS

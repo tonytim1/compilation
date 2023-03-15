@@ -51,9 +51,13 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
     String startLabel = null;
     if (id.equals("PrintInt")) {
       startLabel = "PrintInt";
-    } else if (id.equals("PrintString")) {
+    }
+    else if (id.equals("PrintString"))
+    {
       startLabel = "PrintString";
-    } else {
+    }
+    else
+    {
       startLabel = this.func.startLabel;
     }
     IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(t, startLabel, resTempsList));

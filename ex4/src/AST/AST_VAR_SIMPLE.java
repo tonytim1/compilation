@@ -78,7 +78,9 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 
 		if (inGlobal == 1) {
 			IR.getInstance().Add_IRcommand(new IRcommand_Load_Global(t, name));
-		} else { 			String realN = name;
+		}
+		else
+		{ 			String realN = name;
 			boolean c = false;
 			IRcommand command;
 			if (className != null && offsets.get(name) == null) { 				c = true;
