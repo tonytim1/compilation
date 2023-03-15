@@ -191,12 +191,6 @@ cField 		::= 	varDec:vd 				{: RESULT = new AST_CFEILD_VARDEC(vd);  :}
 					| funcDec:fd			{: RESULT = new AST_CFEILD_FUNCDEC(fd); :}
 					;
 
-dec ::= varDec:v 				{: RESULT= new AST_DEC_VAR_DEC(v);	:}
-		| funcDec:f 			{: RESULT=  new AST_DEC_FUNC_DEC(f); :}
-		| classDec:c 			{: RESULT=new AST_DEC_CLASS_DEC(c)  ;:}
-		| arrayTypedef:a		{: RESULT=new AST_ARRAY_TYPE_DEF(a)  ;     :}
-		;
-
 type  ::= 	TYPE_INT:t 				{: RESULT= new AST_TYPE_INT(tleft + 1)  ;:}
 			| TYPE_STRING:s			{: RESULT= new AST_TYPE_STRING(sleft + 1) ;:}
 			| TYPE_VOID:v				{: RESULT= new AST_TYPE_VOID(vleft + 1) ;:}
