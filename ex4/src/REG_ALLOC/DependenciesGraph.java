@@ -30,11 +30,9 @@ public class DependenciesGraph {
             this.neighborsCount = 0;
             this.register = null;
         }
-
-        HashSet<node> graphNodes = new HashSet<node>();
-        HashSet<node> allNodes = new HashSet<node>();
-		
     }
+    HashSet<node> graphNodes = new HashSet<node>();
+    HashSet<node> allNodes = new HashSet<node>();
 
     public DependenciesGraph(Vertex vertex) {
         Vertex curr = vertex;
