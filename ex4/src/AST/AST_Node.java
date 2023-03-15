@@ -173,7 +173,7 @@ public abstract class AST_Node {
 					AST_TYPE_NAME_LIST funcs = father.functions;
 					for (AST_TYPE_NAME_LIST it = funcs; it != null; it = it.tail) {
 						if (it.head.name.equals(funcName))
-							return SYMBOL_TABLE.getInstance().compareFuncs((TYPE_FUNCTION) it.head.type, funcArgs, line);
+							return SYMBOL_TABLE.getInstance().compare((TYPE_FUNCTION) it.head.type, funcArgs);
 					}
 					father = father.father;
 				}
@@ -207,7 +207,7 @@ public abstract class AST_Node {
 			printError(line);
 		}
 		// should compare a params to func args - getting func args type by semant me
-		return SYMBOL_TABLE.getInstance().compareFuncs(a, funcArgs, line);
+		return SYMBOL_TABLE.getInstance().compare(a, funcArgs);
 
 	}
 

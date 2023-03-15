@@ -98,7 +98,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		/*****************/
 		/* [3] End Scope */
 		/*****************/
-		SYMBOL_TABLE.getInstance().cleanGarbage();
+		SYMBOL_TABLE.getInstance().clearScope();
 		TYPE_CLASS classType = new TYPE_CLASS(father, id, fields, funcs);
 		SYMBOL_TABLE.getInstance().enter(id, classType);
 		SYMBOL_TABLE.getInstance().beginScope("class-" + id + "-extends-" + this.father.name);
