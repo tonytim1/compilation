@@ -5,15 +5,15 @@ import TEMP.TEMP;
 import TYPES.*;
 
 public class AST_ARRAY_TYPE_DEF extends AST_Node {
-	public AST_TYPE type;
 	public String id;
+	public AST_TYPE type;
 
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
 	public AST_ARRAY_TYPE_DEF(String id, AST_TYPE type, int line) {
-		this.type = type;
 		this.id = id;
+		this.type = type;
 		this.line = line;
 
 		/***************************************/

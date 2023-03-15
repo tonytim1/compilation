@@ -13,8 +13,8 @@ public class AST_FUNC_DEC extends AST_Node {
   public String id;
   public AST_ARG_LIST arglist;
   public AST_STMT_LIST list;
-  public String className; // nedded for IRme
   public TYPE_FUNCTION func; // needed for IRme
+  public String className; // nedded for IRme
 
   /*******************/
   /* CONSTRUCTOR(S) */
@@ -85,8 +85,8 @@ public class AST_FUNC_DEC extends AST_Node {
 
     System.out.println("FUNCDEC- semantme(" + id + ")");
 
-    TYPE returnTypeType = null;
     TYPE_LIST argListTypes = null;
+    TYPE returnTypeType = null;
     TYPE t;
 
     /*******************/

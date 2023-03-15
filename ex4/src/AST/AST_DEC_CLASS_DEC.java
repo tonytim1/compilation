@@ -2,13 +2,13 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 public class AST_DEC_CLASS_DEC extends AST_DEC {
-  public AST_CLASS_DEC cd;
+  public AST_CLASS_DEC c;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_DEC_CLASS_DEC(AST_CLASS_DEC cd) {
-    this.cd = cd;
+  public AST_DEC_CLASS_DEC(AST_CLASS_DEC c) {
+    this.c = c;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
@@ -17,7 +17,7 @@ public class AST_DEC_CLASS_DEC extends AST_DEC {
     /***************************************/
     /* PRINT CORRESPONDING DERIVATION RULE */
     /***************************************/
-    if (cd != null)
+    if (c != null)
       System.out.print("====================== dec -> classDec\n");
 
   }
@@ -37,8 +37,8 @@ public class AST_DEC_CLASS_DEC extends AST_DEC {
     /**************************************/
     /* RECURSIVELY PRINT non-null(!) sons (list, left and right...) */
     /**************************************/
-    if (cd != null)
-      cd.PrintMe();
+    if (c != null)
+      c.PrintMe();
     /***************************************/
     /* PRINT Node to AST GRAPHVIZ DOT file */
     /* print node name and optional string (maybe only needed in binop nodes) */
@@ -51,19 +51,19 @@ public class AST_DEC_CLASS_DEC extends AST_DEC {
      * Print Edges to every son!
      */
     /****************************************/
-    if (cd != null)
-      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, cd.SerialNumber);
+    if (c != null)
+      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, c.SerialNumber);
 
   }
   
 	public TYPE SemantMe() {
     System.out.println("DEC CLASSDEC - semant me");
-    return cd.SemantMe();
+    return c.SemantMe();
 	}
 
 	public TEMP IRme() {
     System.out.println("DEC_CLASSDEC" + "- IRme");
-    cd.IRme();
+    c.IRme();
     return null;
 }
 }

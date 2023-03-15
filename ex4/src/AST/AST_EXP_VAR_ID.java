@@ -14,6 +14,9 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_EXP_VAR_ID(AST_VAR var, String id, int line) {
+		this.var = var;
+		this.id = id;
+		this.line = line;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -27,9 +30,6 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.var = var;
-		this.id = id;
-		this.line = line;
 	}
 
 	/***********************************************/

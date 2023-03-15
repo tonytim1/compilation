@@ -14,6 +14,9 @@ public class AST_EXP_LIST extends AST_Node {
   /* CONSTRUCTOR(S) */
   /******************/
   public AST_EXP_LIST(AST_EXP head, AST_EXP_LIST tail, int line) {
+    this.head = head;
+    this.tail = tail;
+    this.line = line;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
@@ -30,9 +33,6 @@ public class AST_EXP_LIST extends AST_Node {
     /*******************************/
     /* COPY INPUT DATA NENBERS ... */
     /*******************************/
-    this.head = head;
-    this.tail = tail;
-    this.line = line;
   }
 
   /******************************************************/

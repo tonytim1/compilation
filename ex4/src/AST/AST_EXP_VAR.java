@@ -10,6 +10,7 @@ public class AST_EXP_VAR extends AST_EXP {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_EXP_VAR(AST_VAR var) {
+		this.var = var;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -23,7 +24,6 @@ public class AST_EXP_VAR extends AST_EXP {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.var = var;
 	}
 
 	/***********************************************/

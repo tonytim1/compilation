@@ -15,10 +15,10 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
   /* CONSTRUCTOR(S) */
   /*******************/
   public AST_CLASS_DEC_SIMPLE(String id, AST_C_FIELD_LIST data_members, int line) {
-    this.data_members = data_members;
     this.id = id;
-    this.line = line;
     this.father = null;
+    this.data_members = data_members;
+    this.line = line;
 
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */

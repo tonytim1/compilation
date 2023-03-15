@@ -6,13 +6,13 @@ public class AST_ARG extends AST_Node {
   public String val; // for IRme
 
   public AST_ARG(AST_TYPE t, String id) {
+    this.t = t;
+    this.id = id;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    this.t = t;
-    this.id = id;
   }
 
   /****************** outside CONSTRUCTOR code *******************/

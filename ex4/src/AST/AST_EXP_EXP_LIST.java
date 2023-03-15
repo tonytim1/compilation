@@ -14,11 +14,14 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
   /* CONSTRUCTOR(S) */
   /******************/
   public AST_EXP_EXP_LIST(String id, AST_EXP_LIST list, int line) {
+    this.id = id;
+    this.list = list;
+    this.line = line;
+
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
-    this.line = line;
 
     /***************************************/
     /* PRINT CORRESPONDING DERIVATION RULE */
@@ -28,9 +31,7 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
     /*******************************/
     /* COPY INPUT DATA NENBERS ... */
     /*******************************/
-    this.id = id;
-    this.list = list;
-    this.line = line;
+
   }
 
   /*************************************************/

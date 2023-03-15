@@ -15,11 +15,11 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_C_FIELD_LIST l, int line) {
+	public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_C_FIELD_LIST data_members, int line) {
 		this.id = id1;
 		this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(id2);
 		this.fatherName = id2;
-		this.data_members = l;
+		this.data_members = data_members;
 		this.line = line;
 
 		System.out.print("====================== classDec -> CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE\n");

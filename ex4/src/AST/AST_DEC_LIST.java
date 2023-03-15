@@ -14,6 +14,8 @@ public class AST_DEC_LIST extends AST_Node {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_DEC_LIST(AST_DEC head, AST_DEC_LIST tail) {
+		this.head = head;
+		this.tail = tail;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -29,8 +31,7 @@ public class AST_DEC_LIST extends AST_Node {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.head = head;
-		this.tail = tail;
+
 	}
 
 	/*************************************************/
