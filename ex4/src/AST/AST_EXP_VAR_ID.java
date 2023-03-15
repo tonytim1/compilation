@@ -9,31 +9,16 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 	public AST_VAR var;
 	public String id;
 	public TYPE_CLASS tl; 
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
 	public AST_EXP_VAR_ID(AST_VAR var, String id, int line) {
 		this.var = var;
 		this.id = id;
 		this.line = line;
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.print("====================== exp -> vardot\n");
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/*******************************/
 	}
 
-	/***********************************************/
-	/* The default message for an exp var AST node */
-	/***********************************************/
 	
 
 	public TYPE SemantMe() {

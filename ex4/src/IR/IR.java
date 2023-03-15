@@ -8,9 +8,6 @@ public class IR {
 
 	private IRcommand initialization = null;
 	private IRcommand_List initializationTail = null;
-	/******************/
-	/* Add IR command */
-	/******************/
 	public void Add_IRcommand(IRcommand cmd) {
 		if ((head == null) && (tail == null)) {
 			this.head = cmd;
@@ -39,9 +36,6 @@ public class IR {
 		}
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		if (head != null)
 			head.MIPSme();
@@ -55,25 +49,13 @@ public class IR {
 			initializationTail.MIPSme();
 	}
 
-	/**************************************/
-	/* USUAL SINGLETON IMPLEMENTATION ... */
-	/**************************************/
 	private static IR instance = null;
 
-	/*****************************/
-	/* PREVENT INSTANTIATION ... */
-	/*****************************/
 	protected IR() {
 	}
 
-	/******************************/
-	/* GET SINGLETON INSTANCE ... */
-	/******************************/
 	public static IR getInstance() {
 		if (instance == null) {
-			/*******************************/
-			/* [0] The instance itself ... */
-			/*******************************/
 			instance = new IR();
 		}
 		return instance;

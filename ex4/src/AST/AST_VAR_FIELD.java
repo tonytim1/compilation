@@ -10,31 +10,16 @@ public class AST_VAR_FIELD extends AST_VAR {
 	public String fieldName;
 	public String classN;
 
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
 	public AST_VAR_FIELD(AST_VAR var, String fieldName, int line) {
 		this.var = var;
 		this.fieldName = fieldName;
 		this.line = line;
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.format("====================== var -> var.ID( %s )\n", fieldName);
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/*******************************/
 	}
 
-	/*************************************************/
-	/* The printing message for a field var AST node */
-	/*************************************************/
 	
 
 	public TYPE SemantMe() {

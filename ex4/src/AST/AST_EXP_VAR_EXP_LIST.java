@@ -10,33 +10,18 @@ public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
 	public AST_EXP_LIST list;
 	public TYPE_CLASS tl;
 
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
 	public AST_EXP_VAR_EXP_LIST(AST_VAR var, String id, AST_EXP_LIST list, int line) {
 		this.var = var;
 		this.id = id;
 		this.list = list;
 		this.line = line;
 
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.print("====================== exp -> vardot_explist\n");
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/*******************************/
 	}
 
-	/***********************************************/
-	/* The default message for an exp var AST node */
-	/***********************************************/
 	
 
 	public TYPE SemantMe() {

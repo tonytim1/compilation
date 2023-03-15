@@ -13,9 +13,6 @@ public class IRcommand_Load_Global extends IRcommand_Assign {
 		UpdateIRName("IRcommand_Assign");
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Load_Global" + "- MIPSme");
 		MIPSGenerator.getInstance().load_label(dst, label);

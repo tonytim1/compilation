@@ -13,9 +13,6 @@ public class IRcommand_List
 		this.tail = tail;
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme()
 	{
 		if (head != null) {

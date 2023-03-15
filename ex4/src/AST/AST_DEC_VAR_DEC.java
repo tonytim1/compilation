@@ -4,25 +4,13 @@ import TYPES.*;
 import TEMP.*;
 
 public class AST_DEC_VAR_DEC extends AST_DEC {
-	/****************/
-	/* DATA MEMBERS */
-	/****************/
 	public AST_VAR_DEC v;
 
-	/*******************/
-	/* CONSTRUCTOR(S) */
-	/*******************/
 	public AST_DEC_VAR_DEC(AST_VAR_DEC v) {
 		this.v = v;
 
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		if (v != null)
 			System.out.print("====================== dec -> varDec\n");
 	}

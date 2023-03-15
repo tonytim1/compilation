@@ -12,9 +12,6 @@ import java.util.HashMap;
 public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 	String fatherName;
 
-	/*******************/
-	/* CONSTRUCTOR(S) */
-	/*******************/
 	public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_C_FIELD_LIST data_members, int line) {
 		this.id = id1;
 		this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(id2);
@@ -24,27 +21,17 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 
 		System.out.print("====================== classDec -> CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE\n");
 
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
 	}
 
-	/****************** outside CONSTRUCTOR code *******************/
 
-	/*************************************************/
-	/* The printing message for a XXX node */
-	/*************************************************/
 	
 
 	public TYPE SemantMe() {
 		System.out.format("CLASSDEC EXTENDS(%s) - semant me\n", id);
 		this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(this.fatherName);
 
-		/*************************/
-		/* [1] Begin Class Scope */
-		/*************************/
 
 		TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
 		if (isExist != null) { 			System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
@@ -53,9 +40,6 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		}
 		SYMBOL_TABLE.getInstance().beginScope("class-" + id + "-extends-" + this.father.name);
 
-		/***************************/
-		/* [2] Semant Data Members */
-		/***************************/
 		AST_ARG_LIST fields = null;
 		AST_TYPE_NAME_LIST funcs = null;
 		TYPE t = null;
@@ -93,9 +77,6 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 			}
 		}
 
-		/*****************/
-		/* [3] End Scope */
-		/*****************/
 		SYMBOL_TABLE.getInstance().clearScope();
 		TYPE_CLASS classType = new TYPE_CLASS(father, id, fields, funcs);
 		SYMBOL_TABLE.getInstance().enter(id, classType);
@@ -104,14 +85,8 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 			t = it.head.SemantMe(); 		}
 		SYMBOL_TABLE.getInstance().endScope();
 
-		/************************************************/
-		/* [4] Enter the Class Type to the Symbol Table */
-		/************************************************/
 
 								
-		/*********************************************************/
-		/* [5] Return value is irrelevant for class declarations */
-		/*********************************************************/
 		return null;
 	}
 

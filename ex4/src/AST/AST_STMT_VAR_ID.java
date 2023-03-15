@@ -7,24 +7,14 @@ public class AST_STMT_VAR_ID extends AST_STMT {
   public String id;
   public TYPE_CLASS tl;
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_STMT_VAR_ID(AST_VAR var, String id) {
     this.var = var;
     this.id = id;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
   public TYPE SemantMe() {
 				System.out.println("STMT VARDOT - semant me");

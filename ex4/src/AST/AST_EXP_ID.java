@@ -10,30 +10,15 @@ import TYPES.*;
 public class AST_EXP_ID extends AST_EXP {
   public String id;
   public TYPE_FUNCTION func; 
-  /******************/
-  /* CONSTRUCTOR(S) */
-  /******************/
   public AST_EXP_ID(String id, int line) {
     this.id = id;
     this.line = line;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.print("====================== exp -> id()\n");
 
-    /*******************************/
-    /* COPY INPUT DATA NENBERS ... */
-    /*******************************/
   }
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {

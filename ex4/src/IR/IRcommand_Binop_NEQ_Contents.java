@@ -12,15 +12,9 @@ public class IRcommand_Binop_NEQ_Contents extends IRcommand_Binop {
 		UpdateIRName("IRcommand_Binop");
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Binop_NEQ_Contents" + "- MIPSme");
 
-		/*******************************/
-		/* [1] Allocate 3 fresh labels */
-		/*******************************/
 		String label_end = getFreshLabel("end");
 		String label_AssignOne = getFreshLabel("AssignOne");
 		String label_AssignZero = getFreshLabel("AssignZero");

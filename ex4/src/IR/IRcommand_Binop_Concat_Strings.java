@@ -14,9 +14,6 @@ public class IRcommand_Binop_Concat_Strings extends IRcommand_Binop {
     UpdateIRName("IRcommand_Binop");
   }
 
-  /***************/
-  /* MIPS me !!! */
-  /***************/
   @Override
   public void MIPSme() {
 	    System.out.println("IRcommand_Binop_Concat_Strings" + "- MIPSme");

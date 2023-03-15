@@ -6,8 +6,6 @@ import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.XMLElement;
 
-/** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
-  */
 @SuppressWarnings({"rawtypes"})
 public class Parser extends java_cup.runtime.lr_parser {
 
@@ -15,18 +13,14 @@ public class Parser extends java_cup.runtime.lr_parser {
     return TokenNames.class;
 }
 
-  /** Default constructor. */
   @Deprecated
   public Parser() {super();}
 
-  /** Constructor which sets the default scanner. */
   @Deprecated
   public Parser(java_cup.runtime.Scanner s) {super(s);}
 
-  /** Constructor which sets the default scanner. */
   public Parser(java_cup.runtime.Scanner s, java_cup.runtime.SymbolFactory sf) {super(s,sf);}
 
-  /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
     "\000\102\000\002\002\004\000\002\006\003\000\002\017" +
@@ -51,10 +45,8 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\002\022\005\000\002\022\005\000\002\022\005\000\002" +
     "\022\005\000\002\022\005" });
 
-  /** Access to production table. */
   public short[][] production_table() {return _production_table;}
 
-  /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
     "\000\226\000\016\030\005\031\010\036\015\037\021\042" +
@@ -235,10 +227,8 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\uffef\036\uffef\037\uffef\042\uffef\044\uffef\001\002\000\004" +
     "\002\uffff\001\002\000\004\002\001\001\002" });
 
-  /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
 
-  /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
     "\000\226\000\022\006\003\007\006\010\013\011\015\012" +
@@ -309,19 +299,15 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001" });
 
-  /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
 
-  /** Instance of action encapsulation class. */
   protected CUP$Parser$actions action_obj;
 
-  /** Action encapsulation object initializer. */
   protected void init_actions()
     {
       action_obj = new CUP$Parser$actions(this);
     }
 
-  /** Invoke a user supplied parse action. */
   public java_cup.runtime.Symbol do_action(
     int                        act_num,
     java_cup.runtime.lr_parser parser,
@@ -329,23 +315,17 @@ public class Parser extends java_cup.runtime.lr_parser {
     int                        top)
     throws java.lang.Exception
   {
-    /* call code in generated class */
     return action_obj.CUP$Parser$do_action(act_num, parser, stack, top);
   }
 
-  /** Indicates start state. */
   public int start_state() {return 0;}
-  /** Indicates start production. */
   public int start_production() {return 0;}
 
-  /** <code>EOF</code> Symbol index. */
   public int EOF_sym() {return 0;}
 
-  /** <code>error</code> Symbol index. */
   public int error_sym() {return 1;}
 
 
-  /** Scan to get the next Symbol. */
   public java_cup.runtime.Symbol scan()
     throws java.lang.Exception
     {
@@ -415,17 +395,14 @@ public class Parser extends java_cup.runtime.lr_parser {
 	}
 
 
-/** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$Parser$actions {
   private final Parser parser;
 
-  /** Constructor */
   CUP$Parser$actions(Parser parser) {
     this.parser = parser;
   }
 
-  /** Method 0 with the actual generated action code for actions 0 to 300. */
   public final java_cup.runtime.Symbol CUP$Parser$do_action_part00000000(
     int                        CUP$Parser$act_num,
     java_cup.runtime.lr_parser CUP$Parser$parser,
@@ -433,13 +410,10 @@ class CUP$Parser$actions {
     int                        CUP$Parser$top)
     throws java.lang.Exception
     {
-      /* Symbol object for return from actions */
       java_cup.runtime.Symbol CUP$Parser$result;
 
-      /* select the action based on the action number */
       switch (CUP$Parser$act_num)
         {
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 0:             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -448,11 +422,9 @@ class CUP$Parser$actions {
 		RESULT = start_val;
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
-          /* ACCEPT */
           CUP$Parser$parser.done_parsing();
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 1:             {
               AST_PROGRAM RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -463,7 +435,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 2:             {
               AST_DEC_LIST RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -477,7 +448,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 3:             {
               AST_DEC_LIST RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -488,7 +458,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 4:             {
               AST_DEC RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -499,7 +468,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 5:             {
               AST_DEC RESULT =null;
 		int fleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -510,7 +478,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 6:             {
               AST_DEC RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -521,7 +488,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 7:             {
               AST_DEC RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -532,7 +498,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 8:             {
               AST_STMT_LIST RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -546,7 +511,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 9:             {
               AST_STMT_LIST RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -557,7 +521,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 10:             {
               AST_CFEILD_LIST RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -571,7 +534,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 11:             {
               AST_CFEILD_LIST RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -582,7 +544,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 12:             {
               AST_C_FIELD RESULT =null;
 		int vdleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -593,7 +554,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 13:             {
               AST_C_FIELD RESULT =null;
 		int fdleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -604,7 +564,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 14:             {
               AST_TYPE RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -615,7 +574,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 15:             {
               AST_TYPE RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -626,7 +584,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 16:             {
               AST_TYPE RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -637,7 +594,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 17:             {
               AST_TYPE RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -648,7 +604,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 18:             {
               AST_ATD RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -662,7 +617,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 19:             {
               AST_VAR_DEC RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -676,7 +630,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 20:             {
               AST_VAR_DEC RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
@@ -693,7 +646,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 21:             {
               AST_VAR_DEC RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
@@ -710,7 +662,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 22:             {
               AST_FUNCDEC RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
@@ -727,7 +678,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 23:             {
               AST_FUNCDEC RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
@@ -747,7 +697,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 24:             {
               AST_ARG RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -761,7 +710,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 25:             {
               AST_ARG_LIST RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -772,7 +720,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 26:             {
               AST_ARG_LIST RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -786,7 +733,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 27:             {
               AST_CLASS_DEC RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
@@ -800,7 +746,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 28:             {
               AST_CLASS_DEC RESULT =null;
 		int id1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -817,7 +762,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 29:             {
               AST_EXP RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -828,7 +772,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 30:             {
               AST_EXP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -839,7 +782,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 31:             {
               AST_EXP RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -850,7 +792,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 32:             {
               AST_EXP RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -867,7 +808,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 33:             {
               AST_EXP RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
@@ -881,7 +821,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 34:             {
               AST_EXP RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
@@ -895,7 +834,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 35:             {
               AST_EXP RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -906,7 +844,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 36:             {
               AST_EXP RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -917,7 +854,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 37:             {
               AST_EXP RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -928,7 +864,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 38:             {
               AST_EXP RESULT =null;
 		 RESULT = new AST_EXP_NIL();   		   			   
@@ -936,7 +871,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 39:             {
               AST_EXP RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -947,7 +881,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 40:             {
               AST_EXPLIST RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -961,7 +894,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 41:             {
               AST_EXPLIST RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -972,7 +904,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 42:             {
               AST_VAR RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -983,7 +914,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 43:             {
               AST_VAR RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -997,7 +927,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 44:             {
               AST_VAR RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
@@ -1011,7 +940,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 45:             {
               AST_STMT RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
@@ -1025,7 +953,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 46:             {
               AST_STMT RESULT =null;
 		int vdleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -1036,7 +963,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 47:             {
               AST_STMT RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
@@ -1050,7 +976,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 48:             {
               AST_STMT RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -1061,7 +986,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 49:             {
               AST_STMT RESULT =null;
 		int rleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -1072,7 +996,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 50:             {
               AST_STMT RESULT =null;
 		int condleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
@@ -1086,7 +1009,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 51:             {
               AST_STMT RESULT =null;
 		int condleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
@@ -1100,7 +1022,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 52:             {
               AST_STMT RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
@@ -1117,7 +1038,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 53:             {
               AST_STMT RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -1131,7 +1051,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 54:             {
               AST_STMT RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
@@ -1145,7 +1064,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 55:             {
               AST_STMT RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
@@ -1156,7 +1074,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 56:             {
               AST_NEW_EXP RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
@@ -1167,7 +1084,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 57:             {
               AST_NEW_EXP RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
@@ -1181,7 +1097,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 58:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1195,7 +1110,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 59:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1209,7 +1123,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 60:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1223,7 +1136,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 61:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1237,7 +1149,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 62:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1251,7 +1162,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 63:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1265,7 +1175,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 64:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1279,7 +1188,6 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
           case 65:             {
               AST_BINOP RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
@@ -1293,15 +1201,12 @@ class CUP$Parser$actions {
             }
           return CUP$Parser$result;
 
-          /* . . . . . .*/
           default:
             throw new Exception(
                "Invalid action number "+CUP$Parser$act_num+"found in internal parse table");
 
         }
-    } /* end of method */
-
-  /** Method splitting the generated action code into several parts. */
+    }
   public final java_cup.runtime.Symbol CUP$Parser$do_action(
     int                        CUP$Parser$act_num,
     java_cup.runtime.lr_parser CUP$Parser$parser,

@@ -8,29 +8,14 @@ import SYMBOL_TABLE.*;
 public class AST_EXP_INT extends AST_EXP {
 	public int value;
 
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
 	public AST_EXP_INT(int value) {
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/******************************/
 		this.value = value;
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.format("====================== exp -> INT(%d)\n", value);
 	}
 
-	/************************************************/
-	/* The printing message for an INT EXP AST node */
-	/************************************************/
 	
 
 	public TYPE SemantMe() {

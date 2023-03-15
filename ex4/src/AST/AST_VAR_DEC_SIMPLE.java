@@ -7,9 +7,6 @@ import IR.*;
 
 public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public String inclass;
   public TYPE t;
   public boolean inFunc;
@@ -19,23 +16,13 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
     this.id = id;
     this.line = line;
 
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     if (type != null)
       System.out.print("====================== varDec -> type ID SEMICOLON \n");
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {
@@ -54,9 +41,6 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
       printError(line);
     }
 
-    /***************************************************/
-    /* [3] Enter the Type to the Symbol Table */
-    /***************************************************/
     isOverride();
 
     SYMBOL_TABLE.getInstance().enter(id, t1);

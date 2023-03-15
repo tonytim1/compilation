@@ -6,35 +6,20 @@ import TEMP.*;
 import IR.*;
 
 public class AST_VAR_SIMPLE extends AST_VAR {
-	/************************/
-	/* simple variable name */
-	/************************/
 	public String name;
 	public String className = null;
 	public TYPE thisT;
 	public boolean cfgVar = false;
 	int inGlobal = 0; 
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
 	public AST_VAR_SIMPLE(String name, int line) {
 		this.name = name;
 		this.line = line;
 
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.format("====================== var -> ID\n");
 	}
 
-	/**************************************************/
-	/* The printing message for a simple var AST node */
-	/**************************************************/
 	
 
 	public TYPE SemantMe() {

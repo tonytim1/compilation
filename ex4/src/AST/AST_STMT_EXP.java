@@ -8,28 +8,15 @@ import IR.*;
 public class AST_STMT_EXP extends AST_STMT {
   public AST_EXP e;
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_STMT_EXP(AST_EXP e, int line) {
     this.e = e;
     this.line = line;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.print("====================== stmt -> RETURN exp SEMICOLON	\n");
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {

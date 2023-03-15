@@ -4,10 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
-/*******************/
-/* PROJECT IMPORTS */
 
-/*******************/
 public class DependenciesGraph {
     public class node {
         String name;

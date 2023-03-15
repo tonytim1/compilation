@@ -6,24 +6,14 @@ import TEMP.*;
 public class AST_STMT_VAR_DEC extends AST_STMT {
   public AST_VAR_DEC v;
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_STMT_VAR_DEC(AST_VAR_DEC v) {
     this.v = v;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     System.out.print("====================== stmt -> varDec\n");
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {

@@ -4,39 +4,21 @@ import TYPES.*;
 import TEMP.*;
 
 public class AST_DEC_LIST extends AST_Node {
-	/****************/
-	/* DATA MEMBERS */
-	/****************/
 	public AST_DEC head;
 	public AST_DEC_LIST tail;
 
-	/******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
 	public AST_DEC_LIST(AST_DEC head, AST_DEC_LIST tail) {
 		this.head = head;
 		this.tail = tail;
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		if (tail != null)
 			System.out.print("====================== decs -> dec decs\n");
 		if (tail == null)
 			System.out.print("====================== decs -> dec      \n");
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/*******************************/
 
 	}
 
-	/*************************************************/
-	/* The printing message for a node */
-	/*************************************************/
 	
 
 	public TYPE SemantMe() {

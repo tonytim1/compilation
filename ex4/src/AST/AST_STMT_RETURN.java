@@ -7,25 +7,15 @@ import TEMP.*;
 
 public class AST_STMT_RETURN extends AST_STMT {
 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_STMT_RETURN(int line) {
     this.line = line;
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     System.out.print("====================== stmt -> return;\n");
 
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {

@@ -6,39 +6,21 @@ import IR.*;
 import SYMBOL_TABLE.*;
 
 public class AST_STMT_ASSIGN extends AST_STMT {
-	/***************/
-	/* var := exp */
-	/***************/
 	public AST_VAR var;
 	public AST_EXP exp;
 	public TYPE scope; 	public String inclass; 	public String ty;
 
-	/*******************/
-	/* CONSTRUCTOR(S) */
-	/*******************/
 	public AST_STMT_ASSIGN(AST_VAR var, AST_EXP exp, int line) {		
 		this.var = var;
 		this.exp = exp;
 		this.line = line;
 
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.print("====================== stmt -> var ASSIGN exp SEMICOLON\n");
 
-		/*******************************/
-		/* COPY INPUT DATA NENBERS ... */
-		/*******************************/
 	}
 
-	/*********************************************************/
-	/* The printing message for an assign statement AST node */
-	/*********************************************************/
 	
 
 	public TYPE SemantMe() {

@@ -8,28 +8,16 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 	public String id;
 	public AST_TYPE type;
 
-	/*******************/
-	/* CONSTRUCTOR(S) */
-	/*******************/
 	public AST_ARRAY_TYPE_DEF(String id, AST_TYPE type, int line) {
 		this.id = id;
 		this.type = type;
 		this.line = line;
 
-		/***************************************/
-		/* PRINT CORRESPONDING DERIVATION RULE */
-		/***************************************/
 		System.out.print("====================== 		arrayTypedef ::= 	array ID = type[]; \n");
 
-		/******************************/
-		/* SET A UNIQUE SERIAL NUMBER */
-		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 	}
 
-	/*************************************************/
-	/* The printing message ------------------------ */
-	/*************************************************/
 	
 
 	public TYPE SemantMe() {

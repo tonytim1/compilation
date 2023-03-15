@@ -9,30 +9,17 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
   public AST_VAR var;
   public AST_NEW_EXP exp;
   public TYPE scope;   public String inclass; 
-  /*******************/
-  /* CONSTRUCTOR(S) */
-  /*******************/
   public AST_STMT_ASSIGN_NEW(AST_VAR var, AST_NEW_EXP exp, int line) {
     this.var = var;
     this.exp = exp;
     this.line = line;
 
-    /******************************/
-    /* SET A UNIQUE SERIAL NUMBER */
-    /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
-    /***************************************/
-    /* PRINT CORRESPONDING DERIVATION RULE */
-    /***************************************/
     System.out.print("====================== stmt -> var:v ASSIGN newExp:ne SEMICOLON \n");
 
   }
 
-  /****************** outside CONSTRUCTOR code *******************/
 
-  /*************************************************/
-  /* The printing message for a XXX node */
-  /*************************************************/
   
 
   public TYPE SemantMe() {
