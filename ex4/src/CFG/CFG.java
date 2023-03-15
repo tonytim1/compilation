@@ -134,17 +134,17 @@ public class CFG {
 							.add(("Temp_" + (Integer.toString(((IRcommand_Store_Global) curr.line).dst.getSerialNumber()))));
 				}
 			}
-			if (curr.line.getClass().toString().equals("class IR.IRcommand_ThisDotField")) {
-				if (((IRcommand_ThisDotField) curr.line).cfg == false) {
-					curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_ThisDotField) curr.line).dst.getSerialNumber()))));
+			if (curr.line.getClass().toString().equals("class IR.IRcommand_This_Dot_Field")) {
+				if (((IRcommand_This_Dot_Field) curr.line).cfg == false) {
+					curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
 					if (curr.inFunc)
 						curr.FuncScope
-								.add(("Temp_" + (Integer.toString(((IRcommand_ThisDotField) curr.line).dst.getSerialNumber()))));
+								.add(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
 				} else {
-					curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_ThisDotField) curr.line).dst.getSerialNumber()))));
+					curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
 					if (curr.inFunc)
 						curr.FuncScope
-								.remove(("Temp_" + (Integer.toString(((IRcommand_ThisDotField) curr.line).dst.getSerialNumber()))));
+								.remove(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
 				}
 			}
 			if (curr.line.getClass().toString().equals("class IR.IRcommand_Call_Func")) {
@@ -671,15 +671,15 @@ public class CFG {
 					((IRcommand_Store_Global) h).dst.changed = true;
 				}
 			}
-			if (h.getClass().toString().equals("class IR.IRcommand_ThisDotField")) {
-				if (((IRcommand_ThisDotField) h).dst.changed == false) {
+			if (h.getClass().toString().equals("class IR.IRcommand_This_Dot_Field")) {
+				if (((IRcommand_This_Dot_Field) h).dst.changed == false) {
 					String theNum = IRtoMIPS
-							.get(("Temp_" + (Integer.toString(((IRcommand_ThisDotField) h).dst.getSerialNumber()))));
+							.get(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) h).dst.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_ThisDotField) h).dst.serial = Integer.parseInt(theNum);
-					((IRcommand_ThisDotField) h).dst.changed = true;
+					((IRcommand_This_Dot_Field) h).dst.serial = Integer.parseInt(theNum);
+					((IRcommand_This_Dot_Field) h).dst.changed = true;
 				}
 			}
 			if (h.getClass().toString().equals("class IR.IRcommand_Virtual_Call")) {
