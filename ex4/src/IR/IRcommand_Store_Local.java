@@ -17,7 +17,6 @@ public class IRcommand_Store_Local extends IRcommand{
 	public TEMP src;
 	public String var;
 
-	// x = t4
 	public IRcommand_Store_Local(String var, TEMP src) {
 		this.src = src;
 		this.var = var;

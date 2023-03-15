@@ -15,13 +15,13 @@ import MIPS.*;
 
 public class IRcommand_Store_Field extends IRcommand {
 	public TEMP val;
-	String classs;
+	String class;
 	String var;
 
 	// this.var = value
 	// where var is a field of class c [i.e. x = t3, where x is a field] .
-	public IRcommand_Store_Field(String classs, String varName, TEMP value) {
-		this.classs = classs;
+	public IRcommand_Store_Field(String class, String varName, TEMP value) {
+		this.class = class;
 		this.var = varName;
 		this.val = value;
 	}
