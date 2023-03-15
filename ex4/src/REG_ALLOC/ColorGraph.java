@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.Stack;
 import TEMP.*;
 import MIPS.*; 
-//import BasicBlock;
+//import Vertex;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
@@ -35,8 +35,8 @@ public class ColorGraph{
 	 //compare something to it's offset to get unique thing
 	//change the names to be X_offset
 
-	public ColorGraph(BasicBlock h) {
-		BasicBlock curr=h;
+	public ColorGraph(Vertex h) {
+		Vertex curr=h;
 		while (curr!=null){
 			Iterator<String> it=curr.inSet.iterator();
 			node p;

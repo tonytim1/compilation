@@ -21,23 +21,23 @@ import IR.*;
 /*******************/
 
 public class REG_ALLOC {
-	BasicBlock head; // for build
-	BasicBlock tail;// for liveness
+	Vertex head; // for build
+	Vertex tail;// for liveness
 	HashMap<String, String> IRtoMIPS = new HashMap<String, String>();
 
 	public REG_ALLOC() {
 		IRcommand h = IR.getInstance().head;
 		IRcommand_List t = IR.getInstance().tail;
 		int lineCounter = 0;
-		this.head = new BasicBlock(lineCounter, h);
+		this.head = new Vertex(lineCounter, h);
 		lineCounter++;
-		BasicBlock curr = this.head;
-		BasicBlock next;
+		Vertex curr = this.head;
+		Vertex next;
 
 		while (t != null) {
 			h = t.head;
 			t = t.tail;
-			next = new BasicBlock(lineCounter, h);
+			next = new Vertex(lineCounter, h);
 			lineCounter++;
 			curr.direct = next;
 			next.father = curr;
@@ -69,7 +69,7 @@ public class REG_ALLOC {
 	}
 
 	public void liveness() {
-		BasicBlock curr = this.tail; // since we are going buttom-up
+		Vertex curr = this.tail; // since we are going buttom-up
 		Boolean notTail = false;
 		while (curr != null) {
 			if (notTail) {
