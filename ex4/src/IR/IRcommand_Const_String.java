@@ -12,9 +12,8 @@ package IR;
 /*******************/
 import TEMP.*;
 import MIPS.*;
-//not in liveness
+
 public class IRcommand_Const_String extends IRcommand_Assign {
-	//TEMP dst;
 	String label;
 	String val;
 

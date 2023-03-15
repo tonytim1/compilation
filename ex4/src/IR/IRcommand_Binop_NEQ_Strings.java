@@ -40,15 +40,12 @@ public class IRcommand_Binop_NEQ_Strings extends IRcommand_Binop {
 
 		MIPSGenerator.getInstance().bne(t1, t2, label_AssignOne);
 		MIPSGenerator.getInstance().beq(t1, t2, label_AssignZero);
-
 		MIPSGenerator.getInstance().label(label_AssignOne);
 		MIPSGenerator.getInstance().li(dst, 1);
 		MIPSGenerator.getInstance().jump(label_end);
-
 		MIPSGenerator.getInstance().label(label_AssignZero);
 		MIPSGenerator.getInstance().li(dst, 0);
 		MIPSGenerator.getInstance().jump(label_end);
-
 		MIPSGenerator.getInstance().label(label_end);
 	}
 }

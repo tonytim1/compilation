@@ -13,9 +13,7 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-// A id = nil (global scope, A is of TYPE_CLASS)
 public class IRcommand_Declare_Global_Object extends IRcommand_Assign_Non_Temp {
-	//String id;
 
 	public IRcommand_Declare_Global_Object(String id) {
 		this.id = id;

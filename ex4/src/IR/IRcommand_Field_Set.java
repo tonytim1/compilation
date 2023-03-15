@@ -20,7 +20,5 @@ public class IRcommand_Field_Set extends IRcommand {
   public void MIPSme() {
     System.out.println("IRcommand_Field_Set" + "- MIPSme");
     MIPSGenerator.getInstance().field_set(dst,offset,val);
-
   }
-
 }

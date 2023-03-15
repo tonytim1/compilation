@@ -15,7 +15,7 @@ import MIPS.*;
 
 public class IRcommand_Jump_Beqz extends IRcommand_Conditional_Jump {
 	public IRcommand_Jump_Beqz(TEMP t, String label) {
-		this.oprnd1 = t;
+		this.op1 = t;
 		this.label = label;
 		changeName("IRcommand_Conditional_Jump");
 	}
@@ -25,6 +25,6 @@ public class IRcommand_Jump_Beqz extends IRcommand_Conditional_Jump {
 	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Jump_Beqz" + "- MIPSme");
-		MIPSGenerator.getInstance().beqz(oprnd1, label);
+		MIPSGenerator.getInstance().beqz(op1, label);
 	}
 }
