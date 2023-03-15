@@ -11,12 +11,12 @@ package IR;
 /* PROJECT IMPORTS */
 /*******************/
 
-public class IRcommandList
+public class IRcommand_List
 {
 	public IRcommand head;
-	public IRcommandList tail;
+	public IRcommand_List tail;
 
-	IRcommandList(IRcommand head, IRcommandList tail)
+	IRcommand_List(IRcommand head, IRcommand_List tail)
 	{
 		this.head = head;
 		this.tail = tail;
