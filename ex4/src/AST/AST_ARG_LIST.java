@@ -25,6 +25,11 @@ public class AST_ARG_LIST extends AST_Node {
       System.out.print("====================== args -> arg, args\n");
     if (tail == null)
       System.out.print("====================== args -> arg      \n");
+
+    /*******************************/
+    /* COPY INPUT DATA NENBERS ... */
+    /*******************************/
+
   }
 
   /******************************************************/
