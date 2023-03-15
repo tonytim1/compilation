@@ -119,7 +119,7 @@ public class AST_STMT_NEWEXP extends AST_STMT {
           cRcommand.offset = GetOffset(varName);
         } else if (inclass != null) { // can be field in func
           String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
-          IRcommand c = new IRcommand_store_field(inclass, varName, value);
+          IRcommand c = new IRcommand_Store_Field(inclass, varName, value);
           c.offset = GetOffset(varName);
           IR.getInstance().Add_IRcommand(c);
 
@@ -135,7 +135,7 @@ public class AST_STMT_NEWEXP extends AST_STMT {
       TEMP t1 = ((AST_VAR_FIELD) var).var.IRme();
       String f_name = ((AST_VAR_FIELD) var).fieldName;
       String c = ((AST_VAR_FIELD) var).classN;
-      IRcommand r = new IRcommand_field_set(t1, f_name, value);
+      IRcommand r = new IRcommand_Field_Set(t1, f_name, value);
       r.offset = GetOffset(c + "_" + f_name);
       IR.getInstance().Add_IRcommand(r);
 
@@ -144,7 +144,7 @@ public class AST_STMT_NEWEXP extends AST_STMT {
       AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
       TEMP array = subVar.var.IRme();
       TEMP index = subVar.subscript.IRme();
-      IR.getInstance().Add_IRcommand(new IRcommand_array_set(array, index, value));
+      IR.getInstance().Add_IRcommand(new IRcommand_Array_Set(array, index, value));
     }
 
     return null;

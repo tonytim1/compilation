@@ -13,21 +13,21 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-public class IRcommand_Store_Global extends IRcommand {
-	public TEMP dst;
-	String label;
+public class IRcommand_Jump_Beqz extends IRcommand_Conditional_Jump {
+	//TEMP oprnd1;
+	//String label;
 
-	// x = t0 (x is stored in label, dst)
-	public IRcommand_Store_Global(TEMP dst, String label) {
-		this.dst = dst;
+	public IRcommand_Jump_Beqz(TEMP t, String label) {
+		this.oprnd1 = t;
 		this.label = label;
+		changeName("IRcommand_Conditional_Jump");
 	}
 
 	/***************/
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme() {
-		System.out.println("IRcommand_Store_Global" + "- MIPSme");
-		MIPSGenerator.getInstance().store_label(dst, label);
+		System.out.println("IRcommand_Jump_Beqz" + "- MIPSme");
+		MIPSGenerator.getInstance().beqz(oprnd1, label);
 	}
 }

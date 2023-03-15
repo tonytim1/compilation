@@ -12,7 +12,6 @@ public class IRcommand_Set_Nil extends IRcommand_Assign {
 
   public void MIPSme() {
     System.out.println("IRcommand_Set_Nil - MIPSme");
-
     MIPSGenerator.getInstance().li(dst, 0);
   }
 }

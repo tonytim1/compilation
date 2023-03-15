@@ -13,21 +13,21 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-public class IRcommand_Load_Local extends IRcommand {
-	public TEMP dst;
-	String var;
+public class IRcommand_Const_Int extends IRcommand_Assign {
+	//TEMP dst;
+	int val;
 
-	// t4 = x
-	public IRcommand_Load_Local(String var, TEMP dst) {
-		this.dst = dst;
-		this.var = var;
+	public IRcommand_Const_Int(TEMP t, int value) {
+		this.dst = t;
+		this.val = value;
+		changeName("IRcommand_Assign");
 	}
 
 	/***************/
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme() {
-		System.out.println("IRcommand_Load_Local" + "- MIPSme");
-		MIPSGenerator.getInstance().load_local(dst, offset);
+		System.out.println("IRcommand_Const_Int" + "- MIPSme");
+		MIPSGenerator.getInstance().li(dst, val);
 	}
 }

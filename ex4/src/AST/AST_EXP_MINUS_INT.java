@@ -1,7 +1,7 @@
 package AST;
 
 import IR.IR;
-import IR.IRcommandConstInt;
+import IR.IRcommand_Const_Int;
 import TEMP.TEMP;
 import TEMP.TEMP_FACTORY;
 import TYPES.*;
@@ -54,7 +54,7 @@ public class AST_EXP_MINUS_INT extends AST_EXP {
     System.out.println("EXP MINUS INT - IRme");
 
     TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
-    IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, value));
+    IR.getInstance().Add_IRcommand(new IRcommand_Const_Int(t, value));
     return t;
   }
 }

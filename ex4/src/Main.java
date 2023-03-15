@@ -3,7 +3,7 @@ import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
 import AST.*;
-import CFG.*;
+import REG_ALLOC.*;
 import IR.*;
 import MIPS.*;
 
@@ -63,7 +63,7 @@ public class Main {
 			/**********************************/
 			/* [8.5] alocate temps for IR ... */
 			/**********************************/
-			CFG g=new CFG();
+			REG_ALLOC g=new REG_ALLOC();
 			g.liveness();
 			g.K_color();
 			/***********************/

@@ -13,10 +13,10 @@ package IR;
 
 public class IR {
 	public IRcommand head = null;
-	public IRcommandList tail = null;
+	public IRcommand_List tail = null;
 
 	private IRcommand initialization = null;
-	private IRcommandList initializationTail = null;
+	private IRcommand_List initializationTail = null;
 	/******************/
 	/* Add IR command */
 	/******************/
@@ -24,13 +24,13 @@ public class IR {
 		if ((head == null) && (tail == null)) {
 			this.head = cmd;
 		} else if ((head != null) && (tail == null)) {
-			this.tail = new IRcommandList(cmd, null);
+			this.tail = new IRcommand_List(cmd, null);
 		} else {
-			IRcommandList it = tail;
+			IRcommand_List it = tail;
 			while ((it != null) && (it.tail != null)) {
 				it = it.tail;
 			}
-			it.tail = new IRcommandList(cmd, null);
+			it.tail = new IRcommand_List(cmd, null);
 		}
 	}
 
@@ -38,13 +38,13 @@ public class IR {
 		if ((initialization == null) && (initializationTail == null)) {
 			this.initialization = cmd;
 		} else if ((initialization != null) && (initializationTail == null)) {
-			this.initializationTail = new IRcommandList(cmd, null);
+			this.initializationTail = new IRcommand_List(cmd, null);
 		} else {
-			IRcommandList it = initializationTail;
+			IRcommand_List it = initializationTail;
 			while ((it != null) && (it.tail != null)) {
 				it = it.tail;
 			}
-			it.tail = new IRcommandList(cmd, null);
+			it.tail = new IRcommand_List(cmd, null);
 		}
 	}
 

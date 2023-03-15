@@ -117,8 +117,8 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 			}
 			if (c == true && (!(thisT instanceof TYPE_CLASS) || !(((TYPE_CLASS) thisT).name.equals(className)))) // var is
 			{																// field and																																																			// itself
-				command = new IRcommand_ThisDotField(realN, t);
-				((IRcommand_ThisDotField)command).cfg = cfgVar;
+				command = new IRcommand_This_Dot_Field(realN, t);
+				((IRcommand_This_Dot_Field)command).cfg = cfgVar;
 			}
 			else
 				command = new IRcommand_Load_Local(realN, t);

@@ -107,7 +107,7 @@ public class AST_STMT_IF extends AST_STMT {
     /******************************************/
     /* [4] Jump conditionally to the loop end */
     /******************************************/
-    IR.getInstance().Add_IRcommand(new IRcommand_Jump_beqz(cond_temp, label_end));
+    IR.getInstance().Add_IRcommand(new IRcommand_Jump_Beqz(cond_temp, label_end));
 
     /*******************/
     /* [5] body.IRme() */

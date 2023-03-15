@@ -302,7 +302,7 @@ public abstract class AST_Node {
 
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 
-		IRcommand ic = new IRcommand_virtual_call(t, varAddress, id, resTempsList);
+		IRcommand ic = new IRcommand_Virtual_Call(t, varAddress, id, resTempsList);
 		ic.offset = classFuncsOff.get(tl.name).get(id);
 		IR.getInstance().Add_IRcommand(ic);
 		return t;

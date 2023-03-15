@@ -13,11 +13,15 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-public class IRcommand_Jump_Label extends IRcommand_Conditional_Jump {
+public class IRcommand_Jump_Beq extends IRcommand_Conditional_Jump {
 	//String label;
+	//TEMP oprnd1;
+	//TEMP oprnd2;
 
-	public IRcommand_Jump_Label(String label) {
+	public IRcommand_Jump_Beq(String label, TEMP op1, TEMP op2) {
 		this.label = label;
+		this.oprnd1 = op1;
+		this.oprnd2 = op2;
 		changeName("IRcommand_Conditional_Jump");
 	}
 
@@ -25,7 +29,7 @@ public class IRcommand_Jump_Label extends IRcommand_Conditional_Jump {
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme() {
-		System.out.println("IRcommand_Jump_Label" + "- MIPSme");
-		MIPSGenerator.getInstance().jump(label);
+		System.out.println("IRcommand_Jump_Beq" + "- MIPSme");
+		MIPSGenerator.getInstance().beq(oprnd1, oprnd2, label);
 	}
 }

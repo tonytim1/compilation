@@ -208,14 +208,14 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
         fields.add(fieldandclass);
       }
     }
-    // IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist,
+    // IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist,
     // fields));
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       if (it.head instanceof AST_C_FIELD_FUNC_DEC)
         it.head.IRme();
     }
     classSize.put(id, fields.size() * 4 + 4);
-    IR.getInstance().Add_IRcommand(new IRcommand_declareClass(id, funclist, fields));
+    IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist, fields));
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
       if (it.head instanceof AST_C_FIELD_VAR_DEC)
         it.head.IRme();
