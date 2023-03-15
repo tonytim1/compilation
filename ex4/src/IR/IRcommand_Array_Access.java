@@ -8,8 +8,7 @@ public class IRcommand_Array_Access extends IRcommand {
   public TEMP t1;
   public TEMP t2;
 
-  // t0 = array_access t1 t2 (dst, src, index)
-  public IRcommand_Array_Access(TEMP dst, TEMP src, TEMP index) {
+    public IRcommand_Array_Access(TEMP dst, TEMP src, TEMP index) {
     this.dst = dst;
     this.t1 = src;
     this.t2 = index;

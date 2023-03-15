@@ -27,11 +27,9 @@ public class AST_STMT_VAR_ID extends AST_STMT {
   /*************************************************/
   
   public TYPE SemantMe() {
-		///a.g(); or a.g(a,b);
-		System.out.println("STMT VARDOT - semant me");
+				System.out.println("STMT VARDOT - semant me");
 		TYPE t1 = var.SemantMe();
-		if (t1 == null || !(t1 instanceof TYPE_CLASS)) //not a class
-		{
+		if (t1 == null || !(t1 instanceof TYPE_CLASS)) 		{
 			System.out.println(">> ERROR ["+line+"] var.dot is of wrong class");
 			printError(line);
 		}

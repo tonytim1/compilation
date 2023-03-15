@@ -18,9 +18,7 @@ import IR.*;
 
 public class REG_ALLOC {
     int registersCount = 10;
-    Vertex head; // for build
-    Vertex tail;// for liveness
-    HashMap<String, String> IRtoMIPS = new HashMap<String, String>();
+    Vertex head;     Vertex tail;    HashMap<String, String> IRtoMIPS = new HashMap<String, String>();
 
     public REG_ALLOC() {
         IRcommand command = IR.getInstance().head;
@@ -41,9 +39,7 @@ public class REG_ALLOC {
             curr_vertex = next;
         }
         this.tail = curr_vertex;
-        // at this point we have the direction line of things, lets take care of the jumps
-        // go over the REG_ALLOC graph this time
-        curr_vertex = this.head;
+                        curr_vertex = this.head;
         while (curr_vertex != null) {
             Boolean isBranch = (curr_vertex.line.name.equals("IRcommand_Conditional_Jump"));
             if (isBranch) {
@@ -67,8 +63,7 @@ public class REG_ALLOC {
     public void liveOpt() {
         Vertex curr = this.tail;
         Boolean finished = false;
-        //fill vertex's ins and outs
-        while (curr != null) {
+                while (curr != null) {
             if (finished) {
                 Iterator<String> d = curr.direction.inSet.iterator();
                 while (d.hasNext()) {
@@ -302,8 +297,7 @@ public class REG_ALLOC {
         Stack<node> nodes_stack = new Stack<node>();
         DependenciesGraph graph = new DependenciesGraph(this.head);
 
-        // simplify
-        Iterator<node> simplify_nodes = graph.allNodes.iterator();
+                Iterator<node> simplify_nodes = graph.allNodes.iterator();
         while (simplify_nodes.hasNext()) {
             node curr = simplify_nodes.next();
             if (curr.neighborsCount < registersCount) {
@@ -318,11 +312,9 @@ public class REG_ALLOC {
                 }
             }
         }
-        // now the coloring:
-        while (!nodes_stack.isEmpty()) {
+                while (!nodes_stack.isEmpty()) {
             node toAdd = nodes_stack.pop();
-            graph.graphNodes.add(toAdd); // now he is back to graph
-            HashSet<String> col = new HashSet<String>();
+            graph.graphNodes.add(toAdd);             HashSet<String> col = new HashSet<String>();
             col.add("0");
             col.add("1");
             col.add("2");
@@ -337,14 +329,11 @@ public class REG_ALLOC {
                 String neighborsName = n.next();
                 node actualNeig = graph.findNode(neighborsName);
                 if (actualNeig != null) {
-                    col.remove(actualNeig.register); // becuase we can't choose that color anymore
-                }
+                    col.remove(actualNeig.register);                 }
             }
             toAdd.register = col.iterator().next();
         }
-        // if we reach here the nodes_stack is empty and everyhting has color now
-        // also, everyone are in the graphNodes list
-        Iterator<node> lastOne = graph.graphNodes.iterator();
+                        Iterator<node> lastOne = graph.graphNodes.iterator();
         while (lastOne.hasNext()) {
             node curr = lastOne.next();
             this.IRtoMIPS.put(curr.name, curr.register);

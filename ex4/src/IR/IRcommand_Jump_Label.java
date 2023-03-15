@@ -14,8 +14,7 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Jump_Label extends IRcommand_Conditional_Jump {
-	//String label;
-
+	
 	public IRcommand_Jump_Label(String label) {
 		this.label = label;
 		UpdateIRName("IRcommand_Conditional_Jump");

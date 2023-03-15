@@ -11,9 +11,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 	/***************/
 	public AST_VAR var;
 	public AST_EXP exp;
-	public TYPE scope; // for irme
-	public String inclass; // for irme
-	public String ty;
+	public TYPE scope; 	public String inclass; 	public String ty;
 
 	/*******************/
 	/* CONSTRUCTOR(S) */
@@ -82,27 +80,20 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 			TEMP value = exp.IRme();
 			((AST_VAR_SIMPLE) var).cfgVar = true;
 			String name = ((AST_VAR_SIMPLE) var).name;
-			// global
-			if (((AST_VAR_SIMPLE) var).inGlobal == 1)
+						if (((AST_VAR_SIMPLE) var).inGlobal == 1)
 				IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(value, name));
-			// local
-			else {
-				if (scope != null) // inside func scope and local of func
-				{
+						else {
+				if (scope != null) 				{
 					String varName = ((AST_VAR_SIMPLE) var).name;
 					IRcommand cRcommand = new IRcommand_Store_Local(varName, value);
 					IR.getInstance().Add_IRcommand(cRcommand);
 					cRcommand.offset = GetOffset(varName);
-				} else if (inclass != null) { // can be field in func
-					String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
+				} else if (inclass != null) { 					String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
 					IRcommand c = new IRcommand_Store_Field(inclass, varName, value);
 					c.offset = GetOffset(varName);
 					IR.getInstance().Add_IRcommand(c);
 
-					// String varName = inclass + "&" + ((AST_VAR_SIMPLE) var).name;
-					// using the store global to store inside a label even tho its local!
-					// IR.getInstance().Add_IRcommand(new IRcommand_Store_Global(value, varName));
-				}
+																			}
 
 			}
 		} else if (var instanceof AST_VAR_FIELD) {
@@ -116,8 +107,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 			if (((AST_VAR_FIELD) var).var instanceof AST_VAR_SIMPLE)
 				((AST_VAR_SIMPLE) ((AST_VAR_FIELD) var).var).cfgVar = true;
 
-		} else { // var instanceof AST_VAR_SUBSCRIPT [Working]
-
+		} else { 
 			AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
 			TEMP array = subVar.var.IRme();
 			TEMP index = subVar.subscript.IRme();

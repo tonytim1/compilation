@@ -4,7 +4,6 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Epilogue extends IRcommand {
-//not in liveness
     public IRcommand_Epilogue() {
     }
 

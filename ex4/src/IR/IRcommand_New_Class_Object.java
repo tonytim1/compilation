@@ -7,10 +7,8 @@ import TEMP.*;
 
 public class IRcommand_New_Class_Object extends IRcommand_Assign {
 	public String className;
-	// public TEMP dst;
-
-	// t1 = new_class className
-	public IRcommand_New_Class_Object(TEMP t1, String className) {
+	
+		public IRcommand_New_Class_Object(TEMP t1, String className) {
 		this.dst = t1;
 		this.className = className;
 	}

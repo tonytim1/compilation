@@ -8,8 +8,7 @@ import SYMBOL_TABLE.*;
 public class AST_EXP_VAR_ID extends AST_EXP {
 	public AST_VAR var;
 	public String id;
-	public TYPE_CLASS tl; //for ir
-
+	public TYPE_CLASS tl; 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -38,11 +37,9 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 	
 
 	public TYPE SemantMe() {
-		///a.g();
-		System.out.println("EXP VARDOT - semant me");
+				System.out.println("EXP VARDOT - semant me");
 		TYPE t1 = var.SemantMe();
-		if (t1 == null || !(t1 instanceof TYPE_CLASS)) //not a class
-		{
+		if (t1 == null || !(t1 instanceof TYPE_CLASS)) 		{
 			System.out.println(">> ERROR ["+line+"] var.dot is of wrong class");
 			printError(line);
 		}

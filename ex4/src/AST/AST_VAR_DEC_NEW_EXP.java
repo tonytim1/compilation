@@ -7,8 +7,7 @@ import IR.*;
 
 public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
   public AST_NEW_EXP exp;
-  public TYPE t; // for IRme
-
+  public TYPE t; 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
@@ -85,8 +84,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
     /******************************************************/
     t = t1;
 
-    // for irme
-    this.scope = scope;
+        this.scope = scope;
 
     return t1;
   }
@@ -97,13 +95,10 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
     TEMP t = exp.IRme();
 
     if (scope.equals("global")) {
-      // can only use "new" on local context or inside class dec
-      printError(666);
+            printError(666);
     } else {
-      // class case?
-
-      // local case
-      IRcommand command = new IRcommand_Store_Local(id, t);
+      
+            IRcommand command = new IRcommand_Store_Local(id, t);
 
       command.offset = GetOffset(id);
 

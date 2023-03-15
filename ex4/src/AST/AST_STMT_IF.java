@@ -88,8 +88,7 @@ public class AST_STMT_IF extends AST_STMT {
 
     else
       body.IRme();
-    // how do you store locals in if?
-
+    
     /**********************/
     /* [7] Loop end label */
     /**********************/

@@ -3,7 +3,6 @@ package IR;
 import TEMP.*;
 import AST.AST_Node;
 import MIPS.*;
-//not in liveness
 public class IRcommand_Declare_Func extends IRcommand {
 	public String name;
 	public int localVars;

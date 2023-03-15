@@ -7,8 +7,7 @@ import IR.*;
 
 public class AST_STMT_ID extends AST_STMT {
   public String id;
-  public TYPE_FUNCTION func; // for IRme
-
+  public TYPE_FUNCTION func; 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/

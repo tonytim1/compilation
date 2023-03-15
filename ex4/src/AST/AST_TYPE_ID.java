@@ -38,8 +38,7 @@ public class AST_TYPE_ID extends AST_TYPE {
       printError(this.line);
     }
 
-    // if this happens its a bug in the compiler, not in the input
-    if (!res.name.equals(typeName)) {
+        if (!res.name.equals(typeName)) {
       System.out.format(">> ERROR [%d]- type name isn't declared correctly! %s %s", line, res.name, typeName);
       printError(this.line);
     }

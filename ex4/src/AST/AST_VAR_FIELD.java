@@ -48,14 +48,12 @@ public class AST_VAR_FIELD extends AST_VAR {
 			printError(line);
 		}
 
-		// if class wasnt declared yet
-		String className = SYMBOL_TABLE.getInstance().inClassScope();
+				String className = SYMBOL_TABLE.getInstance().inClassScope();
 		TYPE fieldType = SYMBOL_TABLE.getInstance().findInClassScope(fieldName);
 		if (className != null && className.equals(t1.name) && fieldType != null)
 			return fieldType;
 
-		// inheritance case
-		else if (className != null && className.equals(t1.name)) {
+				else if (className != null && className.equals(t1.name)) {
 			String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(className);
 			if (fatherName != null) {
 				TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName);
@@ -73,8 +71,7 @@ public class AST_VAR_FIELD extends AST_VAR {
 			printError(line);
 		}
 
-		// class was declared
-		while (t1 != null) {
+				while (t1 != null) {
 			AST_ARG_LIST t1_data_members = ((TYPE_CLASS) t1).data_members;
 			for (AST_ARG_LIST it = t1_data_members; it != null; it = it.tail) {
 				if (it.head.id.equals(fieldName)) {

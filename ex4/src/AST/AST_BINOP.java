@@ -44,16 +44,12 @@ public class AST_BINOP extends AST_Node {
         if (left == null || right == null) {
             printError(line);
         }
-        this.leftType = t1; //// needed in IRme
-
-        if (number >= 6 ) // case = or !=
-        {
-            if (type_equals(t1, t2) || type_equals(t2, t1)) // legal
-                return TYPE_INT.getInstance();
+        this.leftType = t1; 
+        if (number >= 6 )         {
+            if (type_equals(t1, t2) || type_equals(t2, t1))                 return TYPE_INT.getInstance();
 
             if ((t1 == TYPE_INT.getInstance()) || (t2 == TYPE_STRING.getInstance()) ||
-                    (t1 == TYPE_STRING.getInstance()) || (t2 == TYPE_INT.getInstance())) // ilegal
-            {
+                    (t1 == TYPE_STRING.getInstance()) || (t2 == TYPE_INT.getInstance()))             {
                 System.out.format(">> ERROR [%d] can't compare primitive to non-primitive", line);
                 printError(line);
             }
@@ -63,29 +59,22 @@ public class AST_BINOP extends AST_Node {
                 printError(line);
             }
 
-            return TYPE_INT.getInstance(); // legal
-        }
+            return TYPE_INT.getInstance();         }
 
-        if (number == 0) // case +
-        {
-            if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance())) // legal (plus)
-                return TYPE_INT.getInstance();
+        if (number == 0)         {
+            if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))                 return TYPE_INT.getInstance();
 
-            if ((t1 == TYPE_STRING.getInstance()) && (t2 == TYPE_STRING.getInstance())) // legal (concat)
-                return TYPE_STRING.getInstance();
+            if ((t1 == TYPE_STRING.getInstance()) && (t2 == TYPE_STRING.getInstance()))                 return TYPE_STRING.getInstance();
 
             System.out.format(String.format(">> ERROR [%d] trying the + op between wrong types", line));
             printError(line);
         }
 
-        // all other cases
-        if ((t1 != TYPE_INT.getInstance()) || (t2 != TYPE_INT.getInstance())) { // ilegal
-            System.out.format(">> ERROR [%d] trying binop between wrong types %s %s", line, t1.name, t2.name);
+                if ((t1 != TYPE_INT.getInstance()) || (t2 != TYPE_INT.getInstance())) {             System.out.format(">> ERROR [%d] trying binop between wrong types %s %s", line, t1.name, t2.name);
             printError(line);
         }
 
-        // legal (a op b)
-        if ((right instanceof AST_EXP_INT) && ((AST_EXP_INT) right).value == 0 && number == 3) {
+                if ((right instanceof AST_EXP_INT) && ((AST_EXP_INT) right).value == 0 && number == 3) {
             System.out.format(">> ERROR [%d] division by 0", line);
             printError(line);
         }
@@ -104,53 +93,41 @@ public class AST_BINOP extends AST_Node {
 
         TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
 
-        if (number == 0) // +
-        {
-            // concat (srtings)
-            if (leftType == TYPE_STRING.getInstance()) {
+        if (number == 0)         {
+                        if (leftType == TYPE_STRING.getInstance()) {
                 IR.getInstance().Add_IRcommand(new IRcommand_Binop_Concat_Strings(dst, t1, t2));
             }
 
-            // add (ints)
-            else {
+                        else {
                 IR.getInstance().Add_IRcommand(new IRcommand_Binop_Add_Integers(dst, t1, t2));
             }
         }
-        if (number == 2) // *
-        {
+        if (number == 2)         {
             IR.getInstance().Add_IRcommand(new IRcommand_Binop_Mul_Integers(dst, t1, t2));
         }
-        if (number == 6) // =
-        {
-            if (leftType == TYPE_STRING.getInstance()) {// strings
-                IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Strings(dst, t1, t2));
+        if (number == 6)         {
+            if (leftType == TYPE_STRING.getInstance()) {                IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Strings(dst, t1, t2));
             } else
                 IR.getInstance().Add_IRcommand(new IRcommand_Binop_EQ_Contents(dst, t1, t2));
 
         }
-        if (number == 7) // !=
-        {
-            if (leftType == TYPE_STRING.getInstance()) {// strings
-                IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Strings(dst, t1, t2));
+        if (number == 7)         {
+            if (leftType == TYPE_STRING.getInstance()) {                IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Strings(dst, t1, t2));
             } else
                 IR.getInstance().Add_IRcommand(new IRcommand_Binop_NEQ_Contents(dst, t1, t2));
 
         }
 
-        if (number == 5) // <
-        {
+        if (number == 5)         {
             IR.getInstance().Add_IRcommand(new IRcommand_Binop_LT_Integers(dst, t1, t2));
         }
-        if (number == 4) // >
-        {
+        if (number == 4)         {
             IR.getInstance().Add_IRcommand(new IRcommand_Binop_GT_Integers(dst, t1, t2));
         }
-        if (number == 1) // -
-        {
+        if (number == 1)         {
             IR.getInstance().Add_IRcommand(new IRcommand_Binop_SUB_Integers(dst, t1, t2));
         }
-        if (number == 3) // /
-        {
+        if (number == 3)         {
             IR.getInstance().Add_IRcommand(new IRcommand_Binop_DIV_Integers(dst, t1, t2));
         }
 

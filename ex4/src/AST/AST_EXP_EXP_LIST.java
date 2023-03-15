@@ -8,8 +8,7 @@ import SYMBOL_TABLE.SYMBOL_TABLE;
 public class AST_EXP_EXP_LIST extends AST_EXP {
   public String id;
   public AST_EXP_LIST list;
-  public TYPE_FUNCTION func; // for IRme
-
+  public TYPE_FUNCTION func; 
   /******************/
   /* CONSTRUCTOR(S) */
   /******************/
@@ -55,14 +54,12 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
     TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
     TEMP_LIST resTempsList = null;
 
-    // set resTempList
-    for (AST_EXP_LIST it = list; it != null; it = it.tail) {
+        for (AST_EXP_LIST it = list; it != null; it = it.tail) {
       TEMP curr = it.head.IRme();
       resTempsList = new TEMP_LIST(curr, resTempsList);
     }
 
-    // reverse list
-    if (resTempsList != null) {
+        if (resTempsList != null) {
       resTempsList = resTempsList.reverseList();
     }
 

@@ -69,28 +69,22 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
   public TEMP IRme() {
     System.out.println("VARDEC SIMPLE IRme");
 
-    // global
-    if (scope.equals("global")) {
+        if (scope.equals("global")) {
       if (type instanceof AST_TYPE_STRING) {
         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(id, "aaa"));
       } else if (type instanceof AST_TYPE_INT) {
         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(id, 0));
-      } else { // AST_TYPE_ID
-        IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id));
+      } else {         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(id));
       }
     }
 
-    // local
-    else {
+        else {
       if (!inFunc && inclass != null) {
         String namec = inclass + "_" + id;
         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(namec));
       }
 
-      // no need to do anything for regular types
-      // maybe allocate space for arrays or classes?
-    }
-    // ret value doesn't matter for a declaration
-    return null;
+                }
+        return null;
   }
 }

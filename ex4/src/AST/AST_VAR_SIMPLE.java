@@ -13,8 +13,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 	public String className = null;
 	public TYPE thisT;
 	public boolean cfgVar = false;
-	int inGlobal = 0; // needed for IRme
-
+	int inGlobal = 0; 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -44,13 +43,11 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 			inGlobal = 1;
 		className = SYMBOL_TABLE.getInstance().inClassScope();
 		if (res == null) {
-			// if class wasnt declared yet
-			TYPE fieldType = SYMBOL_TABLE.getInstance().findInClassScope(name);
+						TYPE fieldType = SYMBOL_TABLE.getInstance().findInClassScope(name);
 			if (className != null && fieldType != null)
 				return fieldType;
 
-			// inheritance case
-			else if (className != null) {
+						else if (className != null) {
 				String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(className);
 				if (fatherName != null) {
 					TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName);
@@ -76,8 +73,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 
 		}
 
-		if (res == null) { // find in global scope
-			res = SYMBOL_TABLE.getInstance().find(name);
+		if (res == null) { 			res = SYMBOL_TABLE.getInstance().find(name);
 			if (res != null)
 				inGlobal = 1;
 		}
@@ -97,17 +93,13 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 
 		if (inGlobal == 1) {
 			IR.getInstance().Add_IRcommand(new IRcommand_Load_Global(t, name));
-		} else { ///// THATS NOT ENTIRELY RIGHT
-			String realN = name;
+		} else { 			String realN = name;
 			boolean c = false;
 			IRcommand command;
-			if (className != null && offsets.get(name) == null) { // var is class field
-				c = true;
+			if (className != null && offsets.get(name) == null) { 				c = true;
 				realN = className + "_" + name;
 			}
-			if (c == true && (!(thisT instanceof TYPE_CLASS) || !(((TYPE_CLASS) thisT).name.equals(className)))) // var is
-			{																// field and																																																			// itself
-				command = new IRcommand_This_Dot_Field(realN, t);
+			if (c == true && (!(thisT instanceof TYPE_CLASS) || !(((TYPE_CLASS) thisT).name.equals(className)))) 			{																				command = new IRcommand_This_Dot_Field(realN, t);
 				((IRcommand_This_Dot_Field)command).regalloc = cfgVar;
 			}
 			else

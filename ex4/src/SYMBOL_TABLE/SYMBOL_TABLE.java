@@ -358,8 +358,7 @@ public class SYMBOL_TABLE {
 
     public TYPE findInFuncScope(String name) {
         SYMBOL_TABLE_ENTRY curr = top;
-        // TYPE res = null;
-        while (curr != null && !curr.name.startsWith("SCOPE-BOUNDARY-func")) {
+                while (curr != null && !curr.name.startsWith("SCOPE-BOUNDARY-func")) {
             if (curr.name.equals(name)) {
                 return curr.type;
             }
@@ -393,8 +392,7 @@ public class SYMBOL_TABLE {
 
                 TYPE name = af.findType(returnType);
                 if (name.isClass()) {
-                    // was declared already
-                    TYPE_CLASS father = ((TYPE_CLASS) name).father;
+                                        TYPE_CLASS father = ((TYPE_CLASS) name).father;
                     while (father != null) {
                         if (father.name.equals(split_name[split_name.length - 1]))
                             return 1;

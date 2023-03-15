@@ -567,8 +567,7 @@ class Lexer implements java_cup.runtime.Scanner {
     int zzInput;
     int zzAction;
 
-    // cached fields:
-    int zzCurrentPosL;
+        int zzCurrentPosL;
     int zzMarkedPosL;
     int zzEndReadL = zzEndRead;
     char [] zzBufferL = zzBuffer;
@@ -590,11 +589,7 @@ class Lexer implements java_cup.runtime.Scanner {
         zzCh = Character.codePointAt(zzBufferL, zzCurrentPosL, zzMarkedPosL);
         zzCharCount = Character.charCount(zzCh);
         switch (zzCh) {
-        case '\u000B':  // fall through
-        case '\u000C':  // fall through
-        case '\u0085':  // fall through
-        case '\u2028':  // fall through
-        case '\u2029':
+        case '\u000B':          case '\u000C':          case '\u0085':          case '\u2028':          case '\u2029':
           yyline++;
           yycolumn = 0;
           zzR = false;
@@ -619,8 +614,7 @@ class Lexer implements java_cup.runtime.Scanner {
       }
 
       if (zzR) {
-        // peek one character ahead if it is \n (if we have counted one line too much)
-        boolean zzPeek;
+                boolean zzPeek;
         if (zzMarkedPosL < zzEndReadL)
           zzPeek = zzBufferL[zzMarkedPosL] == '\n';
         else if (zzAtEOF)
@@ -643,8 +637,7 @@ class Lexer implements java_cup.runtime.Scanner {
   
       zzState = ZZ_LEXSTATE[zzLexicalState];
 
-      // set up zzAction for empty match case:
-      int zzAttributes = zzAttrL[zzState];
+            int zzAttributes = zzAttrL[zzState];
       if ( (zzAttributes & 1) == 1 ) {
         zzAction = zzState;
       }
@@ -662,12 +655,10 @@ class Lexer implements java_cup.runtime.Scanner {
             break zzForAction;
           }
           else {
-            // store back cached positions
-            zzCurrentPos  = zzCurrentPosL;
+                        zzCurrentPos  = zzCurrentPosL;
             zzMarkedPos   = zzMarkedPosL;
             boolean eof = zzRefill();
-            // get translated positions and possibly new buffer
-            zzCurrentPosL  = zzCurrentPos;
+                        zzCurrentPosL  = zzCurrentPos;
             zzMarkedPosL   = zzMarkedPos;
             zzBufferL      = zzBuffer;
             zzEndReadL     = zzEndRead;
@@ -694,8 +685,7 @@ class Lexer implements java_cup.runtime.Scanner {
         }
       }
 
-      // store back cached position
-      zzMarkedPos = zzMarkedPosL;
+            zzMarkedPos = zzMarkedPosL;
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
@@ -703,8 +693,7 @@ class Lexer implements java_cup.runtime.Scanner {
             switch (zzLexicalState) {
             case YYINITIAL: {
               return symbol(TokenNames.EOF);
-            }  // fall though
-            case 100: break;
+            }              case 100: break;
             default:
           { return new java_cup.runtime.Symbol(TokenNames.EOF); }
         }
@@ -714,173 +703,139 @@ class Lexer implements java_cup.runtime.Scanner {
           case 1: 
             { return symbol(TokenNames.ERROR);
             } 
-            // fall through
-          case 35: break;
+                      case 35: break;
           case 2: 
             { /* just skip what was found, do nothing */
             } 
-            // fall through
-          case 36: break;
+                      case 36: break;
           case 3: 
             { return symbol(TokenNames.INT,  new Integer(yytext()));
             } 
-            // fall through
-          case 37: break;
+                      case 37: break;
           case 4: 
             { return symbol(TokenNames.ID,  new String( yytext()));
             } 
-            // fall through
-          case 38: break;
+                      case 38: break;
           case 5: 
             { return symbol(TokenNames.LPAREN);
             } 
-            // fall through
-          case 39: break;
+                      case 39: break;
           case 6: 
             { return symbol(TokenNames.RPAREN);
             } 
-            // fall through
-          case 40: break;
+                      case 40: break;
           case 7: 
             { return symbol(TokenNames.LBRACE);
             } 
-            // fall through
-          case 41: break;
+                      case 41: break;
           case 8: 
             { return symbol(TokenNames.RBRACE);
             } 
-            // fall through
-          case 42: break;
+                      case 42: break;
           case 9: 
             { return symbol(TokenNames.LBRACK);
             } 
-            // fall through
-          case 43: break;
+                      case 43: break;
           case 10: 
             { return symbol(TokenNames.RBRACK);
             } 
-            // fall through
-          case 44: break;
+                      case 44: break;
           case 11: 
             { return symbol(TokenNames.PLUS);
             } 
-            // fall through
-          case 45: break;
+                      case 45: break;
           case 12: 
             { return symbol(TokenNames.MINUS);
             } 
-            // fall through
-          case 46: break;
+                      case 46: break;
           case 13: 
             { return symbol(TokenNames.DOT);
             } 
-            // fall through
-          case 47: break;
+                      case 47: break;
           case 14: 
             { return symbol(TokenNames.SEMICOLON);
             } 
-            // fall through
-          case 48: break;
+                      case 48: break;
           case 15: 
             { return symbol(TokenNames.TIMES);
             } 
-            // fall through
-          case 49: break;
+                      case 49: break;
           case 16: 
             { return symbol(TokenNames.DIVIDE);
             } 
-            // fall through
-          case 50: break;
+                      case 50: break;
           case 17: 
             { return symbol(TokenNames.COMMA);
             } 
-            // fall through
-          case 51: break;
+                      case 51: break;
           case 18: 
             { return symbol(TokenNames.EQ);
             } 
-            // fall through
-          case 52: break;
+                      case 52: break;
           case 19: 
             { return symbol(TokenNames.GT);
             } 
-            // fall through
-          case 53: break;
+                      case 53: break;
           case 20: 
             { return symbol(TokenNames.LT);
             } 
-            // fall through
-          case 54: break;
+                      case 54: break;
           case 21: 
             { return symbol(TokenNames.STRING,  new String( yytext()));
             } 
-            // fall through
-          case 55: break;
+                      case 55: break;
           case 22: 
             { return symbol(TokenNames.NE);
             } 
-            // fall through
-          case 56: break;
+                      case 56: break;
           case 23: 
             { return symbol(TokenNames.ASSIGN);
             } 
-            // fall through
-          case 57: break;
+                      case 57: break;
           case 24: 
             { return symbol(TokenNames.IF);
             } 
-            // fall through
-          case 58: break;
+                      case 58: break;
           case 25: 
             { return symbol(TokenNames.TYPE_INT);
             } 
-            // fall through
-          case 59: break;
+                      case 59: break;
           case 26: 
             { return symbol(TokenNames.NIL);
             } 
-            // fall through
-          case 60: break;
+                      case 60: break;
           case 27: 
             { return symbol(TokenNames.NEW);
             } 
-            // fall through
-          case 61: break;
+                      case 61: break;
           case 28: 
             { return symbol(TokenNames.TYPE_VOID);
             } 
-            // fall through
-          case 62: break;
+                      case 62: break;
           case 29: 
             { return symbol(TokenNames.CLASS);
             } 
-            // fall through
-          case 63: break;
+                      case 63: break;
           case 30: 
             { return symbol(TokenNames.ARRAY);
             } 
-            // fall through
-          case 64: break;
+                      case 64: break;
           case 31: 
             { return symbol(TokenNames.WHILE);
             } 
-            // fall through
-          case 65: break;
+                      case 65: break;
           case 32: 
             { return symbol(TokenNames.TYPE_STRING);
             } 
-            // fall through
-          case 66: break;
+                      case 66: break;
           case 33: 
             { return symbol(TokenNames.RETURN);
             } 
-            // fall through
-          case 67: break;
+                      case 67: break;
           case 34: 
             { return symbol(TokenNames.EXTENDS);
             } 
-            // fall through
-          case 68: break;
+                      case 68: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
