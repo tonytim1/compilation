@@ -16,9 +16,6 @@ public class AST_STMT_EXP extends AST_STMT {
     System.out.print("=============== stmt -> RETURN exp SEMICOLON	\n");
   }
 
-
-  
-
   public TYPE SemantMe() {
     TYPE ty = e.SemantMe();
     if (ty == null) {

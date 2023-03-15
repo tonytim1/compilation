@@ -193,26 +193,26 @@ public class SYMBOL_TABLE {
 
     public TYPE findInClassScope(String name) {
         SYMBOL_TABLE_ENTRY curr = top;
-        TYPE res = null;
+        TYPE t = null;
 
         while (curr != null && !curr.name.startsWith("SCOPE-BOUNDARY-class")) {
             if (curr.name.equals(name)) {
-                res = curr.type;
+                t = curr.type;
             }
             curr = curr.prevtop;
         }
-        return res;
+        return t;
     }
 
     public TYPE findClass(String name) {
-        SYMBOL_TABLE_ENTRY a = top;
-        while (a.name != null) {
-            if (a.name.equals(name))
-                return a.type;
-            if (a.name.startsWith("SCOPE-BOUNDARY-class"))
-                if (a.name.split("-")[3].equals(name))
+        SYMBOL_TABLE_ENTRY e = top;
+        while (e.name != null) {
+            if (e.name.equals(name))
+                return e.type;
+            if (e.name.startsWith("SCOPE-BOUNDARY-class"))
+                if (e.name.split("-")[3].equals(name))
                     return new TYPE_CLASS(null, name, null, null);
-            a = a.prevtop;
+            e = e.prevtop;
         }
         return null;
     }
@@ -258,15 +258,15 @@ public class SYMBOL_TABLE {
 
     public TYPE findInCurrScope(String name) {
         SYMBOL_TABLE_ENTRY curr = top;
-        TYPE res = null;
+        TYPE t = null;
 
         while (curr != null && !curr.name.startsWith("SCOPE-BOUNDARY")) {
             if (curr.name.equals(name)) {
-                res = curr.type;
+                t = curr.type;
             }
             curr = curr.prevtop;
         }
-        return res;
+        return t;
     }
 
     public int findFunc(String returnType) {
