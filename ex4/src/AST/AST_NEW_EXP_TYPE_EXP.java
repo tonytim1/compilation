@@ -4,14 +4,14 @@ import IR.*;
 import TEMP.*;
 import TYPES.*;
 
-public class AST_NEWEXP_EXP extends AST_NEWEXP {
+public class AST_NEW_EXP_TYPE_EXP extends AST_NEWEXP {
   public AST_TYPE t;
   public AST_EXP e;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_NEWEXP_EXP(AST_TYPE t, AST_EXP e, int line) {
+  public AST_NEW_EXP_TYPE_EXP(AST_TYPE t, AST_EXP e, int line) {
     this.t = t;
     this.e = e;
     this.line = line;

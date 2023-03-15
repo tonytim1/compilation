@@ -149,7 +149,7 @@ public abstract class AST_Node {
 		return false;
 	}
 
-	public TYPE funcSig(String id, AST_EXPLIST list, int line) {
+	public TYPE funcSig(String id, AST_EXP_LIST list, int line) {
 		TYPE type = SYMBOL_TABLE.getInstance().isRealFunc(id, list);
 
 		if (type == null) {
@@ -175,7 +175,7 @@ public abstract class AST_Node {
 		return t;
 	}
 
-	public TYPE isFuncOfClass(String className, String funcName, AST_EXPLIST funcArgs, int line) {
+	public TYPE isFuncOfClass(String className, String funcName, AST_EXP_LIST funcArgs, int line) {
 
 		if (SYMBOL_TABLE.getInstance().inClassScope() != null &&
 				SYMBOL_TABLE.getInstance().inClassScope().equals(className)) { // should find func in current class scope (going
@@ -250,7 +250,7 @@ public abstract class AST_Node {
 			body = ((AST_STMT_WHILE) scope).body;
 		int result = 0;
 		for (AST_STMT_LIST it = body; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VARDEC)
+			if (it.head instanceof AST_STMT_VAR_DEC)
 				result += 1;
 
 			if (it.head instanceof AST_STMT_IF || it.head instanceof AST_STMT_WHILE) {
@@ -265,9 +265,9 @@ public abstract class AST_Node {
 		Map<String, String> temps = new HashMap<>();
 		int varCnt = varsInFunc;
 		for (AST_STMT_LIST it = body; it != null; it = it.tail) {
-			if (it.head instanceof AST_STMT_VARDEC) {
+			if (it.head instanceof AST_STMT_VAR_DEC) {
 				varCnt += 1;
-				AST_STMT_VARDEC a = (AST_STMT_VARDEC) (it.head);
+				AST_STMT_VAR_DEC a = (AST_STMT_VAR_DEC) (it.head);
 				AST_VARDEC b = (AST_VARDEC) (a.v);
 				if (offsets.get(b.id) != null)
 					temps.put(b.id, offsets.get(b.id));
@@ -285,12 +285,12 @@ public abstract class AST_Node {
 		}
 	}
 
-	public TEMP vardotIR(AST_VAR var, AST_EXPLIST list, TYPE_CLASS tl, String id) {
+	public TEMP vardotIR(AST_VAR var, AST_EXP_LIST list, TYPE_CLASS tl, String id) {
 		TEMP varAddress = var.IRme();
 		TEMP_LIST resTempsList = null;
 
 		// set resTempList
-		for (AST_EXPLIST it = list; it != null; it = it.tail) {
+		for (AST_EXP_LIST it = list; it != null; it = it.tail) {
 			TEMP curr = it.head.IRme();
 			resTempsList = new TEMP_LIST(curr, resTempsList);
 		}

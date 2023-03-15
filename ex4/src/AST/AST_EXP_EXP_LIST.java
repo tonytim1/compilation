@@ -1,32 +1,37 @@
 package AST;
 
 import TYPES.*;
-import IR.*;
 import TEMP.*;
-import SYMBOL_TABLE.*;
+import IR.*;
+import SYMBOL_TABLE.SYMBOL_TABLE;
 
-public class AST_STMT_EXPLIST extends AST_STMT {
+public class AST_EXP_EXP_LIST extends AST_EXP {
   public String id;
-  public AST_EXPLIST list;
+  public AST_EXP_LIST list;
   public TYPE_FUNCTION func; // for IRme
 
-  /*******************/
+  /******************/
   /* CONSTRUCTOR(S) */
-  /*******************/
-  public AST_STMT_EXPLIST(String id, AST_EXPLIST list, int line) {
-    this.id = id;
-    this.list = list;
-    this.line = line;
-
+  /******************/
+  public AST_EXP_EXP_LIST(String id, AST_EXP_LIST list, int line) {
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
     SerialNumber = AST_Node_Serial_Number.getFresh();
+    this.line = line;
 
-    System.out.print("====================== stmt -> ID(expList);\n");
+    /***************************************/
+    /* PRINT CORRESPONDING DERIVATION RULE */
+    /***************************************/
+    System.out.print("====================== exp -> ID (expList)\n");
+
+    /*******************************/
+    /* COPY INPUT DATA NENBERS ... */
+    /*******************************/
+    this.id = id;
+    this.list = list;
+    this.line = line;
   }
-
-  /****************** outside CONSTRUCTOR code *******************/
 
   /*************************************************/
   /* The printing message for a XXX node */
@@ -36,7 +41,7 @@ public class AST_STMT_EXPLIST extends AST_STMT {
     /*************************************/
     /* AST NODE TYPE- change XXX with this class name */
     /*************************************/
-    System.out.print(String.format("AST %s NODE\n", "STMT_EXPLIST"));
+    System.out.print(String.format("AST %s NODE\n", "EXP_EXPLIST"));
 
     /**************************************/
     /* RECURSIVELY PRINT non-null(!) sons (list, list and right...) */
@@ -47,7 +52,7 @@ public class AST_STMT_EXPLIST extends AST_STMT {
     /* PRINT Node to AST GRAPHVIZ DOT file */
     /* print node name and optional string (maybe only needed in binop nodes) */
     /***************************************/
-    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("STMT_EXPLIST(%s)", id));
+    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("EXP_EXPLIST(%s)", id));
 
     /****************************************/
     /* PRINT Edges to AST GRAPHVIZ DOT file */
@@ -61,7 +66,7 @@ public class AST_STMT_EXPLIST extends AST_STMT {
   }
 
   public TYPE SemantMe() {
-    System.out.println("STMT EXPLIST - semant me");
+    System.out.println("EXP EXPLIST - semant me");
 
     TYPE t = funcSig(id, list, this.line);
 
@@ -71,13 +76,13 @@ public class AST_STMT_EXPLIST extends AST_STMT {
   }
 
   public TEMP IRme() {
-    System.out.println("STMT EXPLIST - IRme");
+    System.out.println("EXP EXPLIST - IRme  ");
 
     TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
     TEMP_LIST resTempsList = null;
 
     // set resTempList
-    for (AST_EXPLIST it = list; it != null; it = it.tail) {
+    for (AST_EXP_LIST it = list; it != null; it = it.tail) {
       TEMP curr = it.head.IRme();
       resTempsList = new TEMP_LIST(curr, resTempsList);
     }
@@ -95,9 +100,7 @@ public class AST_STMT_EXPLIST extends AST_STMT {
     } else {
       startLabel = this.func.startLabel;
     }
-
     IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(t, startLabel, resTempsList));
-
     return t;
   }
 }

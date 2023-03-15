@@ -3,13 +3,13 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_STMT_VARDEC extends AST_STMT {
+public class AST_STMT_VAR_DEC extends AST_STMT {
   public AST_VARDEC v;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_STMT_VARDEC(AST_VARDEC v) {
+  public AST_STMT_VAR_DEC(AST_VARDEC v) {
     this.v = v;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */

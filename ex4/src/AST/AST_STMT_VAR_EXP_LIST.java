@@ -3,16 +3,16 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_STMT_VARDOT_EXPLIST extends AST_STMT {
+public class AST_STMT_VAR_EXP_LIST extends AST_STMT {
   public AST_VAR var;
   public String id;
-  public AST_EXPLIST list;
+  public AST_EXP_LIST list;
   public TYPE_CLASS tl;
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_STMT_VARDOT_EXPLIST(AST_VAR var, String id, AST_EXPLIST list) {
+  public AST_STMT_VAR_EXP_LIST(AST_VAR var, String id, AST_EXP_LIST list) {
     this.var = var;
     this.id = id;
     this.list = list;

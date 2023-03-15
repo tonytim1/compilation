@@ -5,7 +5,7 @@ import SYMBOL_TABLE.SYMBOL_TABLE;
 import TEMP.*;
 import TYPES.*;
 
-public class AST_STMT_NEWEXP extends AST_STMT {
+public class AST_STMT_ASSIGN_NEW extends AST_STMT {
   public AST_VAR var;
   public AST_NEWEXP exp;
   public TYPE scope; // for irme
@@ -14,7 +14,7 @@ public class AST_STMT_NEWEXP extends AST_STMT {
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_STMT_NEWEXP(AST_VAR var, AST_NEWEXP exp, int line) {
+  public AST_STMT_ASSIGN_NEW(AST_VAR var, AST_NEWEXP exp, int line) {
     this.var = var;
     this.exp = exp;
     this.line = line;
