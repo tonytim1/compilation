@@ -18,7 +18,7 @@ public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
 		this.id = id;
 		this.list = list;
 		this.line = line;
-		
+
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -37,34 +37,7 @@ public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
 	/***********************************************/
 	/* The default message for an exp var AST node */
 	/***********************************************/
-	public void PrintMe() {
-		/************************************/
-		/* AST NODE TYPE = EXP VAR AST NODE */
-		/************************************/
-		System.out.print("AST NODE EXP_VARDOT_EXPLIST\n");
-
-		/*****************************/
-		/* RECURSIVELY PRINT var ... */
-		/*****************************/
-		if (var != null)
-			var.PrintMe();
-		if (list != null)
-			list.PrintMe();
-
-		/*********************************/
-		/* Print to AST GRAPHIZ DOT file */
-		/*********************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("EXP_VARDOT_EXPLIST(%s)", id));
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (var != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, var.SerialNumber);
-		if (list != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, list.SerialNumber);
-
-	}
+	
 
 	public TYPE SemantMe() {
 		/// a.g(); or a.g(a,b);

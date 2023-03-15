@@ -33,17 +33,7 @@ public class AST_EXP_MINUS_INT extends AST_EXP {
   /************************************************/
   /* The printing message for an INT EXP AST node */
   /************************************************/
-  public void PrintMe() {
-    /*******************************/
-    /* AST NODE TYPE = AST INT EXP */
-    /*******************************/
-    System.out.format("AST NODE INT( %d )\n", value);
-
-    /*********************************/
-    /* Print to AST GRAPHIZ DOT file */
-    /*********************************/
-    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("%d", value));
-  }
+  
 
   public TYPE SemantMe() {
     System.out.println("EXP MINUS INT - semant me");

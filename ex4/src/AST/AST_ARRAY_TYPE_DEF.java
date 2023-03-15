@@ -30,33 +30,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 	/*************************************************/
 	/* The printing message ------------------------ */
 	/*************************************************/
-	public void PrintMe() {
-		/*************************************/
-		/* AST NODE TYPE- change XXX with this class name */
-		/*************************************/
-		System.out.print(String.format("AST %s NODE\n", "ATD"));
-
-		/**************************************/
-		/* RECURSIVELY PRINT non-null(!) sons (list, left and right...) */
-		/**************************************/
-		if (type != null)
-			type.PrintMe();
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/* print node name and optional string (maybe only needed in binop nodes) */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("ATD(%s)", id));
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/*
-		 * Print Edges to every son!
-		 */
-		/****************************************/
-		if (type != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, type.SerialNumber);
-
-	}
+	
 
 	public TYPE SemantMe() {
 

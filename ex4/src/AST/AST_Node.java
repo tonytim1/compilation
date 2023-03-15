@@ -20,7 +20,7 @@ public abstract class AST_Node {
 	public String typeName;
 	public int SerialNumber;
 	public int line;
-	
+
 	public static int varsInFunc;
 	private static String file;
 
@@ -35,9 +35,7 @@ public abstract class AST_Node {
 
 	/* The default message for an unknown AST node */
 	/***********************************************/
-	public void PrintMe() {
-		System.out.print("AST NODE UNKNOWN\n");
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.println("DEFAULT SEMANTME!!!");

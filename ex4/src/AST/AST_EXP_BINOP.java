@@ -29,33 +29,7 @@ public class AST_EXP_BINOP extends AST_EXP {
 	/*************************************************/
 	/* The printing message for a binop exp AST node */
 	/*************************************************/
-	public void PrintMe() {
-
-		/*************************************/
-		/* AST NODE TYPE = AST BINOP EXP */
-		/*************************************/
-		System.out.print("AST EXP_BINOP NODE\n");
-
-		/**************************************/
-		/* RECURSIVELY PRINT left + right ... */
-		/**************************************/
-
-		if (binop != null)
-			binop.PrintMe();
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("EXP_BINOP"));
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-
-		if (binop != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, binop.SerialNumber);
-
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.println("EXP BINOP - semant me");

@@ -26,22 +26,7 @@ public class AST_PROGRAM extends AST_Node {
 	}
 
 	@Override
-	public void PrintMe() {
-		System.out.print("AST PROGRAM NODE\n");
-		list.PrintMe();
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("PROGRAM"));
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, list.SerialNumber);
-
-		SYMBOL_TABLE.getInstance().PrintMe();
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.println("\nPROGRAM" + "- semantme");

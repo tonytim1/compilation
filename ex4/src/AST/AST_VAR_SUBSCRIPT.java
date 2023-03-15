@@ -33,33 +33,7 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 	/*****************************************************/
 	/* The printing message for a subscript var AST node */
 	/*****************************************************/
-	public void PrintMe() {
-		/*************************************/
-		/* AST NODE TYPE = AST SUBSCRIPT VAR */
-		/*************************************/
-		System.out.print("AST VAR_SUBSCRIPT NODE\n");
-
-		/****************************************/
-		/* RECURSIVELY PRINT VAR + SUBSRIPT ... */
-		/****************************************/
-		if (var != null)
-			var.PrintMe();
-		if (subscript != null)
-			subscript.PrintMe();
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, "VAR_SUBSCRIPT\n...[...]");
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (var != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, var.SerialNumber);
-		if (subscript != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, subscript.SerialNumber);
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.println("VAR SUBSCRIPT - semant me");

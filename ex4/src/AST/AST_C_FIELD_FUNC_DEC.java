@@ -21,34 +21,7 @@ public class AST_C_FIELD_FUNC_DEC extends AST_C_FIELD {
 	/*************************************************/
 	/* The printing message for a XXX node */
 	/*************************************************/
-	public void PrintMe() {
-
-		/*************************************/
-		/* AST NODE TYPE- change XXX with this class name */
-		/*************************************/
-		System.out.print(String.format("AST %s NODE\n", "CFEILD_FUNCDEC"));
-
-		/**************************************/
-		/* RECURSIVELY PRINT non-null(!) sons (list, left and right...) */
-		/**************************************/
-		if (func != null)
-			func.PrintMe();
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/* print node name and optional string (maybe only needed in binop nodes) */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("CFEILD_FUNCDEC"));
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/*
-		 * Print Edges to every son!
-		 */
-		/****************************************/
-		if (func != null) {
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, func.SerialNumber);
-		}
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.println("CFEILD FUNCDEC semant me");

@@ -38,48 +38,7 @@ public class AST_FUNC_DEC extends AST_Node {
   /*************************************************/
   /* The printing message for a XXX node */
   /*************************************************/
-  public void PrintMe() {
-
-    /*************************************/
-    /* AST NODE TYPE- change XXX with this class name */
-    /*************************************/
-    System.out.print(String.format("AST %s NODE\n", "AST_FUNC_DEC"));
-
-    /**************************************/
-    /* RECURSIVELY PRINT non-null(!) sons (list, t and right...) */
-    /**************************************/
-    if (returnType != null) {
-      returnType.PrintMe();
-    }
-    if (arglist != null) {
-      arglist.PrintMe();
-    }
-    if (list != null) {
-      list.PrintMe();
-    }
-    /***************************************/
-    /* PRINT Node to AST GRAPHVIZ DOT file */
-    /* print node name and optional string (maybe only needed in binop nodes) */
-    /***************************************/
-    AST_GRAPHVIZ.getInstance().logNode(SerialNumber,
-        String.format("FUNCDEC(%s)\n return type, func_name", id));
-
-    /****************************************/
-    /* PRINT Edges to AST GRAPHVIZ DOT file */
-    /*
-     * Print Edges to every son!
-     */
-    /****************************************/
-    if (returnType != null) {
-      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, returnType.SerialNumber);
-    }
-    if (arglist != null) {
-      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, arglist.SerialNumber);
-    }
-    if (list != null) {
-      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, list.SerialNumber);
-    }
-  }
+  
 
   public TYPE SemantMe() {
 

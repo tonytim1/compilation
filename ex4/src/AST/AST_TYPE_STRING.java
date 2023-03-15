@@ -23,19 +23,7 @@ public class AST_TYPE_STRING extends AST_TYPE {
 	/*************************************************/
 	/* The printing message for a XXX node */
 	/*************************************************/
-	public void PrintMe() {
-
-		/*************************************/
-		/* AST NODE TYPE- change XXX with this class name */
-		/*************************************/
-		System.out.print(String.format("AST %s NODE\n", "TYPE_STRING"));
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/* print node name and optional string (maybe only needed in binop nodes) */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("string"));
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.format("TYPE_STRING" + "- semant me\n");
