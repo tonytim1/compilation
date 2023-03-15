@@ -167,7 +167,8 @@ start with Program;
 /* DERIVATION RULES */
 /********************/
 
-Program ::=		decList:p													{: RESULT = new AST_PROGRAM(p, parser.file); :};
+Program ::=		decList:p													{: RESULT = new AST_PROGRAM(p, parser.file); :}
+				;
 
 decList ::=		dec:d decList:l												{: RESULT = new AST_DEC_LIST(d, l); :}
 				| dec:d														{: RESULT = new AST_DEC_LIST(d, null); :}
@@ -179,44 +180,46 @@ dec ::=			varDec:v 													{: RESULT = new AST_DEC_VAR_DEC(v); :}
 				| arrayTypedef:a											{: RESULT = new AST_DEC_ARRAY_DEC(a); :}
 				;
 
-stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
-					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
-					;
+varDec ::=		type:t ID:name SEMICOLON									{: RESULT = new AST_VAR_DEC_SIMPLE(t, name, tleft + 1); :}
+				| type:t ID:name ASSIGN exp:e SEMICOLON						{: RESULT = new AST_VAR_DEC_EXP(t, name, e, tleft + 1); :}
+				| type:t ID:name ASSIGN newExp:e SEMICOLON					{: RESULT = new AST_VAR_DEC_NEW_EXP(t, name, e, tleft + 1); :}
+				;
 
+funcDec ::=		type:t ID:name LPAREN RPAREN LBRACE stmtList:sl RBRACE 				{: RESULT = new AST_FUNC_DEC(t, name, null, sl, tleft + 1 ); :}
+				| type:t ID:name LPAREN argList:a RPAREN LBRACE stmtList:sl RBRACE	{: RESULT = new AST_FUNC_DEC(t, name, a, sl, tleft + 1); :}
+				;
+							
+classDec ::=	CLASS ID:name LBRACE cFieldList:cl RBRACE 		  				{: RESULT = new AST_CLASS_DEC_SIMPLE(name, cl, nameleft + 1); :}
+				| CLASS ID:name1 EXTENDS ID:name2 LBRACE cFieldList:cl RBRACE 	{: RESULT = new AST_CLASS_DEC_EXTENDS(name1, name2, cl, name1left + 1); :}
+				;
+
+arrayTypedef ::=ARRAY ID:name EQ type:t LBRACK RBRACK SEMICOLON 			{: RESULT = new AST_ARRAY_TYPE_DEF(name, t, nameleft + 1); :}
+				;					
+
+type ::=		TYPE_INT:t 													{: RESULT = new AST_TYPE_INT(tleft + 1); :}
+				| TYPE_STRING:s												{: RESULT = new AST_TYPE_STRING(sleft + 1); :}
+				| TYPE_VOID:v												{: RESULT = new AST_TYPE_VOID(vleft + 1); :}
+				| ID:name													{: RESULT = new AST_TYPE_ID(name, nameleft + 1); :}
+				;				
+
+arg ::= 		type:t ID:name  											{: RESULT = new AST_ARG(t, name); :}
+				;				
+
+argList ::=		arg:a														{: RESULT = new AST_ARG_LIST(a, null); :}
+				| arg:a COMMA argList:l 									{: RESULT = new AST_ARG_LIST(a, l); :}
+				;	
+				
 cField ::=		varDec:v 													{: RESULT = new AST_C_FIELD_VAR_DEC(v); :}
 				| funcDec:f													{: RESULT = new AST_C_FIELD_FUNC_DEC(f); :}
 				;
 					
 cFieldList ::=	cField:c cFieldList:l 										{: RESULT = new AST_C_FIELD_LIST(c, l); :}
 				| cField:c 									 				{: RESULT = new AST_C_FIELD_LIST(c, null); :}
-				;						
-
-type  ::= 	TYPE_INT:t 				{: RESULT= new AST_TYPE_INT(tleft + 1)  ;:}
-			| TYPE_STRING:s			{: RESULT= new AST_TYPE_STRING(sleft + 1) ;:}
-			| TYPE_VOID:v				{: RESULT= new AST_TYPE_VOID(vleft + 1) ;:}
-			| ID:id					{: RESULT= new AST_TYPE_ID(id, idleft + 1) ;:}
-			;
-
-arrayTypedef ::=ARRAY ID:name EQ type:t LBRACK RBRACK SEMICOLON 			{: RESULT = new AST_ARRAY_TYPE_DEF(name, t, nameleft + 1); :};
-
-
-varDec ::=		type:t ID:name SEMICOLON									{: RESULT = new AST_VAR_DEC_SIMPLE(t, name, tleft + 1); :}
-				| type:t ID:name ASSIGN exp:e SEMICOLON						{: RESULT = new AST_VAR_DEC_EXP(t, name, e, tleft + 1); :}
-				| type:t ID:name ASSIGN newExp:e SEMICOLON					{: RESULT = new AST_VAR_DEC_NEW_EXP(t, name, e, tleft + 1); :}
 				;				
 
-funcDec ::=		type:t ID:name LPAREN RPAREN LBRACE stmtList:sl RBRACE 				{: RESULT = new AST_FUNC_DEC(t, name, null, sl, tleft + 1 ); :}
-				| type:t ID:name LPAREN argList:a RPAREN LBRACE stmtList:sl RBRACE	{: RESULT = new AST_FUNC_DEC(t, name, a, sl, tleft + 1); :}
-				;				
-
-arg ::=  type:t ID:id  					{: RESULT = new AST_ARG(t, id); :} ;
-
-argList ::= arg:a										{: RESULT = new AST_ARG_LIST(a,null); :}
-				| arg:a COMMA argList:l 		{: RESULT = new AST_ARG_LIST(a,l); :}
-				;
-							
-classDec ::=	CLASS ID:name LBRACE cFieldList:cl RBRACE 		  				{: RESULT = new AST_CLASS_DEC_SIMPLE(name, cl, nameleft + 1); :}
-				| CLASS ID:name1 EXTENDS ID:name2 LBRACE cFieldList:cl RBRACE 	{: RESULT = new AST_CLASS_DEC_EXTENDS(name1, name2, cl, name1left + 1); :}
+var ::=			ID:name														{: RESULT = new AST_VAR_SIMPLE(name, nameleft + 1); :}
+				| var:v DOT ID:name											{: RESULT = new AST_VAR_FIELD(v, name, vleft + 1); :} 
+				| var:v LBRACK exp:e RBRACK									{: RESULT = new AST_VAR_SUBSCRIPT(v, e, vleft + 1); :} 
 				;
 
 exp			::=		var:v									 		 {: RESULT = new AST_EXP_VAR(v);          			   :}
@@ -236,12 +239,9 @@ expList  ::=     exp:e1 COMMA expList:e2		    {: RESULT = new AST_EXPLIST(e1,e2,
 				| exp:e1     		  			    {: RESULT = new AST_EXPLIST(e1,null, e1left + 1);   	     	:}
 				;
 
-							
-var			::=		ID:name								{: RESULT = new AST_VAR_SIMPLE(name, nameleft + 1);       :}
-					| var:v DOT ID:fieldName			{: RESULT = new AST_VAR_FIELD(v,fieldName, vleft + 1); :} 
-					| var:v LBRACK exp:e RBRACK			{: RESULT = new AST_VAR_SUBSCRIPT(v,e,vleft+1);     :} 
-					;
-					
+stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
+					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
+
 stmt		::=		var:v ASSIGN exp:e SEMICOLON									{: RESULT = new AST_STMT_ASSIGN(v,e,vleft + 1);		 :}
 					|varDec:vd													 	{: RESULT = new AST_STMT_VARDEC(vd); 		 :}
 					|var:v ASSIGN newExp:ne SEMICOLON						    	{: RESULT = new AST_STMT_NEWEXP(v,ne, vleft + 1);  	 :}
