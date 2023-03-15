@@ -5,7 +5,7 @@ import IR.*;
 import SYMBOL_TABLE.*;
 import TEMP.*;
 
-public class AST_NEW_EXP_TYPE extends AST_NEWEXP {
+public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
   public AST_TYPE t;
 
   /*******************/

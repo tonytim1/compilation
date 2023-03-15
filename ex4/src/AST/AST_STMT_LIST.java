@@ -14,6 +14,8 @@ public class AST_STMT_LIST extends AST_Node {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_STMT_LIST(AST_STMT head, AST_STMT_LIST tail) {
+		this.head = head;
+		this.tail = tail;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -30,8 +32,6 @@ public class AST_STMT_LIST extends AST_Node {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.head = head;
-		this.tail = tail;
 	}
 
 	/******************************************************/

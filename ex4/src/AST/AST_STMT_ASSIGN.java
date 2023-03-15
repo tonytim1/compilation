@@ -18,7 +18,11 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_ASSIGN(AST_VAR var, AST_EXP exp, int line) {
+	public AST_STMT_ASSIGN(AST_VAR var, AST_EXP exp, int line) {		
+		this.var = var;
+		this.exp = exp;
+		this.line = line;
+		
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -32,9 +36,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.var = var;
-		this.exp = exp;
-		this.line = line;
 	}
 
 	/*********************************************************/

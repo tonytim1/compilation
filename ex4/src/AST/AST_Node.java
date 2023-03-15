@@ -17,35 +17,19 @@ public abstract class AST_Node {
 	/* In particular, it can help in creating */
 	/* a graphviz dot format of the AST ... */
 	/*******************************************/
-	public int SerialNumber;
-
-	public int line;
-
 	public String typeName;
-
+	public int SerialNumber;
+	public int line;
+	
+	public static int varsInFunc;
 	private static String file;
 
 	public static Map<String, String> offsets = new HashMap<>();
-	// for local variables:
-	// <local var name, offset>
-	// for class fields:
-	// <class name + & + field name , offset>
-	// for function:
-	// <func name, label name (where the func starts)>
-	// for functions in class:
-	// <class name + & + func name, label>
-
 	public static Map<String, Integer> classSize = new HashMap<>();
-
-	public static Map<String, Map<String, Integer>> classFuncsOff = new HashMap<>();
-	// <class <func, off> >
-
-	public static Map<String, String> defaultFields = new HashMap<>();
-	// <class_field, value>
-
 	public static Map<String, ArrayList<String>> classfields = new HashMap<>();
+	public static Map<String, String> defaultFields = new HashMap<>();
+	public static Map<String, Map<String, Integer>> classFuncsOff = new HashMap<>();
 
-	public static int varsInFunc;
 
 	/***********************************************/
 

@@ -135,7 +135,7 @@ non terminal AST_VAR_DEC varDec;
 non terminal AST_FUNC_DEC funcDec;
 non terminal AST_CLASS_DEC classDec;
 non terminal AST_C_FIELD cField;
-non terminal AST_NEWEXP newExp;
+non terminal AST_NEW_EXP newExp;
 non terminal AST_DEC_LIST decList;
 non terminal AST_EXP_BINOP expBinop;
 non terminal AST_C_FIELD_LIST cFieldList;

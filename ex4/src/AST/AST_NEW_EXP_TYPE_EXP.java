@@ -4,7 +4,7 @@ import IR.*;
 import TEMP.*;
 import TYPES.*;
 
-public class AST_NEW_EXP_TYPE_EXP extends AST_NEWEXP {
+public class AST_NEW_EXP_TYPE_EXP extends AST_NEW_EXP {
   public AST_TYPE t;
   public AST_EXP e;
 

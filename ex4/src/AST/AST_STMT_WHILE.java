@@ -21,7 +21,6 @@ public class AST_STMT_WHILE extends AST_STMT {
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-
 	}
 
 	/****************** outside CONSTRUCTOR code *******************/

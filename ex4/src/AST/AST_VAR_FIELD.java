@@ -14,6 +14,9 @@ public class AST_VAR_FIELD extends AST_VAR {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_VAR_FIELD(AST_VAR var, String fieldName, int line) {
+		this.var = var;
+		this.fieldName = fieldName;
+		this.line = line;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -27,9 +30,6 @@ public class AST_VAR_FIELD extends AST_VAR {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.var = var;
-		this.fieldName = fieldName;
-		this.line = line;
 	}
 
 	/*************************************************/
@@ -62,7 +62,6 @@ public class AST_VAR_FIELD extends AST_VAR {
 	public TYPE SemantMe() {
 		System.out.format("VAR_FIELD- semantme\n");
 		TYPE res = null;
-
 		TYPE t1 = var.SemantMe();
 		classN = t1.name;
 
@@ -124,18 +123,4 @@ public class AST_VAR_FIELD extends AST_VAR {
 		return t2;
 	}
 
-	/*
-	 * public TEMP getAddress(){
-	 * System.out.format("VAR_FIELD- address\n");
-	 * 
-	 * TEMP t1 = var.IRme();
-	 * TEMP t2 = TEMP_FACTORY.getInstance().getFreshTEMP();
-	 * IRcommand r = new IRcommand_Field_Access(t2, t1, fieldName);
-	 * IR.getInstance().Add_IRcommand(r);
-	 * ((IRcommand_Field_Access)r).address = true;
-	 * r.offset = GetOffset(classN + "_" + fieldName);
-	 * 
-	 * return t2;
-	 * }
-	 */
 }

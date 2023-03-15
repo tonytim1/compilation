@@ -11,13 +11,13 @@ public class AST_TYPE_NAME_LIST extends AST_Node {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_TYPE_NAME_LIST(AST_TYPE_NAME head, AST_TYPE_NAME_LIST tail) {
+		this.head = head;
+		this.tail = tail;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		this.head = head;
-		this.tail = tail;
 	}
 
 	/******************************************************/

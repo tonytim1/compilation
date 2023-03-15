@@ -8,8 +8,8 @@ public class AST_TYPE_INT extends AST_TYPE {
   /* CONSTRUCTOR(S) */
   /*******************/
   public AST_TYPE_INT(int line) {
-    this.line = line;
     this.typeName = "int";
+    this.line = line;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
