@@ -72,8 +72,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 	}
 
 	public TEMP IRme() {
-		System.out.format("VAR SIMPLE - IRme (%s)\n", name);
-
+		
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 
 		if (inGlobal == 1) {

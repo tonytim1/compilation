@@ -42,13 +42,11 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 			String tname = "non-existing";
 			if (t1 != null)
 				tname = t1.name;
-			System.out.format(">> ERROR [%d] type mismatch for var := exp. %s vs %s\n", line, tname, t2.name);
-			printError(this.line);
+						printError(this.line);
 		}
 		TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(id);
 		if (res != null) {
-			System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
-			printError(this.line);
+						printError(this.line);
 		}
 
 		class_name = SYMBOL_TABLE.getInstance().inClassScope();

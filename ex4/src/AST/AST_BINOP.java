@@ -24,8 +24,7 @@ public class AST_BINOP extends AST_Node {
 
 
     public TYPE SemantMe() {
-        System.out.format("BINOP - semant me\n", line);
-
+        
         TYPE t1 = null;
         TYPE t2 = null;
 
@@ -43,13 +42,11 @@ public class AST_BINOP extends AST_Node {
 
             if ((t1 == TYPE_INT.getInstance()) || (t2 == TYPE_STRING.getInstance()) ||
                     (t1 == TYPE_STRING.getInstance()) || (t2 == TYPE_INT.getInstance()))             {
-                System.out.format(">> ERROR [%d] can't compare primitive to non-primitive", line);
-                printError(line);
+                                printError(line);
             }
 
             if (t1 != TYPE_NIL.getInstance() && t2 != TYPE_NIL.getInstance()) {
-                System.out.format(">> ERROR [%d] can't compare different types", line);
-                printError(line);
+                                printError(line);
             }
 
             return TYPE_INT.getInstance();         }
@@ -63,13 +60,11 @@ public class AST_BINOP extends AST_Node {
             printError(line);
         }
 
-                if ((t1 != TYPE_INT.getInstance()) || (t2 != TYPE_INT.getInstance())) {             System.out.format(">> ERROR [%d] trying binop between wrong types %s %s", line, t1.name, t2.name);
-            printError(line);
+                if ((t1 != TYPE_INT.getInstance()) || (t2 != TYPE_INT.getInstance())) {                         printError(line);
         }
 
                 if ((right instanceof AST_EXP_INT) && ((AST_EXP_INT) right).value == 0 && number == 3) {
-            System.out.format(">> ERROR [%d] division by 0", line);
-            printError(line);
+                        printError(line);
         }
         return TYPE_INT.getInstance();
     }

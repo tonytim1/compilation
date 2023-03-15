@@ -39,26 +39,22 @@ public class AST_FUNC_DEC extends AST_Node {
     returnTypeType = findType(returnType.typeName);
 
     if (returnTypeType == null || returnTypeType instanceof TYPE_NIL) {
-      System.out.format(">> ERROR [%d] non existing return type %s\n", line, returnType.typeName);
-      printError(line);
+            printError(line);
     }
 
     for (AST_ARG_LIST it = arglist; it != null; it = it.tail) {
       t = findType(it.head.t.typeName);
 
       if (t == null) {
-        System.out.format(">> ERROR [%d] non existing type %s\n", line, it.head.t.typeName);
-        printError(line);
+                printError(line);
       }
 
       if (t instanceof TYPE_NIL || t instanceof TYPE_VOID) {
-        System.out.format(">> ERROR [%d] cant decalre function with nil/void");
-        printError(line);
+                printError(line);
       }
       for (AST_ARG_LIST it2 = arglist; it2 != null && it2 != it; it2 = it2.tail) {
         if (it.head.id.equals(it2.head.id)) {
-          System.out.format(">> ERROR  2 args with the same name");
-          printError(line);
+                    printError(line);
         }
       }
 

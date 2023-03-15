@@ -27,18 +27,15 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		TYPE typeType = type.SemantMe();
 
 				if (!(SYMBOL_TABLE.getInstance().getScope().equals("global"))) {
-			System.out.format(">> ERROR [%d] array dec in wrong scope\n", line);
-			printError(line);
+						printError(line);
 		}
 
 				if (typeType == null || typeType instanceof TYPE_VOID || typeType instanceof TYPE_NIL) {
-			System.out.format(">> ERROR [%d] non existing type\n", line);
-			printError(line);
+						printError(line);
 		}
 
 				if (SYMBOL_TABLE.getInstance().find(id) != null) {
-			System.out.format(">> ERROR [%d] %s is already declared.\n", line, id);
-			printError(line);
+						printError(line);
 		}
 
 				SYMBOL_TABLE.getInstance().enter(id, new TYPE_ARRAY(typeType, id));

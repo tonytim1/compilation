@@ -29,8 +29,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 	
 
 	public TYPE SemantMe() {
-		System.out.format("CLASSDEC EXTENDS(%s) - semant me\n", id);
-		this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(this.fatherName);
+				this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(this.fatherName);
 
 
 		TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);

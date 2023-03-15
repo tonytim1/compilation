@@ -25,8 +25,7 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 		TYPE t1 = var.SemantMe();
 
 		if (t1 == null) {
-			System.out.format(">> ERROR [%d] var is not declared. (var_subscript)\n", line);
-			printError(line);
+						printError(line);
 		}
 
 		if (!(t1.isArray())) {

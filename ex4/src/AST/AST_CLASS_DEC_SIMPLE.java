@@ -28,8 +28,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
   
 
   public TYPE SemantMe() {
-    System.out.format("CLASSDEC SIMPLE(%s) - semant me\n", id);
-    TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
+        TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
     if (isExist != null) {       System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
           line);
       printError(line);

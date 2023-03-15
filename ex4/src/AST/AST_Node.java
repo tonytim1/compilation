@@ -119,8 +119,7 @@ public abstract class AST_Node {
 		TYPE type = SYMBOL_TABLE.getInstance().isRealFunc(id, list);
 
 		if (type == null) {
-			System.out.format(">> ERROR [%d] " + id + " is not a function or the parameters given are wrong!", line);
-			printError(line);
+						printError(line);
 		}
 		return type;
 	}

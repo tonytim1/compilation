@@ -36,8 +36,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
     t2 = exp.SemantMe();
 
     if (t1 == null || t2 == null) {
-      System.out.format(">> ERROR [%d] non existing type %s %s (stmt_newexp)\n", line, t1, t2);
-      printError(line);
+            printError(line);
     }
 
     if (!(type_equals(t1, t2))) {

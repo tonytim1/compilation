@@ -34,23 +34,19 @@ public class AST_NEW_EXP_TYPE_EXP extends AST_NEW_EXP {
     t2 = e.SemantMe();
 
     if (t1 == null || t2 == null) {
-      System.out.format(">> ERROR [%d] non existing type %s %s\n", line, t1, t2);
-      printError(line);
+            printError(line);
     }
 
     if (!type_equals(t2, TYPE_INT.getInstance())) {
-      System.out.format(">> ERROR [%d] array subscript type is %s- new type[exp]; (newexp_exp)\n", line, t2.name);
-      printError(this.line);
+            printError(this.line);
     }
 
     if ((e instanceof AST_EXP_INT) && (((AST_EXP_INT) e).value <= 0)) {
-      System.out.format(">> ERROR [%d] array subscript must be positive; (newexp_exp)\n", line);
-      printError(this.line);
+            printError(this.line);
     }
 
     if (e instanceof AST_EXP_MINUS_INT) {
-      System.out.format(">> ERROR [%d] array subscript must be positive; (newexp_exp)\n", line);
-      printError(this.line);
+            printError(this.line);
     }
 
     return new TYPE_ARRAY(t1, t1.name + "[]");
