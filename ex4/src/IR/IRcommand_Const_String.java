@@ -31,7 +31,6 @@ public class IRcommand_Const_String extends IRcommand_Assign {
 	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Const_String" + "- MIPSme");
-
 		MIPSGenerator.getInstance().allocate_const_string(dst, label, val);
 	}
 }

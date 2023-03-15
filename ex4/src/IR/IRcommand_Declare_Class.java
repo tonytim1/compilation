@@ -22,10 +22,6 @@ public class IRcommand_Declare_Class extends IRcommand {
 	ArrayList<ArrayList<String>> funcs;
 	ArrayList<ArrayList<ArrayList<String>>> fs;
 
-	//class A{
-		// fields are Fs
-		//funcs are funcs
-	//}
 	public IRcommand_Declare_Class(String name, ArrayList<ArrayList<String>> funcs,
 			ArrayList<ArrayList<ArrayList<String>>> Fs) {
 		this.class_name = name;

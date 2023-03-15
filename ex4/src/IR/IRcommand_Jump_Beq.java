@@ -30,7 +30,6 @@ public class IRcommand_Jump_Beq extends IRcommand_Conditional_Jump {
 	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Jump_Beq" + "- MIPSme");
-
 		MIPSGenerator.getInstance().beq(oprnd1, oprnd2, label);
 	}
 }

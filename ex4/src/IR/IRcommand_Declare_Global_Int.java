@@ -29,7 +29,6 @@ public class IRcommand_Declare_Global_Int extends IRcommand_Assign_Non_Temp {
 	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Declare_Global_Int" + " - MIPSme");
-
 		MIPSGenerator.getInstance().declare_global_int(id, value);
 
 	}

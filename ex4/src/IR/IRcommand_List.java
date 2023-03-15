@@ -27,7 +27,11 @@ public class IRcommand_List
 	/***************/
 	public void MIPSme()
 	{
-		if (head != null) head.MIPSme();
-		if (tail != null) tail.MIPSme();
+		if (head != null) {
+            head.MIPSme();
+        }
+		if (tail != null) {
+		    tail.MIPSme();
+		}
 	}
 }

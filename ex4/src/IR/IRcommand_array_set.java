@@ -20,7 +20,5 @@ public class IRcommand_array_set extends IRcommand {
   public void MIPSme() {
     System.out.println("IRcommand_array_set" + "- MIPSme");
     MIPSGenerator.getInstance().array_set(array, index, val);
-
   }
-
 }

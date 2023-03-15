@@ -32,7 +32,6 @@ public class IRcommand_Binop_Concat_Strings extends IRcommand_Binop {
   @Override
   public void MIPSme() {
 	    System.out.println("IRcommand_Binop_Concat_Strings" + "- MIPSme");
-
 	    String l0 = IRcommand.getFreshLabel("concat_count_start");
 	    String l1 = IRcommand.getFreshLabel("concat_count_str1");
 	    String l2 = IRcommand.getFreshLabel("concat_count_str2");

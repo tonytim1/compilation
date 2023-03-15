@@ -31,7 +31,6 @@ public class IRcommand_Store_Field extends IRcommand {
 	/***************/
 	public void MIPSme() {
 		System.out.println("IRcommand_Store_Field" + "- MIPSme");
-
 		MIPSGenerator.getInstance().store_field(offset, val);
 	}
 }
