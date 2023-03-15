@@ -45,7 +45,7 @@ public class REG_ALLOC {
         // go over the REG_ALLOC graph this time
         curr_vertex = this.head;
         while (curr_vertex != null) {
-            Boolean isBranch = (curr_vertex.line.IRname.equals("IRcommand_Conditional_Jump"));
+            Boolean isBranch = (curr_vertex.line.name.equals("IRcommand_Conditional_Jump"));
             if (isBranch) {
                 next = this.head;
                 String l = ((IRcommand_Conditional_Jump) curr_vertex.line).label;
@@ -89,13 +89,13 @@ public class REG_ALLOC {
             while (it.hasNext()) {
                 curr.inSet.add(it.next());
             }
-            if (curr.line.IRname.equals("IRcommand_Assign")) {
+            if (curr.line.name.equals("IRcommand_Assign")) {
                 curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Assign) curr.line).dst.getSerialNumber()))));
                 if (curr.inFunc) {
                     curr.FuncScope.remove(("Temp_" + (Integer.toString(((IRcommand_Assign) curr.line).dst.getSerialNumber()))));
                 }
             }
-            if (curr.line.IRname.equals("IRcommand_Binop")) {
+            if (curr.line.name.equals("IRcommand_Binop")) {
                 curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Binop) curr.line).dst.getSerialNumber()))));
                 curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Binop) curr.line).t1.getSerialNumber()))));
                 curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Binop) curr.line).t2.getSerialNumber()))));
@@ -105,7 +105,7 @@ public class REG_ALLOC {
                     curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Binop) curr.line).t2.getSerialNumber()))));
                 }
             }
-            if (curr.line.IRname.equals("IRcommand_Two_Temps")) {
+            if (curr.line.name.equals("IRcommand_Two_Temps")) {
                 curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_Two_Temps) curr.line).dst.getSerialNumber()))));
                 curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Two_Temps) curr.line).val.getSerialNumber()))));
                 if (curr.inFunc) {
@@ -147,7 +147,7 @@ public class REG_ALLOC {
                 }
             }
             if (curr.line.getClass().toString().equals("class IR.IRcommand_This_Dot_Field")) {
-                if (((IRcommand_This_Dot_Field) curr.line).cfg == false) {
+                if (((IRcommand_This_Dot_Field) curr.line).regalloc == false) {
                     curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
                     if (curr.inFunc) {
                         curr.FuncScope
@@ -185,7 +185,7 @@ public class REG_ALLOC {
                     }
                 }
             }
-            if (curr.line.IRname.equals("IRcommand_Conditional_Jump")) {
+            if (curr.line.name.equals("IRcommand_Conditional_Jump")) {
                 if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_bnez"))
                         || (curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Beqz"))) {
                     curr.inSet
@@ -358,7 +358,7 @@ public class REG_ALLOC {
         IRcommand h = IR.getInstance().head;
         IRcommand_List t = IR.getInstance().tail;
         while (t != null) {
-            if (h.IRname.equals("IRcommand_Binop")) {
+            if (h.name.equals("IRcommand_Binop")) {
                 String theNum;
                 if (((IRcommand_Binop) h).dst.changed == false) {
                     theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Binop) h).dst.getSerialNumber()))));
@@ -385,7 +385,7 @@ public class REG_ALLOC {
                     ((IRcommand_Binop) h).t2.changed = true;
                 }
             }
-            if (h.IRname.equals("IRcommand_Assign")) {
+            if (h.name.equals("IRcommand_Assign")) {
                 if (((IRcommand_Assign) h).dst.changed == false) {
                     String theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Assign) h).dst.getSerialNumber()))));
                     if (theNum == null) {
@@ -395,7 +395,7 @@ public class REG_ALLOC {
                     ((IRcommand_Assign) h).dst.changed = true;
                 }
             }
-            if (h.IRname.equals("IRcommand_Two_Temps")) {
+            if (h.name.equals("IRcommand_Two_Temps")) {
                 String theNum;
                 if (((IRcommand_Two_Temps) h).dst.changed == false) {
                     theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Two_Temps) h).dst.getSerialNumber()))));
@@ -454,7 +454,7 @@ public class REG_ALLOC {
                 }
             }
 
-            if (h.IRname.equals("class IR.IRcommand_Conditional_Jump")) {
+            if (h.name.equals("class IR.IRcommand_Conditional_Jump")) {
                 if ((h.getClass().toString().equals("class IR.IRcommand_Jump_bnez"))
                         || (h.getClass().toString().equals("class IR.IRcommand_Jump_Beqz"))) {
                     if (((IRcommand_Conditional_Jump) h).op1.changed == false) {
