@@ -41,7 +41,7 @@ public class DependenciesGraph {
             Iterator<String> it = curr.inSet.iterator();
             while (it.hasNext()) {
                 String name = it.next();
-                node res = findNode(name);
+                res = findNode(name);
                 if (res == null) {
                     res = new node(name);
                     this.allNodes.add(res);
