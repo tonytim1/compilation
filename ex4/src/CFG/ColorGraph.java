@@ -12,11 +12,11 @@ import java.util.Iterator;
 import java.util.Stack;
 import TEMP.*;
 import MIPS.*; 
-//import basicBlock;
+//import BasicBlock;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-public class colorGraph{
+public class ColorGraph{
 	public class node{
 		String name;//who we represent
 		HashSet<String> neig;
@@ -35,8 +35,8 @@ public class colorGraph{
 	 //compare something to it's offset to get unique thing
 	//change the names to be X_offset
 
-	public colorGraph(basicBlock h) {
-		basicBlock curr=h;
+	public ColorGraph(BasicBlock h) {
+		BasicBlock curr=h;
 		while (curr!=null){
 			Iterator<String> it=curr.inSet.iterator();
 			node p;

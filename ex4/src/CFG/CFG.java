@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
-import CFG.colorGraph.node;
+import CFG.ColorGraph.node;
 import TEMP.*;
 import MIPS.*;
 import IR.*;
@@ -21,23 +21,23 @@ import IR.*;
 /*******************/
 
 public class CFG {
-	basicBlock head; // for build
-	basicBlock tail;// for liveness
+	BasicBlock head; // for build
+	BasicBlock tail;// for liveness
 	HashMap<String, String> IRtoMIPS = new HashMap<String, String>();
 
 	public CFG() {
 		IRcommand h = IR.getInstance().head;
 		IRcommand_List t = IR.getInstance().tail;
 		int lineCounter = 0;
-		this.head = new basicBlock(lineCounter, h);
+		this.head = new BasicBlock(lineCounter, h);
 		lineCounter++;
-		basicBlock curr = this.head;
-		basicBlock next;
+		BasicBlock curr = this.head;
+		BasicBlock next;
 
 		while (t != null) {
 			h = t.head;
 			t = t.tail;
-			next = new basicBlock(lineCounter, h);
+			next = new BasicBlock(lineCounter, h);
 			lineCounter++;
 			curr.direct = next;
 			next.father = curr;
@@ -69,7 +69,7 @@ public class CFG {
 	}
 
 	public void liveness() {
-		basicBlock curr = this.tail; // since we are going buttom-up
+		BasicBlock curr = this.tail; // since we are going buttom-up
 		Boolean notTail = false;
 		while (curr != null) {
 			if (notTail) {
@@ -316,7 +316,7 @@ public class CFG {
 
 	public void K_color() {
 		Stack<node> stack = new Stack<node>();// here we put the nodes we delete
-		colorGraph g = new colorGraph(this.head);
+		ColorGraph g = new ColorGraph(this.head);
 		// simplify stage
 		Iterator<node> simplfy = g.overall.iterator();
 		while (simplfy.hasNext()) {

@@ -12,10 +12,10 @@ import IR.*;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
-public class basicBlock{
-	basicBlock father; //the liveness needs to go buttom up
-	basicBlock direct; //the building is done top down
-	basicBlock condWorked;
+public class BasicBlock{
+	BasicBlock father; //the liveness needs to go buttom up
+	BasicBlock direct; //the building is done top down
+	BasicBlock condWorked;
 	int time;// will be our n in liveness analysis
 	IRcommand line;
 	HashSet<String> inSet; //the in\out sets for liveness, are empty
@@ -23,7 +23,7 @@ public class basicBlock{
 	boolean inFunc; 
 	HashSet<String> FuncScope; 
 
-	public basicBlock(int time, IRcommand line) {
+	public BasicBlock(int time, IRcommand line) {
 		this.time=time;
 		this.line=line;
 		//sons will be assigned once we lookahead to them
