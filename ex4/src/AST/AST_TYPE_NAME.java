@@ -28,19 +28,7 @@ public class AST_TYPE_NAME extends AST_Node {
 	/*************************************************/
 	/* The printing message for a type name AST node */
 	/*************************************************/
-	public void PrintMe() {
-		/**************************************/
-		/* AST NODE TYPE = AST TYPE NAME NODE */
-		/**************************************/
-		System.out.format("NAME(%s):TYPE(%s)\n", name, typeName);
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-				SerialNumber,
-				String.format("NAME:TYPE\n%s:%s", name, typeName));
-	}
+	
 
 	/*****************/
 	/* SEMANT ME ... */

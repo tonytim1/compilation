@@ -22,7 +22,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 		this.var = var;
 		this.exp = exp;
 		this.line = line;
-		
+
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -41,33 +41,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 	/*********************************************************/
 	/* The printing message for an assign statement AST node */
 	/*********************************************************/
-	public void PrintMe() {
-		/********************************************/
-		/* AST NODE TYPE = AST ASSIGNMENT STATEMENT */
-		/********************************************/
-		System.out.print("AST NODE ASSIGN STMT\n");
-
-		/***********************************/
-		/* RECURSIVELY PRINT VAR + EXP ... */
-		/***********************************/
-		if (var != null)
-			var.PrintMe();
-		if (exp != null)
-			exp.PrintMe();
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, "ASSIGN\nleft := right\n");
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (var != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, var.SerialNumber);
-		if (exp != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, exp.SerialNumber);
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.println("STMT_ASSIGN - semant me");

@@ -36,17 +36,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 	/**************************************************/
 	/* The printing message for a simple var AST node */
 	/**************************************************/
-	public void PrintMe() {
-		/**********************************/
-		/* AST NODE TYPE = AST SIMPLE VAR */
-		/**********************************/
-		System.out.format("AST NODE SIMPLE_VAR( %s )\n", name);
-
-		/*********************************/
-		/* Print to AST GRAPHIZ DOT file */
-		/*********************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("SIMPLE_VAR(%s)", name));
-	}
+	
 
 	public TYPE SemantMe() {
 		TYPE res = SYMBOL_TABLE.getInstance().findInCurrScope(name);

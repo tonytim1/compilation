@@ -35,29 +35,7 @@ public class AST_EXP_VAR_ID extends AST_EXP {
 	/***********************************************/
 	/* The default message for an exp var AST node */
 	/***********************************************/
-	public void PrintMe() {
-		/************************************/
-		/* AST NODE TYPE = EXP VAR AST NODE */
-		/************************************/
-		System.out.print("AST NODE EXP_VARDOT\n");
-
-		/*****************************/
-		/* RECURSIVELY PRINT var ... */
-		/*****************************/
-		if (var != null)
-			var.PrintMe();
-
-		/*********************************/
-		/* Print to AST GRAPHIZ DOT file */
-		/*********************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("EXP_VARDOT(%s)", id));
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (var != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, var.SerialNumber);
-	}
+	
 
 	public TYPE SemantMe() {
 		///a.g();

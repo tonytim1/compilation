@@ -36,33 +36,7 @@ public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC {
   /*************************************************/
   /* The printing message for a XXX node */
   /*************************************************/
-  public void PrintMe() {
-
-    /*************************************/
-    /* AST NODE TYPE- change XXX with this class name */
-    /*************************************/
-    System.out.print(String.format("AST %s NODE\n", "VARDEC_SIMPLE"));
-
-    /**************************************/
-    /* RECURSIVELY PRINT non-null(!) sons (list, type and right...) */
-    /**************************************/
-    if (type != null)
-      type.PrintMe();
-    /***************************************/
-    /* PRINT Node to AST GRAPHVIZ DOT file */
-    /* print node name and optional string (maybe only needed in binop nodes) */
-    /***************************************/
-    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("VARDEC_SIMPLE(%s)", id));
-
-    /****************************************/
-    /* PRINT Edges to AST GRAPHVIZ DOT file */
-    /*
-     * Print Edges to every son!
-     */
-    /****************************************/
-    if (type != null)
-      AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, type.SerialNumber);
-  }
+  
 
   public TYPE SemantMe() {
     System.out.println("VARDEC SIMPLE - semant me");

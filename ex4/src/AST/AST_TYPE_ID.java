@@ -28,20 +28,7 @@ public class AST_TYPE_ID extends AST_TYPE {
   /*************************************************/
   /* The printing message for a XXX node */
   /*************************************************/
-  public void PrintMe() {
-
-    /*************************************/
-    /* AST NODE TYPE- change XXX with this class name */
-    /*************************************/
-    System.out.print(String.format("AST %s NODE\n", "TYPE_ID"));
-
-    /***************************************/
-    /* PRINT Node to AST GRAPHVIZ DOT file */
-    /* print node name and optional string (maybe only needed in binop nodes) */
-    /***************************************/
-    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("%s", typeName));
-
-  }
+  
 
   public TYPE SemantMe() {
     System.out.println("TYPE ID - semant me");

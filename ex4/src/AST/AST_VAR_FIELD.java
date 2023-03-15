@@ -35,29 +35,7 @@ public class AST_VAR_FIELD extends AST_VAR {
 	/*************************************************/
 	/* The printing message for a field var AST node */
 	/*************************************************/
-	public void PrintMe() {
-		/*********************************/
-		/* AST NODE TYPE = AST FIELD VAR */
-		/*********************************/
-		System.out.format("AST VAR_FIELD, with field name %s NODE\n", fieldName);
-
-		/**********************************************/
-		/* RECURSIVELY PRINT VAR, then FIELD NAME ... */
-		/**********************************************/
-		if (var != null)
-			var.PrintMe();
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("FIELD\nVAR\n...->%s", fieldName));
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (var != null)
-			AST_GRAPHVIZ.getInstance().logEdge(SerialNumber, var.SerialNumber);
-	}
+	
 
 	public TYPE SemantMe() {
 		System.out.format("VAR_FIELD- semantme\n");

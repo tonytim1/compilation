@@ -21,20 +21,7 @@ public class AST_EXP_NIL extends AST_EXP {
   /*************************************************/
   /* The printing message for a XXX node */
   /*************************************************/
-  public void PrintMe() {
-
-    /*************************************/
-    /* AST NODE TYPE- change XXX with this class name */
-    /*************************************/
-    System.out.print(String.format("AST %s NODE\n", "EXP_NIL"));
-
-    /***************************************/
-    /* PRINT Node to AST GRAPHVIZ DOT file */
-    /* print node name and optional string (maybe only needed in binop nodes) */
-    /***************************************/
-    AST_GRAPHVIZ.getInstance().logNode(SerialNumber, String.format("EXP_NIL"));
-
-  }
+  
 
   public TYPE SemantMe() {
     System.out.println("EXP NIL - semant me");
