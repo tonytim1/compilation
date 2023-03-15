@@ -144,7 +144,7 @@ public class AST_STMT_NEWEXP extends AST_STMT {
       AST_VAR_SUBSCRIPT subVar = (AST_VAR_SUBSCRIPT) var;
       TEMP array = subVar.var.IRme();
       TEMP index = subVar.subscript.IRme();
-      IR.getInstance().Add_IRcommand(new IRcommand_array_set(array, index, value));
+      IR.getInstance().Add_IRcommand(new IRcommand_Array_Set(array, index, value));
     }
 
     return null;

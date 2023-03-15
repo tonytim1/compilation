@@ -213,14 +213,14 @@ public class CFG {
 					}
 				}
 			}
-			if (curr.line.getClass().toString().equals("class IR.IRcommand_array_set")) {
-				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_array_set) curr.line).array.getSerialNumber()))));
-				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_array_set) curr.line).index.getSerialNumber()))));
-				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_array_set) curr.line).val.getSerialNumber()))));
+			if (curr.line.getClass().toString().equals("class IR.IRcommand_Array_Set")) {
+				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).array.getSerialNumber()))));
+				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).index.getSerialNumber()))));
+				curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).val.getSerialNumber()))));
 				if (curr.inFunc) {
-					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_array_set) curr.line).array.getSerialNumber()))));
-					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_array_set) curr.line).index.getSerialNumber()))));
-					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_array_set) curr.line).val.getSerialNumber()))));
+					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).array.getSerialNumber()))));
+					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).index.getSerialNumber()))));
+					curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).val.getSerialNumber()))));
 				}
 			}
 			if (curr.line.getClass().toString().equals("class IR.IRcommand_Prologue")) {
@@ -510,31 +510,31 @@ public class CFG {
 				}
 
 			}
-			if (h.getClass().toString().equals("class IR.IRcommand_array_set")) {
+			if (h.getClass().toString().equals("class IR.IRcommand_Array_Set")) {
 				String theNum;
-				if (((IRcommand_array_set) h).array.changed == false) {
-					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_array_set) h).array.getSerialNumber()))));
+				if (((IRcommand_Array_Set) h).array.changed == false) {
+					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Array_Set) h).array.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_array_set) h).array.serial = Integer.parseInt(theNum);
-					((IRcommand_array_set) h).array.changed = true;
+					((IRcommand_Array_Set) h).array.serial = Integer.parseInt(theNum);
+					((IRcommand_Array_Set) h).array.changed = true;
 				}
-				if (((IRcommand_array_set) h).index.changed == false) {
-					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_array_set) h).index.getSerialNumber()))));
+				if (((IRcommand_Array_Set) h).index.changed == false) {
+					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Array_Set) h).index.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_array_set) h).index.serial = Integer.parseInt(theNum);
-					((IRcommand_array_set) h).index.changed = true;
+					((IRcommand_Array_Set) h).index.serial = Integer.parseInt(theNum);
+					((IRcommand_Array_Set) h).index.changed = true;
 				}
-				if (((IRcommand_array_set) h).val.changed == false) {
-					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_array_set) h).val.getSerialNumber()))));
+				if (((IRcommand_Array_Set) h).val.changed == false) {
+					theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Array_Set) h).val.getSerialNumber()))));
 					if (theNum == null) {
 						theNum = IRtoMIPS.get("dead");
 					}
-					((IRcommand_array_set) h).val.serial = Integer.parseInt(theNum);
-					((IRcommand_array_set) h).val.changed = true;
+					((IRcommand_Array_Set) h).val.serial = Integer.parseInt(theNum);
+					((IRcommand_Array_Set) h).val.changed = true;
 				}
 
 			}

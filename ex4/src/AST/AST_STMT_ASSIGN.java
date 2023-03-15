@@ -147,7 +147,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 			TEMP array = subVar.var.IRme();
 			TEMP index = subVar.subscript.IRme();
 			TEMP value = exp.IRme();
-			IR.getInstance().Add_IRcommand(new IRcommand_array_set(array, index, value));
+			IR.getInstance().Add_IRcommand(new IRcommand_Array_Set(array, index, value));
 		}
 
 		return null;
