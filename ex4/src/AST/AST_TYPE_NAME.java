@@ -2,10 +2,6 @@
 /* PACKAGE */
 /***********/
 package AST;
-
-/*******************/
-/* PROJECT IMPORTS */
-/*******************/
 import TYPES.*;
 
 public class AST_TYPE_NAME extends AST_Node {
@@ -19,14 +15,14 @@ public class AST_TYPE_NAME extends AST_Node {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_TYPE_NAME(TYPE type, String name) {
+		this.type = type;
+		this.name = name;
+		this.typeName = type.name;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		this.type = type;
-		this.name = name;
-		this.typeName = type.name;
 	}
 
 	/*************************************************/

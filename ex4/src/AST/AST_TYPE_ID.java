@@ -8,8 +8,8 @@ public class AST_TYPE_ID extends AST_TYPE {
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_TYPE_ID(String id, int line) {
-    this.typeName = id;
+  public AST_TYPE_ID(String typeName, int line) {
+    this.typeName = typeName;
     this.line = line;
 
     /******************************/

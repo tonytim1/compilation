@@ -121,24 +121,24 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 
 	public TEMP IRme() {
 		System.out.println("VARDEC EXP IRme");
-		String TrueId = id;
+		String RealId = id;
 
 		// global
 		if (scope.equals("global") || (!inFunc && class_name != null)) { // global or class field
 			if (!inFunc && class_name != null)
-				TrueId = class_name + "_" + id;
+				RealId = class_name + "_" + id;
 			if (type instanceof AST_TYPE_STRING) {
 				String value = ((AST_EXP_STRING) exp).s;
-				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(TrueId, value));
+				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_String(RealId, value));
 				if (class_name!=null)
 					defaultFields.put(class_name+"_"+id, value);
 			} else if (type instanceof AST_TYPE_INT) {
 				int value = ((AST_EXP_INT) exp).value;
-				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(TrueId, value));
+				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Int(RealId, value));
 				if (class_name!=null)
 					defaultFields.put(class_name+"_"+id, String.valueOf(value));
 			} else {
-				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(TrueId));
+				IR.getInstance().Add_IRcommand(new IRcommand_Declare_Global_Object(RealId));
 			}
 		}
 

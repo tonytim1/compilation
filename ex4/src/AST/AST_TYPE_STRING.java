@@ -9,8 +9,8 @@ public class AST_TYPE_STRING extends AST_TYPE {
 	/*******************/
 	public AST_TYPE_STRING(int line) {
 
-		this.line = line;
 		this.typeName = "string";
+		this.line = line;
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 

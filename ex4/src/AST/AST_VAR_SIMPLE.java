@@ -10,17 +10,17 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 	/* simple variable name */
 	/************************/
 	public String name;
-	int inGlobal = 0; // needed for IRme
 	public String className = null;
 	public TYPE thisT;
 	public boolean cfgVar = false;
+	int inGlobal = 0; // needed for IRme
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_VAR_SIMPLE(String name, int line) {
-		this.line = line;
 		this.name = name;
+		this.line = line;
 
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

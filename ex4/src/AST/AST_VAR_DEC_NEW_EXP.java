@@ -6,14 +6,14 @@ import TEMP.*;
 import IR.*;
 
 public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
-  public AST_NEWEXP exp;
+  public AST_NEW_EXP exp;
   public TYPE t; // for IRme
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
 
-  public AST_VAR_DEC_NEW_EXP(AST_TYPE type, String id, AST_NEWEXP exp, int line) {
+  public AST_VAR_DEC_NEW_EXP(AST_TYPE type, String id, AST_NEW_EXP exp, int line) {
     this.type = type;
     this.id = id;
     this.exp = exp;

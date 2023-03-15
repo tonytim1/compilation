@@ -12,6 +12,9 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_VAR_SUBSCRIPT(AST_VAR var, AST_EXP subscript, int line) {
+		this.var = var;
+		this.subscript = subscript;
+		this.line = line;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -25,9 +28,6 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.var = var;
-		this.subscript = subscript;
-		this.line = line;
 	}
 
 	/*****************************************************/

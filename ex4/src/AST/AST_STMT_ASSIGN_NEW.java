@@ -7,14 +7,14 @@ import TYPES.*;
 
 public class AST_STMT_ASSIGN_NEW extends AST_STMT {
   public AST_VAR var;
-  public AST_NEWEXP exp;
+  public AST_NEW_EXP exp;
   public TYPE scope; // for irme
   public String inclass; // for irme
 
   /*******************/
   /* CONSTRUCTOR(S) */
   /*******************/
-  public AST_STMT_ASSIGN_NEW(AST_VAR var, AST_NEWEXP exp, int line) {
+  public AST_STMT_ASSIGN_NEW(AST_VAR var, AST_NEW_EXP exp, int line) {
     this.var = var;
     this.exp = exp;
     this.line = line;

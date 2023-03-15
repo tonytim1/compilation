@@ -7,8 +7,8 @@ public class AST_TYPE_VOID extends AST_TYPE {
   /* CONSTRUCTOR(S) */
   /*******************/
   public AST_TYPE_VOID(int line) {
-    this.line = line;
     this.typeName = "void";
+    this.line = line;
 
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
