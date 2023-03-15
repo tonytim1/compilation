@@ -100,11 +100,10 @@ public class AST_NEW_EXP_TYPE_EXP extends AST_NEWEXP {
   }
 
   public TEMP IRme() {
-    TEMP t1 = e.IRme();
+    TEMP t1 = TEMP_FACTORY.getInstance().getFreshTEMP();
+    TEMP t2 = e.IRme();
+    IR.getInstance().Add_IRcommand(new IRcommand_New_Array(t1, t2));
 
-    TEMP t2 = TEMP_FACTORY.getInstance().getFreshTEMP();
-    IR.getInstance().Add_IRcommand(new IRcommand_New_Array(t2, t1));
-
-    return t2;
+    return t1;
   }
 }

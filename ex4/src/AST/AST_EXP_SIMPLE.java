@@ -10,6 +10,7 @@ public class AST_EXP_SIMPLE extends AST_EXP {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_EXP_SIMPLE(AST_EXP exp) {
+		this.exp = exp;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -23,7 +24,6 @@ public class AST_EXP_SIMPLE extends AST_EXP {
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.exp = exp;
 	}
 
 	/***********************************************/

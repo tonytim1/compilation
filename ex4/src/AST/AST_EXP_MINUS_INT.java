@@ -13,6 +13,7 @@ public class AST_EXP_MINUS_INT extends AST_EXP {
   /* CONSTRUCTOR(S) */
   /******************/
   public AST_EXP_MINUS_INT(int value) {
+    this.value = -value;
     /******************************/
     /* SET A UNIQUE SERIAL NUMBER */
     /******************************/
@@ -21,7 +22,6 @@ public class AST_EXP_MINUS_INT extends AST_EXP {
     /*******************************/
     /* COPY INPUT DATA NENBERS ... */
     /*******************************/
-    this.value = -value;
 
     /***************************************/
     /* PRINT CORRESPONDING DERIVATION RULE */

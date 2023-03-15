@@ -7,10 +7,10 @@ import IR.*;
 
 public class AST_BINOP extends AST_Node {
 
+    int number;
     public AST_EXP left;
     public AST_EXP right;
     public TYPE leftType;
-    int number;
 
     public AST_BINOP(int number, AST_EXP left, AST_EXP right, int line) {
         this.number = number;

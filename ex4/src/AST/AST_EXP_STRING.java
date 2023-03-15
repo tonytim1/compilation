@@ -14,9 +14,9 @@ public class AST_EXP_STRING extends AST_EXP {
 	/* CONSTRUCTOR(S) */
 	/******************/
 	public AST_EXP_STRING(Object s) {
-		SerialNumber = AST_Node_Serial_Number.getFresh();
 		this.s = ((String) s).split("\"")[1];
-
+		
+		SerialNumber = AST_Node_Serial_Number.getFresh();
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
