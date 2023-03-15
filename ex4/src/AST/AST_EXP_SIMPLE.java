@@ -10,7 +10,7 @@ public class AST_EXP_SIMPLE extends AST_EXP {
 		this.exp = exp;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.print("====================== exp -> (exp)\n");
+		System.out.print("=============== exp -> (exp)\n");
 
 	}
 

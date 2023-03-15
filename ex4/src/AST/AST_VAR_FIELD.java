@@ -16,7 +16,7 @@ public class AST_VAR_FIELD extends AST_VAR {
 		this.line = line;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.format("====================== var -> var.ID( %s )\n", fieldName);
+		System.out.format("=============== var -> var.ID( %s )\n", fieldName);
 
 	}
 

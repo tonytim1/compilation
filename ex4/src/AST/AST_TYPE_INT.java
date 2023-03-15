@@ -9,7 +9,7 @@ public class AST_TYPE_INT extends AST_TYPE {
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== type -> TYPE_INT \n");
+    System.out.print("=============== type -> TYPE_INT \n");
   }
 
 

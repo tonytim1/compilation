@@ -9,7 +9,7 @@ public class AST_TYPE_VOID extends AST_TYPE {
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== type -> TYPE_VOID \n");
+    System.out.print("=============== type -> TYPE_VOID \n");
   }
 
 

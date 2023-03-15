@@ -15,7 +15,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
     this.line = line;
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
-    System.out.print("====================== stmt -> var:v ASSIGN newExp:ne SEMICOLON \n");
+    System.out.print("=============== stmt -> var:v ASSIGN newExp:ne SEMICOLON \n");
 
   }
 

@@ -13,7 +13,7 @@ public class AST_EXP_STRING extends AST_EXP {
 		this.s = ((String) s).split("\"")[1];
 		
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		System.out.print("====================== exp -> STRING\n");
+		System.out.print("=============== exp -> STRING\n");
 	}
 
 	

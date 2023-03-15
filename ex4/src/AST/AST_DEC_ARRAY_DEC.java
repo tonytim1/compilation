@@ -11,7 +11,7 @@ public class AST_DEC_ARRAY_DEC extends AST_DEC {
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     if (array != null) {
-      System.out.print("====================== dec -> ATD\n");
+      System.out.print("=============== dec -> ATD\n");
       }
   }
 

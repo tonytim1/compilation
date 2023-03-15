@@ -20,7 +20,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     if (data_members != null) {
-      System.out.print("====================== classDec -> CLASS ID: LBRACE cFieldList RBRACE\n");
+      System.out.print("=============== classDec -> CLASS ID: LBRACE cFieldList RBRACE\n");
       }
   }
 
@@ -29,8 +29,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
 
   public TYPE SemantMe() {
         TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
-    if (isExist != null) {       System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
-          line);
+    if (isExist != null) {      
       printError(line);
     }
     SYMBOL_TABLE.getInstance().beginScope("class-" + id);

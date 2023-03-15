@@ -13,7 +13,7 @@ public class AST_STMT_ID extends AST_STMT {
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== stmt -> ID();\n");
+    System.out.print("=============== stmt -> ID();\n");
   }
 
 

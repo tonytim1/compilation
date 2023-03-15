@@ -13,7 +13,7 @@ public class AST_STMT_EXP extends AST_STMT {
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== stmt -> RETURN exp SEMICOLON	\n");
+    System.out.print("=============== stmt -> RETURN exp SEMICOLON	\n");
   }
 
 
@@ -28,7 +28,6 @@ public class AST_STMT_EXP extends AST_STMT {
 
     int a = SYMBOL_TABLE.getInstance().findFunc(returnName);
     if (a == 0) {
-      System.out.println("=======Error in return statement!");
       printError(line);
     }
     return ty;

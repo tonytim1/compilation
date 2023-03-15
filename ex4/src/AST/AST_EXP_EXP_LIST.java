@@ -16,7 +16,7 @@ public class AST_EXP_EXP_LIST extends AST_EXP {
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== exp -> ID (expList)\n");
+    System.out.print("=============== exp -> ID (expList)\n");
 
 
   }

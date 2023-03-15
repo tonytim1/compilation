@@ -13,7 +13,7 @@ public class AST_EXP_INT extends AST_EXP {
 
 		this.value = value;
 
-		System.out.format("====================== exp -> INT(%d)\n", value);
+		System.out.format("=============== exp -> INT(%d)\n", value);
 	}
 
 	

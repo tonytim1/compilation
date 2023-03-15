@@ -17,7 +17,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.format("====================== var -> ID\n");
+		System.out.format("=============== var -> ID\n");
 	}
 
 	

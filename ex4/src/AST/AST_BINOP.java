@@ -56,7 +56,6 @@ public class AST_BINOP extends AST_Node {
 
             if ((t1 == TYPE_STRING.getInstance()) && (t2 == TYPE_STRING.getInstance()))                 return TYPE_STRING.getInstance();
 
-            System.out.format(String.format(">> ERROR [%d] trying the + op between wrong types", line));
             printError(line);
         }
 

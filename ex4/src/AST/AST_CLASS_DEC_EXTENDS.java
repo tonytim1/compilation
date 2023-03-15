@@ -19,7 +19,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		this.data_members = data_members;
 		this.line = line;
 
-		System.out.print("====================== classDec -> CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE\n");
+		System.out.print("=============== classDec -> CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE\n");
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
@@ -33,8 +33,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 
 
 		TYPE isExist = SYMBOL_TABLE.getInstance().findInCurrScope(id);
-		if (isExist != null) { 			System.out.format(">> ERROR [%d] already exist a variable with the (class) name " + id + " in the same scope",
-					line);
+		if (isExist != null) { 			
 			printError(line);
 		}
 		SYMBOL_TABLE.getInstance().beginScope("class-" + id + "-extends-" + this.father.name);

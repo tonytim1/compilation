@@ -17,7 +17,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.print("====================== stmt -> var ASSIGN exp SEMICOLON\n");
+		System.out.print("=============== stmt -> var ASSIGN exp SEMICOLON\n");
 
 	}
 

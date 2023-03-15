@@ -10,7 +10,7 @@ public class AST_EXP_VAR extends AST_EXP {
 		this.var = var;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.print("====================== exp -> var\n");
+		System.out.print("=============== exp -> var\n");
 
 	}
 

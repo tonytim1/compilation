@@ -13,7 +13,7 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node {
 		this.type = type;
 		this.line = line;
 
-		System.out.print("====================== 		arrayTypedef ::= 	array ID = type[]; \n");
+		System.out.print("=============== 		arrayTypedef ::= 	array ID = type[]; \n");
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 	}

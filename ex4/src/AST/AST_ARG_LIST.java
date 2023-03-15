@@ -10,10 +10,10 @@ public class AST_ARG_LIST extends AST_Node {
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     if (tail != null) {
-      System.out.print("====================== args -> arg, args\n");
+      System.out.print("=============== args -> arg, args\n");
       }
     if (tail == null) {
-      System.out.print("====================== args -> arg      \n");
+      System.out.print("=============== args -> arg      \n");
       }
 
 

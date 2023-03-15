@@ -10,7 +10,7 @@ public class AST_STMT_VAR_DEC extends AST_STMT {
     this.v = v;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== stmt -> varDec\n");
+    System.out.print("=============== stmt -> varDec\n");
   }
 
 

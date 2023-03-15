@@ -14,7 +14,7 @@ public class AST_STMT_VAR_EXP_LIST extends AST_STMT {
     this.id = id;
     this.list = list;
 
-    System.out.print("====================== stmt -> var.ID(expList);\n");
+    System.out.print("=============== stmt -> var.ID(expList);\n");
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 

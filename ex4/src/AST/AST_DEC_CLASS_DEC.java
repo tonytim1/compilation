@@ -9,7 +9,7 @@ public class AST_DEC_CLASS_DEC extends AST_DEC {
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     if (c != null) {
-      System.out.print("====================== dec -> classDec\n");
+      System.out.print("=============== dec -> classDec\n");
       }
 
   }

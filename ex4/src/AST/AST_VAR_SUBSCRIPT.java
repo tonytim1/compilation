@@ -14,7 +14,7 @@ public class AST_VAR_SUBSCRIPT extends AST_VAR {
 		this.line = line;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.print("====================== var -> var [ exp ]\n");
+		System.out.print("=============== var -> var [ exp ]\n");
 
 	}
 

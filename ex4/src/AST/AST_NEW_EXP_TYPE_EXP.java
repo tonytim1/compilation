@@ -13,7 +13,7 @@ public class AST_NEW_EXP_TYPE_EXP extends AST_NEW_EXP {
     this.e = e;
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
-    System.out.print("====================== newExp -> NEW type:t LBRACK exp:e RBRACK \n");
+    System.out.print("=============== newExp -> NEW type:t LBRACK exp:e RBRACK \n");
   }
 
 

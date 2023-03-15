@@ -18,7 +18,7 @@ public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
 
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.print("====================== exp -> vardot_explist\n");
+		System.out.print("=============== exp -> vardot_explist\n");
 
 	}
 

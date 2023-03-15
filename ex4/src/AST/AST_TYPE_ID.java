@@ -11,7 +11,7 @@ public class AST_TYPE_ID extends AST_TYPE {
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== type -> ID \n");
+    System.out.print("=============== type -> ID \n");
   }
 
 

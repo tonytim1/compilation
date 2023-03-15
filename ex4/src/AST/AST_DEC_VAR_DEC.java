@@ -12,7 +12,7 @@ public class AST_DEC_VAR_DEC extends AST_DEC {
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
 		if (v != null) {
-			System.out.print("====================== dec -> varDec\n");
+			System.out.print("=============== dec -> varDec\n");
 			}
 	}
 

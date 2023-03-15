@@ -11,7 +11,7 @@ public class AST_STMT_RETURN extends AST_STMT {
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    System.out.print("====================== stmt -> return;\n");
+    System.out.print("=============== stmt -> return;\n");
 
   }
 

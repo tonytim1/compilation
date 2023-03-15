@@ -14,10 +14,10 @@ public class AST_C_FIELD_LIST extends AST_Node {
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
 		if (tail != null) {
-			System.out.print("====================== cfeilds -> cfeild cfeilds\n");
+			System.out.print("=============== cfeilds -> cfeild cfeilds\n");
 			}
 		if (tail == null) {
-			System.out.print("====================== cfeilds -> cfeild      \n");
+			System.out.print("=============== cfeilds -> cfeild      \n");
 			}
 
 	}

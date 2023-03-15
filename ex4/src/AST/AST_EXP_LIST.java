@@ -14,10 +14,10 @@ public class AST_EXP_LIST extends AST_Node {
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
     if (tail != null) {
-      System.out.print("====================== explis -> exp, exps\n");
+      System.out.print("=============== explis -> exp, exps\n");
       }
     if (tail == null) {
-      System.out.print("====================== explist -> exp      \n");
+      System.out.print("=============== explist -> exp      \n");
       }
 
   }

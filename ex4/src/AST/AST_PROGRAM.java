@@ -13,7 +13,7 @@ public class AST_PROGRAM extends AST_Node {
 
 		getFile(file);
 
-		System.out.print("====================== program -> decs \n");
+		System.out.print("=============== program -> decs \n");
 	}
 
 	@Override

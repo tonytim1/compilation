@@ -11,7 +11,7 @@ public class AST_C_FIELD_VAR_DEC extends AST_C_FIELD {
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
 		if (vd != null) {
-			System.out.print("====================== cfield -> varDec\n");
+			System.out.print("=============== cfield -> varDec\n");
 			}
 	}
 

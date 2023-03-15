@@ -12,7 +12,7 @@ public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
     this.t = t;
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
-    System.out.print("====================== newExp -> NEW type:t \n");
+    System.out.print("=============== newExp -> NEW type:t \n");
   }
 
 

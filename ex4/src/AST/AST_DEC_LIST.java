@@ -12,10 +12,10 @@ public class AST_DEC_LIST extends AST_Node {
 		this.tail = tail;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 		if (tail != null) {
-			System.out.print("====================== decs -> dec decs\n");
+			System.out.print("=============== decs -> dec decs\n");
 			}
 		if (tail == null) {
-			System.out.print("====================== decs -> dec      \n");
+			System.out.print("=============== decs -> dec      \n");
 			}
 
 
