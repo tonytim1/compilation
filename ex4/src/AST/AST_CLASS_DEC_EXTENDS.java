@@ -209,11 +209,11 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 		// #############################################################3
 		// #################second part - this class fields and funcs
 		for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-			AST_CFIELD field = (AST_CFIELD) (it.head);
+			AST_C_FIELD field = (AST_C_FIELD) (it.head);
 			if (field instanceof AST_C_FIELD_VAR_DEC) { // field
 				f = false;
 				AST_C_FIELD_VAR_DEC a = (AST_C_FIELD_VAR_DEC) field;
-				AST_VARDEC b = (AST_VARDEC) (a.vd);
+				AST_VAR_DEC b = (AST_VAR_DEC) (a.vd);
 				int n = fieldlist.size();
 				for (int i = 0; i < n; i++) {
 					if ((((fieldlist.get(i)).get(0)).get(0)).equals(b.id)) {

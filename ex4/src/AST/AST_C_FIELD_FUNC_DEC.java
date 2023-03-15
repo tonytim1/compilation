@@ -3,7 +3,7 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_C_FIELD_FUNC_DEC extends AST_CFIELD {
+public class AST_C_FIELD_FUNC_DEC extends AST_C_FIELD {
 	public AST_FUNC_DEC func;
 
 	/*******************/

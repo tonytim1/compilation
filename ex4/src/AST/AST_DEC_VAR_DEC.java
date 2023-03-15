@@ -7,12 +7,12 @@ public class AST_DEC_VAR_DEC extends AST_DEC {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public AST_VARDEC v;
+	public AST_VAR_DEC v;
 
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_DEC_VAR_DEC(AST_VARDEC v) {
+	public AST_DEC_VAR_DEC(AST_VAR_DEC v) {
 		this.v = v;
 
 		/******************************/

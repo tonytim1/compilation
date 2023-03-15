@@ -3,13 +3,13 @@ package AST;
 import TYPES.*;
 import TEMP.*;
 
-public class AST_C_FIELD_VAR_DEC extends AST_CFIELD {
-	public AST_VARDEC vd;
+public class AST_C_FIELD_VAR_DEC extends AST_C_FIELD {
+	public AST_VAR_DEC vd;
 
 	/*******************/
 	/* CONSTRUCTOR(S) */
 	/*******************/
-	public AST_C_FIELD_VAR_DEC(AST_VARDEC vd) {
+	public AST_C_FIELD_VAR_DEC(AST_VAR_DEC vd) {
 		this.vd = vd;
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

@@ -69,7 +69,7 @@ public class REG_ALLOC {
 	}
 
 	public void liveness() {
-		Vertex curr = this.tail; // since we are going buttom-up
+		Vertex curr = this.tail;
 		Boolean notTail = false;
 		while (curr != null) {
 			if (notTail) {

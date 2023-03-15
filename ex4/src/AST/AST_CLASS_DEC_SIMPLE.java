@@ -154,7 +154,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     int fieldCnt = 0;
     int funcCnt = 0;
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-      AST_CFIELD field = (AST_CFIELD) (it.head);
+      AST_C_FIELD field = (AST_C_FIELD) (it.head);
       if (field instanceof AST_C_FIELD_VAR_DEC) { // field
         fieldCnt += 1;
         continue;
@@ -183,12 +183,12 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     fieldCnt = 0;
     ArrayList<String> fieldslist = new ArrayList<>();
     for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-      AST_CFIELD field = (AST_CFIELD) (it.head);
+      AST_C_FIELD field = (AST_C_FIELD) (it.head);
 
       if (field instanceof AST_C_FIELD_VAR_DEC) { // field
                                                 // fieldCnt += 1;
         AST_C_FIELD_VAR_DEC var = (AST_C_FIELD_VAR_DEC) field;
-        AST_VARDEC b = (AST_VARDEC) (var.vd);
+        AST_VAR_DEC b = (AST_VAR_DEC) (var.vd);
         String off = String.valueOf(fieldCnt * 4 + 4);
         offsets.put(id + "_" + b.id, off);
         fieldslist.add(b.id);

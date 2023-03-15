@@ -7,7 +7,7 @@ import IR.*;
 import SYMBOL_TABLE.*;
 import MIPS.*;
 
-public class AST_VAR_DEC_EXP extends AST_VARDEC {
+public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
 	public AST_EXP exp;
 	String scope; // for IRme
 	String class_name; // for IRme

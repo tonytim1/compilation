@@ -5,7 +5,7 @@ import TYPES.*;
 import TEMP.*;
 import IR.*;
 
-public class AST_VAR_DEC_NEW_EXP extends AST_VARDEC {
+public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
   public AST_NEWEXP exp;
   public TYPE t; // for IRme
 
