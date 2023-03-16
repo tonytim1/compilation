@@ -4,27 +4,24 @@ import TYPES.*;
 import TEMP.*;
 
 public class AST_C_FIELD_VAR_DEC extends AST_C_FIELD {
-	public AST_VAR_DEC vd;
+    public AST_VAR_DEC varDec;
 
-	public AST_C_FIELD_VAR_DEC(AST_VAR_DEC vd) {
-		this.vd = vd;
-		SerialNumber = AST_Node_Serial_Number.getFresh();
+    public AST_C_FIELD_VAR_DEC(AST_VAR_DEC varDec) {
+        this.varDec = varDec;
+        SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		if (vd != null) {
-			System.out.print("=============== cfield -> varDec\n");
-			}
-	}
+        if (varDec != null) {
+            System.out.print("=============== cfield -> varDec\n");
+        }
+    }
 
 
-	
+    public TYPE SemantMe() {
+        return varDec.SemantMe();
+    }
 
-	public TYPE SemantMe() {
-		return vd.SemantMe();
-
-	}
-	public TEMP IRme(){
-		vd.IRme();
-		return null;
-	}
-
+    public TEMP IRme() {
+        varDec.IRme();
+        return null;
+    }
 }

@@ -59,7 +59,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
             break;
           }
         }
-        AST_ARG curr = new AST_ARG(currType, ((AST_C_FIELD_VAR_DEC) it.head).vd.id);
+        AST_ARG curr = new AST_ARG(currType, ((AST_C_FIELD_VAR_DEC) it.head).varDec.id);
         fields = new AST_ARG_LIST(curr, fields);
       }
 
@@ -119,7 +119,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
       AST_C_FIELD field = (AST_C_FIELD) (it.head);
 
       if (field instanceof AST_C_FIELD_VAR_DEC) {                                                         AST_C_FIELD_VAR_DEC var = (AST_C_FIELD_VAR_DEC) field;
-        AST_VAR_DEC b = (AST_VAR_DEC) (var.vd);
+        AST_VAR_DEC b = (AST_VAR_DEC) (var.varDec);
         String off = String.valueOf(fieldCnt * 4 + 4);
         offsets.put(id + "_" + b.id, off);
         fieldslist.add(b.id);

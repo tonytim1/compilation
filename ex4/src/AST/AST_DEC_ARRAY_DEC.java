@@ -16,19 +16,13 @@ public class AST_DEC_ARRAY_DEC extends AST_DEC {
   }
 
 
-  
-
   public TYPE SemantMe() {
-
-
     array.SemantMe();
     return null;
   }
 
   public TEMP IRme() {
-
     array.IRme();
     return null;
   }
-
 }

@@ -12,8 +12,6 @@ public class AST_C_FIELD_FUNC_DEC extends AST_C_FIELD {
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 	}
 
-	
-
 	public TYPE SemantMe() {
 		return func.SemantMe();
 	}

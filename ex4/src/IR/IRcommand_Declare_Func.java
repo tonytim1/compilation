@@ -7,7 +7,6 @@ public class IRcommand_Declare_Func extends IRcommand {
 	public String name;
 	public int localVars;
 	public String className;
-	public String labelEnd;
 
 	    public IRcommand_Declare_Func(String name) {
 	        this.name = name;
