@@ -11,7 +11,7 @@ public class IRcommand_Const_String extends IRcommand_Assign {
     public IRcommand_Const_String(TEMP dst, String label, String value) {
         this.dst = dst;
         this.label = label;
-        this.value = val;
+        this.value = value;
         UpdateIRName("IRcommand_Assign");
     }
 
