@@ -4,23 +4,23 @@ import TYPES.*;
 import TEMP.*;
 
 public class AST_DEC_CLASS_DEC extends AST_DEC {
-    public AST_CLASS_DEC c;
+    public AST_CLASS_DEC classDec;
 
-    public AST_DEC_CLASS_DEC(AST_CLASS_DEC c) {
-        this.c = c;
+    public AST_DEC_CLASS_DEC(AST_CLASS_DEC classDec) {
+        this.classDec = classDec;
         SerialNumber = AST_Node_Serial_Number.getFresh();
 
-        if (c != null) {
+        if (classDec != null) {
             System.out.print("=============== dec -> classDec\n");
         }
     }
 
     public TYPE SemantMe() {
-        return c.SemantMe();
+        return classDec.SemantMe();
     }
 
     public TEMP IRme() {
-        c.IRme();
+        classDec.IRme();
         return null;
     }
 }

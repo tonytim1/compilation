@@ -12,13 +12,8 @@ public class AST_EXP_MINUS_INT extends AST_EXP {
   public AST_EXP_MINUS_INT(int value) {
     this.value = -value;
     SerialNumber = AST_Node_Serial_Number.getFresh();
-
-
     System.out.format("=============== exp -> -INT(%d)\n", value);
-
   }
-
-  
 
   public TYPE SemantMe() {
     return TYPE_INT.getInstance();

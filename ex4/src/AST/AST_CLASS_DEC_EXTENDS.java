@@ -135,11 +135,11 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
             AST_C_FIELD field = it.head;
             if (field instanceof AST_C_FIELD_VAR_DEC) {
                 f = false;
-                AST_C_FIELD_VAR_DEC a = (AST_C_FIELD_VAR_DEC) field;
-                AST_VAR_DEC b = a.varDec;
+                AST_C_FIELD_VAR_DEC fieldVarDec = (AST_C_FIELD_VAR_DEC) field;
+                AST_VAR_DEC varDec = fieldVarDec.varDec;
                 int n = fieldlist.size();
                 for (int i = 0; i < n; i++) {
-                    if ((((fieldlist.get(i)).get(0)).get(0)).equals(b.id)) {
+                    if ((((fieldlist.get(i)).get(0)).get(0)).equals(varDec.id)) {
                         f = true;
                         ((fieldlist.get(i)).get(1)).set(0, id);
                         break;
@@ -147,8 +147,8 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
                 }
                 if (f == false) {
                     ArrayList<String> fieldOfMe = new ArrayList<String>();
-                    fieldOfMe.add(b.id);
-                    if (b.type instanceof AST_TYPE_STRING)
+                    fieldOfMe.add(varDec.id);
+                    if (varDec.type instanceof AST_TYPE_STRING)
                         fieldOfMe.add("1");
                     else
                         fieldOfMe.add("0");
@@ -163,11 +163,11 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
             }
             if (field instanceof AST_C_FIELD_FUNC_DEC) {
                 f = false;
-                AST_C_FIELD_FUNC_DEC a = (AST_C_FIELD_FUNC_DEC) field;
-                AST_FUNC_DEC b = (AST_FUNC_DEC) (a.func);
+                AST_C_FIELD_FUNC_DEC fieldFuncDec = (AST_C_FIELD_FUNC_DEC) field;
+                AST_FUNC_DEC funcDec = fieldFuncDec.func;
                 int n = funclist.size();
                 for (int i = 0; i < n; i++) {
-                    if (((funclist.get(i)).get(0)).equals(b.id)) {
+                    if (((funclist.get(i)).get(0)).equals(funcDec.id)) {
                         f = true;
                         (funclist.get(i)).set(1, id);
                         break;
@@ -175,7 +175,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
                 }
                 if (f == false) {
                     ArrayList<String> funcOfMe = new ArrayList<String>();
-                    funcOfMe.add(b.id);
+                    funcOfMe.add(funcDec.id);
                     funcOfMe.add(id);
                     funclist.add(funcOfMe);
                 }

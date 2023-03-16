@@ -16,22 +16,15 @@ public class AST_EXP_STRING extends AST_EXP {
 		System.out.print("=============== exp -> STRING\n");
 	}
 
-	
-
 	public TYPE SemantMe() {
 		scope = SYMBOL_TABLE.getInstance().getScope();
 		return TYPE_STRING.getInstance();
 	}
 
 	public TEMP IRme() {
-
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
-
 		this.label = IRcommand.getFreshLabel("const_string");
-
 		IR.getInstance().Add_IRcommand(new IRcommand_Const_String(t, label, s));
-
 		return t;
 	}
-
 }

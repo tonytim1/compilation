@@ -4,32 +4,32 @@ import TYPES.*;
 import TEMP.*;
 
 public class AST_DEC_VAR_DEC extends AST_DEC {
-	public AST_VAR_DEC v;
+    public AST_VAR_DEC varDec;
 
-	public AST_DEC_VAR_DEC(AST_VAR_DEC v) {
-		this.v = v;
+    public AST_DEC_VAR_DEC(AST_VAR_DEC varDec) {
+        this.varDec = varDec;
 
-		SerialNumber = AST_Node_Serial_Number.getFresh();
+        SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		if (v != null) {
-			System.out.print("=============== dec -> varDec\n");
-			}
-	}
+        if (varDec != null) {
+            System.out.print("=============== dec -> varDec\n");
+        }
+    }
 
-	
 
-	public TYPE SemantMe() {
-		if (v != null) {
-			return v.SemantMe();
-		}
-		
-		return null;
-	}
-	public TEMP IRme() {
-		if (v != null) {
-			return v.IRme();
-		}	
-		return null;
-	}
+    public TYPE SemantMe() {
+        if (varDec != null) {
+            return varDec.SemantMe();
+        }
+
+        return null;
+    }
+
+    public TEMP IRme() {
+        if (varDec != null) {
+            return varDec.IRme();
+        }
+        return null;
+    }
 
 }
