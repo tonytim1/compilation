@@ -155,7 +155,7 @@ public class AST_FUNC_DEC extends AST_Node {
             if (it.head instanceof AST_STMT_VAR_DEC) {
                 varCnt += 1;
                 AST_STMT_VAR_DEC stmtVarDec = (AST_STMT_VAR_DEC) (it.head);
-                AST_VAR_DEC varDec = stmtVarDec.v;
+                AST_VAR_DEC varDec = stmtVarDec.varDec;
                 String off = String.valueOf(varCnt * (-4) + -40);
                 offsets.put(varDec.id, off);
             }

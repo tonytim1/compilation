@@ -8,9 +8,5 @@ public class AST_TYPE_NAME_LIST extends AST_Node {
 		this.head = head;
 		this.tail = tail;
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-
 	}
-
-	
-
 }

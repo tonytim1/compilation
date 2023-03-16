@@ -6,7 +6,8 @@ import SYMBOL_TABLE.*;
 public abstract class AST_VAR_DEC extends AST_Node {
     public AST_TYPE type;
     public String id;
-    public String scope; 
+    public String scope;
+
     public void isOverride() {
         String c = SYMBOL_TABLE.getInstance().inClassScope();
         if (c == null)

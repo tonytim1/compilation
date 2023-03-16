@@ -12,9 +12,6 @@ public class AST_TYPE_INT extends AST_TYPE {
     System.out.print("=============== type -> TYPE_INT \n");
   }
 
-
-  
-
   public TYPE SemantMe() {
         return TYPE_INT.getInstance();
   }

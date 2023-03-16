@@ -10,13 +10,8 @@ public class AST_STMT_RETURN extends AST_STMT {
   public AST_STMT_RETURN(int line) {
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
-
     System.out.print("=============== stmt -> return;\n");
-
   }
-
-
-  
 
   public TYPE SemantMe() {
     int a = SYMBOL_TABLE.getInstance().findFunc("void");

@@ -10,24 +10,19 @@ public class AST_STMT_ASSIGN extends AST_STMT {
     public AST_EXP exp;
     public TYPE scope;
     public String inclass;
-    public String ty;
 
     public AST_STMT_ASSIGN(AST_VAR var, AST_EXP exp, int line) {
         this.var = var;
         this.exp = exp;
         this.line = line;
-
         SerialNumber = AST_Node_Serial_Number.getFresh();
 
         System.out.print("=============== stmt -> var ASSIGN exp SEMICOLON\n");
-
     }
 
-
     public TYPE SemantMe() {
-
-        TYPE t1 = null;
-        TYPE t2 = null;
+        TYPE t1;
+        TYPE t2;
 
         if (var == null || exp == null) {
             printError(this.line);
@@ -35,7 +30,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
 
         t1 = var.SemantMe();
         t2 = exp.SemantMe();
-        ty = t2.name;
 
         if (t1 == null || t2 == null) {
             printError(line);
@@ -54,7 +48,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
     }
 
     public TEMP IRme() {
-
         if (var instanceof AST_VAR_SIMPLE) {
             TEMP value = exp.IRme();
             ((AST_VAR_SIMPLE) var).cfgVar = true;
@@ -72,9 +65,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
                     IRcommand c = new IRcommand_Store_Field(inclass, varName, value);
                     c.offset = GetOffset(varName);
                     IR.getInstance().Add_IRcommand(c);
-
                 }
-
             }
         } else if (var instanceof AST_VAR_FIELD) {
             TEMP t1 = ((AST_VAR_FIELD) var).var.IRme();
@@ -94,8 +85,6 @@ public class AST_STMT_ASSIGN extends AST_STMT {
             TEMP value = exp.IRme();
             IR.getInstance().Add_IRcommand(new IRcommand_Array_Set(array, index, value));
         }
-
         return null;
     }
-
 }
