@@ -12,7 +12,9 @@ import IR.*;
 
 public class REG_ALLOC {
     int registersCount = 10;
-    Vertex head;     Vertex tail;    HashMap<String, String> IRtoMIPS = new HashMap<String, String>();
+    Vertex head;
+    Vertex tail;
+    HashMap<String, String> IRtoMIPS = new HashMap<String, String>();
 
     public REG_ALLOC() {
         IRcommand command = IR.getInstance().head;
@@ -22,7 +24,7 @@ public class REG_ALLOC {
         Vertex next;
 
         int line_count = 1;
-        
+
         while (commands_list != null) {
             command = commands_list.head;
             commands_list = commands_list.tail;
@@ -33,7 +35,7 @@ public class REG_ALLOC {
             curr_vertex = next;
         }
         this.tail = curr_vertex;
-                        curr_vertex = this.head;
+        curr_vertex = this.head;
         while (curr_vertex != null) {
             Boolean isBranch = (curr_vertex.line.name.equals("IRcommand_Conditional_Jump"));
             if (isBranch) {
@@ -57,7 +59,7 @@ public class REG_ALLOC {
     public void liveOpt() {
         Vertex curr = this.tail;
         Boolean finished = false;
-                while (curr != null) {
+        while (curr != null) {
             if (finished) {
                 Iterator<String> d = curr.direction.inSet.iterator();
                 while (d.hasNext()) {
@@ -142,9 +144,7 @@ public class REG_ALLOC {
                         curr.FuncScope
                                 .add(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
                     }
-                }
-                else
-                {
+                } else {
                     curr.inSet.remove(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
                     if (curr.inFunc) {
                         curr.FuncScope
@@ -185,12 +185,8 @@ public class REG_ALLOC {
                         curr.FuncScope
                                 .add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
                     }
-                }
-                else if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Label")))
-                {
-                }
-                else
-                {
+                } else if ((curr.line.getClass().toString().equals("class IR.IRcommand_Jump_Label"))) {
+                } else {
                     curr.inSet
                             .add(("Temp_" + (Integer.toString(((IRcommand_Conditional_Jump) curr.line).op1.getSerialNumber()))));
                     curr.inSet
@@ -297,7 +293,7 @@ public class REG_ALLOC {
         Stack<node> nodes_stack = new Stack<node>();
         DependenciesGraph graph = new DependenciesGraph(this.head);
 
-                Iterator<node> simplify_nodes = graph.allNodes.iterator();
+        Iterator<node> simplify_nodes = graph.allNodes.iterator();
         while (simplify_nodes.hasNext()) {
             node curr = simplify_nodes.next();
             if (curr.neighborsCount < registersCount) {
@@ -312,9 +308,10 @@ public class REG_ALLOC {
                 }
             }
         }
-                while (!nodes_stack.isEmpty()) {
+        while (!nodes_stack.isEmpty()) {
             node toAdd = nodes_stack.pop();
-            graph.graphNodes.add(toAdd);             HashSet<String> col = new HashSet<String>();
+            graph.graphNodes.add(toAdd);
+            HashSet<String> col = new HashSet<String>();
             col.add("0");
             col.add("1");
             col.add("2");
@@ -329,11 +326,12 @@ public class REG_ALLOC {
                 String neighborsName = n.next();
                 node actualNeig = graph.findNode(neighborsName);
                 if (actualNeig != null) {
-                    col.remove(actualNeig.register);                 }
+                    col.remove(actualNeig.register);
+                }
             }
             toAdd.register = col.iterator().next();
         }
-                        Iterator<node> lastOne = graph.graphNodes.iterator();
+        Iterator<node> lastOne = graph.graphNodes.iterator();
         while (lastOne.hasNext()) {
             node curr = lastOne.next();
             this.IRtoMIPS.put(curr.name, curr.register);
@@ -455,12 +453,8 @@ public class REG_ALLOC {
                         ((IRcommand_Conditional_Jump) h).op1.serial = Integer.parseInt(theNum);
                         ((IRcommand_Conditional_Jump) h).op1.changed = true;
                     }
-                }
-                else if ((h.getClass().toString().equals("class IR.IRcommand_Jump_Label")))
-                {
-                }
-                else
-                {
+                } else if ((h.getClass().toString().equals("class IR.IRcommand_Jump_Label"))) {
+                } else {
                     String theNum;
                     if (((IRcommand_Conditional_Jump) h).op1.changed == false) {
                         theNum = IRtoMIPS
