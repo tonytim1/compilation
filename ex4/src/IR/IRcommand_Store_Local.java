@@ -4,16 +4,14 @@ package IR;
 import TEMP.*;
 import MIPS.*;
 
-public class IRcommand_Store_Local extends IRcommand{
-	public TEMP src;
-	public String var;
+public class IRcommand_Store_Local extends IRcommand {
+    public TEMP src;
 
-	public IRcommand_Store_Local(String var, TEMP src) {
-		this.src = src;
-		this.var = var;
-	}
+    public IRcommand_Store_Local(TEMP src) {
+        this.src = src;
+    }
 
-	public void MIPSme() {
-		MIPSGenerator.getInstance().store_local(src, offset);
-	}
+    public void MIPSme() {
+        MIPSGenerator.getInstance().store_local(src, offset);
+    }
 }

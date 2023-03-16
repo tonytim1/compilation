@@ -136,7 +136,7 @@ public class REG_ALLOC {
                 }
             }
             if (curr.line.getClass().toString().equals("class IR.IRcommand_This_Dot_Field")) {
-                if (((IRcommand_This_Dot_Field) curr.line).regalloc == false) {
+                if (((IRcommand_This_Dot_Field) curr.line).isAllocated == false) {
                     curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_This_Dot_Field) curr.line).dst.getSerialNumber()))));
                     if (curr.inFunc) {
                         curr.FuncScope

@@ -82,7 +82,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC {
         } else {
             TEMP t = exp.IRme();
 
-            IRcommand command = new IRcommand_Store_Local(id, t);
+            IRcommand command = new IRcommand_Store_Local(t);
             command.offset = GetOffset(id);
             IR.getInstance().Add_IRcommand(command);
         }

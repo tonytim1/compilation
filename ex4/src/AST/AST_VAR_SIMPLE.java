@@ -81,8 +81,8 @@ public class AST_VAR_SIMPLE extends AST_VAR {
                 realName = className + "_" + name;
             }
             if (c && (!(this.t instanceof TYPE_CLASS) || !(this.t.name.equals(className)))) {
-                command = new IRcommand_This_Dot_Field(realName, t);
-                ((IRcommand_This_Dot_Field) command).regalloc = cfgVar;
+                command = new IRcommand_This_Dot_Field(t);
+                ((IRcommand_This_Dot_Field) command).isAllocated = cfgVar;
             } else
                 command = new IRcommand_Load_Local(realName, t);
 

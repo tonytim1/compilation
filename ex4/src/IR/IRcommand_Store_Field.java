@@ -5,17 +5,13 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Store_Field extends IRcommand {
-	public TEMP val;
-	String className;
-	String var;
+    public TEMP val;
 
-			public IRcommand_Store_Field(String className, String varName, TEMP value) {
-		this.className = className;
-		this.var = varName;
-		this.val = value;
-	}
+    public IRcommand_Store_Field(TEMP value) {
+        this.val = value;
+    }
 
-	public void MIPSme() {
-				MIPSGenerator.getInstance().store_field(offset, val);
-	}
+    public void MIPSme() {
+        MIPSGenerator.getInstance().store_field(offset, val);
+    }
 }

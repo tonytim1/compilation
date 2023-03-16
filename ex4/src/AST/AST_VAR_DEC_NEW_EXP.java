@@ -56,7 +56,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC {
         if (scope.equals("global")) {
             printError(this.line);
         } else {
-            IRcommand command = new IRcommand_Store_Local(id, t);
+            IRcommand command = new IRcommand_Store_Local(t);
             command.offset = GetOffset(id);
             IR.getInstance().Add_IRcommand(command);
         }

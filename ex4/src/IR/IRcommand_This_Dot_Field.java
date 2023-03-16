@@ -6,13 +6,11 @@ import MIPS.*;
 
 public class IRcommand_This_Dot_Field extends IRcommand {
     public TEMP dst;
-    public boolean regalloc;
-    String name;
+    public boolean isAllocated;
 
-    public IRcommand_This_Dot_Field(String Fname, TEMP dst) {
-        this.regalloc = false;
+    public IRcommand_This_Dot_Field(TEMP dst) {
+        this.isAllocated = false;
         this.dst = dst;
-        this.name = Fname;
     }
 
     public void MIPSme() {

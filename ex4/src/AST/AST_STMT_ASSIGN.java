@@ -57,12 +57,12 @@ public class AST_STMT_ASSIGN extends AST_STMT {
             else {
                 if (scope != null) {
                     String varName = ((AST_VAR_SIMPLE) var).name;
-                    IRcommand cRcommand = new IRcommand_Store_Local(varName, value);
+                    IRcommand cRcommand = new IRcommand_Store_Local(value);
                     IR.getInstance().Add_IRcommand(cRcommand);
                     cRcommand.offset = GetOffset(varName);
                 } else if (inclass != null) {
                     String varName = inclass + "_" + ((AST_VAR_SIMPLE) var).name;
-                    IRcommand c = new IRcommand_Store_Field(inclass, varName, value);
+                    IRcommand c = new IRcommand_Store_Field(value);
                     c.offset = GetOffset(varName);
                     IR.getInstance().Add_IRcommand(c);
                 }
