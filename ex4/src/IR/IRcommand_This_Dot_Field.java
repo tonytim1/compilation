@@ -5,18 +5,17 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_This_Dot_Field extends IRcommand {
-	public TEMP dst;
-	public boolean regalloc;
-	String name;
+    public TEMP dst;
+    public boolean regalloc;
+    String name;
 
-		public IRcommand_This_Dot_Field(String Fname, TEMP dst) {
-	    this.regalloc = false;
-		this.dst = dst;
-		this.name = Fname;
+    public IRcommand_This_Dot_Field(String Fname, TEMP dst) {
+        this.regalloc = false;
+        this.dst = dst;
+        this.name = Fname;
+    }
 
-	}
-
-	public void MIPSme() {
-		MIPSGenerator.getInstance().load_field_in_func(dst, offset);
-	}
+    public void MIPSme() {
+        MIPSGenerator.getInstance().load_field_in_func(dst, offset);
+    }
 }

@@ -9,7 +9,6 @@ import IR.*;
 
 public class MIPSGenerator {
     private PrintWriter fileWriter;
-
     private static MIPSGenerator instance = null;
 
     protected MIPSGenerator() {
@@ -44,7 +43,6 @@ public class MIPSGenerator {
 
         fileWriter.format("\tbeq $t%d, 0, invalid_pointer_dereference\n", id1);
         fileWriter.format("\tlw $t%d, %d($t%d)\n", id2, offset, id1);
-
     }
 
     public void field_set(TEMP t1, int offset, TEMP val) {
@@ -54,7 +52,6 @@ public class MIPSGenerator {
         fileWriter.format("\tbeq $t%d, 0, invalid_pointer_dereference\n", id1);
         fileWriter.format("\tla $s0, %d($t%d)\n", offset, id1);
         fileWriter.format("\tsw $t%d, 0($s0)\n", isValid);
-
     }
 
     public void virtual_call(TEMP dst, TEMP classTemp, int offset, TEMP_LIST args) {
@@ -78,7 +75,6 @@ public class MIPSGenerator {
 
         int dstix = dst.getSerialNumber();
         fileWriter.format("\tmove $t%d, $v0\n", dstix);
-
     }
 
     public void load_local(TEMP dst, int offset) {
@@ -330,7 +326,7 @@ public class MIPSGenerator {
         int idxdst = dst.getSerialNumber();
 
         MIPSGenerator generator = MIPSGenerator.getInstance();
-        
+
         generator.label(labels[0]);
         fileWriter.format("\tmove $s0, $t%d\n", idx1);
         fileWriter.format("\tmove $s1, $t%d\n", idx2);
@@ -375,7 +371,6 @@ public class MIPSGenerator {
         fileWriter.format("\tsb $s3, 0($s2)\n");
         fileWriter.format("\tmove $t%d, $v0\n", idxdst);
     }
-
 
 
     public static MIPSGenerator getInstance() {

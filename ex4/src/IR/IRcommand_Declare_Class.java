@@ -1,6 +1,7 @@
 package IR;
 
 import MIPS.*;
+import java.util.ArrayList;
 
 public class IRcommand_Declare_Class extends IRcommand {
     String className;
