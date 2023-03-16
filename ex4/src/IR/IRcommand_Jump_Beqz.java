@@ -11,9 +11,6 @@ public class IRcommand_Jump_Beqz extends IRcommand_Conditional_Jump {
 		UpdateIRName("IRcommand_Conditional_Jump");
 	}
 
-	/***************/
-	/* MIPS me !!! */
-	/***************/
 	public void MIPSme() {
 				MIPSGenerator.getInstance().beqz(op1, label);
 	}

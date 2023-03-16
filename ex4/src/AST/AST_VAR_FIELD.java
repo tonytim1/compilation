@@ -68,7 +68,7 @@ public class AST_VAR_FIELD extends AST_VAR {
     public TEMP IRme() {
         TEMP t1 = var.IRme();
         TEMP t2 = TEMP_FACTORY.getInstance().getFreshTEMP();
-        IRcommand r = new IRcommand_Field_Access(t2, t1, fieldName);
+        IRcommand r = new IRcommand_Field_Access(t2, t1);
         IR.getInstance().Add_IRcommand(r);
         r.offset = GetOffset(classN + "_" + fieldName);
         return t2;

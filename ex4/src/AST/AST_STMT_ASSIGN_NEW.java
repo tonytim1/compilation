@@ -73,7 +73,7 @@ public class AST_STMT_ASSIGN_NEW extends AST_STMT {
             TEMP t1 = ((AST_VAR_FIELD) var).var.IRme();
             String f_name = ((AST_VAR_FIELD) var).fieldName;
             String c = ((AST_VAR_FIELD) var).classN;
-            IRcommand r = new IRcommand_Field_Set(t1, f_name, value);
+            IRcommand r = new IRcommand_Field_Set(t1, value);
             r.offset = GetOffset(c + "_" + f_name);
             IR.getInstance().Add_IRcommand(r);
 

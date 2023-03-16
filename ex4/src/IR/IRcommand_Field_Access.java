@@ -3,20 +3,16 @@ package IR;
 import MIPS.MIPSGenerator;
 import TEMP.*;
 
-public class IRcommand_Field_Access extends IRcommand{
+public class IRcommand_Field_Access extends IRcommand {
+    public TEMP src;
+    public TEMP dst;
 
-  public TEMP src;
-  public TEMP dst;
-  String field;
+    public IRcommand_Field_Access(TEMP dst, TEMP src) {
+        this.dst = dst;
+        this.src = src;
+    }
 
-    public IRcommand_Field_Access(TEMP dst, TEMP src, String fieldName) {
-	    this.dst = dst;
-	    this.src = src;
-	    this.field = fieldName;
-	  }
-
-	  public void MIPSme() {
-	    MIPSGenerator.getInstance().field_Access(dst, offset, src);
-	  }
-
+    public void MIPSme() {
+        MIPSGenerator.getInstance().field_Access(dst, offset, src);
+    }
 }

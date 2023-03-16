@@ -144,7 +144,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
         it.head.IRme();
     }
     classSize.put(id, fields.size() * 4 + 4);
-    IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist, fields));
+    IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist));
     for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
       if (it.head instanceof AST_C_FIELD_VAR_DEC)
         it.head.IRme();

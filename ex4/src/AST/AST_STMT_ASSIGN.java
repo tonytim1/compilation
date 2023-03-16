@@ -72,7 +72,7 @@ public class AST_STMT_ASSIGN extends AST_STMT {
             String f_name = ((AST_VAR_FIELD) var).fieldName;
             String c = ((AST_VAR_FIELD) var).classN;
             TEMP value = exp.IRme();
-            IRcommand r = new IRcommand_Field_Set(t1, f_name, value);
+            IRcommand r = new IRcommand_Field_Set(t1, value);
             r.offset = GetOffset(c + "_" + f_name);
             IR.getInstance().Add_IRcommand(r);
             if (((AST_VAR_FIELD) var).var instanceof AST_VAR_SIMPLE)
