@@ -6,31 +6,27 @@ import SYMBOL_TABLE.*;
 import TEMP.*;
 
 public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
-  public AST_TYPE t;
+  public AST_TYPE type;
 
-  public AST_NEW_EXP_TYPE(AST_TYPE t, int line) {
-    this.t = t;
+  public AST_NEW_EXP_TYPE(AST_TYPE type, int line) {
+    this.type = type;
     this.line = line;
     SerialNumber = AST_Node_Serial_Number.getFresh();
     System.out.print("=============== newExp -> NEW type:t \n");
   }
 
-
-  
-
   public TYPE SemantMe() {
-
-    if (t.typeName.equals("void") || t.typeName.equals("nil")) {
+    if (type.typeName.equals("void") || type.typeName.equals("nil")) {
       printError(line);
     }
-        if (t.typeName.equals("int")) {
+        if (type.typeName.equals("int")) {
       return TYPE_INT.getInstance();
     }
-    if (t.typeName.equals("string")) {
+    if (type.typeName.equals("string")) {
       return TYPE_STRING.getInstance();
     }
 
-    TYPE cl = SYMBOL_TABLE.getInstance().findClass(t.typeName);
+    TYPE cl = SYMBOL_TABLE.getInstance().findClass(type.typeName);
     if (cl == null) {
       printError(line);
     }
@@ -38,9 +34,8 @@ public class AST_NEW_EXP_TYPE extends AST_NEW_EXP {
   }
 
   public TEMP IRme() {
-
     TEMP t1 = TEMP_FACTORY.getInstance().getFreshTEMP();
-    IR.getInstance().Add_IRcommand(new IRcommand_New_Class_Object(t1, t.typeName));
+    IR.getInstance().Add_IRcommand(new IRcommand_New_Class_Object(t1, type.typeName));
     return t1;
   }
 }

@@ -2,13 +2,12 @@ package AST;
 
 import TEMP.*;
 import TYPES.*;
-import IR.*;
 
 public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
     public AST_VAR var;
     public String id;
     public AST_EXP_LIST list;
-    public TYPE_CLASS tl;
+    public TYPE_CLASS typeClass;
 
     public AST_EXP_VAR_EXP_LIST(AST_VAR var, String id, AST_EXP_LIST list, int line) {
         this.var = var;
@@ -20,20 +19,18 @@ public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
         System.out.print("=============== exp -> vardot_explist\n");
     }
 
-
     public TYPE SemantMe() {
         TYPE t1 = var.SemantMe();
         if (t1 == null || !(t1 instanceof TYPE_CLASS)) {
             printError(line);
         }
-        tl = (TYPE_CLASS) t1;
+        typeClass = (TYPE_CLASS) t1;
 
         TYPE t2 = isFuncOfClass(t1.name, id, list, this.line);
         if (t2 == null) {
             printError(line);
         }
         return t2;
-
     }
 
     public TEMP_LIST IRme(int ignore) {
@@ -44,6 +41,6 @@ public class AST_EXP_VAR_EXP_LIST extends AST_EXP {
     }
 
     public TEMP IRme() {
-        return varIdExpIRme(var, list, tl, id);
+        return varIdExpIRme(var, list, typeClass, id);
     }
 }

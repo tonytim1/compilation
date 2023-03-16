@@ -24,7 +24,6 @@ public class AST_BINOP extends AST_Node {
 
 
     public TYPE SemantMe() {
-        
         TYPE t1 = null;
         TYPE t2 = null;
 
