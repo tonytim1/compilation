@@ -5,13 +5,13 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Label extends IRcommand {
-	public String label_name;
+	public String labelName;
 
-	public IRcommand_Label(String label_name) {
-		this.label_name = label_name;
+	public IRcommand_Label(String labelName) {
+		this.labelName = labelName;
 	}
 
 	public void MIPSme() {
-		MIPSGenerator.getInstance().label(label_name);
+		MIPSGenerator.getInstance().label(labelName);
 	}
 }

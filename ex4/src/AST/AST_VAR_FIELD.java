@@ -41,7 +41,7 @@ public class AST_VAR_FIELD extends AST_VAR {
                     for (AST_ARG_LIST it = fatherClass.dataMembers; it != null; it = it.tail) {
                         if (it.head.id.equals(fieldName)) {
                             String resName = it.head.t.typeName;
-                            return res = SYMBOL_TABLE.getInstance().find(resName);
+                            return SYMBOL_TABLE.getInstance().find(resName);
                         }
                     }
                     fatherClass = fatherClass.father;
@@ -55,7 +55,7 @@ public class AST_VAR_FIELD extends AST_VAR {
             for (AST_ARG_LIST it = t1_dataMembers; it != null; it = it.tail) {
                 if (it.head.id.equals(fieldName)) {
                     String resName = it.head.t.typeName;
-                    return res = SYMBOL_TABLE.getInstance().find(resName);
+                    return SYMBOL_TABLE.getInstance().find(resName);
                 }
             }
             t1 = ((TYPE_CLASS) t1).father;

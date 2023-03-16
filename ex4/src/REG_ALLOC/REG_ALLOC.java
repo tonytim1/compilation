@@ -42,7 +42,7 @@ public class REG_ALLOC {
                 while (next != null) {
                     Boolean isLabel = next.line.getClass().toString().equals("class IR.IRcommand_Label");
                     if (isLabel) {
-                        if (((IRcommand_Label) next.line).label_name == l) {
+                        if (((IRcommand_Label) next.line).labelName == l) {
                             curr_vertex.vertex2 = next;
                         }
                         break;
