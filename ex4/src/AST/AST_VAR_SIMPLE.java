@@ -37,7 +37,7 @@ public class AST_VAR_SIMPLE extends AST_VAR {
 				if (fatherName != null) {
 					TYPE_CLASS fatherClass = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName);
 					while (fatherClass != null) {
-						for (AST_ARG_LIST it = fatherClass.data_members; it != null; it = it.tail) {
+						for (AST_ARG_LIST it = fatherClass.dataMembers; it != null; it = it.tail) {
 							if (it.head.id.equals(name)) {
 								String resName = it.head.t.typeName;
 								return res = SYMBOL_TABLE.getInstance().find(resName);

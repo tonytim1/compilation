@@ -12,11 +12,11 @@ import java.util.HashMap;
 public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
     String fatherName;
 
-    public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_C_FIELD_LIST data_members, int line) {
+    public AST_CLASS_DEC_EXTENDS(String id1, String id2, AST_C_FIELD_LIST dataMembers, int line) {
         this.id = id1;
         this.father = (TYPE_CLASS) SYMBOL_TABLE.getInstance().find(id2);
         this.fatherName = id2;
-        this.data_members = data_members;
+        this.dataMembers = dataMembers;
         this.line = line;
 
         System.out.print("=============== classDec -> CLASS ID:id1 EXTENDS ID:id2 LBRACE cFieldList:cl RBRACE\n");
@@ -35,7 +35,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
         AST_ARG_LIST fields = null;
         AST_TYPE_NAME_LIST funcs = null;
         TYPE t = null;
-        for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+        for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
             t = it.head.SemantMe();
             AST_TYPE currType = null;
 
@@ -71,12 +71,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
         TYPE_CLASS classType = new TYPE_CLASS(father, id, fields, funcs);
         SYMBOL_TABLE.getInstance().enter(id, classType);
         SYMBOL_TABLE.getInstance().beginScope("class-" + id + "-extends-" + this.father.name);
-        for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
-            t = it.head.SemantMe();
-        }
         SYMBOL_TABLE.getInstance().endScope();
-
-
         return null;
     }
 
@@ -105,7 +100,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
                 }
             }
 
-            for (AST_ARG_LIST it = fatherclass.data_members; it != null; it = it.tail) {
+            for (AST_ARG_LIST it = fatherclass.dataMembers; it != null; it = it.tail) {
                 f = false;
                 int n = fieldlist.size();
                 for (int i = 0; i < n; i++) {
@@ -136,7 +131,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
             fatherclass = fatherclass.father;
         }
 
-        for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+        for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
             AST_C_FIELD field = it.head;
             if (field instanceof AST_C_FIELD_VAR_DEC) {
                 f = false;
@@ -204,12 +199,12 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
 
         classFuncsOff.put(id, funcOff);
 
-        for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+        for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
             if (it.head instanceof AST_C_FIELD_FUNC_DEC)
                 it.head.IRme();
         }
         IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist, fieldlist));
-        AST_C_FIELD_LIST temp = data_members;
+        AST_C_FIELD_LIST temp = dataMembers;
         for (int i = 0; i < fieldlist.size(); i++) {
             String tf = fieldlist.get(i).get(1).get(0);
             String n = fieldlist.get(i).get(0).get(0);
@@ -225,7 +220,7 @@ public class AST_CLASS_DEC_EXTENDS extends AST_CLASS_DEC {
                     if (it.head instanceof AST_C_FIELD_VAR_DEC &&
                             ((AST_C_FIELD_VAR_DEC) it.head).varDec.id.equals(n)) {
                         it.head.IRme();
-                        temp = data_members;
+                        temp = dataMembers;
                         break;
                     }
                 }

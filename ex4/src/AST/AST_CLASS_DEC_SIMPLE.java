@@ -11,15 +11,15 @@ import java.util.HashMap;
 
 public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
 
-  public AST_CLASS_DEC_SIMPLE(String id, AST_C_FIELD_LIST data_members, int line) {
+  public AST_CLASS_DEC_SIMPLE(String id, AST_C_FIELD_LIST dataMembers, int line) {
     this.id = id;
     this.father = null;
-    this.data_members = data_members;
+    this.dataMembers = dataMembers;
     this.line = line;
 
     SerialNumber = AST_Node_Serial_Number.getFresh();
 
-    if (data_members != null) {
+    if (dataMembers != null) {
       System.out.print("=============== classDec -> CLASS ID: LBRACE cFieldList RBRACE\n");
       }
   }
@@ -38,7 +38,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     AST_TYPE_NAME_LIST funcs = null;
     TYPE t = null;
 
-    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
       t = it.head.SemantMe();       AST_TYPE currType = null;
 
       if (it.head instanceof AST_C_FIELD_VAR_DEC) {
@@ -74,7 +74,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     SYMBOL_TABLE.getInstance().enter(id, classType);
     SYMBOL_TABLE.getInstance().beginScope("class-" + id);
 
-    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
       t = it.head.SemantMe();     }
 
     SYMBOL_TABLE.getInstance().endScope();
@@ -89,7 +89,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
     Map<String, Integer> funcOff = new HashMap<>();
     int fieldCnt = 0;
     int funcCnt = 0;
-    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
       AST_C_FIELD field = (AST_C_FIELD) (it.head);
       if (field instanceof AST_C_FIELD_VAR_DEC) {         fieldCnt += 1;
         continue;
@@ -115,7 +115,7 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
 
     fieldCnt = 0;
     ArrayList<String> fieldslist = new ArrayList<>();
-    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
       AST_C_FIELD field = (AST_C_FIELD) (it.head);
 
       if (field instanceof AST_C_FIELD_VAR_DEC) {                                                         AST_C_FIELD_VAR_DEC var = (AST_C_FIELD_VAR_DEC) field;
@@ -139,13 +139,13 @@ public class AST_CLASS_DEC_SIMPLE extends AST_CLASS_DEC {
         fields.add(fieldandclass);
       }
     }
-            for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+            for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
       if (it.head instanceof AST_C_FIELD_FUNC_DEC)
         it.head.IRme();
     }
     classSize.put(id, fields.size() * 4 + 4);
     IR.getInstance().Add_IRcommand(new IRcommand_Declare_Class(id, funclist, fields));
-    for (AST_C_FIELD_LIST it = data_members; it != null; it = it.tail) {
+    for (AST_C_FIELD_LIST it = dataMembers; it != null; it = it.tail) {
       if (it.head instanceof AST_C_FIELD_VAR_DEC)
         it.head.IRme();
     }

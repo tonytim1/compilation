@@ -416,22 +416,22 @@ public class MIPSGenerator {
             instance.fileWriter.print("\tsyscall\n");
 
             instance.fileWriter.format(".text\n");
-            generator.label("PrintInt");
-            generator.prologue(0);
+            instance.label("PrintInt");
+            instance.prologue(0);
             instance.fileWriter.format("\tlw $a0, 8($fp)\n");
             instance.fileWriter.format("\tli $v0, 1\n");
             instance.fileWriter.format("\tsyscall\n");
             instance.fileWriter.format("\tla $a0, string_space\n");
             instance.fileWriter.format("\tli $v0, 4\n");
             instance.fileWriter.format("\tsyscall\n");
-            generator.epilogue();
+            instance.epilogue();
 
-            generator.label("PrintString");
-            generator.prologue(0);
+            instance.label("PrintString");
+            instance.prologue(0);
             instance.fileWriter.format("\tlw $a0, 8($fp)\n");
             instance.fileWriter.format("\tli $v0, 4\n");
             instance.fileWriter.format("\tsyscall\n");
-            generator.epilogue();
+            instance.epilogue();
 
         }
         return instance;
