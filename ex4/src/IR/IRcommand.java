@@ -4,7 +4,6 @@ package IR;
 public abstract class IRcommand {
 	public String name="";
 	protected static int label_counter = 0;
-
 	public int offset;
 
 	public static String getFreshLabel(String msg) {

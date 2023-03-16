@@ -5,27 +5,27 @@ import TEMP.*;
 import MIPS.*;
 
 public class IRcommand_Binop_NEQ_Contents extends IRcommand_Binop {
-	public IRcommand_Binop_NEQ_Contents(TEMP dst, TEMP t1, TEMP t2) {
-		this.dst = dst;
-		this.t1 = t1;
-		this.t2 = t2;
-		UpdateIRName("IRcommand_Binop");
-	}
+    public IRcommand_Binop_NEQ_Contents(TEMP dst, TEMP t1, TEMP t2) {
+        this.dst = dst;
+        this.t1 = t1;
+        this.t2 = t2;
+        UpdateIRName("IRcommand_Binop");
+    }
 
-	public void MIPSme() {
+    public void MIPSme() {
+        String label_end = getFreshLabel("end");
+        String label_assign_one = getFreshLabel("assign_one");
+        String label_assign_zero = getFreshLabel("assign_zero");
 
-		String label_end = getFreshLabel("end");
-		String label_assign_one = getFreshLabel("assign_one");
-		String label_assign_zero = getFreshLabel("assign_zero");
-
-		MIPSGenerator.getInstance().bne(t1, t2, label_assign_one);
-		MIPSGenerator.getInstance().beq(t1, t2, label_assign_zero);
-		MIPSGenerator.getInstance().label(label_assign_one);
-		MIPSGenerator.getInstance().li(dst, 1);
-		MIPSGenerator.getInstance().jump(label_end);
-		MIPSGenerator.getInstance().label(label_assign_zero);
-		MIPSGenerator.getInstance().li(dst, 0);
-		MIPSGenerator.getInstance().jump(label_end);
-		MIPSGenerator.getInstance().label(label_end);
-	}
+        MIPSGenerator generator = MIPSGenerator.getInstance();
+        generator.bne(t1, t2, label_assign_one);
+        generator.beq(t1, t2, label_assign_zero);
+        generator.label(label_assign_one);
+        generator.li(dst, 1);
+        generator.jump(label_end);
+        generator.label(label_assign_zero);
+        generator.li(dst, 0);
+        generator.jump(label_end);
+        generator.label(label_end);
+    }
 }

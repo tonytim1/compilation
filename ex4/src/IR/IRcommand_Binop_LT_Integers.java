@@ -14,7 +14,6 @@ public class IRcommand_Binop_LT_Integers extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-
 		String label_end = getFreshLabel("end");
 		String label_assign_one = getFreshLabel("assign_one");
 		String label_assign_zero = getFreshLabel("assign_zero");
