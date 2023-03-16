@@ -19,8 +19,7 @@ public class MIPSGenerator {
 		fileWriter.close();
 	}
 
-	public void create_new_class(String class_name, ArrayList<ArrayList<String>> funcs,
-		ArrayList<ArrayList<ArrayList<String>>> fs) {
+	public void create_new_class(String class_name, ArrayList<ArrayList<String>> funcs) {
 		fileWriter.format(".data\n");
 		fileWriter.format("vt_%s:\n", class_name);
 		if (funcs.size() == 0)

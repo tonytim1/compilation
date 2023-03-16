@@ -14,22 +14,18 @@ public class IRcommand_Binop_GT_Integers extends IRcommand_Binop {
 	}
 
 	public void MIPSme() {
-
 		String label_end = getFreshLabel("end");
-		String label_AssignOne = getFreshLabel("AssignOne");
-		String label_AssignZero = getFreshLabel("AssignZero");
+		String label_assign_one = getFreshLabel("assign_one");
+		String label_assign_zero = getFreshLabel("assign_zero");
 
-		MIPSGenerator.getInstance().bgt(t1, t2, label_AssignOne);
-		MIPSGenerator.getInstance().ble(t1, t2, label_AssignZero);
-
-		MIPSGenerator.getInstance().label(label_AssignOne);
+		MIPSGenerator.getInstance().bgt(t1, t2, label_assign_one);
+		MIPSGenerator.getInstance().ble(t1, t2, label_assign_zero);
+		MIPSGenerator.getInstance().label(label_assign_one);
 		MIPSGenerator.getInstance().li(dst, 1);
 		MIPSGenerator.getInstance().jump(label_end);
-
-		MIPSGenerator.getInstance().label(label_AssignZero);
+		MIPSGenerator.getInstance().label(label_assign_zero);
 		MIPSGenerator.getInstance().li(dst, 0);
 		MIPSGenerator.getInstance().jump(label_end);
-
 		MIPSGenerator.getInstance().label(label_end);
 	}
 }

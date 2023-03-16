@@ -4,18 +4,18 @@ import MIPS.MIPSGenerator;
 import TEMP.*;
 
 public class IRcommand_Array_Set extends IRcommand {
-  public TEMP val;
+  public TEMP value;
   public TEMP array;
   public TEMP index;
 
-  public IRcommand_Array_Set(TEMP array, TEMP index, TEMP val) {
+  public IRcommand_Array_Set(TEMP array, TEMP index, TEMP value) {
     this.array = array;
     this.index = index;
-    this.val = val;
+    this.value = value;
 
   }
 
   public void MIPSme() {
-    MIPSGenerator.getInstance().array_set(array, index, val);
+    MIPSGenerator.getInstance().array_set(array, index, value);
   }
 }

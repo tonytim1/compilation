@@ -15,7 +15,7 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop {
 
 	public void MIPSme() {
 		String label0 = IRcommand.getFreshLabel("loop");
-		String label1 = IRcommand.getFreshLabel("no");
+		String label1 = IRcommand.getFreshLabel("not_equals");
 		String label2 = IRcommand.getFreshLabel("end");
 		String[] labels = { label0, label1, label2 };
 

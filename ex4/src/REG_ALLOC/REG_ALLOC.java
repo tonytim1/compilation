@@ -206,11 +206,11 @@ public class REG_ALLOC {
             if (curr.line.getClass().toString().equals("class IR.IRcommand_Array_Set")) {
                 curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).array.getSerialNumber()))));
                 curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).index.getSerialNumber()))));
-                curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).val.getSerialNumber()))));
+                curr.inSet.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).value.getSerialNumber()))));
                 if (curr.inFunc) {
                     curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).array.getSerialNumber()))));
                     curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).index.getSerialNumber()))));
-                    curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).val.getSerialNumber()))));
+                    curr.FuncScope.add(("Temp_" + (Integer.toString(((IRcommand_Array_Set) curr.line).value.getSerialNumber()))));
                 }
             }
             if (curr.line.getClass().toString().equals("class IR.IRcommand_Prologue")) {
@@ -503,13 +503,13 @@ public class REG_ALLOC {
                     ((IRcommand_Array_Set) h).index.serial = Integer.parseInt(theNum);
                     ((IRcommand_Array_Set) h).index.changed = true;
                 }
-                if (((IRcommand_Array_Set) h).val.changed == false) {
-                    theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Array_Set) h).val.getSerialNumber()))));
+                if (((IRcommand_Array_Set) h).value.changed == false) {
+                    theNum = IRtoMIPS.get(("Temp_" + (Integer.toString(((IRcommand_Array_Set) h).value.getSerialNumber()))));
                     if (theNum == null) {
                         theNum = IRtoMIPS.get("dead");
                     }
-                    ((IRcommand_Array_Set) h).val.serial = Integer.parseInt(theNum);
-                    ((IRcommand_Array_Set) h).val.changed = true;
+                    ((IRcommand_Array_Set) h).value.serial = Integer.parseInt(theNum);
+                    ((IRcommand_Array_Set) h).value.changed = true;
                 }
 
             }

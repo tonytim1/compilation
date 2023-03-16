@@ -98,11 +98,11 @@ public abstract class AST_Node {
 				String fatherName = SYMBOL_TABLE.getInstance().findExtendsClass(t2.name);
 				if (fatherName.equals(t1.name))
 					return true;
-				TYPE_CLASS fatherC = ((TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName)).father;
-				while (fatherC != null) {
-					if (fatherC.name.equals(t1.name))
+				TYPE_CLASS father_class = ((TYPE_CLASS) SYMBOL_TABLE.getInstance().find(fatherName)).father;
+				while (father_class != null) {
+					if (father_class.name.equals(t1.name))
 						return true;
-					fatherC = fatherC.father;
+					father_class = father_class.father;
 				}
 			}
 		}
