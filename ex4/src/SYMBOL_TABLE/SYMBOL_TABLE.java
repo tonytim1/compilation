@@ -16,16 +16,7 @@ public class SYMBOL_TABLE {
 
 
     private int hash(String s) {
-        if (s.charAt(0) == 'l' || s.charAt(0) == 'm') {
-            return 1;
-        }
-        if (s.charAt(0) == 'r') {
-            return 3;
-        }
-        if (s.charAt(0) == 'i' || s.charAt(0) == 'd' || s.charAt(0) == 'k' || s.charAt(0) == 'f' || s.charAt(0) == 's') {
-            return 6;
-        }
-        return 12;
+       return 1;
     }
 
 
